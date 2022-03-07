@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [
-    
-  ]
+  styles: []
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
-  ngOnInit(): void {
+  openVerticallyCentered() {
+    const modRef = this.modalService.open(ModalComponent, { centered: true });
+  
+    modRef.componentInstance.title = '¡Bienvenido!';
   }
 
 }
