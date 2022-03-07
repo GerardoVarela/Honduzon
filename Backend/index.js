@@ -10,13 +10,15 @@ var registroRouters = require('./routes/registro-routers');
  * -response (respuesta)
  */
 
-app.use(cors);
-app.use(bodyParser.json());
+
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use('/usuarios',registroRouters.router());
+app.use(bodyParser.json());
+app.use('/usuarios',registroRouters.router);
 
 
-puerto = 8088;
+
+puerto = 8888;
 
 app.get('/',(req,res)=>{
     res.send('Servidor levantado');

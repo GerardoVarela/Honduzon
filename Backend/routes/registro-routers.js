@@ -13,12 +13,25 @@
 
 var express = require('express');
 var router = express.Router();
+var usuarios = [];
 
-router.post('/', (req, res)=>{
-    //Testing
-    res.send(200,req.body);
-})
+router.post('/',(req,res)=>{
+    //req.body -> la informacion cae ahi gracias al middleware bodyparser
 
-module.exports = {
-    router:router
-};
+    let usuario = {
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        edad: req.body.edad,
+        password: req.body.password
+    }
+
+    usuarios.push(usuario);
+    res.send({
+        mensaje: 'SIUUUUUUU',
+        usuario: usuario
+    })
+});
+
+module.exports={
+    router : router
+}
