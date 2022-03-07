@@ -6,10 +6,17 @@
  * NO TOCAR TODAVIA
 */
 
+/**
+ * 
+ * INFORMACION SOLAMENTE DE PRUEBA...
+ * ### NO ME VAYAN A HACKEAR PL0X :'V... 
+ * 
+ */
+
 const config ={
-    user: 'usuario de la bd',
-    password: 'constraseña del usuario de la bd',
-    server : 'ip del servidor de la base de datos',
+    user: 'sa',
+    password: '1234',
+    server : '192.168.1.105',
     options:{ 
         trustedconnection: false,
         enableArthAbort: true,
