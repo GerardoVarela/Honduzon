@@ -1,5 +1,18 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var cors = require('cors');
+
+
+/**
+ * Middlewares: funciones que tienen acceso a los objetos:
+ * -request (peticion)
+ * -response (respuesta)
+ */
+
+app.use(cors);
+app.use(bodyParser.json());
+
 
 
 
@@ -14,8 +27,3 @@ app.get('/',(req,res)=>{
 app.listen(puerto,()=>{
     console.log( `Servidor Levantado con el puerto ${puerto}`)
 });
-
-
-module.exports= {
-    app:app
-}
