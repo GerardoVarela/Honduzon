@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body col" style="text-align: center;">
+    <!-- Título y Subtítulo -->
+    <div class="row" style="padding-bottom: 20px;">
+        <h2 class="modal-title">Regístrate!</h2>
+        <small>Ingresa tus datos.</small>
+    </div>
+
+    <!-- Zona Inputs -->
+    <div class="form-floating">
+        <input type="text" class="border-bottom-custom form-control" id="floatingName" placeholder="Nombre Apellido">
+        <label for="floatingName">Nombre y Apellido</label>
+    </div>
+    <div class="form-floating">
+        <input type="email" class="border-bottom-custom form-control" id="floatingEmail" placeholder="nombre@ejemplo.com">
+        <label for="floatingEmail">Correo electrónico</label>
+    </div>
+    <div class="form-floating">
+        <input type="tel" class="border-bottom-custom form-control" id="floatingPhone" placeholder="nombre@ejemplo.com" pattern="[0-9]{4}-[0-9]{4}">
+        <label for="floatingPhone">Teléfono</label>
+    </div>
+    <select class="border-bottom-custom" id="formSelect" aria-label="Departamento">
+        <option selected>Departamento</option>
+        <optgroup>
+            <option *ngFor="let dep of deptos; let i=index" value="{{i}}">{{dep}}</option>
+        </optgroup>
+    </select>
+    <div class="form-floating">
+        <input type="text" class="border-bottom-custom form-control" id="floatingCity" placeholder="Ciudad">
+        <label for="floatingCity">Ciudad</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="border-bottom-custom form-control" id="floatingPassword" placeholder="Contraseña">
+        <label for="floatingPassword">Contraseña</label>
+    </div>
+    
+    <!-- Botón Iniciar Sesión -->
+    <button class="btn btn-primary" type="submit">Regístrate</button>
+
+    <!-- Opciones Extras -->
+    <a id="texto" href="#">Recuperar Contraseña</a>
+    <small style="color: #8190A5">|</small>
+    <a id="texto" href="#" (click)="openLogin()">Inicia Sesión</a>
+    
+    <!-- Términos y Condiciones -->
+    <div class="row">
+        <small style="margin-top: 40px;">Al iniciar estás aceptando nuestros</small>
+    </div>
+    <a id="texto" style="margin-bottom: 30px" href="#">Términos</a>
+    <small style="margin-bottom: 30px">y</small>
+    <a id="texto" style="margin-bottom: 30px" href="#">Condiciones</a>
+</div>
