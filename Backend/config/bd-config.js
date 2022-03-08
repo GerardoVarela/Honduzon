@@ -17,6 +17,7 @@ const config ={
     user: 'sa',
     password: '1234',
     server : '192.168.1.105',
+    port: 1433,
     options:{ 
         trustedconnection: false,
         enableArthAbort: true,
