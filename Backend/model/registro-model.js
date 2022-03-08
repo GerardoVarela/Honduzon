@@ -5,7 +5,7 @@
  * 
  */
 
-var config = require('../config/bd-config');
+var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
 
@@ -19,26 +19,25 @@ async function insertUsuario(usuario){
      * 
      */
     try {
-        var pool = await mssql.connect(config);
+        var pool = await mssql.connect(bdConfig.config);
         let insertarUsuario = await pool.request()
-        .input()
-        .input()
-        .input()
-        .input()
-        .input()
-        .input()
-        .input()
-        .execute(' SP_INSERTAR_USUARIO');
-        return insertUsuario.recordsets;
+        .input('nombreCompleto', mssql.VarChar,usuario.nombre)
+        .input('correoElectronico',mssql.VarChar,usuario.correo)
+        .input('telefono',mssql.VarChar,usuario.telefono)
+        .input('direccion',mssql.VarChar,usuario.direccion)
+        .input('ciudad',mssql.VarChar,usuario.ciudad)
+        .input('departamento',mssql.VarChar,usuario.departamento)
+        .input('contrasena',mssql.VarChar,usuario.contrasena)
+        .execute('SP_INSERTAR_USUARIO'); //STORED PROCEDURE DE PRUEBA :'V
+        return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
-        pool.close();
-        return error;
     }
-
-
 }
 
 
+module.exports={
+    insertUsuario:insertUsuario
+}
 
 

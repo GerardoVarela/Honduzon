@@ -13,13 +13,27 @@
 
 var express = require('express');
 var router = express.Router();
+var registro = require('../model/registro-model'); 
 
-router.post('/', (req, res)=>{
+router.get('/', (req, res)=>{
     //Testing
-    res.send(201,{
-        mensaje: 'Usuario Agregado Exitosamente'
-    });
+    
 })
+
+
+router.post('/guardar',(req,res)=>{
+    let usuario ={...req.body};
+    registro.insertUsuario(usuario).then(resultado=>{
+        res.status(201).json(resultado);
+        
+    });
+});
+
+
+router.get('/:id',(req,res)=>{
+    
+});
+
 
 module.exports={
     router : router
