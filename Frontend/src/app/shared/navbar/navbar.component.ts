@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
     'Ocotepeque', 'Olancho', 'Santa Bárbara', 'Valle', 'Yoro'
   ];
 
+  public preguntas = {};
+
+  public hayError: boolean = false;
+
   private backendHost:string = 'http://localhost:8888';
 
   registerForm = new FormGroup({
@@ -32,7 +36,7 @@ export class NavbarComponent implements OnInit {
     formTerms: new FormControl('', Validators.required),
   });
   
-  LoginForm = new FormGroup({
+  loginForm = new FormGroup({
     formEmailLogin: new FormControl('', [Validators.required, Validators.email]),
     formPasswordLogin: new FormControl('', Validators.required),
   });
@@ -40,6 +44,7 @@ export class NavbarComponent implements OnInit {
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
+    this.preguntas = this.httpClient.get(`${this.backendHost}/usuarios`).subscribe(res=>{});
   }
 
   open(content: any, eraseMod?: boolean){
@@ -57,10 +62,7 @@ export class NavbarComponent implements OnInit {
   }
 
   Login(){
-    this.httpClient.get(`${this.backendHost}/usuarios`, this.LoginForm.value)
-    .subscribe(res=>{
-      console.log(res)
-    });
+    this.httpClient.post(`${this.backendHost}/usuarios`, this.loginForm.value).subscribe(res=>{});
   }
 
 }

@@ -49,6 +49,17 @@
             <label for="floatingPasswordLogin">Contraseña</label>
         </div>
         <button class="btn btn-primary" type="submit" (click)="Login()">Iniciar Sesión</button>
+
+        <div *ngIf="hayError" 
+                class="alert alert-danger">
+                Correo o Contraseña incorrecta.
+        </div>
+        <ng-template #elseBlock >
+            <div class="alert alert-success">
+                Sesión iniciada con éxito.
+            </div>
+        </ng-template>
+
         <a id="texto" href="#">Recuperar Contraseña</a>
         <small style="color: #8190A5">|</small>
         <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
@@ -127,10 +138,10 @@
                         id="floatingCity" 
                         placeholder="Ciudad"
                         [class.is-invalid]="registerForm.get('formCity')!.invalid && registerForm.get('formCity')!.touched">
-                <label for="floatingCity">Ciudad</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" 
+                        <label for="floatingCity">Ciudad</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" 
                         formControlName="formDirection"
                         class="border-bottom-custom form-control" 
                         id="floatingDirection" 
@@ -146,6 +157,10 @@
                         [class.is-invalid]="registerForm.get('formPassword')!.invalid && registerForm.get('formPassword')!.touched">
                 <label for="floatingPassword">Contraseña</label>
             </div>
+            <!-- <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
+                <option selected value="0">Departamento</option>
+                <option *ngFor="let dep of deptos; let i=index" value="{{i+1}}">{{dep}}</option>
+            </select> -->
             
             <!-- Términos y Condiciones -->
             <div class="form-check">
