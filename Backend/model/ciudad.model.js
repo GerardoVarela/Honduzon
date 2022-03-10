@@ -17,6 +17,7 @@ async function getCiudades(){
         return ciudades.recordset;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 
 
@@ -31,6 +32,7 @@ async function getCiudadId(ciudadId){
         return ciudad.recordset;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 }
 

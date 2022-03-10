@@ -8,7 +8,6 @@
 var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
-var departamentoModel = require ('./departamento-model');
 
 async function insertUsuario(usuario){
     /**
@@ -19,9 +18,6 @@ async function insertUsuario(usuario){
      * 
      */
     try {
-        
-
-
         var pool = await mssql.connect(bdConfig.config);
         let insertarUsuario = await pool.request()
         .input('NOMBRE', mssql.VarChar,usuario.formName)
@@ -38,12 +34,58 @@ async function insertUsuario(usuario){
         return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
+}
+
+async function getUsuarioId(usuario){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let usuario = await pool.request()
+        .input('idUsuarioInput',mssql.Int, usuario.id)
+        .query('SELECT * FROM [dbo].[Usuarios] WHERE ID_USUARIO = @idUsuarioInput');
+        return usuario.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+    
+
+}
+
+async function getCorreoUsuario(){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let usuario = await pool.request()
+        .query('SELECT CORREO_ELECTRONICO FROM [dbo].[Usuarios]');
+        return usuario.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+    
+
+}
+
+async function getUsuarios(){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let usuarios = await pool.request()
+        .query('SELECT * FROM [dbo].[Usuarios] ');
+        return usuarios.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+    
+
 }
 
 
 module.exports={
-    insertUsuario:insertUsuario
+    insertUsuario:insertUsuario,
+    getUsuarioId:getUsuarioId,
+    getUsuarios:getUsuarios
 }
 
 

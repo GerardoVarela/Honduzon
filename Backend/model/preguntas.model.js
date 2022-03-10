@@ -17,6 +17,7 @@ async function getPreguntas(){
         return preguntas.recordset;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 
 

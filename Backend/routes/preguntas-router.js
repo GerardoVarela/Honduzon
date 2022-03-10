@@ -11,7 +11,7 @@
 
 var express = require('express');
 var router = express.Router();
-var preguntasModel = require ('../model/preguntas-model');
+var preguntasModel = require ('../model/preguntas.model');
 
 router.get('/', (req, res)=>{
     
