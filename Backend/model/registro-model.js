@@ -8,7 +8,7 @@
 var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
-
+var departamentoModel = require ('./departamento-model');
 
 async function insertUsuario(usuario){
     /**
@@ -19,16 +19,22 @@ async function insertUsuario(usuario){
      * 
      */
     try {
+        
+
+
         var pool = await mssql.connect(bdConfig.config);
         let insertarUsuario = await pool.request()
-        .input('nombreCompleto', mssql.VarChar,usuario.nombre)
-        .input('correoElectronico',mssql.VarChar,usuario.correo)
-        .input('telefono',mssql.VarChar,usuario.telefono)
-        .input('direccion',mssql.VarChar,usuario.direccion)
-        .input('ciudad',mssql.VarChar,usuario.ciudad)
-        .input('departamento',mssql.VarChar,usuario.departamento)
-        .input('contrasena',mssql.VarChar,usuario.contrasena)
-        .execute('SP_INSERTAR_USUARIO'); //STORED PROCEDURE DE PRUEBA :'V
+        .input('NOMBRE', mssql.VarChar,usuario.formName)
+        .input('APELLIDO', mssql.VarChar,usuario.formLastName)
+        .input('CORREO_ELECTRONICO',mssql.VarChar,usuario.formEmail)
+        .input('TELEFONO',mssql.VarChar,usuario.formPhone)
+        .input('DIRECCION',mssql.VarChar,usuario.formDirection)
+        .input('RESPUESTA',mssql.VarChar,usuario.formResp)
+        .input('ID_DEPARTAMENTO',mssql.Int,usuario.formDept)
+        .input('CONTRASENA',mssql.VarChar,usuario.formPassword)
+        .input('ID_CIUDAD',mssql.Int,usuario.formCity)
+        .input('ID_PREGUNTA',mssql.Int,usuario.formPreg)
+        .execute('SP_INSERTAR_USUARIO'); //NO SE HA CREADO EL STORED PROCEDURE
         return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
