@@ -3,7 +3,9 @@ var app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var registroRouters = require('./routes/registro-routers');
-
+var obtenerDepartamentos = require ('./routes/departamentos-routers');
+var obtenerCiudades = require ('./routes/ciudad-router');
+var obtenerPreguntas = require('./routes/preguntas-router')
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
  * -request (peticion)
@@ -15,8 +17,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use('/usuarios',registroRouters.router);
-
-
+app.use ('/departamentos',obtenerDepartamentos.router);
+app.use('/ciudades',obtenerCiudades.router);
+app.use('/preguntas',obtenerPreguntas.router)
 
 puerto = 8888;
 

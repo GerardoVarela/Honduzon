@@ -24,7 +24,9 @@ router.get('/', (req, res)=>{
 router.post('/guardar',(req,res)=>{
     let usuario ={...req.body};
     registro.insertUsuario(usuario).then(resultado=>{
-        res.status(201).json(resultado);
+        res.send(201,{
+            mensaje: 'Usuario se ha Ingresado Exitosamente'
+        });
         
     });
 });
