@@ -54,11 +54,9 @@
                 class="alert alert-danger">
                 Correo o Contraseña incorrecta.
         </div>
-        <ng-template #elseBlock >
-            <div class="alert alert-success">
-                Sesión iniciada con éxito.
-            </div>
-        </ng-template>
+        <div *ngIf="!hayError" class="alert alert-success">
+            Sesión iniciada con éxito.
+        </div>
 
         <a id="texto" href="#">Recuperar Contraseña</a>
         <small style="color: #8190A5">|</small>

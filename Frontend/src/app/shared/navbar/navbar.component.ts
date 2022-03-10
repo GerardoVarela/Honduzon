@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   public preguntas = {};
 
-  public hayError: boolean = false;
+  public hayError!: boolean;
 
   private backendHost:string = 'http://localhost:8888';
 
