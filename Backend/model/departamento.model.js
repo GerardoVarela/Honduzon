@@ -19,6 +19,7 @@ async function getDepartamento(){
         return departamentos.recordset;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 
 
@@ -33,6 +34,7 @@ async function getDepartamentoId(departamentoId){
         return departamento.recordset;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 }
 

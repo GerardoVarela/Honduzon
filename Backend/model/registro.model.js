@@ -8,7 +8,6 @@
 var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
-var departamentoModel = require ('./departamento-model');
 
 async function insertUsuario(usuario){
     /**
@@ -38,6 +37,7 @@ async function insertUsuario(usuario){
         return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 }
 

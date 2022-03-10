@@ -11,7 +11,7 @@
 
 var express = require('express');
 var router = express.Router();
-var ciudadModel = require ('../model/ciudad-model');
+var ciudadModel = require ('../model/ciudad.model');
 
 router.get('/', (req, res)=>{
     

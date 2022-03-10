@@ -13,7 +13,7 @@
 
 var express = require('express');
 var router = express.Router();
-var registro = require('../model/registro-model'); 
+var registro = require('../model/registro.model'); 
 
 router.get('/', (req, res)=>{
     //Testing
