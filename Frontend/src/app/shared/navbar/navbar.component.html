@@ -1,200 +1,351 @@
-<nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="font-family: Karla, sans-serif;height: 66px;border-bottom: 1px solid rgba(51,51,51,0.28);">
-    <div class="container" style="margin-left:20px">
-        <a class="navbar-brand" href="#"><img src="../assets/logo.png" style="width: 50px;height: 50px;" /></a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-          <!-- Parte Izq Navbar -->
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Ubicación</a>
-              <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-            </li>
-            <li class="nav-item"><input class="search-input" type="search" placeholder="Buscar articulos" /></li>
-            <li class="search-icon nav-item"><i class="fas fa-search" style="margin-right: 0px;color: rgba(51,51,51,0.6);margin-left: 10px;margin-bottom: 0px;font-size: 20px;"></i></li>
-          </ul>
-          <!-- Parte Der Navbar -->
-          <ul class="navbar-nav ms-auto" style="padding-left: 60px;">
-              <li class="nav-item" style="padding-top: 25px!important"><i class="far fa-paper-plane" style="font-size: 20px;float: bottom;height: 16px;background: #ffffff;color: rgba(51,51,51,0.6);"></i></li>
-              <li class="nav-item" style="padding-top: 10px!important"><a class="message-a nav-link" href="#">Mensaje</a></li>
-              <li class="nav-item" style="margin-right: 5px!important"><button class="btn-reg-or-log btn" type="button" (click)="open(contentLog)">Regístrate o inicia sesión</button></li>
-              <li class="nav-item" style="margin-left: 5px!important"><button class="btn-subs btn" type="button"><i class="fas fa-plus-circle" style="margin-right: 5px;"></i>Subir producto</button></li>
-          </ul>
-        </div>
+<nav
+  class="navbar navbar-light navbar-expand-lg navigation-clean"
+  style="
+    font-family: Karla, sans-serif;
+    height: 66px;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.28);
+  "
+>
+  <div class="container" style="margin-left: 20px">
+    <a class="navbar-brand" href="#"
+      ><img src="../assets/logo.png" style="width: 50px; height: 50px"
+    /></a>
+    <button
+      class="navbar-toggler"
+      data-bs-toggle="collapse"
+      data-bs-target="#navcol-1"
+    >
+      <span class="visually-hidden">Toggle navigation</span
+      ><span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navcol-1" class="collapse navbar-collapse">
+      <!-- Parte Izq Navbar -->
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="dropdown-toggle nav-link"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            href="#"
+            >Ubicación</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">First Item</a
+            ><a class="dropdown-item" href="#">Second Item</a
+            ><a class="dropdown-item" href="#">Third Item</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <input
+            class="search-input"
+            type="search"
+            placeholder="Buscar articulos"
+          />
+        </li>
+        <li class="search-icon nav-item">
+          <i
+            class="fas fa-search"
+            style="
+              margin-right: 0px;
+              color: rgba(51, 51, 51, 0.6);
+              margin-left: 10px;
+              margin-bottom: 0px;
+              font-size: 20px;
+            "
+          ></i>
+        </li>
+      </ul>
+      <!-- Parte Der Navbar -->
+      <ul class="navbar-nav ms-auto" style="padding-left: 60px">
+        <li class="nav-item" style="padding-top: 25px !important">
+          <i
+            class="far fa-paper-plane"
+            style="
+              font-size: 20px;
+              float: bottom;
+              height: 16px;
+              background: #ffffff;
+              color: rgba(51, 51, 51, 0.6);
+            "
+          ></i>
+        </li>
+        <li class="nav-item" style="padding-top: 10px !important">
+          <a class="message-a nav-link" href="#">Mensaje</a>
+        </li>
+        <li class="nav-item" style="margin-right: 5px !important">
+          <button
+            class="btn-reg-or-log btn"
+            type="button"
+            (click)="open(contentLog)"
+          >
+            Regístrate o inicia sesión
+          </button>
+        </li>
+        <li class="nav-item" style="margin-left: 5px !important">
+          <button class="btn-subs btn" type="button">
+            <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
+            producto
+          </button>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <!-- Modal Login -->
 <ng-template #contentLog let-modalLog>
-    <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="modalLog.dismiss('Cross click')"></button>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalLog.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center">
+    <div class="row" style="padding-bottom: 20px">
+      <h2 class="modal-title">¡Bienvenido!</h2>
+      <small>Estamos felices de tenerte de vuelta.</small>
     </div>
-    <div class="modal-body col" style="text-align: center;">
-        <div class="row" style="padding-bottom: 20px;">
-            <h2 class="modal-title">¡Bienvenido!</h2>
-            <small>Estamos felices de tenerte de vuelta.</small>
-        </div>
-        <div class="form-floating">
-            <input type="email"
-                    formControlName="formEmailLogin"
-                    class="border-bottom-custom form-control" 
-                    id="floatingInputLogin" 
-                    placeholder="name@example.com">
-            <label for="floatingInputLogin">Correo electrónico</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" 
-                    formControlName="formPasswordLogin"
-                    class="border-bottom-custom form-control" 
-                    id="floatingPasswordLogin" 
-                    placeholder="Password">
-            <label for="floatingPasswordLogin">Contraseña</label>
-        </div>
-        <button class="btn btn-primary" type="submit" (click)="Login()">Iniciar Sesión</button>
-
-        <div *ngIf="hayError" 
-                class="alert alert-danger">
-                Correo o Contraseña incorrecta.
-        </div>
-        <ng-template #elseBlock >
-            <div *ngIf="!hayError" class="alert alert-success">
-                Sesión iniciada con éxito.
-            </div>
-        </ng-template>
-
-        <a id="texto" href="#">Recuperar Contraseña</a>
-        <small style="color: #8190A5">|</small>
-        <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
-        
-        <div class="row">
-            <small style="margin-top: 40px;">Al iniciar estás aceptando nuestros</small>
-        </div>
-        
-        <small style="margin-bottom: 30px">
-            <a id="texto" style="padding: 0px!important" href="#">Términos</a>
-            y
-            <a id="texto" style="padding: 0px!important" href="#">Condiciones</a>
-        </small>
+    <div class="form-floating">
+      <input
+        type="email"
+        formControlName="formEmailLogin"
+        class="border-bottom-custom form-control"
+        id="floatingInputLogin"
+        placeholder="name@example.com"
+      />
+      <label for="floatingInputLogin">Correo electrónico</label>
     </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        formControlName="formPasswordLogin"
+        class="border-bottom-custom form-control"
+        id="floatingPasswordLogin"
+        placeholder="Password"
+      />
+      <label for="floatingPasswordLogin">Contraseña</label>
+    </div>
+    <button class="btn btn-primary" type="submit" (click)="Login()">
+      Iniciar Sesión
+    </button>
+
+    <div *ngIf="hayError" class="alert alert-danger">
+      Correo o Contraseña incorrecta.
+    </div>
+    <ng-template #elseBlock>
+      <div *ngIf="!hayError" class="alert alert-success">
+        Sesión iniciada con éxito.
+      </div>
+    </ng-template>
+
+    <a id="texto" href="#">Recuperar Contraseña</a>
+    <small style="color: #8190a5">|</small>
+    <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
+
+    <div class="row">
+      <small style="margin-top: 40px"
+        >Al iniciar estás aceptando nuestros</small
+      >
+    </div>
+
+    <small style="margin-bottom: 30px">
+      <a id="texto" style="padding: 0px !important" href="#">Términos</a>
+      y
+      <a id="texto" style="padding: 0px !important" href="#">Condiciones</a>
+    </small>
+  </div>
 </ng-template>
 
 <!-- Modal Registro -->
 <ng-template #contentReg let-modalReg>
-    <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="modalReg.dismiss('Cross click')"></button>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalReg.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center">
+    <!-- Título y Subtítulo -->
+    <div class="row" style="padding-bottom: 20px">
+      <h2 class="modal-title">Regístrate!</h2>
+      <small>Ingresa tus datos.</small>
     </div>
-    <div class="modal-body col" style="text-align: center;">
-        <!-- Título y Subtítulo -->
-        <div class="row" style="padding-bottom: 20px;">
-            <h2 class="modal-title">Regístrate!</h2>
-            <small>Ingresa tus datos.</small>
+
+    <form [formGroup]="registerForm">
+      <!-- Zona Inputs -->
+      <div class="form-floating">
+        <input
+          type="text"
+          formControlName="formName"
+          class="border-bottom-custom form-control"
+          id="floatingName"
+          placeholder="Nombre"
+          [class.is-invalid]="
+            registerForm.get('formName')!.invalid &&
+            registerForm.get('formName')!.touched
+          "
+        />
+        <label for="floatingName">Nombre</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          formControlName="formLastName"
+          class="border-bottom-custom form-control"
+          id="floatingLastName"
+          placeholder="Apellido"
+          [class.is-invalid]="
+            registerForm.get('formLastName')!.invalid &&
+            registerForm.get('formLastName')!.touched
+          "
+        />
+        <label for="floatingLastName">Apellido</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="email"
+          formControlName="formEmail"
+          class="border-bottom-custom form-control"
+          id="floatingEmail"
+          placeholder="nombre@ejemplo.com"
+          [class.is-invalid]="
+            registerForm.get('formEmail')!.invalid &&
+            registerForm.get('formEmail')!.touched
+          "
+        />
+        <label for="floatingEmail">Correo electrónico</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          formControlName="formPassword"
+          class="border-bottom-custom form-control"
+          id="floatingPassword"
+          placeholder="Contraseña"
+          [class.is-invalid]="
+            registerForm.get('formPassword')!.invalid &&
+            registerForm.get('formPassword')!.touched
+          "
+        />
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="tel"
+          formControlName="formPhone"
+          class="border-bottom-custom form-control"
+          id="floatingPhone"
+          placeholder="nombre@ejemplo.com"
+          pattern="[0-9]{4}-[0-9]{4}"
+          [class.is-invalid]="
+            registerForm.get('formPhone')!.invalid &&
+            registerForm.get('formPhone')!.touched
+          "
+        />
+        <label for="floatingPhone">Teléfono</label>
+      </div>
+      <select
+        class="border-bottom-custom"
+        id="formSelect"
+        aria-label="Departamento"
+        formControlName="formDept"
+      >
+        <option selected value="0">Departamento</option>
+        <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
+          {{ dep.NOMBRE_DEPARTAMENTO }}
+        </option>
+      </select>
+
+      <select
+        class="border-bottom-custom"
+        id="formSelect"
+        aria-label="Preguntas"
+        formControlName="formPreg"
+      >
+        <option selected value="0">Preguntas</option>
+        <option *ngFor="let preg of preguntas" value="{{ preg.ID_PREGUNTA }}">
+          {{ preg.PREGUNTA }}
+        </option>
+      </select>
+
+      <div class="form-floating">
+        <div class="form-floating">
+          <input
+            type="tel"
+            formControlName="formResp"
+            class="border-bottom-custom form-control"
+            id="floatingPhone"
+            [class.is-invalid]="
+              registerForm.get('formResp')!.invalid &&
+              registerForm.get('formResp')!.touched
+            "
+          />
+          <label for="floatingPhone">Respuesta</label>
         </div>
-    
-        <form [formGroup]="registerForm">
-            <!-- Zona Inputs -->
-            <div class="form-floating">
-                <input type="text"
-                        formControlName="formName" 
-                        class="border-bottom-custom form-control" 
-                        id="floatingName" 
-                        placeholder="Nombre"
-                        [class.is-invalid]="registerForm.get('formName')!.invalid && registerForm.get('formName')!.touched">
-                <label for="floatingName">Nombre</label>
-            </div>
-            <div class="form-floating">
-                <input type="text"
-                        formControlName="formLastName" 
-                        class="border-bottom-custom form-control" 
-                        id="floatingLastName" 
-                        placeholder="Apellido"
-                        [class.is-invalid]="registerForm.get('formLastName')!.invalid && registerForm.get('formLastName')!.touched">
-                <label for="floatingLastName">Apellido</label>
-            </div>
-            <div class="form-floating">
-                <input type="email" 
-                        formControlName="formEmail"
-                        class="border-bottom-custom form-control" 
-                        id="floatingEmail" 
-                        placeholder="nombre@ejemplo.com"
-                        [class.is-invalid]="registerForm.get('formEmail')!.invalid && registerForm.get('formEmail')!.touched">
-                <label for="floatingEmail">Correo electrónico</label>
-            </div>
-            <div class="form-floating">
-                <input type="password"
-                        formControlName="formPassword" 
-                        class="border-bottom-custom form-control" 
-                        id="floatingPassword" 
-                        placeholder="Contraseña"
-                        [class.is-invalid]="registerForm.get('formPassword')!.invalid && registerForm.get('formPassword')!.touched">
-                <label for="floatingPassword">Contraseña</label>
-            </div>
-            <div class="form-floating">
-                <input type="tel"
-                    formControlName="formPhone" 
-                    class="border-bottom-custom form-control" 
-                    id="floatingPhone" 
-                    placeholder="nombre@ejemplo.com" 
-                    pattern="[0-9]{4}-[0-9]{4}"
-                    [class.is-invalid]="registerForm.get('formPhone')!.invalid && registerForm.get('formPhone')!.touched">
-                <label for="floatingPhone">Teléfono</label>
-            </div>
-            <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
-                <option selected value="0">Departamento</option>
-                <option *ngFor="let dep of deptos" value="{{dep.ID_DEPARTAMENTO}}">{{dep.NOMBRE_DEPARTAMENTO}}</option>
-            </select>
+        <input
+          type="text"
+          formControlName="formCity"
+          class="border-bottom-custom form-control"
+          id="floatingCity"
+          placeholder="Ciudad"
+          [class.is-invalid]="
+            registerForm.get('formCity')!.invalid &&
+            registerForm.get('formCity')!.touched
+          "
+        />
+        <label for="floatingCity">Ciudad</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          formControlName="formDirection"
+          class="border-bottom-custom form-control"
+          id="floatingDirection"
+          placeholder="Dirección"
+        />
+        <label for="floatingDirection">Dirección</label>
+      </div>
 
-
-            <select class="border-bottom-custom" id="formSelect" aria-label="Preguntas" formControlName="formPreg">
-                <option selected value="0">Preguntas</option>
-                <option *ngFor="let preg of preguntas" value="{{preg.ID_PREGUNTA}}">{{preg.PREGUNTA}}</option>
-            </select>
-
-
-            <div class="form-floating">
-                <div class="form-floating">
-                    <input type="tel"
-                        formControlName="formResp" 
-                        class="border-bottom-custom form-control" 
-                        id="floatingPhone"
-                        [class.is-invalid]="registerForm.get('formResp')!.invalid && registerForm.get('formResp')!.touched">
-                    <label for="floatingPhone">Respuesta</label>
-                </div>
-                <input type="text" 
-                        formControlName="formCity"  
-                        class="border-bottom-custom form-control" 
-                        id="floatingCity" 
-                        placeholder="Ciudad"
-                        [class.is-invalid]="registerForm.get('formCity')!.invalid && registerForm.get('formCity')!.touched">
-                        <label for="floatingCity">Ciudad</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" 
-                        formControlName="formDirection"
-                        class="border-bottom-custom form-control" 
-                        id="floatingDirection" 
-                        placeholder="Dirección">
-                <label for="floatingDirection">Dirección</label>
-            </div>
-            
-            <!-- <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
+      <!-- <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
                 <option selected value="0">Departamento</option>
                 <option *ngFor="let dep of deptos; let i=index" value="{{i+1}}">{{dep}}</option>
             </select> -->
-            
-            <!-- Términos y Condiciones -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="formTerms">
-                <label class="form-check-label" for="flexCheckDefault">
-                  He leído y acepto los <a style="color:#00BCE4" href="#">Términos</a> y <a style="color:#00BCE4" href="#">Condiciones</a> de Honduzon.
-                </label>
-            </div>
-        
-            <!-- Botón Registrarse -->
-            <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" (click)="Register()">Regístrate</button>
-            <!-- <button class="btn btn-primary" type="submit"  (click)="Register()">Regístrate</button> -->
-        </form>
-        
-        <!-- Inicia Sesión -->
-        <div class="row" style="margin-bottom: 10px;">
-            <a id="texto" href="#" (click)="open(contentLog, true)">Inicia Sesión</a>
-        </div>
+
+      <!-- Términos y Condiciones -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+          formControlName="formTerms"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          He leído y acepto los
+          <a style="color: #00bce4" href="#">Términos</a> y
+          <a style="color: #00bce4" href="#">Condiciones</a> de Honduzon.
+        </label>
+      </div>
+
+      <!-- Botón Registrarse -->
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!registerForm.valid"
+        (click)="Register()"
+      >
+        Regístrate
+      </button>
+      <!-- <button class="btn btn-primary" type="submit"  (click)="Register()">Regístrate</button> -->
+    </form>
+
+    <!-- Inicia Sesión -->
+    <div class="row" style="margin-bottom: 10px">
+      <a id="texto" href="#" (click)="open(contentLog, true)">Inicia Sesión</a>
     </div>
+  </div>
 </ng-template>
