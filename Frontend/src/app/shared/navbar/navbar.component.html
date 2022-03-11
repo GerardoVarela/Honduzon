@@ -116,6 +116,15 @@
                 <label for="floatingEmail">Correo electrónico</label>
             </div>
             <div class="form-floating">
+                <input type="password"
+                        formControlName="formPassword" 
+                        class="border-bottom-custom form-control" 
+                        id="floatingPassword" 
+                        placeholder="Contraseña"
+                        [class.is-invalid]="registerForm.get('formPassword')!.invalid && registerForm.get('formPassword')!.touched">
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <div class="form-floating">
                 <input type="tel"
                     formControlName="formPhone" 
                     class="border-bottom-custom form-control" 
@@ -125,10 +134,26 @@
                     [class.is-invalid]="registerForm.get('formPhone')!.invalid && registerForm.get('formPhone')!.touched">
                 <label for="floatingPhone">Teléfono</label>
             </div>
-            <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
+            <select class="border-bottom-custom" id="formSelectDeptos" aria-label="Departamento" formControlName="formDept">
                 <option selected value="0">Departamento</option>
-                <option *ngFor="let dep of deptos; let i=index" value="{{i+1}}">{{dep}}</option>
+                <option *ngFor="let dep of deptos" value="{{dep.ID_DEPARTAMENTO}}">{{dep.NOMBRE_DEPARTAMENTO}}</option>
             </select>
+
+
+            <select class="border-bottom-custom" id="formSelectPreg" aria-label="Preguntas" formControlName="formPreg">
+                <option selected value="0">Preguntas</option>
+                <option *ngFor="let preg of preguntas" value="{{preg.ID_PREGUNTA}}">{{preg.PREGUNTA}}</option>
+            </select>
+
+
+            <div class="form-floating">
+                <input type="tel"
+                formControlName="formResp" 
+                class="border-bottom-custom form-control" 
+                id="floatingPhone"
+                [class.is-invalid]="registerForm.get('formResp')!.invalid && registerForm.get('formResp')!.touched">
+                <label for="floatingPhone">Respuesta</label>
+            </div>
             <div class="form-floating">
                 <input type="text" 
                         formControlName="formCity"  
@@ -136,9 +161,9 @@
                         id="floatingCity" 
                         placeholder="Ciudad"
                         [class.is-invalid]="registerForm.get('formCity')!.invalid && registerForm.get('formCity')!.touched">
-                        <label for="floatingCity">Ciudad</label>
-                    </div>
-                    <div class="form-floating">
+                <label for="floatingCity">Ciudad</label>
+            </div>
+            <div class="form-floating">
                         <input type="text" 
                         formControlName="formDirection"
                         class="border-bottom-custom form-control" 
@@ -146,15 +171,7 @@
                         placeholder="Dirección">
                 <label for="floatingDirection">Dirección</label>
             </div>
-            <div class="form-floating">
-                <input type="password"
-                        formControlName="formPassword" 
-                        class="border-bottom-custom form-control" 
-                        id="floatingPassword" 
-                        placeholder="Contraseña"
-                        [class.is-invalid]="registerForm.get('formPassword')!.invalid && registerForm.get('formPassword')!.touched">
-                <label for="floatingPassword">Contraseña</label>
-            </div>
+            
             <!-- <select class="border-bottom-custom" id="formSelect" aria-label="Departamento" formControlName="formDept">
                 <option selected value="0">Departamento</option>
                 <option *ngFor="let dep of deptos; let i=index" value="{{i+1}}">{{dep}}</option>
@@ -170,6 +187,7 @@
         
             <!-- Botón Registrarse -->
             <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" (click)="Register()">Regístrate</button>
+            <!-- <button class="btn btn-primary" type="submit"  (click)="Register()">Regístrate</button> -->
         </form>
         
         <!-- Inicia Sesión -->
