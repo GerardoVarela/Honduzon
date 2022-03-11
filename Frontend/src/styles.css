@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+.success-modal{
+    background-color: lightgreen!important;
+    color: green;
+}
+
+.modal-content{
+    border-radius: 20px;
+}

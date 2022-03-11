@@ -12,13 +12,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NavbarComponent implements OnInit {
 
-  public deptos: any = [
-  ];
-  public preguntas:any  = {};
-  public hayError!: boolean ;
-  public ciudades : any =[]
-  private backendHost:string = 'http://localhost:8888';
-  
+
+  public deptos: string[] = ['Francisco', 'Cortes'];
+  // public deptos: any = [];
+  public preguntas: string[] = ['hola', 'adios'];
+  // public preguntas:any  = {};
+  public hayError!: boolean;
+  public ciudades : string[] = ['tegus', 'sps'];
+  // public ciudades : any = [];
+  private backendHost: string = 'http://localhost:8888';
+  public successMsg!: string;
+
   registerForm = new FormGroup({
     formName: new FormControl('', Validators.required),
     formLastName: new FormControl('', Validators.required),
@@ -28,9 +32,9 @@ export class NavbarComponent implements OnInit {
     formPreg: new FormControl('', Validators.required),
     formResp: new FormControl('', Validators.required),
     formCity: new FormControl('', Validators.required),
-    formDirection: new FormControl('', Validators.required),
+    formDirection: new FormControl(''),
     formPassword: new FormControl('', Validators.required),
-    formTerms: new FormControl('', Validators.required),
+    formTerms: new FormControl(false, Validators.requiredTrue),
   });
 
   loginForm = new FormGroup({
@@ -41,18 +45,18 @@ export class NavbarComponent implements OnInit {
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
-      this.preguntas = res;
-      // console.log(this.preguntas);
-    });
-    this.deptos = this.httpClient.get(`${this.backendHost}/departamentos/`).subscribe(res=>{
-      this.deptos = res;
-      // console.log(this.deptos);
-    });
-    console.log(this.registerForm.value.formCity);
-    this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
-      this.ciudades = res;
-    });
+    // this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
+    //   this.preguntas = res;
+    //   // console.log(this.preguntas);
+    // });
+    // this.deptos = this.httpClient.get(`${this.backendHost}/departamentos/`).subscribe(res=>{
+    //   this.deptos = res;
+    //   // console.log(this.deptos);
+    // });
+    // console.log(this.registerForm.value.formCity);
+    // this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
+    //   this.ciudades = res;
+    // });
   }
 
   open(content: any, eraseMod?: boolean){
@@ -62,17 +66,34 @@ export class NavbarComponent implements OnInit {
     this.modalService.open(content, {centered: true});
   }
 
-  Register(){
+  register(content: any){
     this.registerForm.value.formCity=1
     // console.log(this.registerForm.value.formCity=1);
-      this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
-        console.log(res)
-    });
+    //   this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
+    //     console.log(res)
+    // });
+    this.successMsg = 'Registrado';
+    this.modalService.dismissAll();
+    this.modalService.open(content, { size: 'sm' });
   }
 
-  Login(){
+  login(){
     this.httpClient.post(`${this.backendHost}/usuarios`, this.loginForm.value).subscribe(res=>{});
-    
+
+    // this.successMsg = 'Sesión Iniciada';
+    // this.hayError = true;
+    // this.hayError = false;
   }
+
+  get formName() { return this.registerForm.get('formName'); }
+  get formLastName() { return this.registerForm.get('formLastName'); }
+  get formEmail() { return this.registerForm.get('formEmail'); }
+  get formPhone() { return this.registerForm.get('formPhone'); }
+  get formDept() { return this.registerForm.get('formDept'); }
+  get formCity() { return this.registerForm.get('formCity'); }
+  get formPreg() { return this.registerForm.get('formPreg'); }
+  get formResp() { return this.registerForm.get('formResp'); }
+  get formPassword() { return this.registerForm.get('formPassword'); }
+  get formTerms() { return this.registerForm.get('formTerms'); }
 
 }

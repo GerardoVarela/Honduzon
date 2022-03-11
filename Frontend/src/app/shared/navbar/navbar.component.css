@@ -1,4 +1,8 @@
 /* NAVBAR */
+.navbar-nav{
+    display: contents;
+}
+
 .search-input{
     border-radius: 20px;
     background-color: #ECEFF1;
@@ -21,11 +25,9 @@
 }
 
 .message-a{
-    margin-top: 5%;
     font-size: 18px;
     height: 42px;
     font-weight: bold;
-    text-align: center;
     color: rgba(70,87,101,0.85);
 }
 
@@ -36,6 +38,8 @@
     border-radius: 20px!important;
     font-weight: bold!important;
     height: 42px!important;
+    width: 250px!important;
+    margin: 0% 10%!important;
 }
 
 .btn-subs{
@@ -45,11 +49,17 @@
     border-radius: 20px!important;
     font-weight: bold!important;
     height: 42px!important;
+    width: 250px!important;
+    margin: 0% 10%!important;
 }
 
 /* MODALES */
 h2{
     color: #47525E;
+}
+
+sup{
+    color: red;
 }
 
 .modal-header{
@@ -117,7 +127,7 @@ h2{
     padding-right: 10px;
 }
 
-#formSelect{
+.form-select-reg{
     margin: 2% 15%;
     margin-bottom: 0%!important;
     width: 326px;
@@ -144,4 +154,11 @@ h2{
 
 select:focus-visible{
     outline: none;
+}
+
+.invalid-feedback-select{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
 }

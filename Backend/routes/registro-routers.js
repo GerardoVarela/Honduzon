@@ -13,27 +13,34 @@
 
 var express = require('express');
 var router = express.Router();
-var registro = require('../model/registro-model'); 
+var registroModel = require('../model/registro.model'); 
+
+
 
 router.get('/', (req, res)=>{
-    //Testing
-    
+    registroModel.getUsuarios().then(resultado=>{
+        res.send(resultado)
+    });
 })
 
 
 router.post('/guardar',(req,res)=>{
-    let usuario ={...req.body};
-    registro.insertUsuario(usuario).then(resultado=>{
-        res.send(201,{
-            mensaje: 'Usuario se ha Ingresado Exitosamente'
+    const usuario ={...req.body};
+    
+        console.log('No se Repite')
+        registroModel.insertUsuario(usuario).then(resultado=>{
+            res.send(201,{
+                mensaje: 'Usuario se ha Ingresado Exitosamente'
         });
         
-    });
+        });
 });
 
 
 router.get('/:id',(req,res)=>{
-    
+    registroModel.getUsuarioId(req.params.id).then(resultado=>{
+        res.json(resultado)
+    });
 });
 
 
