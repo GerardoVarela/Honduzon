@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Botones del carrusel */
+.owl-next,
+.owl-prev {
+  background: rgb(158 158 158 / 28%) !important;
+  color: #222 !important;
+  height: 60px !important;
+  width: 60px !important;
+  border-radius: 50% !important;
+  top: 50%;
+  position: absolute;
+}
+
+.owl-next {
+  right: -68px;
+  transform: translate(-50%, -50%);
+}
+
+.owl-prev {
+  left: -25px;
+  transform: translate(-50%, -50%);
+}
+
+.owl-next i,
+.owl-prev i {
+  font-size: 24px;
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  transform: translate(50%, 50%);
+}
