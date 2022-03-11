@@ -4,6 +4,8 @@
     font-family: Karla, sans-serif;
     height: 66px;
     border-bottom: 1px solid rgba(51, 51, 51, 0.28);
+    padding-left: 5px;
+    padding-right: 5px;
   "
 >
   <!-- <div class="container" style="margin-left: 20px"> -->
@@ -183,7 +185,6 @@
           class="border-bottom-custom form-control"
           id="floatingLastName"
           placeholder="Apellido"
-          pattern="[A-za-z]+"
           [class.is-invalid]="
             formLastName!.invalid &&
             formLastName!.touched
@@ -272,12 +273,12 @@
         aria-label="Departamento"
         formControlName="formDept">
         <option value="">Departamento*</option>
-        <!-- <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
+        <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
-        </option> -->
-        <option *ngFor="let dep of deptos; let i=index" value="{{ i+1 }}">
-          {{ dep }}
         </option>
+        <!-- <option *ngFor="let dep of deptos; let i=index" value="{{ i+1 }}">
+          {{ dep }}
+        </option> -->
       </select>
       <div *ngIf="formDept!.invalid && (formDept!.dirty || formDept!.touched)"
         class="invalid-feedback-select">
@@ -292,12 +293,12 @@
         aria-label="Departamento"
         formControlName="formCity">
         <option value="">Ciudad*</option>
-        <!-- <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
+        <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
-        </option> -->
-        <option *ngFor="let cit of ciudades; let i=index" value="{{ i+1 }}">
-          {{ cit }}
         </option>
+        <!-- <option *ngFor="let cit of ciudades; let i=index" value="{{ i+1 }}">
+          {{ cit }}
+        </option> -->
       </select>
       <div *ngIf="formCity!.invalid && (formCity!.dirty || formCity!.touched)"
         class="invalid-feedback-select">
@@ -312,12 +313,12 @@
         aria-label="Preguntas"
         formControlName="formPreg">
         <option value="">Preguntas*</option>
-        <!-- <option *ngFor="let preg of preguntas" value="{{ preg.ID_PREGUNTA }}">
+        <option *ngFor="let preg of preguntas" value="{{ preg.ID_PREGUNTA }}">
           {{ preg.PREGUNTA }}
-        </option> -->
-        <option *ngFor="let preg of preguntas; let i=index" value="{{ i+1 }}">
-          {{ preg }}
         </option>
+        <!-- <option *ngFor="let preg of preguntas; let i=index" value="{{ i+1 }}">
+          {{ preg }}
+        </option> -->
       </select>
       <div *ngIf="formPreg!.invalid && (formPreg!.dirty || formPreg!.touched)"
         class="invalid-feedback-select">

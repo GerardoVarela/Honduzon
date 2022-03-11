@@ -10,7 +10,6 @@
 }
 
 .title {
-  margin-bottom: 10px;
   padding-bottom: 20px;
   text-align: center;
   position: relative;
@@ -32,7 +31,6 @@
 .title::after {
   content: "\f005""\f005""\f005""\f005""\f005";
   font-family: FontAwesome;
-
   color: #00bce4;
   width: 100px;
   height: 20px;
@@ -73,6 +71,7 @@
 
 .card-main {
   position: relative;
+  padding: 15px;
 }
 
 img {
@@ -99,4 +98,13 @@ img {
   font-weight: bold;
   height: 42px;
   width: 100%;
+}
+
+#btn-Refrescar {
+  background: rgba(13, 110, 253, 0);
+  color: #00bce4;
+  border-color: #00bce4;
+  border-radius: 20px;
+  font-weight: bold;
+  height: 42px;
 }

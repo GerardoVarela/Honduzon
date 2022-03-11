@@ -13,13 +13,13 @@ import { HttpClient } from '@angular/common/http';
 export class NavbarComponent implements OnInit {
 
 
-  public deptos: string[] = ['Francisco', 'Cortes'];
-  // public deptos: any = [];
-  public preguntas: string[] = ['hola', 'adios'];
-  // public preguntas:any  = {};
+  // public deptos: string[] = ['Francisco', 'Cortes'];
+  public deptos: any = [];
+  // public preguntas: string[] = ['hola', 'adios'];
+  public preguntas:any  = {};
   public hayError!: boolean;
-  public ciudades : string[] = ['tegus', 'sps'];
-  // public ciudades : any = [];
+  // public ciudades : string[] = ['tegus', 'sps'];
+  public ciudades : any = [];
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
 
@@ -45,18 +45,18 @@ export class NavbarComponent implements OnInit {
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    // this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
-    //   this.preguntas = res;
-    //   // console.log(this.preguntas);
-    // });
-    // this.deptos = this.httpClient.get(`${this.backendHost}/departamentos/`).subscribe(res=>{
-    //   this.deptos = res;
-    //   // console.log(this.deptos);
-    // });
-    // console.log(this.registerForm.value.formCity);
-    // this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
-    //   this.ciudades = res;
-    // });
+    this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
+      this.preguntas = res;
+      // console.log(this.preguntas);
+    });
+    this.deptos = this.httpClient.get(`${this.backendHost}/departamentos/`).subscribe(res=>{
+      this.deptos = res;
+      // console.log(this.deptos);
+    });
+    console.log(this.registerForm.value.formCity);
+    this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
+      this.ciudades = res;
+    });
   }
 
   open(content: any, eraseMod?: boolean){
@@ -68,10 +68,10 @@ export class NavbarComponent implements OnInit {
 
   register(content: any){
     this.registerForm.value.formCity=1
-    // console.log(this.registerForm.value.formCity=1);
-    //   this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
-    //     console.log(res)
-    // });
+    console.log(this.registerForm.value.formCity=1);
+      this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
+        console.log(res)
+    });
     this.successMsg = 'Registrado';
     this.modalService.dismissAll();
     this.modalService.open(content, { size: 'sm' });

@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CarruselComponent } from './components/carrusel/carrusel.component';
     LoginComponent,
     ModalComponent,
     RegisterComponent,
-    CarruselComponent
+    CarruselComponent,
+    CardsComponent
   ],
   imports: [
     CommonModule,
