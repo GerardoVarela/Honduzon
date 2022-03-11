@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -22,6 +20,8 @@ export class NavbarComponent implements OnInit {
   public ciudades : any = [];
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
+  public respLogin!: any;
+  private exists: boolean = false;
 
   registerForm = new FormGroup({
     formName: new FormControl('', Validators.required),
@@ -77,14 +77,27 @@ export class NavbarComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' });
   }
 
-  login(){
+  
+
+  login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
-      console.log(res); 
+    
+      if(res == true){
+        this.hayError = false;
+        this.successMsg = 'Sesión Iniciada';
+        this.modalService.dismissAll();
+        this.modalService.open(content, { size: 'sm' });
+      }else{
+        this.hayError = true;
+      }
     });
-      
-    // this.successMsg = 'Sesión Iniciada';
-    // this.hayError = true;
-    // this.hayError = false;
+
+    // if(this.exists){
+    //   this.successMsg = 'Sesión Iniciada';
+    //   this.modalService.dismissAll();
+    //   this.modalService.open(content, { size: 'sm' });
+    // }
+    
   }
 
   get formName() { return this.registerForm.get('formName'); }

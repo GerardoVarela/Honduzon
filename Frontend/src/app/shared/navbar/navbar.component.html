@@ -120,7 +120,7 @@
                   placeholder="Password">
           <label for="floatingPasswordLogin">Contraseña</label>
       </div>
-      <button class="btn btn-primary" type="submit" (click)="login()">Iniciar Sesión</button>
+      <button class="btn btn-primary" type="submit" (click)="login(contentSuccess)">Iniciar Sesión</button>
       <div *ngIf="hayError" 
               class="alert alert-danger">
               Correo o Contraseña incorrecta.

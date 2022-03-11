@@ -21,22 +21,28 @@
  })
  
  
+var logeado = false;
+
 router.post('/',(req,res)=>{
      login.getUsuario(req.body.formEmailLogin,req.body.formPasswordLogin).then(resultado=>{
         if(resultado.length>0){
            if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
             resultado[0].CONTRASENA==req.body.formPasswordLogin){
+                logeado = true;
+                res.send(logeado);
                 
-                res.status(201).send( {
-                    mensaje:"Bienvenido ",
-                    logeado:true
-                });
+                // res.status(201).send( {
+                //     mensaje:"Bienvenido ",
+                //     logeado:true
+                // });
             }}else {
+                logeado = false;
+                res.send(logeado);
                
-                res.status(201).send( {
-                    mensaje:"algo salio mal :(",
-                    logeado:false
-                });
+                // res.status(201).send( {
+                //     mensaje:"algo salio mal :(",
+                //     logeado:false
+                // });
             }
      });
      
