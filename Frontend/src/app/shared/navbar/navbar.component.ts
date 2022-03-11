@@ -78,8 +78,10 @@ export class NavbarComponent implements OnInit {
   }
 
   login(){
-    this.httpClient.post(`${this.backendHost}/usuarios`, this.loginForm.value).subscribe(res=>{});
-
+    this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
+      console.log(res); 
+    });
+      
     // this.successMsg = 'Sesión Iniciada';
     // this.hayError = true;
     // this.hayError = false;
