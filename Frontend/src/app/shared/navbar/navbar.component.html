@@ -102,29 +102,30 @@
         <h2 class="modal-title">¡Bienvenido!</h2>
         <small>Estamos felices de tenerte de vuelta.</small>
     </div>
-    <div class="form-floating">
-        <input type="email"
-                formControlName="formEmailLogin"
-                class="border-bottom-custom form-control" 
-                id="floatingInputLogin" 
-                placeholder="name@example.com">
-        <label for="floatingInputLogin">Correo electrónico</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" 
-                formControlName="formPasswordLogin"
-                class="border-bottom-custom form-control" 
-                id="floatingPasswordLogin" 
-                placeholder="Password">
-        <label for="floatingPasswordLogin">Contraseña</label>
-    </div>
-    <button class="btn btn-primary" type="submit" (click)="login()">Iniciar Sesión</button>
-
-    <div *ngIf="hayError" 
-            class="alert alert-danger">
-            Correo o Contraseña incorrecta.
-    </div>
-
+    
+    <form [formGroup]="registerForm">
+      <div class="form-floating">
+          <input type="email"
+                  formControlName="formEmailLogin"
+                  class="border-bottom-custom form-control" 
+                  id="floatingInputLogin" 
+                  placeholder="name@example.com">
+          <label for="floatingInputLogin">Correo electrónico</label>
+      </div>
+      <div class="form-floating">
+          <input type="password" 
+                  formControlName="formPasswordLogin"
+                  class="border-bottom-custom form-control" 
+                  id="floatingPasswordLogin" 
+                  placeholder="Password">
+          <label for="floatingPasswordLogin">Contraseña</label>
+      </div>
+      <button class="btn btn-primary" type="submit" (click)="login()">Iniciar Sesión</button>
+      <div *ngIf="hayError" 
+              class="alert alert-danger">
+              Correo o Contraseña incorrecta.
+      </div>
+    </form>
     <a id="texto" href="#">Recuperar Contraseña</a>
     <small style="color: #8190A5">|</small>
     <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
