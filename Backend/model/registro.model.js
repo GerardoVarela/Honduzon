@@ -53,18 +53,18 @@ async function getUsuarioId(usuario){
 
 }
 
-async function getCorreoUsuario(){
+async function getCorreoUsuario(correo){
     try {
         var pool = await mssql.connect(bdConfig.config);
-        let usuario = await pool.request()
-        .query('SELECT CORREO_ELECTRONICO FROM [dbo].[Usuarios]');
-        return usuario.recordset;
+        let correoUsuario = await pool.request()
+        .input('correoInput',mssql.VarChar, correo)
+        .query('SELECT CORREO_ELECTRONICO FROM [dbo].[Usuarios] WHERE CORREO_ELECTRONICO = @correoInput');
+        return correoUsuario.recordset;
     } catch (error) {
         console.log(error);
         process.exit(1);
     }
     
-
 }
 
 async function getUsuarios(){
@@ -85,7 +85,8 @@ async function getUsuarios(){
 module.exports={
     insertUsuario:insertUsuario,
     getUsuarioId:getUsuarioId,
-    getUsuarios:getUsuarios
+    getUsuarios:getUsuarios,
+    getCorreoUsuario:getCorreoUsuario
 }
 
 
