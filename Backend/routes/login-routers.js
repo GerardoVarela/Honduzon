@@ -10,15 +10,28 @@
  * 
  */
 
-var express= require('express');
+var express = require('express');
 var router = express.Router();
+var login = require('../model/login.model'); 
+
+router.get('/', (req, res)=>{
+     //Testing
+})
 
 
-router.get('/',(req,res)=>{});
+router.post('/',(req,res)=>{
+    console.log(req.body);
+    login.getCorreo(req.body.Usuariocorreo).then(resultado=>{
+        res.json(resultado);
+    });
+});
 
 
+router.get('/:id',(req,res)=>{
+
+});
 
 
-module.exports = {
-    router:router
-};
+module.exports={
+    router : router
+}

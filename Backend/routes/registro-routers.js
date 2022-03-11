@@ -17,6 +17,7 @@ var registroModel = require('../model/registro.model');
 
 
 
+
 router.get('/', (req, res)=>{
     registroModel.getUsuarios().then(resultado=>{
         res.send(resultado)
@@ -25,6 +26,7 @@ router.get('/', (req, res)=>{
 
 
 router.post('/guardar',(req,res)=>{
+  
     const usuario ={...req.body};
     
         console.log('No se Repite')
