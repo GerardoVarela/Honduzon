@@ -31,4 +31,8 @@ async function inserProducto(producto){
 }
 
 
-module.exports={}
+
+
+module.exports={
+    inserProducto:inserProducto
+}
