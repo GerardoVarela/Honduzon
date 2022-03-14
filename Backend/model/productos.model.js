@@ -21,7 +21,25 @@ async function inserProducto(producto){
         .input('ID_USUARIO',mssql.Int,producto.userID)
         .input('ID_CATEGORIA',mssql.Int,producto.categoryID)
         .input('IMAGEN',mssql.Image,producto.formImage)
+        .execute('SP_INSERTAR_PRODUCTO');
+        return insertarProducto.recordset
 
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+
+}
+
+async function getProductoFiltrado(precio=0.00, categoria=0, ciudad=0, departamento = 0){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenerProductoFiltrado = await pool.request()
+        .input('PRECIO',mssql.Float,precio)
+        .input('ID_CATEGORIA',mssql.Int,categoria)
+        .input('',mssql.Int,producto.formQuantityProd)
+        .input('CANTIDAD_PROD_VENDIDO',mssql.Int,producto.formQuantitySold) 
+        .query('SELECT * FROM [dbo].[Productos] WHERE NOM')
 
     } catch (error) {
         console.log(error);
