@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
+import { AbstractControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-navbar',
@@ -21,41 +23,44 @@ export class NavbarComponent implements OnInit {
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
-  private exists: boolean = false;
+  public registerForm: any;
 
-  registerForm = new FormGroup({
-    formName: new FormControl('', Validators.required),
-    formLastName: new FormControl('', Validators.required),
-    formEmail: new FormControl('', [Validators.required, Validators.email]),
-    formPhone: new FormControl('', Validators.required),
-    formDept: new FormControl('', Validators.required),
-    formPreg: new FormControl('', Validators.required),
-    formResp: new FormControl('', Validators.required),
-    formCity: new FormControl('', Validators.required),
-    formDirection: new FormControl(''),
-    formPassword: new FormControl('', Validators.required),
-    formTerms: new FormControl(false, Validators.requiredTrue),
-  });
 
   loginForm = new FormGroup({
     formEmailLogin: new FormControl('', [Validators.required, Validators.email]),
     formPasswordLogin: new FormControl('', Validators.required),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
+  constructor(private modalService: NgbModal, private httpClient: HttpClient) {
+
+  }
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
       this.preguntas = res;
-      // console.log(this.preguntas);
     });
     this.deptos = this.httpClient.get(`${this.backendHost}/departamentos/`).subscribe(res=>{
       this.deptos = res;
-      // console.log(this.deptos);
     });
-    console.log(this.registerForm.value.formCity);
     this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
       this.ciudades = res;
+    });
+
+    this.registerForm = new FormGroup({
+      formName: new FormControl('', Validators.required),
+      formLastName: new FormControl('', Validators.required),
+      formEmail: new FormControl('', [Validators.required, Validators.email]),
+      formPhone: new FormControl('', Validators.required),
+      formDept: new FormControl('', Validators.required),
+      formPreg: new FormControl('', Validators.required),
+      formResp: new FormControl('', Validators.required),
+      formCity: new FormControl('', Validators.required),
+      formDirection: new FormControl(''),
+      password: new FormGroup({
+        formPassword: new FormControl('', Validators.required),
+        formVPassword: new FormControl('', [Validators.required, this.validateAreEqual]),
+      }),
+      formTerms: new FormControl(false, Validators.requiredTrue)
     });
   }
 
@@ -67,17 +72,13 @@ export class NavbarComponent implements OnInit {
   }
 
   register(content: any){
-    this.registerForm.value.formCity=1
-    console.log(this.registerForm.value.formCity=1);
-      this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
+    this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
         console.log(res)
     });
     this.successMsg = 'Registrado';
     this.modalService.dismissAll();
     this.modalService.open(content, { size: 'sm' });
   }
-
-  
 
   login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
@@ -91,12 +92,6 @@ export class NavbarComponent implements OnInit {
         this.hayError = true;
       }
     });
-
-    // if(this.exists){
-    //   this.successMsg = 'Sesión Iniciada';
-    //   this.modalService.dismissAll();
-    //   this.modalService.open(content, { size: 'sm' });
-    // }
     
   }
 
@@ -108,7 +103,53 @@ export class NavbarComponent implements OnInit {
   get formCity() { return this.registerForm.get('formCity'); }
   get formPreg() { return this.registerForm.get('formPreg'); }
   get formResp() { return this.registerForm.get('formResp'); }
-  get formPassword() { return this.registerForm.get('formPassword'); }
+  get password() { return this.registerForm.get('password'); }
+  get formPassword() { return this.password.get('formPassword'); }
+  get formVPassword() { return this.password.get('formVPassword'); }
   get formTerms() { return this.registerForm.get('formTerms'); }
+
+
+//   pwdMatchValidator(frm: FormGroup): { invalid: true } | null {
+//     return frm.get('formPassword')!.value === frm.get('formVPassword')!.value
+//        ? null : {'mismatch': true};
+//  }
+
+  validateAreEqual(fieldControl: FormControl) {
+    return fieldControl.value === this.registerForm.get('password').get("formPassword").value ? null : {
+        NotEqual: true
+    };
+  }
+
+ pwdMatchValidator():ValidatorFn {
+  return (formGroup: AbstractControl):{ [key: string]: any } | null => {
+    const passwordControl = formGroup.get('formPassword');
+    const confirmPasswordControl = formGroup.get('formvPassword');
+    
+    if (!passwordControl || !confirmPasswordControl) {
+      console.log('A');
+      return null;
+    }
+
+    if (
+      confirmPasswordControl.errors &&
+      !confirmPasswordControl.errors['passwordMismatch']
+    ) {
+      console.log('B');
+      return null;
+    }
+
+    if (passwordControl.value !== confirmPasswordControl.value) {
+      console.log('Hola');
+      confirmPasswordControl.setErrors({ passwordMismatch: true });
+      console.log(confirmPasswordControl.errors);
+      console.log(confirmPasswordControl.errors!['passwordMismatch']);
+      return { passwordMismatch: true }
+    } else {
+      console.log('adios');
+      confirmPasswordControl.setErrors(null);
+      return null;
+    }
+  };
+}
 
 }

@@ -72,8 +72,13 @@
           </a>
         </li>
         <li class="nav-item" style="margin-right: 5px !important">
+          <button class="btn-reg-or-log btn" type="button" (click)="open(contentReg)">
+            Regístrate
+          </button>
+        </li>
+        <li class="nav-item" style="margin-right: 5px !important">
           <button class="btn-reg-or-log btn" type="button" (click)="open(contentLog)">
-            Regístrate o inicia sesión
+            Iniciar Sesión
           </button>
         </li>
         <li class="nav-item" style="margin-left: 5px !important">
@@ -123,7 +128,7 @@
       <button class="btn btn-primary" type="submit" (click)="login(contentSuccess)">Iniciar Sesión</button>
       <div *ngIf="hayError" 
               class="alert alert-danger">
-              Correo o Contraseña incorrecta.
+              Correo o contraseña incorrecta.
       </div>
     </form>
     <a id="texto" href="#">Recuperar Contraseña</a>
@@ -222,27 +227,52 @@
         </div>
       </div>
 
+      
+      <form [formGroup]="registerForm.get('password')">
+        <div class="form-floating">
+          <input
+            type="password"
+            formControlName="formPassword"
+            class="border-bottom-custom form-control"
+            id="floatingPassword"
+            placeholder="Contraseña"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
+          />
+          <label for="floatingPassword">Contraseña*</label>
+        </div>
+        <div *ngIf="formPassword!.invalid && (formPassword!.dirty || formPassword!.touched)"
+          class="invalid-feedback-select">
+          <div *ngIf="formPassword!.invalid && formPassword!.touched">
+            Campo Obligatorio.
+          </div>
+          <div *ngIf="formPassword!.invalid && formPassword!.dirty">
+            La contraseña debe ser de 8-16 caracteres y tener al menos 1 mayúscula, minúscula, número y caracter no alfanumérico.
+          </div>
+        </div>
 
-      <div class="form-floating">
-        <input
-          type="password"
-          formControlName="formPassword"
-          class="border-bottom-custom form-control"
-          id="floatingPassword"
-          placeholder="Contraseña"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
-        />
-        <label for="floatingPassword">Contraseña*</label>
-      </div>
-      <div *ngIf="formPassword!.invalid && (formPassword!.dirty || formPassword!.touched)"
-        class="invalid-feedback-select">
-        <div *ngIf="formPassword!.invalid && formPassword!.touched">
-          Campo Obligatorio.
+        <div class="form-floating">
+          <input
+            type="password"
+            formControlName="formVPassword"
+            class="border-bottom-custom form-control"
+            id="floatingVPassword"
+            placeholder="Verificar Contraseña"
+          />
+          <label for="floatingPassword">Verificar Contraseña*</label>
         </div>
-        <div *ngIf="formPassword!.invalid && formPassword!.dirty">
-          La contraseña debe ser de 8-16 caracteres y tener al menos 1 mayúscula, minúscula, número y caracter no alfanumérico.
+        <div *ngIf="password.invalid && (formVPassword!.dirty || formVPassword!.touched)"
+          class="invalid-feedback-select">
+          <div *ngIf="formVPassword!.touched">
+            Campo Obligatorio.
+          </div>
+          <!-- <div *ngIf="formVPassword!.dirty && password.invalid">
+            La contraseña no coincide.
+          </div> -->
+          <div *ngIf="formVPassword!.value !== formPassword.value">
+            La contraseña no coincide.
+          </div>
         </div>
-      </div>
+      </form>
 
       <div class="form-floating">
         <input
