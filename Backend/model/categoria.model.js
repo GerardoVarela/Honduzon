@@ -50,7 +50,7 @@ async function obtenerCategoria(categoriaId){
     }
 }
 
-async function editarCategoria(categoriaId){
+async function editarCategoria(categoriaModificada, categoriaId){
 
 }
 
