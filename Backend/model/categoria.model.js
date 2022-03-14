@@ -17,7 +17,7 @@ async function insertCategoria(categoria){
         .input('NOMBRE_CATEGORIA', mssql.VarChar,usuario.formCategoryName)
         .input('DESCRIPCION_CATEGORIA', mssql.VarChar,usuario.formCategoryDescription)
         .input('IMAGEN',mssql.Image,usuario.formImageInput)
-        .execute('SP_INSERTAR_CATEGORIA'); //NO SE HA CREADO EL STORED PROCEDURE
+        .execute('SP_INSERTAR_CATEGORIA'); 
         return insertarCategoria.recordsets;
     } catch (error) {
         console.log(error);
@@ -26,11 +26,28 @@ async function insertCategoria(categoria){
 }
 
 async function obtenerCategorias(){
-
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let categorias = await pool.request()
+        .query('SELECT * FROM [dbo].[Categoria]') 
+        return categorias.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
 async function obtenerCategoria(categoriaId){
-
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let categorias = await pool.request()
+        .input('CategoriaInput',mssql.Int,categoriaId)
+        .query('SELECT * FROM [dbo].[Categoria] WHERE = @CategoriaInput') 
+        return categorias.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
 async function editarCategoria(categoriaId){
