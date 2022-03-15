@@ -35,12 +35,12 @@ async function getProductoFiltrado(precio=0.00, categoria=0, ciudad=0, departame
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrado = await pool.request()
-        .input('PRECIO',mssql.Float,precio)
-        .input('ID_CATEGORIA',mssql.Int,categoria)
-        .input('',mssql.Int,producto.formQuantityProd)
-        .input('CANTIDAD_PROD_VENDIDO',mssql.Int,producto.formQuantitySold) 
-        .query('SELECT * FROM [dbo].[Productos] WHERE NOM')
-
+        .input('PrecioInput',mssql.Float,precio)
+        .input('IdCategoriaInput',mssql.Int,categoria)
+        .input('ciudadInput',mssql.Int,ciudad)
+        .input('departamentoInput',mssql.Int,departamento) 
+        .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO= @PrecioInput OR ID_CATEGORIA= @IdCategoria OR ')
+        return obtenerProductoFiltrado.recordset
     } catch (error) {
         console.log(error);
         process.exit(1);
