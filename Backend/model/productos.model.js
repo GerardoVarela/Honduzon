@@ -8,7 +8,7 @@
 var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
-async function inserProducto(producto){
+async function insertProducto(producto){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let insertarProducto = await pool.request()
@@ -52,5 +52,5 @@ async function getProductoFiltrado(precio=0.00, categoria=0, ciudad=0, departame
 
 
 module.exports={
-    inserProducto:inserProducto
+    insertProducto:insertProducto
 }
