@@ -17,7 +17,16 @@ var productoModel = require('../model/productos.model');
 
 router.get('/',(req,res)=>{});
 
-router.post('/guardarproducto',(req,res)=>{});
+router.post('/guardarproducto',(req,res)=>{
+    var producto = {... req.body}
+    productoModel.insertProducto(producto).then(resultado=>{
+        res.send({
+            mensaje: 'Producto ingresada con exito',
+            registroCat: true
+        })
+        res.statusCode(201);
+    });
+});
 
 router.get('/filtradoproducto',(req,res)=>{})
 
