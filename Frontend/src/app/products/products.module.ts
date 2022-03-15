@@ -7,6 +7,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ModalComponent,
     RegisterComponent,
     CarruselComponent,
+    CardCarruselComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, CarouselModule],
   exports: [

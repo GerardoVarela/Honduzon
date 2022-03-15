@@ -4,6 +4,15 @@
   background: #eee;
 }
 
+#btn-Refrescar {
+  background: rgba(13, 110, 253, 0);
+  color: #00bce4;
+  border-color: #00bce4;
+  border-radius: 20px;
+  font-weight: bold;
+  height: 42px;
+}
+
 .containers {
   width: 90%;
   margin: 0 auto;
@@ -98,13 +107,4 @@ img {
   font-weight: bold;
   height: 42px;
   width: 100%;
-}
-
-#btn-Refrescar {
-  background: rgba(13, 110, 253, 0);
-  color: #00bce4;
-  border-color: #00bce4;
-  border-radius: 20px;
-  font-weight: bold;
-  height: 42px;
 }
