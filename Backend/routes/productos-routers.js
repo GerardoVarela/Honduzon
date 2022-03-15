@@ -12,3 +12,15 @@
 
 var express = require('express');
 var router = express.Router();
+
+var productoModel = require('../model/productos.model');
+
+router.get('/',(req,res)=>{});
+
+router.post('/guardarproducto',(req,res)=>{});
+
+router.get('/filtradoproducto',(req,res)=>{})
+
+router.delete('/borrarproducto',(req,res)=>{});
+
+
