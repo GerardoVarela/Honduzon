@@ -31,3 +31,8 @@ router.post('/guardar',(req,res)=>{
         res.statusCode(201);
     })
 });
+
+
+module.exports={
+    router:router
+}
