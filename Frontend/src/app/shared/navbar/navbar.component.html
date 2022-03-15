@@ -9,86 +9,98 @@
   "
 >
   <!-- <div class="container" style="margin-left: 20px"> -->
-    <a class="navbar-brand" href="#" style="margin-left: 25px">
-      <img src="../assets/logo.png" style="width: 50px; height: 50px"/>
-    </a>
-    <button
-      class="navbar-toggler"
-      data-bs-toggle="collapse"
-      data-bs-target="#navcol-1">
-      <span class="visually-hidden">Toggle navigation</span>
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navcol-1" class="collapse navbar-collapse">
-      <!-- Parte Izq Navbar -->
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a
-            class="dropdown-toggle nav-link"
-            aria-expanded="false"
-            data-bs-toggle="dropdown"
-            href="#"
-            >Ubicación</a
-          >
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">First Item</a
-            ><a class="dropdown-item" href="#">Second Item</a
-            ><a class="dropdown-item" href="#">Third Item</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <input
-            class="search-input"
-            type="search"
-            placeholder="Buscar articulos"
-          />
-        </li>
-        <li class="search-icon nav-item">
+  <a class="navbar-brand" href="#" style="margin-left: 25px">
+    <img src="../assets/logo.png" style="width: 50px; height: 50px" />
+  </a>
+  <button
+    class="navbar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#navcol-1"
+  >
+    <span class="visually-hidden">Toggle navigation</span>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navcol-1" class="collapse navbar-collapse">
+    <!-- Parte Izq Navbar -->
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a
+          class="dropdown-toggle nav-link"
+          aria-expanded="false"
+          data-bs-toggle="dropdown"
+          href="#"
+          >Ubicación</a
+        >
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">First Item</a
+          ><a class="dropdown-item" href="#">Second Item</a
+          ><a class="dropdown-item" href="#">Third Item</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <input
+          class="search-input"
+          type="search"
+          placeholder="Buscar articulos"
+        />
+      </li>
+      <li class="search-icon nav-item">
+        <i
+          class="fas fa-search"
+          style="
+            margin-right: 0px;
+            color: rgba(51, 51, 51, 0.6);
+            margin-left: 10px;
+            margin-bottom: 0px;
+            font-size: 20px;
+          "
+        ></i>
+      </li>
+    </ul>
+    <!-- Parte Der Navbar -->
+    <ul class="navbar-nav">
+      <li class="nav-item" style="margin-left: 15%">
+        <a class="message-a nav-link" href="#">
           <i
-            class="fas fa-search"
+            class="far fa-paper-plane"
             style="
-              margin-right: 0px;
-              color: rgba(51, 51, 51, 0.6);
-              margin-left: 10px;
-              margin-bottom: 0px;
               font-size: 20px;
+              float: bottom;
+              background: #ffffff;
+              height: 16px;
+              color: rgba(51, 51, 51, 0.6);
             "
-          ></i>
-        </li>
-      </ul>
-      <!-- Parte Der Navbar -->
-      <ul class="navbar-nav">
-        <li class="nav-item" style="margin-left: 15%">
-          <a class="message-a nav-link" href="#">
-            <i class="far fa-paper-plane"
-                style="
-                  font-size: 20px;
-                  float: bottom;
-                  background: #ffffff;
-                  height: 16px;
-                  color: rgba(51, 51, 51, 0.6);">
-            </i>
-            Mensaje
-          </a>
-        </li>
-        <li class="nav-item" style="margin-right: 5px !important">
-          <button class="btn-reg-or-log btn" type="button" (click)="open(contentReg)">
-            Regístrate
-          </button>
-        </li>
-        <li class="nav-item" style="margin-right: 5px !important">
-          <button class="btn-reg-or-log btn" type="button" (click)="open(contentLog)">
-            Iniciar Sesión
-          </button>
-        </li>
-        <li class="nav-item" style="margin-left: 5px !important">
-          <button class="btn-subs btn" type="button">
-            <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
-            producto
-          </button>
-        </li>
-      </ul>
-    </div>
+          >
+          </i>
+          Mensaje
+        </a>
+      </li>
+      <li class="nav-item" style="margin-right: 5px !important">
+        <button
+          class="btn-reg-or-log btn"
+          type="button"
+          (click)="open(contentReg)"
+        >
+          Regístrate
+        </button>
+      </li>
+      <li class="nav-item" style="margin-right: 5px !important">
+        <button
+          class="btn-reg-or-log btn"
+          type="button"
+          (click)="open(contentLog)"
+        >
+          Iniciar Sesión
+        </button>
+      </li>
+      <li class="nav-item" style="margin-left: 5px !important">
+        <button class="btn-subs btn" type="button">
+          <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
+          producto
+        </button>
+      </li>
+    </ul>
+  </div>
   <!-- </div> -->
 </nav>
 
@@ -102,47 +114,58 @@
       (click)="modalLog.dismiss('Cross click')"
     ></button>
   </div>
-  <div class="modal-body col" style="text-align: center;">
-    <div class="row" style="padding-bottom: 20px;">
-        <h2 class="modal-title">¡Bienvenido!</h2>
-        <small>Estamos felices de tenerte de vuelta.</small>
+  <div class="modal-body col" style="text-align: center">
+    <div class="row" style="padding-bottom: 20px">
+      <h2 class="modal-title">¡Bienvenido!</h2>
+      <small>Estamos felices de tenerte de vuelta.</small>
     </div>
-    
+
     <form [formGroup]="loginForm">
       <div class="form-floating">
-          <input type="email"
-                  formControlName="formEmailLogin"
-                  class="border-bottom-custom form-control" 
-                  id="floatingInputLogin" 
-                  placeholder="name@example.com">
-          <label for="floatingInputLogin">Correo electrónico</label>
+        <input
+          type="email"
+          formControlName="formEmailLogin"
+          class="border-bottom-custom form-control"
+          id="floatingInputLogin"
+          placeholder="name@example.com"
+        />
+        <label for="floatingInputLogin">Correo electrónico</label>
       </div>
       <div class="form-floating">
-          <input type="password" 
-                  formControlName="formPasswordLogin"
-                  class="border-bottom-custom form-control" 
-                  id="floatingPasswordLogin" 
-                  placeholder="Password">
-          <label for="floatingPasswordLogin">Contraseña</label>
+        <input
+          type="password"
+          formControlName="formPasswordLogin"
+          class="border-bottom-custom form-control"
+          id="floatingPasswordLogin"
+          placeholder="Password"
+        />
+        <label for="floatingPasswordLogin">Contraseña</label>
       </div>
-      <button class="btn btn-primary" type="submit" (click)="login(contentSuccess)">Iniciar Sesión</button>
-      <div *ngIf="hayError" 
-              class="alert alert-danger">
-              Correo o contraseña incorrecta.
+      <button
+        class="btn btn-primary"
+        type="submit"
+        (click)="login(contentSuccess)"
+      >
+        Iniciar Sesión
+      </button>
+      <div *ngIf="hayError" class="alert alert-danger">
+        Correo o contraseña incorrecta.
       </div>
     </form>
     <a id="texto" href="#">Recuperar Contraseña</a>
-    <small style="color: #8190A5">|</small>
+    <small style="color: #8190a5">|</small>
     <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
-    
+
     <div class="row">
-        <small style="margin-top: 40px;">Al iniciar estás aceptando nuestros</small>
+      <small style="margin-top: 40px"
+        >Al iniciar estás aceptando nuestros</small
+      >
     </div>
-    
+
     <small style="margin-bottom: 30px">
-        <a id="texto" style="padding: 0px!important" href="#">Términos</a>
-        y
-        <a id="texto" style="padding: 0px!important" href="#">Condiciones</a>
+      <a id="texto" style="padding: 0px !important" href="#">Términos</a>
+      y
+      <a id="texto" style="padding: 0px !important" href="#">Condiciones</a>
     </small>
   </div>
 </ng-template>
@@ -173,15 +196,10 @@
           class="border-bottom-custom form-control"
           id="floatingName"
           placeholder="Nombre"
-          [class.is-invalid]="
-            formName!.invalid &&
-            formName!.touched
-          "
+          [class.is-invalid]="formName!.invalid && formName!.touched"
         />
         <label for="floatingName">Nombre*</label>
-        <div class="invalid-feedback">
-          Campo obligatorio.
-        </div>
+        <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
 
       <div class="form-floating">
@@ -191,17 +209,11 @@
           class="border-bottom-custom form-control"
           id="floatingLastName"
           placeholder="Apellido"
-          [class.is-invalid]="
-            formLastName!.invalid &&
-            formLastName!.touched
-          "
+          [class.is-invalid]="formLastName!.invalid && formLastName!.touched"
         />
         <label for="floatingLastName">Apellido*</label>
-        <div class="invalid-feedback">
-          Campo obligatorio.
-        </div>
+        <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
-
 
       <div class="form-floating">
         <input
@@ -211,23 +223,17 @@
           id="floatingEmail"
           placeholder="nombre@ejemplo.com"
           pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
-          [class.is-invalid]="
-            formEmail!.invalid &&
-            formEmail!.touched
-          "
+          [class.is-invalid]="formEmail!.invalid && formEmail!.touched"
         />
         <label for="floatingEmail">Correo electrónico*</label>
         <div class="invalid-feedback">
           <ng-container *ngIf="formEmail!.dirty; else elseTemplate">
             Patrón incorrecto. Ejemplo: abc_d1@efgh.ijk
           </ng-container>
-          <ng-template #elseTemplate>
-            Campo obligatorio.
-          </ng-template>
+          <ng-template #elseTemplate> Campo obligatorio. </ng-template>
         </div>
       </div>
 
-      
       <form [formGroup]="registerForm.get('password')">
         <div class="form-floating">
           <input
@@ -240,13 +246,19 @@
           />
           <label for="floatingPassword">Contraseña*</label>
         </div>
-        <div *ngIf="formPassword!.invalid && (formPassword!.dirty || formPassword!.touched)"
-          class="invalid-feedback-select">
+        <div
+          *ngIf="
+            formPassword!.invalid &&
+            (formPassword!.dirty || formPassword!.touched)
+          "
+          class="invalid-feedback-select"
+        >
           <div *ngIf="formPassword!.invalid && formPassword!.touched">
             Campo Obligatorio.
           </div>
           <div *ngIf="formPassword!.invalid && formPassword!.dirty">
-            La contraseña debe ser de 8-16 caracteres y tener al menos 1 mayúscula, minúscula, número y caracter no alfanumérico.
+            La contraseña debe ser de 8-16 caracteres y tener al menos 1
+            mayúscula, minúscula, número y caracter no alfanumérico.
           </div>
         </div>
 
@@ -260,11 +272,13 @@
           />
           <label for="floatingPassword">Verificar Contraseña*</label>
         </div>
-        <div *ngIf="password.invalid && (formVPassword!.dirty || formVPassword!.touched)"
-          class="invalid-feedback-select">
-          <div *ngIf="formVPassword!.touched">
-            Campo Obligatorio.
-          </div>
+        <div
+          *ngIf="
+            password.invalid && (formVPassword!.dirty || formVPassword!.touched)
+          "
+          class="invalid-feedback-select"
+        >
+          <div *ngIf="formVPassword!.touched">Campo Obligatorio.</div>
           <!-- <div *ngIf="formVPassword!.dirty && password.invalid">
             La contraseña no coincide.
           </div> -->
@@ -283,8 +297,7 @@
           placeholder="nombre@ejemplo.com"
           pattern="[0-9]{4}-[0-9]{4}"
           [class.is-invalid]="
-            formPhone!.invalid &&
-            (formPhone!.touched || formPhone!.dirty )
+            formPhone!.invalid && (formPhone!.touched || formPhone!.dirty)
           "
         />
         <label for="floatingPhone">Teléfono*</label>
@@ -292,9 +305,7 @@
           <ng-container *ngIf="formPhone!.dirty; else elseTemplate">
             Patrón incorrecto. Ejemplo: 1234-5678
           </ng-container>
-          <ng-template #elseTemplate>
-            Campo obligatorio.
-          </ng-template>
+          <ng-template #elseTemplate> Campo obligatorio. </ng-template>
         </div>
       </div>
 
@@ -302,7 +313,8 @@
         class="border-bottom-custom form-select-reg"
         id="formSelectDept"
         aria-label="Departamento"
-        formControlName="formDept">
+        formControlName="formDept"
+      >
         <option value="">Departamento*</option>
         <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
@@ -311,18 +323,19 @@
           {{ dep }}
         </option> -->
       </select>
-      <div *ngIf="formDept!.invalid && (formDept!.dirty || formDept!.touched)"
-        class="invalid-feedback-select">
-        <div *ngIf="formDept!.errors?.['required']">
-          Campo Obligatorio.
-        </div>
+      <div
+        *ngIf="formDept!.invalid && (formDept!.dirty || formDept!.touched)"
+        class="invalid-feedback-select"
+      >
+        <div *ngIf="formDept!.errors?.['required']">Campo Obligatorio.</div>
       </div>
-      
+
       <select
         class="border-bottom-custom form-select-reg"
         id="formSelectCity"
         aria-label="Departamento"
-        formControlName="formCity">
+        formControlName="formCity"
+      >
         <option value="">Ciudad*</option>
         <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
@@ -331,18 +344,19 @@
           {{ cit }}
         </option> -->
       </select>
-      <div *ngIf="formCity!.invalid && (formCity!.dirty || formCity!.touched)"
-        class="invalid-feedback-select">
-        <div *ngIf="formCity!.errors?.['required']">
-          Campo Obligatorio.
-        </div>
+      <div
+        *ngIf="formCity!.invalid && (formCity!.dirty || formCity!.touched)"
+        class="invalid-feedback-select"
+      >
+        <div *ngIf="formCity!.errors?.['required']">Campo Obligatorio.</div>
       </div>
 
       <select
         class="border-bottom-custom form-select-reg"
         id="formSelectPreg"
         aria-label="Preguntas"
-        formControlName="formPreg">
+        formControlName="formPreg"
+      >
         <option value="">Preguntas*</option>
         <option *ngFor="let preg of preguntas" value="{{ preg.ID_PREGUNTA }}">
           {{ preg.PREGUNTA }}
@@ -351,11 +365,11 @@
           {{ preg }}
         </option> -->
       </select>
-      <div *ngIf="formPreg!.invalid && (formPreg!.dirty || formPreg!.touched)"
-        class="invalid-feedback-select">
-        <div *ngIf="formPreg!.errors?.['required']">
-          Campo Obligatorio.
-        </div>
+      <div
+        *ngIf="formPreg!.invalid && (formPreg!.dirty || formPreg!.touched)"
+        class="invalid-feedback-select"
+      >
+        <div *ngIf="formPreg!.errors?.['required']">Campo Obligatorio.</div>
       </div>
 
       <div class="form-floating">
@@ -365,17 +379,12 @@
           class="border-bottom-custom form-control"
           id="floatingResp"
           placeholder="Respuesta"
-          [class.is-invalid]="
-            formResp!.invalid &&
-            formResp!.touched
-          "
+          [class.is-invalid]="formResp!.invalid && formResp!.touched"
         />
         <label for="floatingResp">Respuesta*</label>
-        <div class="invalid-feedback">
-          Campo obligatorio.
-        </div>
-      </div>     
-      
+        <div class="invalid-feedback">Campo obligatorio.</div>
+      </div>
+
       <div class="form-floating">
         <input
           type="text"
@@ -421,7 +430,10 @@
 </ng-template>
 
 <ng-template #contentSuccess let-modalSuccess>
-  <div class="modal-body success-modal" style="text-align: center; border-radius: 20px;">
-    <p><br>{{successMsg}} con éxito</p>
+  <div
+    class="modal-body success-modal"
+    style="text-align: center; border-radius: 20px"
+  >
+    <p><br />{{ successMsg }} con éxito</p>
   </div>
 </ng-template>

@@ -1,1 +1,363 @@
-<p>carrusel works!</p>
+<section class="bg-color">
+  <div class="containers">
+    <!-- Titulo -->
+    <div class="title">
+      <p style="margin-bottom: 10px">
+        Plataforma líder de compraventa en Honduras
+      </p>
+      <h1><span>Hondu</span>zon</h1>
+    </div>
+    <div
+      class="row"
+      style="text-align: right; padding-bottom: 10px; padding-right: 10px"
+    >
+      <div class="col">
+        <button id="btn-Refrescar" class="btn btn-primary" type="button">
+          Refrescar categorías
+        </button>
+      </div>
+    </div>
+
+    <!-- Carrusel -->
+    <div class="row">
+      <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/01.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">VideoJuegos</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 80</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/02.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">Ropa</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 400</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/03.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">Tecnologia</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 40</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/04.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">Muebles</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 15</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/02.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">VideoJuegos</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 80</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template carouselSlide>
+          <div class="card">
+            <div class="card-main">
+              <div class="product-contairner">
+                <div class="p">
+                  <img src="../assets/01.jpg" alt="Product" />
+                  <div class="card-description">
+                    <div style="padding-top: 7px" class="row">
+                      <div class="col">
+                        <div class="card-title">
+                          <h4 style="color: 47525e">VideoJuegos</h4>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <h5 id="ctn-Articulos">Numero de articulos: 80</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <p style="text-align: justify">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum enim possimus dolorum non, modi sunt ips.
+                    </p>
+                  </div>
+                  <div class="card-link">
+                    <div style="padding: 0" class="container">
+                      <div class="row">
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Ver más<i
+                              class="fas fa-chevron-right"
+                              style="margin-left: 5px"
+                            ></i>
+                          </button>
+                        </div>
+                        <div class="col">
+                          <button
+                            id="btn-Cards"
+                            class="btn btn-primary"
+                            type="button"
+                          >
+                            Suscribirme
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>

@@ -6,8 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
-import { CardsComponent } from './components/cards/cards.component';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -15,17 +14,13 @@ import { CardsComponent } from './components/cards/cards.component';
     ModalComponent,
     RegisterComponent,
     CarruselComponent,
-    CardsComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, CarouselModule],
   exports: [
     // LoginComponent,
     // RegisterComponent,
-    // CarruselComponent
+    CarruselComponent,
   ],
-  providers: []
+  providers: [],
 })
-export class ProductsModule { }
+export class ProductsModule {}
