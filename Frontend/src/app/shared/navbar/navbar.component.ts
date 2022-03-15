@@ -23,17 +23,29 @@ export class NavbarComponent implements OnInit {
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
-  public registerForm: any;
+  public confirmPasswordControl!: any;
 
+  registerForm = new FormGroup({
+    formName: new FormControl('', Validators.required),
+    formLastName: new FormControl('', Validators.required),
+    formEmail: new FormControl('', [Validators.required, Validators.email]),
+    formPhone: new FormControl('', Validators.required),
+    formDept: new FormControl('', Validators.required),
+    formPreg: new FormControl('', Validators.required),
+    formResp: new FormControl('', Validators.required),
+    formCity: new FormControl('', Validators.required),
+    formDirection: new FormControl(''),
+    formPassword: new FormControl('', Validators.required),
+    formVPassword: new FormControl('', [Validators.required]),
+    formTerms: new FormControl(false, Validators.requiredTrue)
+  }, this.passwordMatch());
 
   loginForm = new FormGroup({
     formEmailLogin: new FormControl('', [Validators.required, Validators.email]),
     formPasswordLogin: new FormControl('', Validators.required),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient) {
-
-  }
+  constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -46,25 +58,10 @@ export class NavbarComponent implements OnInit {
       this.ciudades = res;
     });
 
-    this.registerForm = new FormGroup({
-      formName: new FormControl('', Validators.required),
-      formLastName: new FormControl('', Validators.required),
-      formEmail: new FormControl('', [Validators.required, Validators.email]),
-      formPhone: new FormControl('', Validators.required),
-      formDept: new FormControl('', Validators.required),
-      formPreg: new FormControl('', Validators.required),
-      formResp: new FormControl('', Validators.required),
-      formCity: new FormControl('', Validators.required),
-      formDirection: new FormControl(''),
-      password: new FormGroup({
-        formPassword: new FormControl('', Validators.required),
-        formVPassword: new FormControl('', [Validators.required, this.validateAreEqual]),
-      }),
-      formTerms: new FormControl(false, Validators.requiredTrue)
-    });
   }
 
   open(content: any, eraseMod?: boolean){
+    this.clearInputs();
     if(eraseMod){
       this.modalService.dismissAll();
     }
@@ -103,53 +100,67 @@ export class NavbarComponent implements OnInit {
   get formCity() { return this.registerForm.get('formCity'); }
   get formPreg() { return this.registerForm.get('formPreg'); }
   get formResp() { return this.registerForm.get('formResp'); }
-  get password() { return this.registerForm.get('password'); }
-  get formPassword() { return this.password.get('formPassword'); }
-  get formVPassword() { return this.password.get('formVPassword'); }
+  get formPassword() { return this.registerForm.get('formPassword'); }
+  get formVPassword() { return this.registerForm.get('formVPassword'); }
   get formTerms() { return this.registerForm.get('formTerms'); }
 
+  // validateAreEqual(fieldControl: AbstractControl): {NotEqual: boolean} | null{
+  //   return fieldControl.value === this.registerForm.get("formPassword")!.value ? null : {
+  //       NotEqual: true
+  //   };
+  // }
 
-//   pwdMatchValidator(frm: FormGroup): { invalid: true } | null {
-//     return frm.get('formPassword')!.value === frm.get('formVPassword')!.value
-//        ? null : {'mismatch': true};
-//  }
+  passwordMatch():ValidatorFn {
+    return (formGroup: AbstractControl):{ [key: string]: any } | null => {
+      const passwordControl = formGroup.get('formPassword');
+      const confirmPasswordControl = formGroup.get('formVPassword');
+      
+      if (passwordControl && confirmPasswordControl) {
+        console.log('A');
+        if (passwordControl!.value !== confirmPasswordControl!.value) {
+          console.log('Hola');
+          confirmPasswordControl!.setErrors({ passwordMismatch: true });
+          return { passwordMismatch: true }
+        } else {
+          console.log('adios');
+          confirmPasswordControl!.setErrors(null);
+          return null;
+        }
+      }else{
+        return null;
+      }
 
-  validateAreEqual(fieldControl: FormControl) {
-    return fieldControl.value === this.registerForm.get('password').get("formPassword").value ? null : {
-        NotEqual: true
+      // if (
+      //   confirmPasswordControl.errors &&
+      //   !confirmPasswordControl.errors['passwordMismatch']
+      // ) {
+      //   console.log('B');
+      //   return null;
+      // }
+
     };
   }
 
- pwdMatchValidator():ValidatorFn {
-  return (formGroup: AbstractControl):{ [key: string]: any } | null => {
-    const passwordControl = formGroup.get('formPassword');
-    const confirmPasswordControl = formGroup.get('formvPassword');
-    
-    if (!passwordControl || !confirmPasswordControl) {
-      console.log('A');
-      return null;
-    }
+  public getConfirmPasswordError(): number {
+    const control = this.registerForm.get('formVPassword');
+    return control!.hasError('required')
+      ? 1
+      : control!.hasError('passwordMismatch')
+      ? 2
+      : 3;
+  }
 
-    if (
-      confirmPasswordControl.errors &&
-      !confirmPasswordControl.errors['passwordMismatch']
-    ) {
-      console.log('B');
-      return null;
-    }
-
-    if (passwordControl.value !== confirmPasswordControl.value) {
-      console.log('Hola');
-      confirmPasswordControl.setErrors({ passwordMismatch: true });
-      console.log(confirmPasswordControl.errors);
-      console.log(confirmPasswordControl.errors!['passwordMismatch']);
-      return { passwordMismatch: true }
-    } else {
-      console.log('adios');
-      confirmPasswordControl.setErrors(null);
-      return null;
-    }
-  };
-}
-
+  clearInputs() { 
+    this.formName!.reset();
+    this.formLastName!.reset();
+    this.formEmail!.reset();
+    this.formPhone!.reset();
+    this.formDept!.reset();
+    this.formCity!.reset();
+    this.formPreg!.reset();
+    this.formResp!.reset();
+    this.formPassword!.reset();
+    this.formVPassword!.reset();
+    this.formTerms!.reset();
+  }
 }
