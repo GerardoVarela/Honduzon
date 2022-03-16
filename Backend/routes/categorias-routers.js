@@ -24,6 +24,7 @@ router.get('/',(req,res)=>{
 
 router.post('/guardar',(req,res)=>{
     const categoria ={...req.body};
+    // console.log(categoria);
     categoriaModel.insertCategoria(categoria).then(resultado=>{
         res.send({
             mensaje: 'Categoria ingresada con exito',

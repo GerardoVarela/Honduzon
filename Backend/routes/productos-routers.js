@@ -33,3 +33,6 @@ router.get('/filtradoproducto',(req,res)=>{})
 router.delete('/borrarproducto',(req,res)=>{});
 
 
+module.exports={
+    router:router
+}
