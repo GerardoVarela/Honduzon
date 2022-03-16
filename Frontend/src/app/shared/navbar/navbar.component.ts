@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +24,10 @@ export class NavbarComponent implements OnInit {
   public successMsg!: string;
   public respLogin!: any;
   public confirmPasswordControl!: any;
+
+  searchForm = new FormGroup({
+    searchInput: new FormControl('')
+  });
 
   registerForm = new FormGroup({
     formName: new FormControl('', Validators.required),
@@ -51,7 +55,7 @@ export class NavbarComponent implements OnInit {
     formRespRecover: new FormControl(''),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
+  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -73,19 +77,19 @@ export class NavbarComponent implements OnInit {
     }
     this.modalService.open(content, {centered: true});
   }
-
+  
   register(content: any){
     this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
-        console.log(res)
+      console.log(res)
     });
     this.successMsg = 'Registrado';
     this.modalService.dismissAll();
     this.modalService.open(content, { size: 'sm' });
   }
-
+  
   login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
-    
+      
       if(res == true){
         this.hayError = false;
         this.successMsg = 'Sesión Iniciada';
@@ -98,8 +102,16 @@ export class NavbarComponent implements OnInit {
   }
 
   recover(){
-
+    this.modalService.dismissAll();
+    this.router.navigateByUrl('/restore');
   }
+
+  search(){
+    this.httpClient.post(`${this.backendHost}/login`, this.searchForm.value).subscribe(res=>{});
+  }
+
+  // Getter Search
+  get searchInput() { return this.searchForm.get('searchInput'); }
 
   // Getters Login Form
   get formEmailLogin() { return this.loginForm.get('formEmailLogin'); }
