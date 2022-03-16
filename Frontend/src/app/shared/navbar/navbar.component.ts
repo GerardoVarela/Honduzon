@@ -44,6 +44,12 @@ export class NavbarComponent implements OnInit {
     formEmailLogin: new FormControl('', [Validators.required, Validators.email]),
     formPasswordLogin: new FormControl('', Validators.required),
   });
+  
+  recoverForm = new FormGroup({
+    formEmailRecover: new FormControl('', [Validators.required, Validators.email]),
+    formRadioBRecover: new FormControl('email'),
+    formRespRecover: new FormControl(''),
+  });
 
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
@@ -89,9 +95,18 @@ export class NavbarComponent implements OnInit {
         this.hayError = true;
       }
     });
-    
   }
 
+  recover(){
+
+  }
+
+  // Getters Login Form
+  get formEmailLogin() { return this.loginForm.get('formEmailLogin'); }
+  get formPasswordLogin() { return this.loginForm.get('formPasswordLogin'); }
+
+
+  // Getters Register Form
   get formName() { return this.registerForm.get('formName'); }
   get formLastName() { return this.registerForm.get('formLastName'); }
   get formEmail() { return this.registerForm.get('formEmail'); }
@@ -103,12 +118,12 @@ export class NavbarComponent implements OnInit {
   get formPassword() { return this.registerForm.get('formPassword'); }
   get formVPassword() { return this.registerForm.get('formVPassword'); }
   get formTerms() { return this.registerForm.get('formTerms'); }
-
-  // validateAreEqual(fieldControl: AbstractControl): {NotEqual: boolean} | null{
-  //   return fieldControl.value === this.registerForm.get("formPassword")!.value ? null : {
-  //       NotEqual: true
-  //   };
-  // }
+  
+  // Getters Recover Form
+  get formEmailRecover() { return this.recoverForm.get('formEmailRecover'); }
+  get formRadioBRecover() { return this.recoverForm.get('formRadioBRecover'); }
+  get formRespRecover() { return this.recoverForm.get('formRespRecover'); }
+  
 
   passwordMatch():ValidatorFn {
     return (formGroup: AbstractControl):{ [key: string]: any } | null => {
@@ -116,13 +131,10 @@ export class NavbarComponent implements OnInit {
       const confirmPasswordControl = formGroup.get('formVPassword');
       
       if (passwordControl && confirmPasswordControl) {
-        console.log('A');
         if (passwordControl!.value !== confirmPasswordControl!.value) {
-          console.log('Hola');
           confirmPasswordControl!.setErrors({ passwordMismatch: true });
           return { passwordMismatch: true }
         } else {
-          console.log('adios');
           confirmPasswordControl!.setErrors(null);
           return null;
         }
@@ -134,7 +146,6 @@ export class NavbarComponent implements OnInit {
       //   confirmPasswordControl.errors &&
       //   !confirmPasswordControl.errors['passwordMismatch']
       // ) {
-      //   console.log('B');
       //   return null;
       // }
 
@@ -151,6 +162,11 @@ export class NavbarComponent implements OnInit {
   }
 
   clearInputs() { 
+    // Login
+    this.formEmailLogin!.reset();
+    this.formPasswordLogin!.reset();
+
+    // Register
     this.formName!.reset();
     this.formLastName!.reset();
     this.formEmail!.reset();
@@ -162,5 +178,9 @@ export class NavbarComponent implements OnInit {
     this.formPassword!.reset();
     this.formVPassword!.reset();
     this.formTerms!.reset();
+    
+    // Recover
+    this.formEmailRecover!.reset();
+    this.formRespRecover!.reset();
   }
 }
