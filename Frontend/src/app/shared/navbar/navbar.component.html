@@ -48,7 +48,7 @@
             type="button"
             (click)="open(contentLog)"
           >
-            inicia sesión
+            Inicia Sesión
           </button>
         </li>
         <li class="nav-item" style="margin-left: 5px">
@@ -101,7 +101,7 @@
       </div>
       <button
         id="btn-modal"
-        class="btn btn-primary"
+        class="btn btn-primary btn-blue-animate"
         type="submit"
         (click)="login(contentSuccess)"
       >
@@ -111,10 +111,10 @@
         Correo o contraseña incorrecta.
       </div>
     </form>
-    <a id="texto" href="#">Recuperar Contraseña</a>
+    <a id="texto" href="#" (click)="open(contentRecover, true)">Recuperar Contraseña</a>
     <small style="color: #8190a5">|</small>
     <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
-
+    
     <div class="row">
       <small style="margin-top: 40px"
         >Al iniciar estás aceptando nuestros</small
@@ -371,7 +371,7 @@
       <!-- Botón Registrarse -->
       <button
         id="btn-modal"
-        class="btn btn-primary"
+        class="btn btn-primary btn-blue-animate"
         type="submit"
         [disabled]="registerForm.invalid"
         (click)="register(contentSuccess)"
@@ -393,5 +393,103 @@
     style="text-align: center; border-radius: 20px"
   >
     <p><br />{{ successMsg }} con éxito</p>
+  </div>
+</ng-template>
+
+<!-- Modal Recuperar Contraseña -->
+<ng-template #contentRecover let-modalRecover>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRecover.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center">
+    <div class="row" style="padding-bottom: 20px">
+      <h2 class="modal-title">Recuperar Contraseña</h2>
+      <small>Contesta la pregunta de seguridad o recibe un correo.</small>
+    </div>
+
+    <form [formGroup]="recoverForm">
+      <div class="form-floating">
+        <input
+          type="email"
+          formControlName="formEmailRecover"
+          class="border-bottom-custom form-control"
+          id="floatingEmailRecover"
+          placeholder="name@example.com"
+          [class.is-invalid]="formEmailRecover!.touched && (formEmailRecover!.value === null || formEmailRecover!.value === '')"/>
+        <label for="formEmailRecover">Correo electrónico</label>
+        <div class="invalid-feedback">Campo obligatorio.</div>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" 
+                style="margin-top: 0!important" 
+                type="radio" 
+                value="email" 
+                name="flexRadioDefault" 
+                formControlName="formRadioBRecover" 
+                id="flexRadioDefault1" 
+                checked>
+        <label class="form-check-label" for="flexRadioDefault1">
+          Recibir correo electrónico
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" 
+                style="margin-top: 0!important" 
+                type="radio" 
+                value="question" 
+                name="flexRadioDefault" 
+                formControlName="formRadioBRecover"
+                id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Contestar pregunta de seguridad
+        </label>
+      </div>
+
+      <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseTemplate">
+        <button
+          id="btn-modal"
+          class="btn btn-primary btn-blue-animate"
+          type="submit"
+          [disabled]="formEmailRecover!.value === null || formEmailRecover!.value === ''"
+          (click)="recover()">
+            Enviar Correo
+        </button>
+      </ng-container>
+      <ng-template #elseTemplate>
+
+        <div style="text-align: center; margin-top: 5%">
+          <p id="texto" style="margin-bottom: 0!important">Pregunta xd</p>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="text"
+            formControlName="formRespRecover"
+            class="border-bottom-custom form-control"
+            id="floatingResp"
+            placeholder="Respuesta"
+            [class.is-invalid]="formRespRecover!.touched && (formRespRecover!.value === null || formRespRecover!.value === '')"
+          />
+          <label for="floatingResp">Respuesta</label>
+          <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+
+        <button
+          id="btn-modal"
+          class="btn btn-primary btn-blue-animate"
+          type="submit"
+          [disabled]="(formRespRecover!.value === null || formRespRecover!.value === '') || (formEmailRecover!.value === null || formEmailRecover!.value === '')"
+          (click)="recover()">
+            Enviar Respuesta
+        </button>
+      </ng-template>
+      
+    </form>
   </div>
 </ng-template>
