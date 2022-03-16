@@ -30,7 +30,6 @@ router.post('/guardar',(req,res)=>{
             mensaje: 'Categoria ingresada con exito',
             registroCat: true
         })
-        res.statusCode(201);
     })
 });
 

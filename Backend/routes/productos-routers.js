@@ -20,11 +20,10 @@ router.get('/',(req,res)=>{});
 router.post('/guardarproducto',(req,res)=>{
     var producto = {... req.body}
     productoModel.insertProducto(producto).then(resultado=>{
-        res.send({
-            mensaje: 'Producto ingresada con exito',
-            registroCat: true
-        })
-        res.statusCode(201);
+        res.status(201).send({
+            mensaje: 'Producto ingresado con exito',
+            registroProd: true
+        });
     });
 });
 
