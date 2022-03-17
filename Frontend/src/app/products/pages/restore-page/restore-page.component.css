@@ -1,0 +1,128 @@
+.bg-color-restore {
+  padding: 20px 0;
+  /* background: #fff; */
+  background: #eee;
+  position: absolute;
+  height:100%;
+  width:100%;
+}
+
+.containers {
+  width: 90%;
+  margin: 5% auto;
+  text-align: center;
+}
+
+.title {
+  padding-bottom: 20px;
+  text-align: center;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+}
+
+.title::before {
+  content: "";
+  width: 20%;
+  height: 3px;
+  background: #dbdbdb;
+  opacity: 0.6;
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.title::after {
+  content: "\f005""\f005""\f005""\f005""\f005";
+  font-family: FontAwesome;
+  color: #00bce4;
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  background: #eee;
+  transform: translateX(-50%);
+  font-size: 16px;
+}
+
+.title p {
+  color: #999;
+  font-style: italic;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.title h1 {
+  font-size: 44px;
+  color: #131313;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.title h1 span {
+  color: #00bce4;
+}
+
+#box{
+  height: 50%;
+  width: 50%;
+  background-color: #FFF;
+  border-radius: 20px;
+  margin: 3% 25%!important;
+  padding: 5%;
+}   
+
+h4{
+  color: #47525e;
+}
+
+.form-floating {
+  margin: 2% 15%;
+}
+
+.form-control:focus {
+  border-bottom-color: #8190a5 !important;
+  outline: none;
+  box-shadow: 0 0 0 0px;
+}
+
+.invalid-feedback-select {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
+
+.border-bottom-custom {
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-color: #ced4da;
+}
+
+.btn-blue-animate {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 50%;
+    background-color: #00bce4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.btn-blue-animate:focus {
+  box-shadow: 0 0 0 0px!important;
+  background-color: #00d0ff!important;
+}
+
+.btn-blue-animate:hover {
+  background-color: #00d0ff!important;
+}

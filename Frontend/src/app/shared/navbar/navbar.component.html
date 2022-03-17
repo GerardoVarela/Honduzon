@@ -149,7 +149,7 @@
   <div class="modal-body col" style="text-align: center">
     <!-- Título y Subtítulo -->
     <div class="row" style="padding-bottom: 20px">
-      <h2 class="modal-title">Regístrate!</h2>
+      <h2 class="modal-title">¡Regístrate!</h2>
       <small>Ingresa tus datos.</small>
     </div>
 
@@ -394,15 +394,6 @@
   </div>
 </ng-template>
 
-<ng-template #contentSuccess let-modalSuccess>
-  <div
-    class="modal-body success-modal"
-    style="text-align: center; border-radius: 20px"
-  >
-    <p><br />{{ successMsg }} con éxito</p>
-  </div>
-</ng-template>
-
 <!-- Modal Recuperar Contraseña -->
 <ng-template #contentRecover let-modalRecover>
   <div class="modal-header">
@@ -496,5 +487,15 @@
         </button>
       </ng-template>
     </form>
+  </div>
+</ng-template>
+
+<!--Modal Success-->
+<ng-template #contentSuccess let-modalSuccess>
+  <div
+    class="modal-body success-modal"
+    style="text-align: center; border-radius: 20px"
+  >
+    <p><br />{{ successMsg }} con éxito</p>
   </div>
 </ng-template>

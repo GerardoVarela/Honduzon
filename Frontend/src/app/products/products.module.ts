@@ -10,6 +10,8 @@ import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { RestorePageComponent } from './pages/restore-page/restore-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { RestorePageComponent } from './pages/restore-page/restore-page.componen
     ReactiveFormsModule,
     RouterModule, 
     CarouselModule,
+    NgbModule,
+    HttpClientModule,
     SharedModule
   ],
   exports: [

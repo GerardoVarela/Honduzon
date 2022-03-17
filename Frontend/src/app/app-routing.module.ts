@@ -14,10 +14,6 @@ const routes: Routes = [
         path: 'restore',
         component: RestorePageComponent,
     },
-    // {
-    //     path: '',
-    //     component: PorRegionComponent
-    // },
     {
         path: '**',
         redirectTo: ''
