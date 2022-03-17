@@ -107,7 +107,7 @@ export class NavbarComponent implements OnInit {
   }
 
   search(){
-    this.httpClient.post(`${this.backendHost}/login`, this.searchForm.value).subscribe(res=>{});
+    // this.httpClient.post(`${this.backendHost}/search`, this.searchForm.value).subscribe(res=>{});
   }
 
   // Getter Search

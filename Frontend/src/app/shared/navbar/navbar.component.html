@@ -418,11 +418,12 @@
           class="border-bottom-custom form-control"
           id="floatingEmailRecover"
           placeholder="name@example.com"
-          [class.is-invalid]="formEmailRecover!.touched && (formEmailRecover!.value === null || formEmailRecover!.value === '')"/>
+          pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
+          [class.is-invalid]="formEmailRecover!.touched && formEmailRecover!.invalid"/>
         <label for="formEmailRecover">Correo electrónico</label>
         <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
-
+      <!-- (formEmailRecover!.value === null || formEmailRecover!.value === '') -->
       <div class="form-check">
         <input class="form-check-input" 
                 style="margin-top: 0!important" 
