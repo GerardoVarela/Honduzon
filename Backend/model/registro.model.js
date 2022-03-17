@@ -67,6 +67,22 @@ async function getCorreoUsuario(correo){
     
 }
 
+async function getPreguntaUsuario(idPregunta){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let preguntaUsuario = await pool.request()
+        .input('preguntaInput',mssql.VarChar, idPregunta)
+        .query('SELECT PREGUNTA FROM PREGUNTAS WHERE ID_PREGUNTA = @preguntaInput');
+        pool.close(); //Prueba del close para cerrar una conexion
+        return preguntaUsuario.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
+
+
+
 async function getUsuarios(){
     try {
         var pool = await mssql.connect(bdConfig.config);
@@ -86,7 +102,8 @@ module.exports={
     insertUsuario:insertUsuario,
     getUsuarioId:getUsuarioId,
     getUsuarios:getUsuarios,
-    getCorreoUsuario:getCorreoUsuario
+    getCorreoUsuario:getCorreoUsuario,
+    getPreguntaUsuario:getPreguntaUsuario
 }
 
 

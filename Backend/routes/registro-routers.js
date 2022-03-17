@@ -13,8 +13,8 @@
 
 var express = require('express');
 var router = express.Router();
-var registroModel = require('../model/registro.model'); 
-
+var registroModel = require('../model/registro.model');
+var emailConfiguration = require('../config/email.config')
 
 
 router.get('/', (req, res)=>{
@@ -52,6 +52,26 @@ router.get('/:id',(req,res)=>{
     registroModel.getUsuarioId(req.params.id).then(resultado=>{
         res.json(resultado)
     });
+});
+
+router.get('/recuperacionemail/:email', (req,res)=>{
+    console.log(req.params.email);
+    registroModel.getCorreoUsuario(req.params.email).then(resultado=>{
+        if (resultado.length ==0){
+            //en caso de que el email existe, al momento que el usuario aprete de que quiere recuperar contraseña pues se enviara el correo
+            return res.status(500).send({
+                mensaje:'No existe el correo'
+            })
+        }
+        var emailOpt = emailConfiguration.mailOption(req.params.email);
+            emailConfiguration.sendEmail(emailOpt);
+            return res.status(200).send({
+                mensaje:'Correo enviado con exito'
+            })    
+        
+        
+    });
+
 });
 
 

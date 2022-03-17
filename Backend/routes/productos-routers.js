@@ -29,6 +29,10 @@ router.post('/guardarproducto',(req,res)=>{
 
 router.get('/filtradoproducto',(req,res)=>{})
 
+router.post('/filtrado',(req,res)=>{
+    productoModel.getProductoFiltrado(req.body.formPrice,req.body.categoryID,req.body.userID);
+})
+
 router.delete('/borrarproducto',(req,res)=>{});
 
 

@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   public respLogin!: any;
   public confirmPasswordControl!: any;
 
+  public recoveryQuestion : string ='';
   searchForm = new FormGroup({
     searchInput: new FormControl('')
   });
@@ -67,7 +68,7 @@ export class NavbarComponent implements OnInit {
     this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
       this.ciudades = res;
     });
-
+    
   }
 
   open(content: any, eraseMod?: boolean){
@@ -102,10 +103,20 @@ export class NavbarComponent implements OnInit {
   }
 
   recover(){
+    this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      // console.log(res);
+    });
     this.modalService.dismissAll();
     this.router.navigateByUrl('/restore');
   }
-
+  showQuestion(){
+    // console.log('pregunta')
+    
+    this.httpClient.get(`${this.backendHost}/preguntas/recuperacionquestion/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      // console.log(res);
+      this.recoveryQuestion = res.toString();
+    });
+  }
   search(){
     // this.httpClient.post(`${this.backendHost}/search`, this.searchForm.value).subscribe(res=>{});
   }

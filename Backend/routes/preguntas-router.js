@@ -20,11 +20,26 @@ router.get('/', (req, res)=>{
     });
 });
 
-// router.get('/:id',(req, res)=>{
-//     
-//     });
-// });
+router.get('pregunta/:id',(req, res)=>{
 
+});
+
+
+router.get('/recuperacionquestion/:email', (req,res)=>{
+    console.log(req.params.email);
+    preguntasModel.getPreguntaPorCorreo(req.params.email).then(resultado=>{
+        console.log(resultado[0]);
+        if(resultado.length ==0){
+            res.status(500).send({
+                mensaje: 'El Usuario no Existe',
+                registered:false
+            })
+        }
+            var pregunta = resultado[0].PREGUNTA
+            res.status(200).json(pregunta);
+        
+    })
+});
 
 
 

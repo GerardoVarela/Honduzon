@@ -301,12 +301,12 @@
         formControlName="formCity"
       >
         <option value="">Ciudad*</option>
-        <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
+        <!-- <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
-        </option>
-        <!-- <option *ngFor="let cit of ciudades; let i=index" value="{{ i+1 }}">
-          {{ cit }}
         </option> -->
+        <option *ngFor="let cit of ciudades; let i=index" value="{{ i+1 }}">
+          {{ cit.CIUDAD }}
+        </option> 
       </select>
       <div
         *ngIf="formCity!.invalid && (formCity!.dirty || formCity!.touched)"
@@ -444,7 +444,7 @@
                 value="question" 
                 name="flexRadioDefault" 
                 formControlName="formRadioBRecover"
-                id="flexRadioDefault2">
+                id="flexRadioDefault2"  (click)="showQuestion()">
         <label class="form-check-label" for="flexRadioDefault2">
           Contestar pregunta de seguridad
         </label>
@@ -462,7 +462,7 @@
       </ng-container>
       <ng-template #elseTemplate>
         <div style="text-align: center; margin-top: 5%">
-          <p id="texto" style="margin-bottom: 0!important">Pregunta xd</p>
+          <p id="texto" style="margin-bottom: 0!important">{{recoveryQuestion}}</p>
         </div>
 
         <div class="form-floating">
