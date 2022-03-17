@@ -26,6 +26,7 @@ app.use('/preguntas',obtenerPreguntas.router);
 app.use('/login',login.router);
 app.use('/categorias',categorias.router)
 app.use('/productos',productos.router)
+app.use('/filtrado',productos.router)
 puerto = 8888;
 
 app.get('/',(req,res)=>{
