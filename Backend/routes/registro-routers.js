@@ -56,21 +56,19 @@ router.get('/:id',(req,res)=>{
 
 router.get('/recuperacionemail/:email', (req,res)=>{
     console.log(req.params.email);
-    
     registroModel.getCorreoUsuario(req.params.email).then(resultado=>{
-        if (resultado.length >0){
+        if (resultado.length ==0){
             //en caso de que el email existe, al momento que el usuario aprete de que quiere recuperar contraseña pues se enviara el correo
-            var emailOpt = emailConfiguration.mailOption(req.params.email);
-            emailConfiguration.sendEmail(emailOpt);
-            res.status(200).send({
-                mensaje:'Correo enviado con exito'
+            return res.status(500).send({
+                mensaje:'No existe el correo'
             })
-        }else{
-            /**
-             * En caso que el usuario no existe y se tiene que redireccionar a la pagina de login
-             */
-            res.redirect('http://localhost:4200/');
         }
+        var emailOpt = emailConfiguration.mailOption(req.params.email);
+            emailConfiguration.sendEmail(emailOpt);
+            return res.status(200).send({
+                mensaje:'Correo enviado con exito'
+            })    
+        
         
     });
 

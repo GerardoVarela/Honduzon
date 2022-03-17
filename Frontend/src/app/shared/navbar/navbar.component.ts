@@ -103,6 +103,9 @@ export class NavbarComponent implements OnInit {
   }
 
   recover(){
+    this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      // console.log(res);
+    });
     this.modalService.dismissAll();
     this.router.navigateByUrl('/restore');
   }
