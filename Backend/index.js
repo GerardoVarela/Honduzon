@@ -28,7 +28,7 @@ app.use('/categorias',categorias.router)
 app.use('/productos',productos.router)
 app.use('/filtrado',productos.router)
 puerto = 8888;
-
+// app.set('templates', path.join(__dirname,'recuperacion-constraseña'));
 app.get('/',(req,res)=>{
     res.send('Servidor levantado');
 })

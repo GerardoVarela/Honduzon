@@ -25,12 +25,24 @@ function mailOption(email){
         from:'honduzon2022@gmail.com',
         to:`${email}`,
         subject:'Recuperacion de Cuenta de Honduzon',
-        text:`Estimado cliente \n A continuacion verá un enlace para poder recuperar su cuenta. \n \n Atte. Chomin Corporation.`
+        text:`Hey ${email}, bienvenido a la recuperacion de contraseña, puedes dar <a href="http://localhost:4200/restore">Click Aqui</a> \n
+        para recuperar tu contraseña. Si crees que es un error, no hagas nada.`
     }
+}
+
+function sendEmail(mailOption){
+    transporter.sendMail(mailOption,(error,exito)=>{
+        if(error){
+            console.log(error);
+        }else{
+            console.log('el correo se envió ');
+        }
+    })
 }
 
 
 module.exports= {
-    transporter:transporter,
-    mailOption:mailOption
+    transporter,
+    mailOption,
+    sendEmail
 }
