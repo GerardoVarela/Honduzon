@@ -443,7 +443,7 @@
                 value="question" 
                 name="flexRadioDefault" 
                 formControlName="formRadioBRecover"
-                id="flexRadioDefault2">
+                id="flexRadioDefault2"  (click)="showQuestion()">
         <label class="form-check-label" for="flexRadioDefault2">
           Contestar pregunta de seguridad
         </label>
@@ -461,7 +461,7 @@
       </ng-container>
       <ng-template #elseTemplate>
         <div style="text-align: center; margin-top: 5%">
-          <p id="texto" style="margin-bottom: 0!important">Pregunta xd</p>
+          <p id="texto" style="margin-bottom: 0!important">{{recoveryQuestion}}</p>
         </div>
 
         <div class="form-floating">

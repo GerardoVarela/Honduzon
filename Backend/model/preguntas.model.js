@@ -23,11 +23,37 @@ async function getPreguntas(){
 
 }
 
-// async function getPreguntaId(preguntaId){
-//     
-// }
+ async function getPreguntaId(preguntaId){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let pregunta = await pool.request()
+        .input('preguntaInput',mssql.VarChar, preguntaId)
+        .query('SELECT PREGUNTA FROM PREGUNTAS WHERE ID_PREGUNTA = @preguntaInput');
+        pool.close(); //Prueba del close para cerrar una conexion
+        return pregunta.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+ }
+
+ async function getPreguntaPorCorreo(correoUsuario){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let pregunta = await pool.request()
+        .input('correoInput',mssql.VarChar, correoUsuario)
+        .query('SELECT PREGUNTA FROM PREGUNTAS INNER JOIN Usuarios ON PREGUNTAS.ID_PREGUNTA = Usuarios.ID_PREGUNTA WHERE CORREO_ELECTRONICO = @correoInput');
+        pool.close(); //Prueba del close para cerrar una conexion
+        return pregunta.recordset;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+ }
+
 
 module.exports = {
     getPreguntas : getPreguntas,
+    getPreguntaPorCorreo:getPreguntaPorCorreo
     // getPreguntaId : getPreguntaId
 }

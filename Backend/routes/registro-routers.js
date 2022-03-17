@@ -54,6 +54,10 @@ router.get('/:id',(req,res)=>{
     });
 });
 
+router.put('/recuperacionemail/:email', (req,res)=>{
+    console.log(req.params.email);
+});
+
 
 module.exports={
     router : router
