@@ -20,17 +20,17 @@ async function insertUsuario(usuario){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let insertarUsuario = await pool.request()
-        .input('NOMBRE', mssql.VarChar,usuario.formName)
-        .input('APELLIDO', mssql.VarChar,usuario.formLastName)
-        .input('CORREO_ELECTRONICO',mssql.VarChar,usuario.formEmail)
-        .input('TELEFONO',mssql.VarChar,usuario.formPhone)
-        .input('DIRECCION',mssql.VarChar,usuario.formDirection)
-        .input('RESPUESTA',mssql.VarChar,usuario.formResp)
-        .input('ID_DEPARTAMENTO',mssql.Int,usuario.formDept)
-        .input('CONTRASENA',mssql.VarChar,usuario.formPassword)
-        .input('ID_CIUDAD',mssql.Int,usuario.formCity)
-        .input('ID_PREGUNTA',mssql.Int,usuario.formPreg)
-        .execute('SP_INSERTAR_USUARIO'); //NO SE HA CREADO EL STORED PROCEDURE
+            .input('NOMBRE', mssql.VarChar,usuario.nombre)
+            .input('APELLIDO', mssql.VarChar,usuario.apellido)
+            .input('CORREO_ELECTRONICO',mssql.VarChar,usuario.email)
+            .input('TELEFONO',mssql.VarChar,usuario.telefono)
+            .input('DIRECCION',mssql.VarChar,usuario.direccion)
+            .input('RESPUESTA',mssql.VarChar,usuario.respuesta)
+            .input('ID_DEPARTAMENTO',mssql.Int,usuario.departamento)
+            .input('CONTRASENA',mssql.VarChar,usuario.contrasena)
+            .input('ID_CIUDAD',mssql.Int,usuario.ciudad)
+            .input('ID_PREGUNTA',mssql.Int,usuario.pregunta)
+            .execute('SP_INSERTAR_USUARIO'); //NO SE HA CREADO EL STORED PROCEDURE
         return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
@@ -95,6 +95,11 @@ async function getUsuarios(){
     }
     
 
+}
+
+function encriptadoContrasena(password){
+    
+    
 }
 
 

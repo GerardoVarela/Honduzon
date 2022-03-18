@@ -15,7 +15,7 @@ var express = require('express');
 var router = express.Router();
 var registroModel = require('../model/registro.model');
 var emailConfiguration = require('../config/email.config')
-
+const bcrypt = require ('bcrypt');
 
 router.get('/', (req, res)=>{
     registroModel.getUsuarios().then(resultado=>{
@@ -26,7 +26,7 @@ router.get('/', (req, res)=>{
 
 router.post('/guardar', 
     (req,res)=>{
-        const usuario ={...req.body};
+        
         registroModel.getCorreoUsuario(req.body.formEmail).then(resultado=>{
             if (resultado.length >0){
                 console.log(resultado[0].CORREO_ELECTRONICO)
@@ -35,14 +35,30 @@ router.post('/guardar',
                     userValidation : false
                 });
             }
-            registroModel.insertUsuario(usuario).then(resultado=>{
-                res.status(201).send(
-                    {
-                        mensaje:'usuario Registrado',
-                        userValidation : true
-                    }
-                )
+            
+            bcrypt.hash(req.body.formPassword,10).then((hash)=>{
+                const usuario ={
+                    nombre:req.body.formName,
+                    apellido: req.body.formLastName,
+                    email: req.body.formEmail,
+                    telefono: req.body.formPhone,
+                    direccion: req.body.formDirection,
+                    ciudad: req.body.formCity,
+                    departamento: req.body.formDept,
+                    contrasena : hash,
+                    pregunta: req.body.formPreg,
+                    respuesta: req.body.formResp
+                };
+                registroModel.insertUsuario(usuario).then(resultado=>{
+                    res.status(201).send(
+                        {
+                            mensaje:'usuario Registrado',
+                            userValidation : true
+                        }
+                    )
+                })
             })
+            
         });
     }
 );
