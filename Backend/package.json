@@ -21,6 +21,7 @@
     "nodemailer-express-handlebars": "^5.0.0",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
+    "randexp": "^0.5.3",
     "tedious": "^14.3.0"
   }
 }
