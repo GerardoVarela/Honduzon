@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +25,11 @@ export class NavbarComponent implements OnInit {
   public respLogin!: any;
   public confirmPasswordControl!: any;
 
+  public recoveryQuestion : string ='';
+  searchForm = new FormGroup({
+    searchInput: new FormControl('')
+  });
+
   registerForm = new FormGroup({
     formName: new FormControl('', Validators.required),
     formLastName: new FormControl('', Validators.required),
@@ -44,8 +49,14 @@ export class NavbarComponent implements OnInit {
     formEmailLogin: new FormControl('', [Validators.required, Validators.email]),
     formPasswordLogin: new FormControl('', Validators.required),
   });
+  
+  recoverForm = new FormGroup({
+    formEmailRecover: new FormControl('', [Validators.required, Validators.email]),
+    formRadioBRecover: new FormControl('email'),
+    formRespRecover: new FormControl(''),
+  });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
+  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -57,7 +68,7 @@ export class NavbarComponent implements OnInit {
     this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
       this.ciudades = res;
     });
-
+    
   }
 
   open(content: any, eraseMod?: boolean){
@@ -67,19 +78,19 @@ export class NavbarComponent implements OnInit {
     }
     this.modalService.open(content, {centered: true});
   }
-
+  
   register(content: any){
     this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
-        console.log(res)
+      console.log(res)
     });
     this.successMsg = 'Registrado';
     this.modalService.dismissAll();
     this.modalService.open(content, { size: 'sm' });
   }
-
+  
   login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
-    
+      
       if(res == true){
         this.hayError = false;
         this.successMsg = 'Sesión Iniciada';
@@ -89,9 +100,36 @@ export class NavbarComponent implements OnInit {
         this.hayError = true;
       }
     });
-    
   }
 
+  recover(){
+    this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      // console.log(res);
+    });
+    this.modalService.dismissAll();
+    this.router.navigateByUrl('/restore');
+  }
+  showQuestion(){
+    // console.log('pregunta')
+    
+    this.httpClient.get(`${this.backendHost}/preguntas/recuperacionquestion/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      // console.log(res);
+      this.recoveryQuestion = res.toString();
+    });
+  }
+  search(){
+    this.httpClient.post(`${this.backendHost}/login`, this.searchForm.value).subscribe(res=>{});
+  }
+
+  // Getter Search
+  get searchInput() { return this.searchForm.get('searchInput'); }
+
+  // Getters Login Form
+  get formEmailLogin() { return this.loginForm.get('formEmailLogin'); }
+  get formPasswordLogin() { return this.loginForm.get('formPasswordLogin'); }
+
+
+  // Getters Register Form
   get formName() { return this.registerForm.get('formName'); }
   get formLastName() { return this.registerForm.get('formLastName'); }
   get formEmail() { return this.registerForm.get('formEmail'); }
@@ -103,12 +141,12 @@ export class NavbarComponent implements OnInit {
   get formPassword() { return this.registerForm.get('formPassword'); }
   get formVPassword() { return this.registerForm.get('formVPassword'); }
   get formTerms() { return this.registerForm.get('formTerms'); }
-
-  // validateAreEqual(fieldControl: AbstractControl): {NotEqual: boolean} | null{
-  //   return fieldControl.value === this.registerForm.get("formPassword")!.value ? null : {
-  //       NotEqual: true
-  //   };
-  // }
+  
+  // Getters Recover Form
+  get formEmailRecover() { return this.recoverForm.get('formEmailRecover'); }
+  get formRadioBRecover() { return this.recoverForm.get('formRadioBRecover'); }
+  get formRespRecover() { return this.recoverForm.get('formRespRecover'); }
+  
 
   passwordMatch():ValidatorFn {
     return (formGroup: AbstractControl):{ [key: string]: any } | null => {
@@ -116,13 +154,10 @@ export class NavbarComponent implements OnInit {
       const confirmPasswordControl = formGroup.get('formVPassword');
       
       if (passwordControl && confirmPasswordControl) {
-        console.log('A');
         if (passwordControl!.value !== confirmPasswordControl!.value) {
-          console.log('Hola');
           confirmPasswordControl!.setErrors({ passwordMismatch: true });
           return { passwordMismatch: true }
         } else {
-          console.log('adios');
           confirmPasswordControl!.setErrors(null);
           return null;
         }
@@ -134,7 +169,6 @@ export class NavbarComponent implements OnInit {
       //   confirmPasswordControl.errors &&
       //   !confirmPasswordControl.errors['passwordMismatch']
       // ) {
-      //   console.log('B');
       //   return null;
       // }
 
@@ -151,6 +185,11 @@ export class NavbarComponent implements OnInit {
   }
 
   clearInputs() { 
+    // Login
+    this.formEmailLogin!.reset();
+    this.formPasswordLogin!.reset();
+
+    // Register
     this.formName!.reset();
     this.formLastName!.reset();
     this.formEmail!.reset();
@@ -162,5 +201,9 @@ export class NavbarComponent implements OnInit {
     this.formPassword!.reset();
     this.formVPassword!.reset();
     this.formTerms!.reset();
+    
+    // Recover
+    this.formEmailRecover!.reset();
+    this.formRespRecover!.reset();
   }
 }

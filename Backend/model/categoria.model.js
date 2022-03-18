@@ -14,9 +14,10 @@ async function insertCategoria(categoria){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let insertarCategoria = await pool.request()
-        .input('NOMBRE_CATEGORIA', mssql.VarChar,usuario.formCategoryName)
-        .input('DESCRIPCION_CATEGORIA', mssql.VarChar,usuario.formCategoryDescription)
-        .input('IMAGEN',mssql.Image,usuario.formImageInput)
+        .input('NOMBRE_CATEGORIA', mssql.VarChar,categoria.formCategoryName)
+        .input('DESCRIPCION_CATEGORIA', mssql.VarChar,categoria.formCategoryDescription)
+        .input('IMAGEN_CATEGORIA',mssql.VarBinary,categoria.formImageInput)
+        .input('ID_ADMINISTRADOR',mssql.Int,categoria.formAdmin)
         .execute('SP_INSERTAR_CATEGORIA'); 
         return insertarCategoria.recordsets;
     } catch (error) {

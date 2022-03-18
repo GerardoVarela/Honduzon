@@ -1,5 +1,5 @@
 /**
- * @author: Jvarela
+ * @author: Jvarela jamador
  * 
  * Archivo que contendra el modelo para las queries hacia y desde las base de datos para los Productos.
  * 
@@ -8,7 +8,7 @@
 var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
-async function inserProducto(producto){
+async function insertProducto(producto){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let insertarProducto = await pool.request()
@@ -20,7 +20,7 @@ async function inserProducto(producto){
         .input('PRECIO',mssql.Float,producto.formPrice)
         .input('ID_USUARIO',mssql.Int,producto.userID)
         .input('ID_CATEGORIA',mssql.Int,producto.categoryID)
-        .input('IMAGEN',mssql.Image,producto.formImage)
+        .input('ID_IMAGEN',mssql.Int,producto.formImage)
         .execute('SP_INSERTAR_PRODUCTO');
         return insertarProducto.recordset
 
@@ -31,20 +31,59 @@ async function inserProducto(producto){
 
 }
 
-async function getProductoFiltrado(precio=0.00, categoria=0, ciudad=0, departamento = 0){
+async function getProductoFiltrado(bandera,precio=0.00, categoria=0, ciudad=0, departamento = 0){
+ 
+
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrado = await pool.request()
-        .input('PrecioInput',mssql.Float,precio)
+        switch(bandera){
+            case precio:
+                obtenerProductoFiltrado
+                .input('PreciomenorInput',mssql.Float,precio)
+                .input('PrecioMayorInput',mssql.Float,precio)
+
+                .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput');
+                break;                
+            case categoria:
+                 obtenerProductoFiltrado 
+                .input('@IdCategoria',mssql.Float,precio)
+                .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria ');
+                break;
+                
+            case ciudad:
+                obtenerProductoFiltrado
+                .input('ciudadInput',mssql.Int,ciudad)
+                .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_CIUDAD=@ciudadInput ');
+                break;
+                
+                case departamento:
+                    obtenerProductoFiltrado
+                    .input('departamentoInput',mssql.Int,ciudad)
+                    .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
+                    break;
+                    
+    
+                default:
+                    obtenerProductoFiltrado
+                    .query('select * from productos ');
+                    break;
+                    
+            
+    
+        }
+   /*     .input('PrecioInput',mssql.Float,precio)
         .input('IdCategoriaInput',mssql.Int,categoria)
         .input('ciudadInput',mssql.Int,ciudad)
         .input('departamentoInput',mssql.Int,departamento) 
-        .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO= @PrecioInput OR ID_CATEGORIA= @IdCategoria OR ')
+        .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO= @PrecioInput')*/
         return obtenerProductoFiltrado.recordset
     } catch (error) {
         console.log(error);
         process.exit(1);
     }
+
+
 
 }
 
@@ -52,5 +91,6 @@ async function getProductoFiltrado(precio=0.00, categoria=0, ciudad=0, departame
 
 
 module.exports={
-    inserProducto:inserProducto
+    insertProducto:insertProducto,
+    getProductoFiltrado:getProductoFiltrado
 }

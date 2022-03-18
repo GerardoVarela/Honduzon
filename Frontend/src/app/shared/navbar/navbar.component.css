@@ -1,7 +1,12 @@
 /* NAVBAR */
 
+<<<<<<< HEAD
 #navbar {
   display: block;
+=======
+.navbar-nav {
+  display: flex;
+>>>>>>> e21aeb302a9b155c974646b909dffcc793b3e103
 }
 
 .container {
@@ -108,13 +113,13 @@ sup {
   border-radius: 20px;
 }
 
-.btn:focus {
-  box-shadow: 0 0 0 0px;
-  background-color: #00d0ff;
+.btn-blue-animate:focus {
+  box-shadow: 0 0 0 0px!important;
+  background-color: #00d0ff!important;
 }
 
-.btn:hover {
-  background-color: #00d0ff;
+.btn-blue-animate:hover {
+  background-color: #00d0ff!important;
 }
 
 .btn-close:focus {

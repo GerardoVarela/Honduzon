@@ -1,0 +1,78 @@
+
+<div class="bg-color-restore">
+    <div class="containers">
+        <div class="title">
+            <p style="margin-bottom: 10px">
+            Plataforma líder de compraventa en Honduras
+            </p>
+            <h1><span>Hondu</span>zon</h1>
+        </div>
+        
+        <div id="box">
+            <div>
+                <h4>Ingresa tu nueva contraseña</h4>
+            </div>
+
+            <form [formGroup]="newPasswordForm">
+                <div class="form-floating">
+                    <input
+                    type="password"
+                    formControlName="password"
+                    class="border-bottom-custom form-control"
+                    id="floatingPassword"
+                    placeholder="Contraseña"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
+                    />
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+                <div *ngIf="password!.invalid && (password!.dirty || password!.touched)"
+                        class="invalid-feedback-select">
+                    <div *ngIf="password!.invalid && password!.touched">
+                        Campo Obligatorio.
+                    </div>
+                    <div *ngIf="password!.invalid && password!.dirty">
+                        La contraseña debe ser de 8-16 caracteres y tener al menos 1
+                        mayúscula, minúscula, número y caracter no alfanumérico.
+                    </div>
+                </div>
+            
+                <div class="form-floating">
+                    <input
+                    type="password"
+                    formControlName="vPassword"
+                    class="border-bottom-custom form-control"
+                    id="floatingVPassword"
+                    placeholder="Verificar Contraseña"
+                    />
+                    <label for="floatingPassword">Verificar Contraseña</label>
+                </div>
+                <div *ngIf="vPassword!.invalid && (vPassword!.dirty || vPassword!.touched)"
+                    class="invalid-feedback-select">
+                    <div *ngIf="vPassword!.touched && getConfirmPasswordError() == 1">
+                        Campo Obligatorio.
+                    </div>
+                    <div *ngIf="vPassword!.dirty && getConfirmPasswordError() == 2">
+                        La contraseña no coincide.
+                    </div>
+                </div>
+
+                <button
+                    id="btn-modal"
+                    class="btn btn-primary btn-blue-animate"
+                    type="submit"
+                    [disabled]="newPasswordForm.invalid"
+                    (click)="setNewPassword(contentSuccess)">
+                    Confirmar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Success-->
+<ng-template #contentSuccess let-modalSuccess>
+    <div class="modal-body success-modal" style="text-align: center; border-radius: 20px">
+      <p><br>Contraseña actualizada con éxito</p>
+    </div>
+</ng-template>
