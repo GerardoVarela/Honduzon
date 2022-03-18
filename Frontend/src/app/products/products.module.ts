@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
+import { CardProductsComponent } from './components/card-products/card-products.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.
     RegisterComponent,
     CarruselComponent,
     CardCarruselComponent,
+    CardProductsComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, CarouselModule],
   exports: [
     // LoginComponent,
     // RegisterComponent,
     CarruselComponent,
+    CardProductsComponent,
   ],
   providers: [],
 })
