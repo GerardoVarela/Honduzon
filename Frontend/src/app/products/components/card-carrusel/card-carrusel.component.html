@@ -1,31 +1,31 @@
+
 <div class="card">
   <div class="card-main">
     <div class="product-contairner">
       <div class="p">
-        <img src="../assets/01.jpg" alt="Product" />
+        <img src="../../../../assets/0{{img}}.jpg" alt="Product" />
         <div class="card-description">
           <div style="padding-top: 7px" class="row">
-            <div class="col">
+            <div class="col-8">
               <div class="card-title">
-                <h4 style="color: 47525e">VideoJuegos</h4>
+                <h4 style="color: 47525e">{{category[img-1].title}}</h4>
               </div>
             </div>
-            <div class="col">
-              <h5 id="ctn-Articulos">Numero de articulos: 80</h5>
+            <div class="col-4">
+              <h5 id="ctn-Articulos">Cantidad de artículos: {{category[img-1].numItems}}</h5>
             </div>
           </div>
         </div>
         <div class="card-text">
           <p style="text-align: justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum enim
-            possimus dolorum non, modi sunt ips.
+            {{category[img-1].content}}
           </p>
         </div>
         <div class="card-link">
           <div style="padding: 0" class="container">
             <div class="row">
               <div class="col">
-                <button id="btn-Cards" class="btn btn-primary" type="button">
+                <button id="btn-Cards" class="btn btn-primary" type="button" (click)="search()">
                   Ver más<i
                     class="fas fa-chevron-right"
                     style="margin-left: 5px"

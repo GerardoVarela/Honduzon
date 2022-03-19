@@ -31,43 +31,53 @@ async function insertProducto(producto){
 
 }
 
-async function getProductoFiltrado(bandera,precio=0.00, categoria=0, ciudad=0, departamento = 0){
+async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, categoria=0, ciudad=0, departamento = 0){
  
 
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrado = await pool.request()
+        while(numeroFiltros<=3){
+
+        }
+        /*
+        SI contador = 1 : se hace el switch
+        Si contador = 0 : se hace la consulta del default
+
+        si contador > 1: se hace el filtro en general 
+    
+        */
         switch(bandera){
-            case precio:
+            case 'precio':
                 obtenerProductoFiltrado
-                .input('PreciomenorInput',mssql.Float,precio)
-                .input('PrecioMayorInput',mssql.Float,precio)
+                .input('PreciomenorInput',mssql.Float,precio1)
+                .input('PrecioMayorInput',mssql.Float,precio2)
 
                 .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput');
                 break;                
-            case categoria:
-                 obtenerProductoFiltrado 
+            case 'categoria':
+                obtenerProductoFiltrado 
                 .input('@IdCategoria',mssql.Float,precio)
                 .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria ');
                 break;
                 
-            case ciudad:
+            case 'ciudad':
                 obtenerProductoFiltrado
                 .input('ciudadInput',mssql.Int,ciudad)
                 .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_CIUDAD=@ciudadInput ');
                 break;
                 
-                case departamento:
-                    obtenerProductoFiltrado
-                    .input('departamentoInput',mssql.Int,ciudad)
-                    .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
-                    break;
+            case 'departamento':
+                obtenerProductoFiltrado
+                .input('departamentoInput',mssql.Int,ciudad)
+                .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
+                break;
                     
     
-                default:
-                    obtenerProductoFiltrado
-                    .query('select * from productos ');
-                    break;
+            default:
+                obtenerProductoFiltrado
+                .query('select * from productos ');
+                break;
                     
             
     

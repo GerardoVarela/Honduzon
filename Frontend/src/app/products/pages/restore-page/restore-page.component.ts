@@ -55,7 +55,7 @@ export class RestorePageComponent implements OnInit {
   }
 
   setNewPassword(content: any){
-    // this.httpClient.post(`${this.backendHost}/login`, this.newPasswordForm.value).subscribe(res=>{});
+    // this.httpClient.put(`${this.backendHost}/login`, this.newPasswordForm.value).subscribe(res=>{});
     this.modalService.open(content, { size: 'sm' });
     this.router.navigateByUrl('/');
   }

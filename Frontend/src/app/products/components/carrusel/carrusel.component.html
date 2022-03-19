@@ -21,8 +21,8 @@
     <!-- Carrusel -->
     <div class="row">
       <owl-carousel-o [options]="customOptions">
-        <ng-template carouselSlide>
-          <div class="card">
+        <ng-template carouselSlide *ngFor="let img of imgs">
+          <!-- <div class="card">
             <div class="card-main">
               <div class="product-contairner">
                 <div class="p">
@@ -75,8 +75,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+          <app-card-carrusel [img]="img"></app-card-carrusel>
         </ng-template>
+        <!-- <app-card-carrusel></app-card-carrusel> -->
         <ng-template carouselSlide>
           <div class="card">
             <div class="card-main">

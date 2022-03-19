@@ -1,12 +1,7 @@
 /* NAVBAR */
 
-<<<<<<< HEAD
-#navbar {
-  display: block;
-=======
 .navbar-nav {
   display: flex;
->>>>>>> e21aeb302a9b155c974646b909dffcc793b3e103
 }
 
 .container {

@@ -104,11 +104,12 @@ export class NavbarComponent implements OnInit {
 
   recover(){
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
-      // console.log(res);
+      // console.log(res.valueOf);
     });
     this.modalService.dismissAll();
     this.router.navigateByUrl('/restore');
   }
+
   showQuestion(){
     // console.log('pregunta')
     
@@ -117,8 +118,10 @@ export class NavbarComponent implements OnInit {
       this.recoveryQuestion = res.toString();
     });
   }
+
   search(){
     // this.httpClient.post(`${this.backendHost}/search`, this.searchForm.value).subscribe(res=>{});
+    this.router.navigateByUrl('/product');
   }
 
   // Getter Search

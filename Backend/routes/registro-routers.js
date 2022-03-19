@@ -30,9 +30,8 @@ router.post('/guardar',
         registroModel.getCorreoUsuario(req.body.formEmail).then(resultado=>{
             if (resultado.length >0){
                 console.log(resultado[0].CORREO_ELECTRONICO)
-                return res.status(500).send({
-                    mensaje:'Error: El Email ya existe',
-                    userValidation : false
+                return res.send({
+                    yaRegistrado:true
                 });
             }
             
