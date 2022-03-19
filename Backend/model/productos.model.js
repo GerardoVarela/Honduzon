@@ -31,12 +31,22 @@ async function insertProducto(producto){
 
 }
 
-async function getProductoFiltrado(bandera,precio=0.00, categoria=0, ciudad=0, departamento = 0){
+async function getProductoFiltrado(contador,bandera,precio=0.00, categoria=0, ciudad=0, departamento = 0){
  
 
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrado = await pool.request()
+        while(numeroFiltros<=3){
+
+        }
+        /*
+        SI contador = 1 : se hace el switch
+        Si contador = 0 : se hace la consulta del default
+
+        si contador > 1: se hace el filtro en general 
+    
+        */
         switch(bandera){
             case precio:
                 obtenerProductoFiltrado
@@ -46,7 +56,7 @@ async function getProductoFiltrado(bandera,precio=0.00, categoria=0, ciudad=0, d
                 .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput');
                 break;                
             case categoria:
-                 obtenerProductoFiltrado 
+                obtenerProductoFiltrado 
                 .input('@IdCategoria',mssql.Float,precio)
                 .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria ');
                 break;
