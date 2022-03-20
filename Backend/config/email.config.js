@@ -20,13 +20,13 @@ let transporter = nodeMailer.createTransport({
 
 })
 
-function mailOption(email,codigo){
+function mailOption(email,contrasena){
     return {
         from:'honduzon2022@gmail.com',
         to:`${email}`,
         subject:'Recuperacion de Cuenta de Honduzon',
-        text:`Hey ${email}, bienvenido a la recuperacion de contraseña, se ha generado un codigo para que puedas recuperar tu constraseña\n codigo de recuperacion: ${codigo} \n
-        Si crees que es un error, no hagas nada. \n Atte. Equipo de Honduzon`
+        text:`Hey ${email}, bienvenido a la recuperacion de contraseña, se ha generado un codigo para que puedas recuperar tu constraseña\ncodigo de recuperacion: ${contrasena}\n\n
+        Si crees que es un error, no hagas nada.\n Atte. Equipo de Honduzon \n`
     }
 }
 

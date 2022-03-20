@@ -9,7 +9,7 @@ const obtenerPreguntas = require('./routes/preguntas-router');
 const login = require('./routes/login-routers');
 const categorias = require('./routes/categorias-routers');
 const productos = require ('./routes/productos-routers');
-const randExp = require('randexp')
+
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
  * -request (peticion)
@@ -38,7 +38,6 @@ app.get('/',(req,res)=>{
 
 app.listen(puerto,()=>{
     //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
-    var random = new randExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/);
-    console.log(random.gen());
+    
     console.log( `Servidor Levantado con el puerto ${puerto}`)
 });

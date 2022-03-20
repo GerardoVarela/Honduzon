@@ -97,18 +97,28 @@ async function getUsuarios(){
 
 }
 
-function encriptadoContrasena(password){
-    
-    
+async function updateContrasena(password,email){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let usuarios = await pool.request()
+        .input('nuevaContrasena',mssql.VarChar, password)
+        .input('correoInput',mssql.VarChar, email)
+        .query('UPDATE [dbo].[Usuarios] SET CONTRASENA = @nuevaContrasena WHERE CORREO_ELECTRONICO = @correoInput');
+        return usuarios.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
 
 module.exports={
-    insertUsuario:insertUsuario,
-    getUsuarioId:getUsuarioId,
-    getUsuarios:getUsuarios,
-    getCorreoUsuario:getCorreoUsuario,
-    getPreguntaUsuario:getPreguntaUsuario
+    insertUsuario,
+    getUsuarioId,
+    getUsuarios,
+    getCorreoUsuario,
+    getPreguntaUsuario,
+    updateContrasena
 }
 
 
