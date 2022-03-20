@@ -32,6 +32,16 @@ export class CardCarruselComponent implements OnInit {
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum enim possimus dolorum non, modi sunt ips.',
       numItems: 230
     },
+    {
+      title: 'Gimnasio',
+      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum enim possimus dolorum non, modi sunt ips.',
+      numItems: 75
+    },
+    {
+      title: 'Juguetes',
+      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum enim possimus dolorum non, modi sunt ips.',
+      numItems: 115
+    },
   ];
   
   constructor(private router: Router) { }
@@ -39,8 +49,9 @@ export class CardCarruselComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  search(){
-    // this.httpClient.post(`${this.backendHost}/search`, this.searchForm.value).subscribe(res=>{});
+  search(idCategory: number){
+    // CAMBIAR PETICIÓN
+    // this.httpClient.post(`${this.backendHost}/search`, idCategory).subscribe(res=>{});
     this.router.navigateByUrl('/product');
   }
 

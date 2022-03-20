@@ -8,7 +8,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class CarruselComponent implements OnInit {
   
-  imgs: number[] = [1, 2, 3, 4];
+  imgs: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor() {}
 

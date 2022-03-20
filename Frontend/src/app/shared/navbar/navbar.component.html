@@ -487,6 +487,9 @@
             Enviar Respuesta
         </button>
       </ng-template>
+      <div *ngIf="correoRegistrado" class="alert alert-danger">
+        Este correo no está registrado en la plataforma.
+      </div>
     </form>
   </div>
 </ng-template>

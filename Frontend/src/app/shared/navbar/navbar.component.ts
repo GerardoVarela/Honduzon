@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   // public preguntas: string[] = ['hola', 'adios'];
   public preguntas:any  = {};
   public hayError!: boolean;
+  public correoRegistrado!: boolean;
   // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
   private backendHost: string = 'http://localhost:8888';
@@ -103,8 +104,13 @@ export class NavbarComponent implements OnInit {
   }
 
   recover(){
+    // RECIBIR TRUE O FALSE
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
-      // console.log(res.valueOf);
+      // if(res == true){
+      //   this.correoRegistrado = false;
+      // }else{
+      //   this.hayError = true;
+      // }
     });
     this.modalService.dismissAll();
     this.router.navigateByUrl('/restore');
