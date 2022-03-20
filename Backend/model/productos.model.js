@@ -37,9 +37,6 @@ async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, c
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrado = await pool.request()
-        while(numeroFiltros<=3){
-
-        }
         /*
         SI contador = 1 : se hace el switch
         Si contador = 0 : se hace la consulta del default
@@ -47,6 +44,7 @@ async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, c
         si contador > 1: se hace el filtro en general 
     
         */
+       if(contador==1){
         switch(bandera){
             case 'precio':
                 obtenerProductoFiltrado
@@ -57,7 +55,7 @@ async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, c
                 break;                
             case 'categoria':
                 obtenerProductoFiltrado 
-                .input('@IdCategoria',mssql.Float,precio)
+                .input('IdCategoria',mssql.Float,precio)
                 .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria ');
                 break;
                 
@@ -74,14 +72,24 @@ async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, c
                 break;
                     
     
-            default:
-                obtenerProductoFiltrado
-                .query('select * from productos ');
-                break;
-                    
             
     
         }
+       } else if(contador>1){
+        obtenerProductoFiltrado
+        .input('departamentoInput',mssql.Int,ciudad)
+        .input('ciudadInput',mssql.Int,ciudad)
+        .input('IdCategoria',mssql.Float,precio)
+        .input('PreciomenorInput',mssql.Float,precio1)
+        .input('PrecioMayorInput',mssql.Float,precio2)
+       .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where (ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) or (ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput) or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput) or  (ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput) or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput) or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'
+       );
+       }
+       else{
+           obtenerProductoFiltrado
+           .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN')
+       }
+       
    /*     .input('PrecioInput',mssql.Float,precio)
         .input('IdCategoriaInput',mssql.Int,categoria)
         .input('ciudadInput',mssql.Int,ciudad)
@@ -97,10 +105,17 @@ async function getProductoFiltrado(contador,bandera,precio1=0.00,precio2=0.00, c
 
 }
 
-
+async function buscarProducto(producto){
+    var pool = await mssql.connect(bdConfig.config);
+    let obtenerProductoFiltrado = await pool.request()
+    obtenerProductoFiltrado
+        .input('productoInput',mssql.Int,producto)
+        .execute('SP_BUSCAR_PRODUCTO')
+}
 
 
 module.exports={
     insertProducto:insertProducto,
-    getProductoFiltrado:getProductoFiltrado
+    getProductoFiltrado:getProductoFiltrado,
+    buscarProducto:buscarProducto
 }

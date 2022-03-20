@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-
+// public productos: string[] = ['Francisco', 'Cortes'];
+public productos: any = [];
   // public deptos: string[] = ['Francisco', 'Cortes'];
   public deptos: any = [];
   // public preguntas: string[] = ['hola', 'adios'];
@@ -125,8 +126,11 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
   search(){
-    // this.httpClient.post(`${this.backendHost}/search`, this.searchForm.value).subscribe(res=>{});
+     this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
+       this.productos=res;
+     });
     this.router.navigateByUrl('/product');
   }
 

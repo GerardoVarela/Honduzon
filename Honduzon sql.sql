@@ -229,6 +229,8 @@ BEGIN
 select * from productos join IMAGENES ON Productos.ID_IMAGEN=IMAGENES.ID_IMAGEN where Productos.NOMBRE_PRODUCTO LIKE ('%'+@NOMBRE_PRODUCTO+'%')
 END
 
+select * FROM Usuarios
+use HONDUZON
 
 select * from productos join IMAGENES ON Productos.ID_IMAGEN=IMAGENES.ID_IMAGEN where Productos.NOMBRE_PRODUCTO LIKE ('%nin%')
 
@@ -237,7 +239,7 @@ values ('nintendo wii','motion plus incluido',1,0,1200,1,1)
 
 insert into IMAGENES values (0)
 
-select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where ID_CATEGORIA=1 or PRECIO=1 or ID_CIUDAD=1 or ID_DEPARTAMENTO=1 or
+select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO 
 (ID_CATEGORIA=1 and PRECIO=1) or (ID_CATEGORIA=1 and PRECIO=1 and ID_CIUDAD=1) or(ID_CATEGORIA=1 and PRECIO=1 and ID_CIUDAD=1 and ID_DEPARTAMENTO=1) or
 (ID_CATEGORIA=1 and ID_CIUDAD=1) or  (ID_CATEGORIA=1 and ID_DEPARTAMENTO=1) or (PRECIO=1 and ID_CIUDAD=1) or (PRECIO=1 and ID_DEPARTAMENTO=1) or
 (ID_CIUDAD=1 and ID_DEPARTAMENTO=1)
