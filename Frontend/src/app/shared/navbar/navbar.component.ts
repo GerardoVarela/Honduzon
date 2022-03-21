@@ -26,7 +26,10 @@ public productos: any = [];
   public successMsg!: string;
   public respLogin!: any;
   public confirmPasswordControl!: any;
-
+  public usertemp : object ={
+    email: "jvarelao@chominInc.com",
+    password: 'chomin inc'
+  };
   public recoveryQuestion : string ='';
   searchForm = new FormGroup({
     searchInput: new FormControl('')
@@ -106,6 +109,7 @@ public productos: any = [];
 
   recover(){
     // RECIBIR TRUE O FALSE
+    
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
       // if(res == true){
       //   this.correoRegistrado = false;
@@ -119,7 +123,10 @@ public productos: any = [];
 
   showQuestion(){
     // console.log('pregunta')
+    this.httpClient.put(`${this.backendHost}/usuarios/recovery/`,this.usertemp).subscribe(res=>{
     
+      console.log(res)
+    })
     this.httpClient.get(`${this.backendHost}/preguntas/recuperacionquestion/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
       // console.log(res);
       this.recoveryQuestion = res.toString();

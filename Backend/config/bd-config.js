@@ -16,7 +16,7 @@
 const config ={
     user: 'sa',
     password: '1234',
-    server : '192.168.0.13',
+    server : '192.168.1.105',
     database:'HONDUZON',
     port: 1433,
     options:{ 
