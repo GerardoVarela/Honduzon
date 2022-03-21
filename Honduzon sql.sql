@@ -234,12 +234,24 @@ use HONDUZON
 
 select * from productos join IMAGENES ON Productos.ID_IMAGEN=IMAGENES.ID_IMAGEN where Productos.NOMBRE_PRODUCTO LIKE ('%nin%')
 
-insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN)
-values ('nintendo wii','motion plus incluido',1,0,1200,1,1)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('nintendo 3ds','tiene 3d para ver todo en 3d a chomin le gusta el 3d',1,0,1900,1,1,6)
 
 insert into IMAGENES values (0)
 
-select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO 
-(ID_CATEGORIA=1 and PRECIO=1) or (ID_CATEGORIA=1 and PRECIO=1 and ID_CIUDAD=1) or(ID_CATEGORIA=1 and PRECIO=1 and ID_CIUDAD=1 and ID_DEPARTAMENTO=1) or
+select Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Usuarios.NOMBRE,Usuarios.TELEFONO,Usuarios.CORREO_ELECTRONICO,
+Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where
+(ID_CATEGORIA=6 and PRECIO=1900) or (ID_CATEGORIA=0 and PRECIO=0 and ID_CIUDAD=0) or(ID_CATEGORIA=0 and PRECIO=1 and ID_CIUDAD=1 and ID_DEPARTAMENTO=1) or
 (ID_CATEGORIA=1 and ID_CIUDAD=1) or  (ID_CATEGORIA=1 and ID_DEPARTAMENTO=1) or (PRECIO=1 and ID_CIUDAD=1) or (PRECIO=1 and ID_DEPARTAMENTO=1) or
 (ID_CIUDAD=1 and ID_DEPARTAMENTO=1)
+
+SELECT * FROM [dbo].[Productos] WHERE PRECIO<=4500 and Precio>=1200
+select * from Categoria
+
+
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('videojuegos','para cuando chomin quiera jugar',2)
+
+select * from ADMINISTRADOR
+
+INSERT INTO ADMINISTRADOR (NOMBRE ,APELLIDO ,CORREO_ELECTRONICO,TELEFONO ,DIRECCION ,CONTRASENA ,ID_CIUDAD) VALUES ('Pedro Alejandro', 'Vasquez Gutierrez', 'asd1@asd.com','1234-1234','Col. America','asd.1234',1);

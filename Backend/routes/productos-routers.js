@@ -31,7 +31,9 @@ router.get('/filtradoproducto',(req,res)=>{})
 
 router.post('/filtrado',(req,res)=>{
     
-    productoModel.getProductoFiltrado(req.body.formPrice,req.body.categoryID,req.body.userID);
+    productoModel.getProductoFiltrado(req.body.precioMenor,req.body.precioMayor,req.body.categoryID,req.body.departamentoID,req.body.ciudadID,req.body.contador,req.body.bandera).then(resultado=>{
+        res.send(resultado)
+    });
 })
 
 router.get('/search/:nombreProducto',(req,res)=>{
