@@ -128,12 +128,29 @@ async function buscarProducto(producto){
         return obtenerProductoBuscado.recordset
 }
 
+async function getProductoPorCatId(catId){
+    /**
+     * 
+     * SELECT * FROM Productos inner join IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN WHERE ID_CATEGORIA =
+     * 
+     */
 
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenerProductoPorCat = await pool.request()
+        .input('IdCategoria',mssql.Int,catId)
+        .query('SELECT * FROM Productos inner join IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN WHERE ID_CATEGORIA =@IdCategoria');
+        return obtenerProductoPorCat.recordset
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
 module.exports={
     insertProducto:insertProducto,
     getProductoFiltrado:getProductoFiltrado,
-    buscarProducto:buscarProducto
+    buscarProducto:buscarProducto,
+    getProductoPorCatId
 }

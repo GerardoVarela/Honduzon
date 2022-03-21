@@ -45,6 +45,21 @@ router.get('/search/:nombreProducto',(req,res)=>{
     })
 })
 
+router.get('/getprodcat/:idCat',(req,res)=>{
+    productoModel.getProductoPorCatId(req.params.idCat).then(resultado=>{
+        
+        if(resultado.length==0){
+            /*
+            No tiene productos la categoria
+            */ 
+           return res.send(false);
+        }else{
+            res.send(resultado)
+        }
+    })
+})
+
+
 router.delete('/borrarproducto',(req,res)=>{});
 
 
