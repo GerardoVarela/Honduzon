@@ -129,6 +129,9 @@ async function buscarProducto(producto){
 }
 
 
+
+
+
 module.exports={
     insertProducto:insertProducto,
     getProductoFiltrado:getProductoFiltrado,

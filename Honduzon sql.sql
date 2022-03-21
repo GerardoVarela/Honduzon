@@ -248,9 +248,24 @@ Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.I
 SELECT * FROM [dbo].[Productos] WHERE PRECIO<=4500 and Precio>=1200
 select * from Categoria
 
+INSERT INTO ADMINISTRADOR (NOMBRE ,APELLIDO ,CORREO_ELECTRONICO,TELEFONO ,DIRECCION ,CONTRASENA ,ID_CIUDAD) VALUES ('Pedro Alejandro', 'Vasquez Gutierrez', 'asd1@asd.com','1234-1234','Col. America','asd.1234',1);
+
+
 
 insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
-values('videojuegos','para cuando chomin quiera jugar',2)
+values('videojuegos','los mejores videojuegos',2)
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('ropa','gerardo cambia esto',2)
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('tecnologia','gerardo cambia esto',2)
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('muebles','gerardo cambia esto',2)
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('gimnasio','gerardo cambia esto',2)
+insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
+values('juguetes','gerardo cambia esto',2)
+
+
 
 select * from ADMINISTRADOR
 
