@@ -13,7 +13,7 @@ export class CardCarruselComponent implements OnInit {
 
   category: any[] = [
     {
-      title: 'Video Juegos',
+      title: 'Videojuegos',
       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum enim possimus dolorum non, modi sunt ips.',
       numItems: 80
     },
@@ -52,7 +52,9 @@ export class CardCarruselComponent implements OnInit {
   search(idCategory: number){
     // CAMBIAR PETICIÓN
     // this.httpClient.post(`${this.backendHost}/search`, idCategory).subscribe(res=>{});
-    this.router.navigateByUrl('/product');
+    this.router.navigate(['/product'], {
+      queryParams: {category: idCategory}
+    });
   }
 
 }

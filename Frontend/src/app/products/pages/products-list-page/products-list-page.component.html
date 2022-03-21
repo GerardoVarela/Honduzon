@@ -1,7 +1,67 @@
 <app-navbar></app-navbar>
 
-<app-card-products></app-card-products>
-<app-card-products></app-card-products>
-<app-card-products></app-card-products>
+<div class="container" id="containerFilters">
+    <div class="row justify-content-center">
+        <div id="titleFilter">
+            Filtros
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <ng-container *ngIf="idCategoryParam != undefined; else elseCategory">
+                    <button class="btn btn-filter" id="dropdownCategory" ngbDropdownToggle>
+                        {{categorias[idCategoryParam-1].NOMBRE_CATEGORIA}}
+                    </button>
+                </ng-container>
+                <ng-template #elseCategory>
+                    <button class="btn btn-filter" id="dropdownCategory" ngbDropdownToggle>
+                        {{btnCategory}}
+                    </button>
+                </ng-template>
+                <div ngbDropdownMenu aria-labelledby="dropdownCategory">
+                    <button ngbDropdownItem *ngFor="let cat of categorias" (click)="updateCategory(cat.ID_CATEGORIA)">{{cat.NOMBRE_CATEGORIA}}</button>
+                    <button ngbDropdownItem style="color:red" (click)="updateCategory(-1)">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-filter" id="dropdownPrecio" ngbDropdownToggle>
+                    Precio
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownPrecio">
+                  <button ngbDropdownItem>Action - 1</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div ngbDropdown class="d-inline-block">
+                <ng-container *ngIf="idLocationParam != undefined; else elseLocation">
+                    <button class="btn btn-filter" id="dropdownLocation" ngbDropdownToggle>
+                        {{deptos[idLocationParam-1].NOMBRE_DEPARTAMENTO}}
+                    </button>
+                </ng-container>
+                <ng-template #elseLocation>
+                    <button class="btn btn-filter" id="dropdownLocation" ngbDropdownToggle>
+                        {{btnLocation}}
+                    </button>
+                </ng-template>
+                <div ngbDropdownMenu aria-labelledby="dropdownLocation">
+                    <button ngbDropdownItem *ngFor="let dep of deptos" (click)="updateLocation(dep.ID_DEPARTAMENTO)">{{dep.NOMBRE_DEPARTAMENTO}}</button>
+                    <button ngbDropdownItem style="color:red" (click)="updateLocation(-1)">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="cardsProducts">
+    <div class="row" style="margin: 0 5%">
+        <div *ngFor="let item of obtenerProductos()" class="col-lg-3 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
+            <app-card-products></app-card-products>
+        </div>
+    </div>
+</section>
 
 <app-footer></app-footer>

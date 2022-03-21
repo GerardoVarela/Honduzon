@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ public productos: any = [];
   public preguntas:any  = {};
   public hayError!: boolean;
   public correoRegistrado!: boolean;
+  public respuestaIncorrecta!: boolean;
   // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
   private backendHost: string = 'http://localhost:8888';
@@ -61,7 +63,7 @@ public productos: any = [];
     formRespRecover: new FormControl(''),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router) {}
+  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router, private service: SharedService) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -107,26 +109,46 @@ public productos: any = [];
     });
   }
 
-  recover(){
-    // RECIBIR TRUE O FALSE
-    
+  recoverByEmail(content: any){
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
-      // if(res == true){
-      //   this.correoRegistrado = false;
-      // }else{
-      //   this.hayError = true;
-      // }
+      if(res == true){
+        this.correoRegistrado = true;
+        this.successMsg = 'Correo enviado';
+        this.modalService.dismissAll();
+        this.modalService.open(content, { size: 'sm' });
+      }else{
+        this.correoRegistrado = false;
+      }
     });
-    this.modalService.dismissAll();
-    this.router.navigateByUrl('/restore');
   }
+  
+  recoverByAnswer(){  
+    this.httpClient.get(`${this.backendHost}/usuarios/obtenerCorreo/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      if(res == true){
+        this.correoRegistrado = true;
+      }else{
+        this.correoRegistrado = false;
+      }
+    });
+
+    if(this.correoRegistrado){
+      this.httpClient.post(`${this.backendHost}/usuarios/getrespuesta/`, this.recoverForm.value).subscribe(res=>{
+        if(res == true){
+          this.respuestaIncorrecta = false;
+          this.modalService.dismissAll();
+          // this.router.navigateByUrl('/restore');
+          this.router.navigate(['/restore'], {queryParams: {email: this.formEmailRecover!.value}});
+        }else{
+          this.respuestaIncorrecta = true;
+        }
+      });
+    }
+
+  }
+  
 
   showQuestion(){
     // console.log('pregunta')
-    this.httpClient.put(`${this.backendHost}/usuarios/recovery/`,this.usertemp).subscribe(res=>{
-    
-      console.log(res)
-    })
     this.httpClient.get(`${this.backendHost}/preguntas/recuperacionquestion/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
       // console.log(res);
       this.recoveryQuestion = res.toString();
