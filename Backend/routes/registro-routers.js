@@ -95,6 +95,17 @@ router.get('/recuperacionemail/:email', (req,res)=>{
 
 });
 
+router.put('/recovery/:credenciales',(req,res)=>{
+    var user = {
+        email : req.params.credenciales.email,
+        password : req.params.credenciales.password
+    }
+    bcrypt.hash(req.params.credenciales.password,10).then(hash=>{
+        registroModel.updateContrasena(hash,user.email).then(resultado=>{
+            return res.send(true)
+        })
+    });
+})
 
 module.exports={
     router : router
