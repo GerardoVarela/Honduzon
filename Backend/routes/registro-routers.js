@@ -95,21 +95,26 @@ router.get('/recuperacionemail/:email', (req,res)=>{
 
 });
 
-router.put('/recovery/',(req,res)=>{
-    var user = {
-        email : req.params.credenciales.email,
-        password : req.params.credenciales.password
-    }
-    console.log(req.body);
-    console.log('hola');
-    res.send({
-        mensaje:"Chomin"
+
+router.post('/getrespuesta/',(req,res)=>{
+    registroModel.getRespuesta(req.body.formEmailRecover).then(resultado=>{
+        if(resultado[0].RESPUESTA == req.body.formRespRecover){
+            // console.log('Funciona esta wea');
+            return res.send(true)
+        }else{
+            return res.send(false);
+        }
+        // console.log('No Funciona esta Wea')
+        
     })
-    // bcrypt.hash(req.params.credenciales.password,10).then(hash=>{
-    //     registroModel.updateContrasena(hash,user.email).then(resultado=>{
-    //         return res.send(true)
-    //     })
-    // });
+})
+
+router.put('/recovery/',(req,res)=>{
+    bcrypt.hash(req.params.credenciales.password,10).then(hash=>{
+        registroModel.updateContrasena(hash,user.email).then(resultado=>{
+            return res.send(true)
+        })
+    });
 })
 
 module.exports={

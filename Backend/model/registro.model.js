@@ -111,6 +111,23 @@ async function updateContrasena(password,email){
     }
 }
 
+async function getRespuesta(correo){
+ /**
+  * 
+  * SELECT RESPUESTA FROM Usuarios WHERE CORREO_ELECTRONICO 
+  */
+
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let respuesta = await pool.request()
+        .input('correoInput',mssql.VarChar, correo)
+        .query('SELECT RESPUESTA FROM Usuarios WHERE CORREO_ELECTRONICO = @correoInput')
+        return respuesta.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 module.exports={
     insertUsuario,
@@ -118,7 +135,8 @@ module.exports={
     getUsuarios,
     getCorreoUsuario,
     getPreguntaUsuario,
-    updateContrasena
+    updateContrasena,
+    getRespuesta
 }
 
 
