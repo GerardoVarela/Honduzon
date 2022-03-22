@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-products',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-products.component.css']
 })
 export class CardProductsComponent implements OnInit {
+
+  @Input() item!:any;
 
   constructor() { }
 

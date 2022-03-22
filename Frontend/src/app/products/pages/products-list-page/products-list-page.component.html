@@ -31,7 +31,7 @@
                     Precio
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownPrecio">
-                  <button ngbDropdownItem>Action - 1</button>
+                  <!-- <button ngbDropdownItem>Action - 1</button> -->
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@
 
 <section class="cardsProducts">
     <div class="row" style="margin: 0 5%">
-        <div *ngFor="let item of obtenerProductos()" class="col-lg-3 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
-            <app-card-products></app-card-products>
+        <div *ngFor="let item of productos" class="col-lg-3 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
+            <app-card-products [item]="item"></app-card-products>
         </div>
     </div>
 </section>
