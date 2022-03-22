@@ -78,12 +78,16 @@ export class ProductsListPageComponent implements OnInit {
         categoria: this.idCategoryParam,
         contador: 1,
         bandera: 'categoria',
+    
       };
+    
       this.httpClient.post(`${this.backendHost}/productos/filtrado/`, this.filterOptions).subscribe(res=>{
         console.log(res);
         // this.deptos = res;
       });
+      this.filterOptions.contador=0
     }
+    
     return [1,2,3,4];
     
   }

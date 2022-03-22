@@ -31,9 +31,9 @@ async function insertProducto(producto){
 
 }
 
-async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciudad=0, departamento = 0,contador,bandera){
+async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciudad=0, departamento = 0,contador=0,bandera){
 
-
+            
     try {
        
         /*
@@ -44,18 +44,7 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciuda
     
         */
        if(contador==1){
-        switch(bandera){
-            case 'precio':
-                console.log(precio1,precio2);
-                var pool = await mssql.connect(bdConfig.config);
-                let obtenerProductoFiltrado = await pool.request()
-                .input('PreciomenorInput',mssql.Float,precio1)
-                .input('PrecioMayorInput',mssql.Float,precio2)
-                .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput');
-                console.log(obtenerProductoFiltrado.recordset)
-                return obtenerProductoFiltrado.recordset;
-                            
-            case 'categoria':
+           if(bandera=="categoria"){
                 console.log("cat");
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradocat = await pool.request()
@@ -63,28 +52,39 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciuda
                 .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria');
                 return obtenerProductoFiltradocat.recordset;
                 
-            case 'ciudad':
+           } else if(bandera=="precio"){
+                console.log(precio1,precio2);
+                var pool = await mssql.connect(bdConfig.config);
+                let obtenerProductoFiltrado = await pool.request()
+                .input('PreciomenorInput',mssql.Float,precio1)
+                .input('PrecioMayorInput',mssql.Float,precio2)
+                .query('SELECT * FROM [dbo].[Productos] WHERE PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput');
+                console.log(obtenerProductoFiltrado.recordset)
+                return obtenerProductoFiltrado.recordset;}
+                
+            else if (bandera=="ciudad"){
                 console.log("ciu");
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradociu = await pool.request()
                 .input('ciudadInput',mssql.Int,ciudad)
                 .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_CIUDAD=@ciudadInput');
                 return obtenerProductoFiltradociu.recordset
+            }
+            
+            else if(bandera=="departamento"){
                 
-            case 'departamento':
-                console.log("dep");
-
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradodep = await pool.request()
                 .input('departamentoInput',mssql.Int,departamento)
                 .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
                 return obtenerProductoFiltradodep
+            }
+           
                   
     
-        }
-       } else if(contador>1){
+       } else if(contador>1 && contador<=4){
         
-
+        console.log("aqui estoy chomines soy un divergente ");
         var pool = await mssql.connect(bdConfig.config);
         let obtenerProductoFiltrados = await pool.request()
         .input('departamentoInput',mssql.Int,departamento)
