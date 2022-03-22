@@ -5,7 +5,7 @@
   <div class="card-main">
     <div class="product-contairner">
       <div class="p">
-        <img src="../assets/xboxController.webp" alt="Product" />
+        <img src="../../../../assets/{{item.ID_CATEGORIA}}{{item.ID_PRODUCTO}}.jpg" alt="Product" />
         <div
           class="card-description"
           style="margin-bottom: 10px; color: #00bce4"
@@ -13,7 +13,7 @@
           <div class="row" style="padding-top: 7px">
             <div class="col">
               <div class="card-title">
-                <h4>Lps. 1200</h4>
+                <h4>Lps. {{item.PRECIO}}</h4>
               </div>
             </div>
             <div class="col" style="text-align: right; font-size: 25px">
@@ -26,13 +26,12 @@
             class="text-muted card-subtitle mb-2"
             style="padding-top: 10px; font-weight: bold; font-size: 18px"
           >
-            Xbox Controller
+          {{item.NOMBRE_PRODUCTO}}
           </h6>
         </div>
         <div class="card-text">
           <p style="text-align: justify; margin: 0">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            enim possimus dolorum non, modi sunt ips.
+            {{item.DESCRIPCION_PRODUCTO}}
           </p>
         </div>
       </div>

@@ -250,23 +250,48 @@ values('Juguetes','Lleva la diversión hasta tu casa con estos increíbles jugue
 INSERT INTO Usuarios(NOMBRE,APELLIDO,CORREO_ELECTRONICO,TELEFONO,CONTRASENA,RESPUESTA)
 VALUES ('CHOMIN','CHOMINIO','CHOMIN@LAMOTO@GMAIL.COM','88431212','CHOMIN123','CHOMINIA')
 
+INSERT INTO Usuarios
+VALUES ('Prueba','PruebaApellido','prueba@gmail.com','9999-9999','prueba123$','Res. Prueba', 'Pedro',1,1,1,1)
+
 insert into IMAGENES values (0)
 
+/* Tecnología */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Nintendo 3DS',
 		'Nintendo 3DS es tu puerta de acceso portátil a un mundo de increíbles juegos y servicios; te permite conectar con amigos y la comunidad global de Nintendo.',
 		1,0,1900,1,1,1)
-
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Control Xbox',
 		'Haz que tu experiencia de juego sea más envolvente con los accesorios y los controles Xbox para las consolas Xbox.',
 		25,4,1500,1,1,1)
-
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('PlayStation 5',
 		'La nueva PS5 es la consola con la que Sony planea asaltar la nueva generación.',
 		15,2,15000,1,1,1)
 
+/* Ropa */
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Blue Jeans',
+		'Jeans de alta calidad, color azul marino y en distintas tallas.',
+		30,5,400,2,1,2)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Calcetines con rombos',
+		'Calcetines 100% de algodón, escala de rojos y distintas tallas.',
+		45,5,150,2,1,2)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Camisetas negras',
+		'Camisetas 80% de algodón, 20% polyestireno, talla única.',
+		25,15,175,2,1,2)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Tenis blancos',
+		'Tenis de damas bajos, color blanco con piedras brillantes, talla única.',
+		10,0,700,2,1,2)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Suéter rayado',
+		'Tenis de damas bajos, color blanco con piedras brillantes, talla única.',
+		40,2,330,2,1,1)
+
+/* Muebles */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Sillón Reclinable',
 		'Sillón reclinable Commodity, sistema mecedora, tela vinil en color negro y base de metal.',
@@ -277,4 +302,3 @@ values ('Mesa Plegable',
 		'Mesa comercial, ajustable y ligera, es fácil de transportar, su diseño la hace ligera, de fácil instalación y almacenaje.',
 		30,5,8000,1,1,4)
 		
-SELECT * FROM Categoria;

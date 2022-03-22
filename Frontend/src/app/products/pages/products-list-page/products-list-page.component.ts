@@ -34,6 +34,12 @@ export class ProductsListPageComponent implements OnInit {
       this.idLocationParam = params['location'];
     });
     
+    this.productos = this.httpClient.get(`${this.backendHost}/productos/getprodcat/${this.idCategoryParam}`).subscribe(res=>{
+      this.productos = res;
+      console.log(this.productos);
+      // this.deptos = res;
+    });
+
   }
   
   updateCategory(idCategory: number){
@@ -43,6 +49,12 @@ export class ProductsListPageComponent implements OnInit {
       this.router.navigate(['/product'], {
         queryParams: {category: idCategory},
         queryParamsHandling: 'merge'
+      });
+
+      this.productos = this.httpClient.get(`${this.backendHost}/productos/getprodcat/${idCategory}`).subscribe(res=>{
+        this.productos = res;
+        console.log(this.productos);
+        // this.deptos = res;
       });
     }else{
       this.btnCategory = 'Categoría';
@@ -80,12 +92,19 @@ export class ProductsListPageComponent implements OnInit {
         bandera: 'categoria',
     
       };
+<<<<<<< HEAD
     
       this.httpClient.post(`${this.backendHost}/productos/filtrado/`, this.filterOptions).subscribe(res=>{
         console.log(res);
         // this.deptos = res;
       });
       this.filterOptions.contador=0
+=======
+      // this.httpClient.get(`${this.backendHost}/productos/getprodcat/${this.idCategoryParam}`).subscribe(res=>{
+      //   console.log(res);
+      //   // this.deptos = res;
+      // });
+>>>>>>> 5bed0ffe618d786bc00a486b80c7cc71188eb489
     }
     
     return [1,2,3,4];
