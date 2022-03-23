@@ -8,45 +8,33 @@ import { SharedModule } from '../shared/shared.module';
 
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
-<<<<<<< HEAD
-import { CardProductsComponent } from './components/card-products/card-products.component';
-=======
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { RestorePageComponent } from './pages/restore-page/restore-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
->>>>>>> e21aeb302a9b155c974646b909dffcc793b3e103
+import { CarruselProductsComponent } from './components/carrusel-products/carrusel-products.component';
 
 @NgModule({
   declarations: [
     CarruselComponent,
     CardCarruselComponent,
-<<<<<<< HEAD
-    CardProductsComponent,
-=======
     LandingPageComponent,
     RestorePageComponent,
+    CarruselProductsComponent,
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     ReactiveFormsModule,
-    RouterModule, 
+    RouterModule,
     CarouselModule,
     NgbModule,
     HttpClientModule,
-    SharedModule
->>>>>>> e21aeb302a9b155c974646b909dffcc793b3e103
+    SharedModule,
   ],
   exports: [
-<<<<<<< HEAD
-    // LoginComponent,
-    // RegisterComponent,
-    CarruselComponent,
-    CardProductsComponent,
-=======
     LandingPageComponent,
     RestorePageComponent,
->>>>>>> e21aeb302a9b155c974646b909dffcc793b3e103
+    CarruselProductsComponent,
   ],
   providers: [],
 })
