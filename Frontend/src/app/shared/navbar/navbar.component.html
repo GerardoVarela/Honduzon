@@ -18,7 +18,7 @@
               id="busqueda"
               formControlName="searchInput"
               type="search"
-              placeholder="Buscar articulos"
+              placeholder="Buscar artículos"
               style="width: 22rem"
             />
             <button type="submit" 
@@ -279,10 +279,10 @@
         aria-label="Departamento"
         formControlName="formDept"
       >
-        <option value="">Departamento*</option>
-        <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
+        <option selected>Departamento*</option>
+        <!-- <option *ngFor="let dep of deptos" value="{{ dep.ID_DEPARTAMENTO }}">
           {{ dep.NOMBRE_DEPARTAMENTO }}
-        </option>
+        </option> -->
         <!-- <option *ngFor="let dep of deptos; let i=index" value="{{ i+1 }}">
           {{ dep }}
         </option> -->
@@ -407,7 +407,7 @@
   <div class="modal-body col" style="text-align: center">
     <div class="row" style="padding-bottom: 20px">
       <h2 class="modal-title">Recuperar Contraseña</h2>
-      <small>Contesta la pregunta de seguridad o recibe un correo.</small>
+      <small>Recibirás un correo con tu nueva contraseña.</small>
     </div>
 
     <form [formGroup]="recoverForm">
@@ -424,7 +424,7 @@
         <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
 
-      <div class="form-check">
+      <!-- <div class="form-check">
         <input class="form-check-input" 
                 style="margin-top: 0!important" 
                 type="radio" 
@@ -448,9 +448,17 @@
         <label class="form-check-label" for="flexRadioDefault2">
           Contestar pregunta de seguridad
         </label>
-      </div>
+      </div> -->
 
-      <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseThenAns">
+      <button
+        id="btn-modal"
+        class="btn btn-primary btn-blue-animate"
+        type="submit"
+        [disabled]="formEmailRecover!.value === null || formEmailRecover!.value === ''"
+        (click)="recoverByEmail(contentSuccess)">
+          Enviar Correo
+      </button>
+      <!-- <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseThenAns">
         <button
           id="btn-modal"
           class="btn btn-primary btn-blue-animate"
@@ -486,13 +494,13 @@
           (click)="recoverByAnswer()">
             Enviar Respuesta
         </button>
-      </ng-template>
+      </ng-template> -->
       <div *ngIf="correoRegistrado === false" class="alert alert-danger">
         Este correo no está registrado en la plataforma.
       </div>
-      <div *ngIf="(respuestaIncorrecta === true) && (correoRegistrado === true)" class="alert alert-danger">
+      <!-- <div *ngIf="(respuestaIncorrecta === true) && (correoRegistrado === true)" class="alert alert-danger">
         Respuesta incorrecta.
-      </div>
+      </div> -->
     </form>
   </div>
 </ng-template>

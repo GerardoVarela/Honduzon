@@ -5,15 +5,15 @@
   <div class="card-main">
     <div class="product-contairner">
       <div class="p">
-        <img src="../../../../assets/{{item.ID_CATEGORIA}}{{item.ID_PRODUCTO}}.jpg" alt="Product" />
+        <img src="../../../../assets/{{item.ID_CATEGORIA}}_{{item.ID_PRODUCTO}}.jpg" alt="Product" />
         <div
           class="card-description"
           style="margin-bottom: 10px; color: #00bce4"
         >
           <div class="row" style="padding-top: 7px">
-            <div class="col">
+            <div class="col-9">
               <div class="card-title">
-                <h4>Lps. {{item.PRECIO}}</h4>
+                <h4>{{item.PRECIO | currency: 'Lps. '}}</h4>
               </div>
             </div>
             <div class="col" style="text-align: right; font-size: 25px">

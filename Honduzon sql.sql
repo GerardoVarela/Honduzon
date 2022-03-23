@@ -255,7 +255,7 @@ VALUES ('Prueba','PruebaApellido','prueba@gmail.com','9999-9999','prueba123$','R
 
 insert into IMAGENES values (0)
 
-/* Tecnología */
+/* Videojuegos */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Nintendo 3DS',
 		'Nintendo 3DS es tu puerta de acceso portátil a un mundo de increíbles juegos y servicios; te permite conectar con amigos y la comunidad global de Nintendo.',
@@ -289,16 +289,56 @@ values ('Tenis blancos',
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Suéter rayado',
 		'Tenis de damas bajos, color blanco con piedras brillantes, talla única.',
-		40,2,330,2,1,1)
+		40,2,330,1,1,2)
+
+/* Tecnología */
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Laptop Dell',
+		'Laptop para uso empresarial o personal, imprescindible para trabajo de oficina, color plateado.',
+		8,0,11999,1,1,3)
 
 /* Muebles */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Sillón Reclinable',
 		'Sillón reclinable Commodity, sistema mecedora, tela vinil en color negro y base de metal.',
 		30,5,8000,1,1,4)
-
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Mesa Plegable',
 		'Mesa comercial, ajustable y ligera, es fácil de transportar, su diseño la hace ligera, de fácil instalación y almacenaje.',
 		30,5,8000,1,1,4)
-		
+
+/* Gimnasio */	
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Mancuernas',
+		'Mancuernas de hierro, base cuadrada, 30 kg, color plateado.',
+		4,0,800,1,1,5)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Discos',
+		'Discos de goma, 10 cm de diámetro, 10 kg, color negro.',
+		10,0,400,2,1,5)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Pesas rusas',
+		'Material de goma, 25 kg, color negro.',
+		15,4,450,2,1,5)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Saco de boxeo',
+		'Capa de cuero, 35 kg, 1.25 m de alto, color negro.',
+		5,1,1000,1,1,5)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Cuerda de salto',
+		'Hecho de hule, 1.2 m de largo, color negro y naranja.',
+		45,17,300,1,1,5)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Bicicletas estáticas',
+		'Ideal para recorrer largas distancias desde casa, con marcaje de recorrido.',
+		4,0,2300,2,1,5)
+
+/* Juguetes */
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Conjunto de ajedrez',
+		'Piezas color crema y marrón, dimensión 30x30 cm, con estuche para guardar.',
+		15,13,450,1,1,6)
+insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
+values ('Monopoly',
+		'Monopoly versión turista, dimensión 25x25 cm, piezas color plata.',
+		10,1,500,2,1,6)
