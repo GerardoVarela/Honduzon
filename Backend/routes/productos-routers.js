@@ -37,14 +37,11 @@ router.get('/filtrado/:detallesfiltro',(req,res)=>{
     for(i=0;i<filtroArray.length;i++){
         var tempfilt = filtroArray[i].split('=')
         jsonFilt[tempfilt[0]] = tempfilt[1];
-        // console.log(tempfilt)
     }
-    res.send(jsonFilt);
-    console.log(jsonFilt.id);
-    console.log(jsonFilt.test);
-    // productoModel.getProductoFiltrado(req.body.precioMenor,req.body.precioMayor,req.body.categoryID,req.body.departamentoID,req.body.ciudadID,req.body.contador,req.body.bandera).then(resultado=>{
-    //     res.send(resultado)
-    // });
+    console.log(jsonFilt)
+    productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
+        res.send(resultado)
+    });
 })
 
 router.get('/search/:nombreProducto',(req,res)=>{
