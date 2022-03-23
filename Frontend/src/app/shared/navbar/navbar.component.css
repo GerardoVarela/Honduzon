@@ -109,12 +109,12 @@ sup {
 }
 
 .btn-blue-animate:focus {
-  box-shadow: 0 0 0 0px!important;
-  background-color: #00d0ff!important;
+  box-shadow: 0 0 0 0px !important;
+  background-color: #00d0ff !important;
 }
 
 .btn-blue-animate:hover {
-  background-color: #00d0ff!important;
+  background-color: #00d0ff !important;
 }
 
 .btn-close:focus {
