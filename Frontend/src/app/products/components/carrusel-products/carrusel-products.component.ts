@@ -8,8 +8,8 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CarruselProductsComponent implements OnInit {
   imagenes: any[] = [
-    { img: '../assets/xboxController.webp' },
-    { img: '../assets/xboxController.webp' },
+    { img: '../assets/12.webp' },
+    { img: '../assets/1_2.jpg' },
   ];
 
   constructor(private _config: NgbCarouselConfig) {
