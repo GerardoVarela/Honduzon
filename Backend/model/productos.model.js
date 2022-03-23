@@ -31,9 +31,8 @@ async function insertProducto(producto){
 
 }
 
-async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciudad=0, departamento = 0,contador=0,bandera){
+async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,departamento = 0,ciudad=0,contador=0,bandera){
 
-            
     try {
        
         /*
@@ -64,6 +63,7 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciuda
                 
             else if (bandera=="ciudad"){
                 console.log("ciu");
+                console.log(ciudad)
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradociu = await pool.request()
                 .input('ciudadInput',mssql.Int,ciudad)
@@ -72,38 +72,48 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0, ciuda
             }
             
             else if(bandera=="departamento"){
-                
+                console.log(departamento)
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradodep = await pool.request()
                 .input('departamentoInput',mssql.Int,departamento)
                 .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
-                return obtenerProductoFiltradodep
+                return obtenerProductoFiltradodep.recordset
             }
-           
-                  
     
-       } else if(contador>1 && contador<=4){
-        
-        console.log("aqui estoy chomines soy un divergente ");
-        var pool = await mssql.connect(bdConfig.config);
-        let obtenerProductoFiltrados = await pool.request()
-        .input('departamentoInput',mssql.Int,departamento)
-        .input('ciudadInput',mssql.Int,ciudad)
-        .input('IdCategoria',mssql.Int,categoria)
-        .input('PreciomenorInput',mssql.Float,precio1)
-        .input('PrecioMayorInput',mssql.Float,precio2)
-       .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where (ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) or (ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput) or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput) or  (ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput) or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput) or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'
-       );
-       return obtenerProductoFiltrados.recordset
-       }
-       else{
+        } else if(contador>1 && contador<=4){
+            console.log(departamento)
+            console.log(categoria)
+            console.log(ciudad)
+            console.log("aqui estoy chomines soy un divergente ");
+            var pool = await mssql.connect(bdConfig.config);
+            let obtenerProductoFiltrados = await pool.request()
+            .input('departamentoInput',mssql.Int,departamento)
+            .input('ciudadInput',mssql.Int,ciudad)
+            .input('IdCategoria',mssql.Int,categoria)
+            .input('PreciomenorInput',mssql.Float,precio1)
+            .input('PrecioMayorInput',mssql.Float,precio2)
+            .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+            '(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput)'+
+            'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput) or'+  
+            '(ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput)'+
+            'or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput)'+ 
+            'or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput)'+
+            ' or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput) '+
+            'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+            'or(PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) '+
+            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
+            return obtenerProductoFiltrados.recordset
+        }
+        else{
         
         var pool = await mssql.connect(bdConfig.config);
         let obtenerTodosProducto = await pool.request()
-           .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN, Productos.PRECIO from Productos join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN')
+            .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN, Productos.PRECIO from Productos join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN')
             return obtenerTodosProducto.recordset;
         }
-       
+
    /*     .input('PrecioInput',mssql.Float,precio)
         .input('IdCategoriaInput',mssql.Int,categoria)
         .input('ciudadInput',mssql.Int,ciudad)

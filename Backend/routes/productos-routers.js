@@ -36,6 +36,7 @@ router.get('/filtrado/:detallesfiltro',(req,res)=>{
     var jsonFilt = {}
     for(i=0;i<filtroArray.length;i++){
         var tempfilt = filtroArray[i].split('=')
+        console.log(tempfilt)
         jsonFilt[tempfilt[0]] = tempfilt[1];
     }
     console.log(jsonFilt)
