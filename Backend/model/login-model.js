@@ -24,13 +24,12 @@ var bdConfig = require ('../config/bd-config');
 
 
  
- async function getUsuario(Usuariocorreo,usuarioPassword){
+ async function getUsuario(Usuariocorreo){
      try {
          let pool = await mssql.connect(bdConfig.config);
          let correo = await pool.request()
          .input('correoIput', mssql.VarChar, Usuariocorreo)
-         .input('paswwordIput', mssql.VarChar, usuarioPassword)
-         .query('select Usuarios.CORREO_ELECTRONICO, Usuarios.CONTRASENA from Usuarios where Usuarios.CORREO_ELECTRONICO=@correoIput and Usuarios.CONTRASENA=@paswwordIput');
+         .query('select Usuarios.CORREO_ELECTRONICO, Usuarios.CONTRASENA from Usuarios where Usuarios.CORREO_ELECTRONICO=@correoIput');
        
          return correo.recordset;
      } catch (error) {

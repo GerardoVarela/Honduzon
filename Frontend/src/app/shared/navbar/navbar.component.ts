@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,19 +13,25 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-
+// public productos: string[] = ['Francisco', 'Cortes'];
+public productos: any = [];
   // public deptos: string[] = ['Francisco', 'Cortes'];
   public deptos: any = [];
   // public preguntas: string[] = ['hola', 'adios'];
   public preguntas:any  = {};
   public hayError!: boolean;
+  public correoRegistrado!: boolean;
+  public respuestaIncorrecta!: boolean;
   // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
   public confirmPasswordControl!: any;
-
+  public usertemp : object ={
+    email: "jvarelao@chominInc.com",
+    password: 'chomin inc'
+  };
   public recoveryQuestion : string ='';
   searchForm = new FormGroup({
     searchInput: new FormControl('')
@@ -56,7 +63,7 @@ export class NavbarComponent implements OnInit {
     formRespRecover: new FormControl(''),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router) {}
+  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router, private service: SharedService) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -102,23 +109,58 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  recover(){
+  recoverByEmail(content: any){
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
-      // console.log(res);
+      if(res == true){
+        this.correoRegistrado = true;
+        this.successMsg = 'Correo enviado';
+        this.modalService.dismissAll();
+        this.modalService.open(content, { size: 'sm' });
+      }else{
+        this.correoRegistrado = false;
+      }
     });
-    this.modalService.dismissAll();
-    this.router.navigateByUrl('/restore');
   }
+  
+  recoverByAnswer(){  
+    this.httpClient.get(`${this.backendHost}/usuarios/obtenerCorreo/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
+      if(res == true){
+        this.correoRegistrado = true;
+      }else{
+        this.correoRegistrado = false;
+      }
+    });
+
+    if(this.correoRegistrado){
+      this.httpClient.post(`${this.backendHost}/usuarios/getrespuesta/`, this.recoverForm.value).subscribe(res=>{
+        if(res == true){
+          this.respuestaIncorrecta = false;
+          this.modalService.dismissAll();
+          // this.router.navigateByUrl('/restore');
+          this.router.navigate(['/restore'], {queryParams: {email: this.formEmailRecover!.value}});
+        }else{
+          this.respuestaIncorrecta = true;
+        }
+      });
+    }
+
+  }
+  
+
   showQuestion(){
     // console.log('pregunta')
-    
     this.httpClient.get(`${this.backendHost}/preguntas/recuperacionquestion/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
       // console.log(res);
       this.recoveryQuestion = res.toString();
     });
   }
+
+
   search(){
-    this.httpClient.post(`${this.backendHost}/login`, this.searchForm.value).subscribe(res=>{});
+     this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
+       this.productos=res;
+     });
+    this.router.navigateByUrl('/product');
   }
 
   // Getter Search

@@ -1,0 +1,26 @@
+#containerFilters{
+    width: 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 10px;
+    background-color:white; 
+    text-align: center;
+    border-radius: 20px;
+    border-color: #5C636A;
+}
+
+#titleFilter{
+    width: 30%;
+    color: white; 
+    background-color: #00BCE4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-filter{
+    border-color: #5C636A;
+    border-radius: 20px;
+    color: #5C636A;
+    box-shadow: none;
+}

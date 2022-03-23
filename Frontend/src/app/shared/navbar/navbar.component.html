@@ -418,7 +418,8 @@
           class="border-bottom-custom form-control"
           id="floatingEmailRecover"
           placeholder="name@example.com"
-          [class.is-invalid]="formEmailRecover!.touched && (formEmailRecover!.value === null || formEmailRecover!.value === '')"/>
+          pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
+          [class.is-invalid]="formEmailRecover!.touched && formEmailRecover!.invalid"/>
         <label for="formEmailRecover">Correo electrónico</label>
         <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
@@ -428,7 +429,7 @@
                 style="margin-top: 0!important" 
                 type="radio" 
                 value="email" 
-                name="flexRadioDefault" 
+                name="formRadioBRecover" 
                 formControlName="formRadioBRecover" 
                 id="flexRadioDefault1" 
                 checked>
@@ -441,7 +442,7 @@
                 style="margin-top: 0!important" 
                 type="radio" 
                 value="question" 
-                name="flexRadioDefault" 
+                name="formRadioBRecover" 
                 formControlName="formRadioBRecover"
                 id="flexRadioDefault2"  (click)="showQuestion()">
         <label class="form-check-label" for="flexRadioDefault2">
@@ -449,17 +450,17 @@
         </label>
       </div>
 
-      <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseTemplate">
+      <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseThenAns">
         <button
           id="btn-modal"
           class="btn btn-primary btn-blue-animate"
           type="submit"
           [disabled]="formEmailRecover!.value === null || formEmailRecover!.value === ''"
-          (click)="recover()">
+          (click)="recoverByEmail(contentSuccess)">
             Enviar Correo
         </button>
       </ng-container>
-      <ng-template #elseTemplate>
+      <ng-template #elseThenAns>
         <div style="text-align: center; margin-top: 5%">
           <p id="texto" style="margin-bottom: 0!important">{{recoveryQuestion}}</p>
         </div>
@@ -482,10 +483,16 @@
           class="btn btn-primary btn-blue-animate"
           type="submit"
           [disabled]="(formRespRecover!.value === null || formRespRecover!.value === '') || (formEmailRecover!.value === null || formEmailRecover!.value === '')"
-          (click)="recover()">
+          (click)="recoverByAnswer()">
             Enviar Respuesta
         </button>
       </ng-template>
+      <div *ngIf="correoRegistrado === false" class="alert alert-danger">
+        Este correo no está registrado en la plataforma.
+      </div>
+      <div *ngIf="(respuestaIncorrecta === true) && (correoRegistrado === true)" class="alert alert-danger">
+        Respuesta incorrecta.
+      </div>
     </form>
   </div>
 </ng-template>

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-restore-page',
@@ -12,10 +13,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class RestorePageComponent implements OnInit {
   
   private backendHost: string = 'http://localhost:8888';
-
-  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router) {}
+  private emailParam!: string;
+  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.emailParam = params['email'];
+    });
   }
 
   newPasswordForm = new FormGroup({
@@ -55,7 +59,12 @@ export class RestorePageComponent implements OnInit {
   }
 
   setNewPassword(content: any){
-    // this.httpClient.post(`${this.backendHost}/login`, this.newPasswordForm.value).subscribe(res=>{});
+    
+    let user = {
+      email: this.emailParam,
+      password: this.password
+    }
+    this.httpClient.put(`${this.backendHost}/usuarios/recovery/`, user).subscribe(res=>{})
     this.modalService.open(content, { size: 'sm' });
     this.router.navigateByUrl('/');
   }

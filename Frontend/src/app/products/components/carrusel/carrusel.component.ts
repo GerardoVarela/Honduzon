@@ -7,6 +7,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./carrusel.component.css'],
 })
 export class CarruselComponent implements OnInit {
+  
+  imgs: number[] = [1, 2, 3, 4, 5, 6];
+
   constructor() {}
 
   ngOnInit(): void {}

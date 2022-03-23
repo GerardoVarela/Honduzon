@@ -1,14 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var registroRouters = require('./routes/registro-routers');
-var obtenerDepartamentos = require ('./routes/departamentos-routers');
-var obtenerCiudades = require ('./routes/ciudad-router');
-var obtenerPreguntas = require('./routes/preguntas-router');
-var login = require('./routes/login-routers');
-var categorias = require('./routes/categorias-routers');
-var productos = require ('./routes/productos-routers');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const registroRouters = require('./routes/registro-routers');
+const obtenerDepartamentos = require ('./routes/departamentos-routers');
+const obtenerCiudades = require ('./routes/ciudad-router');
+const obtenerPreguntas = require('./routes/preguntas-router');
+const login = require('./routes/login-routers');
+const categorias = require('./routes/categorias-routers');
+const productos = require ('./routes/productos-routers');
+
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
  * -request (peticion)
@@ -36,5 +37,7 @@ app.get('/',(req,res)=>{
 
 
 app.listen(puerto,()=>{
+    //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
+    
     console.log( `Servidor Levantado con el puerto ${puerto}`)
 });

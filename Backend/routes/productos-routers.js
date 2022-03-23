@@ -1,5 +1,5 @@
 /**
- *  @author: JVarela
+ *  @author: JVarela Jamador
  * 
  * Archivo para poner todas las web services del de los productos.
  * Aca se pondran todos
@@ -30,8 +30,35 @@ router.post('/guardarproducto',(req,res)=>{
 router.get('/filtradoproducto',(req,res)=>{})
 
 router.post('/filtrado',(req,res)=>{
-    productoModel.getProductoFiltrado(req.body.formPrice,req.body.categoryID,req.body.userID);
+    
+    productoModel.getProductoFiltrado(req.body.precioMenor,req.body.precioMayor,req.body.categoryID,req.body.departamentoID,req.body.ciudadID,req.body.contador,req.body.bandera).then(resultado=>{
+        res.send(resultado)
+    });
 })
+
+router.get('/search/:nombreProducto',(req,res)=>{
+
+    productoModel.buscarProducto(req.params.nombreProducto).then(resultado=>{
+        res.status(201).send(resultado
+        
+        );
+    })
+})
+
+router.get('/getprodcat/:idCat',(req,res)=>{
+    productoModel.getProductoPorCatId(req.params.idCat).then(resultado=>{
+        
+        if(resultado.length==0){
+            /*
+            No tiene productos la categoria
+            */ 
+           return res.send(false);
+        }else{
+            res.send(resultado)
+        }
+    })
+})
+
 
 router.delete('/borrarproducto',(req,res)=>{});
 
