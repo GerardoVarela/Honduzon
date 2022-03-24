@@ -34,7 +34,7 @@ async function insertProducto(producto){
 async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,departamento = 0,ciudad=0,contador=0,bandera){
 
     try {
-       
+        
         /*
         SI contador = 1 : se hace el switch
         Si contador = 0 : se hace la consulta del default
@@ -42,8 +42,8 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
         si contador > 1: se hace el filtro en general 
     
         */
-       if(contador==1){
-           if(bandera=="categoria"){
+        if(contador==1){
+            if(bandera=="categoria"){
                 console.log("cat");
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradocat = await pool.request()
@@ -51,7 +51,7 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
                 .query('SELECT * FROM [dbo].[Productos] WHERE ID_CATEGORIA= @IdCategoria');
                 return obtenerProductoFiltradocat.recordset;
                 
-           } else if(bandera=="precio"){
+            } else if(bandera=="precio"){
                 console.log(precio1,precio2);
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltrado = await pool.request()
@@ -76,45 +76,106 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
                 var pool = await mssql.connect(bdConfig.config);
                 let obtenerProductoFiltradodep = await pool.request()
                 .input('departamentoInput',mssql.Int,departamento)
-                .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where usuarios.ID_DEPARTAMENTO=@departamentoInput ');
+                .query('select * from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO where ID_DEPARTAMENTO = @departamentoInput ');
                 return obtenerProductoFiltradodep.recordset
             }
     
-        } else if(contador>1 && contador<=4){
-            console.log(departamento)
-            console.log(categoria)
-            console.log(ciudad)
-            console.log("aqui estoy chomines soy un divergente ");
+        } else if(contador == 2){
+             //CONSULTAS DOBLES
+
+                var pool = await mssql.connect(bdConfig.config);
+                let obtenerProductoFiltrados = await pool.request()
+                .input('departamentoInput',mssql.Int,departamento)
+                .input('ciudadInput',mssql.Int,ciudad)
+                .input('IdCategoria',mssql.Int,categoria)
+                .input('PreciomenorInput',mssql.Float,precio1)
+                .input('PrecioMayorInput',mssql.Float,precio2)
+                .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+                '(ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+                'OR (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput))'+
+                'or (ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput)'+
+                'or ((PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput)'+
+                'or ((PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_DEPARTAMENTO=@departamentoInput)'+
+                'or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'
+                );
+                return obtenerProductoFiltrados.recordset
+
+            // if(departamento>0 && categoria>0 && ciudad > 0){
+            //     console.log(departamento)
+            // console.log(categoria)
+            // console.log(ciudad)
+            // console.log("aqui estoy chomines soy un divergente ");
+            // var pool = await mssql.connect(bdConfig.config);
+            // let obtenerProductoFiltrados = await pool.request()
+            // .input('departamentoInput',mssql.Int,departamento)
+            // .input('ciudadInput',mssql.Int,ciudad)
+            // .input('IdCategoria',mssql.Int,categoria)
+            // .input('PreciomenorInput',mssql.Float,precio1)
+            // .input('PrecioMayorInput',mssql.Float,precio2)
+            // .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where(ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
+            // return obtenerProductoFiltrados.recordset
+            // }
+            // console.log(departamento)
+            // console.log(categoria)
+            // console.log(ciudad)
+            // console.log("aqui estoy chomines soy un divergente ");
+            // var pool = await mssql.connect(bdConfig.config);
+            // let obtenerProductoFiltrados = await pool.request()
+            // .input('departamentoInput',mssql.Int,departamento)
+            // .input('ciudadInput',mssql.Int,ciudad)
+            // .input('IdCategoria',mssql.Int,categoria)
+            // .input('PreciomenorInput',mssql.Float,precio1)
+            // .input('PrecioMayorInput',mssql.Float,precio2)
+            // .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+            // '(ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput))'+
+            // 'or (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_DEPARTAMENTO=@departamentoInput) '+
+            /*'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+*/
+            // 'or ((PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+            // 'or (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput) '+
+            // 'or (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
+            // return obtenerProductoFiltrados.recordset
+        } else if(contador == 3){
             var pool = await mssql.connect(bdConfig.config);
-            let obtenerProductoFiltrados = await pool.request()
-            .input('departamentoInput',mssql.Int,departamento)
-            .input('ciudadInput',mssql.Int,ciudad)
-            .input('IdCategoria',mssql.Int,categoria)
-            .input('PreciomenorInput',mssql.Float,precio1)
-            .input('PrecioMayorInput',mssql.Float,precio2)
-            .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
-            '(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput)'+
-            'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput) or'+  
-            '(ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput)'+
-            'or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput)'+ 
-            'or (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput)'+
-            ' or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
-            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput) '+
-            'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
-            'or(PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
-            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput) '+
-            'or(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
-            return obtenerProductoFiltrados.recordset
+                let obtenerProductoFiltrados = await pool.request()
+                .input('departamentoInput',mssql.Int,departamento)
+                .input('ciudadInput',mssql.Int,ciudad)
+                .input('IdCategoria',mssql.Int,categoria)
+                .input('PreciomenorInput',mssql.Float,precio1)
+                .input('PrecioMayorInput',mssql.Float,precio2)
+                .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on '+
+                'Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+                '(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput)or'+
+                '(ID_CATEGORIA=@IdCategoria and PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_DEPARTAMENTO=@departamentoInput)or'+
+                '(ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)or'+
+                '(PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
+                return obtenerProductoFiltrados.recordset
+        }
+        else if(contador == 4){
+            /**
+             *  (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)');
+             */
+                var pool = await mssql.connect(bdConfig.config);
+                let obtenerProductoFiltrados = await pool.request()
+                .input('departamentoInput',mssql.Int,departamento)
+                .input('ciudadInput',mssql.Int,ciudad)
+                .input('IdCategoria',mssql.Int,categoria)
+                .input('PreciomenorInput',mssql.Float,precio1)
+                .input('PrecioMayorInput',mssql.Float,precio2)
+                .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO from Productos join Usuarios on '+
+                    'Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+                    '(ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'
+                );
+                return obtenerProductoFiltrados.recordset
         }
         else{
         
-        var pool = await mssql.connect(bdConfig.config);
-        let obtenerTodosProducto = await pool.request()
+            var pool = await mssql.connect(bdConfig.config);
+            let obtenerTodosProducto = await pool.request()
             .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN, Productos.PRECIO from Productos join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN')
             return obtenerTodosProducto.recordset;
         }
 
-   /*     .input('PrecioInput',mssql.Float,precio)
+    /*     .input('PrecioInput',mssql.Float,precio)
         .input('IdCategoriaInput',mssql.Int,categoria)
         .input('ciudadInput',mssql.Int,ciudad)
         .input('departamentoInput',mssql.Int,departamento) 
