@@ -96,7 +96,8 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
                 'or (ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput)'+
                 'or ((PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_CIUDAD=@ciudadInput)'+
                 'or ((PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput) and ID_DEPARTAMENTO=@departamentoInput)'+
-                'or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'
+                'or (ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
+                'or (ID_CATEGORIA=@IdCategoria and ID_CIUDAD=@ciudadInput)'
                 );
                 return obtenerProductoFiltrados.recordset
 

@@ -31,18 +31,19 @@ router.get('/filtradoproducto',(req,res)=>{})
 
 router.get('/filtrado/:detallesfiltro',(req,res)=>{
     var filtro = req.params.detallesfiltro;
-    console.log(filtro);
+    
     var filtroArray = filtro.split('&');
+    
     var jsonFilt = {}
     for(i=0;i<filtroArray.length;i++){
         var tempfilt = filtroArray[i].split('=')
-        console.log(tempfilt)
+       
         jsonFilt[tempfilt[0]] = tempfilt[1];
     }
-    console.log(jsonFilt)
-    productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
-        res.send(resultado)
-    });
+    
+        productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
+            res.send(resultado)
+        });
 })
 
 router.get('/search/:nombreProducto',(req,res)=>{
