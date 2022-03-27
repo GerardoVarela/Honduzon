@@ -16,12 +16,12 @@
                 </ng-container>
                 <ng-template #elseCategory>
                     <button class="btn btn-filter" id="dropdownCategory" ngbDropdownToggle>
-                        {{btnCategory}}
+                        Categoría
                     </button>
                 </ng-template>
                 <div ngbDropdownMenu aria-labelledby="dropdownCategory">
                     <button ngbDropdownItem *ngFor="let cat of categorias" (click)="updateCategory(cat.ID_CATEGORIA)">{{cat.NOMBRE_CATEGORIA}}</button>
-                    <button ngbDropdownItem style="color:red" (click)="updateCategory(-1)">Cancelar</button>
+                    <button ngbDropdownItem *ngIf="categorias" style="color:red" (click)="updateCategory(-1)">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -30,8 +30,22 @@
                 <button class="btn btn-filter" id="dropdownPrecio" ngbDropdownToggle>
                     Precio
                 </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownPrecio">
-                  <!-- <button ngbDropdownItem>Action - 1</button> -->
+                <div ngbDropdownMenu aria-labelledby="dropdownPrecio" style="padding: 20%">
+                    <form [formGroup]="sliderForm">
+                        <ngx-slider formControlName="sliderControl" [options]="options"></ngx-slider>
+                    </form>
+                    <br>
+                    <button ngbDropdownItem 
+                            class="btn-apply" 
+                            (click)="updatePrice(1)">
+                            Aplicar
+                    </button>
+                    <button ngbDropdownItem 
+                            class="btn-apply" 
+                            style="background-color: tomato; border-color: tomato!important;" 
+                            (click)="updatePrice(-1)">
+                            Cancelar
+                    </button>
                 </div>
             </div>
         </div>
@@ -44,12 +58,12 @@
                 </ng-container>
                 <ng-template #elseLocation>
                     <button class="btn btn-filter" id="dropdownLocation" ngbDropdownToggle>
-                        {{btnLocation}}
+                        Ubicación
                     </button>
                 </ng-template>
                 <div ngbDropdownMenu aria-labelledby="dropdownLocation">
                     <button ngbDropdownItem *ngFor="let dep of deptos" (click)="updateLocation(dep.ID_DEPARTAMENTO)">{{dep.NOMBRE_DEPARTAMENTO}}</button>
-                    <button ngbDropdownItem style="color:red" (click)="updateLocation(-1)">Cancelar</button>
+                    <button ngbDropdownItem *ngIf="deptos" style="color:red" (click)="updateLocation(-1)">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -59,9 +73,6 @@
 <section class="cardsProducts">
     <div class="row" style="margin: 0 5%">
         <div *ngFor="let item of productos" class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
-            <div class="spinner-border text-info" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
             <app-card-products [item]="item"></app-card-products>
         </div>
     </div>

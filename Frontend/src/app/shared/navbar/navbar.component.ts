@@ -24,6 +24,7 @@ public productos: any = [];
   public respuestaIncorrecta!: boolean;
   // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
+  private times: number = 0;
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
@@ -33,6 +34,7 @@ public productos: any = [];
     password: 'chomin inc'
   };
   public recoveryQuestion : string ='';
+
   searchForm = new FormGroup({
     searchInput: new FormControl('')
   });
@@ -157,10 +159,13 @@ public productos: any = [];
 
 
   search(){
-     this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
-       this.productos=res;
-     });
-    this.router.navigateByUrl('/product');
+    //  this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
+    //    this.productos=res;
+    //  });
+    this.router.navigate(['/product'], {
+      queryParams: {search: this.searchInput!.value},
+      queryParamsHandling: 'merge'
+    });
   }
 
   // Getter Search
@@ -169,7 +174,6 @@ public productos: any = [];
   // Getters Login Form
   get formEmailLogin() { return this.loginForm.get('formEmailLogin'); }
   get formPasswordLogin() { return this.loginForm.get('formPasswordLogin'); }
-
 
   // Getters Register Form
   get formName() { return this.registerForm.get('formName'); }

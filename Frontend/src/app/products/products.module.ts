@@ -5,6 +5,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     CarouselModule,
     NgbModule,
     HttpClientModule,
+    NgxSliderModule,
     SharedModule
   ],
   exports: [

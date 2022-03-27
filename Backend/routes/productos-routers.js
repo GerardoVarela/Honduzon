@@ -41,9 +41,9 @@ router.get('/filtrado/:detallesfiltro',(req,res)=>{
         jsonFilt[tempfilt[0]] = tempfilt[1];
     }
     
-        productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
-            res.send(resultado)
-        });
+    productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
+        res.send(resultado)
+    });
 })
 
 router.get('/search/:nombreProducto',(req,res)=>{
