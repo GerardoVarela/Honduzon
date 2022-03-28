@@ -200,7 +200,7 @@ async function buscarProducto(producto){
         return obtenerProductoBuscado.recordset
 }
 
-async function getProductoPorCatId(catId){
+async function getProductoPorProductoID(productoID){
     /**
      * 
      * SELECT * FROM Productos inner join IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN WHERE ID_CATEGORIA =
