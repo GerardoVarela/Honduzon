@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import { Location } from '@angular/common';
+import { take, tap } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-products-list-page',
@@ -13,7 +15,6 @@ import { Location } from '@angular/common';
 export class ProductsListPageComponent implements OnInit {
 
   private backendHost: string = 'http://localhost:8888';
-
   public deptos: any = [];
   public categorias: any = [];
   public productos: any = [];
@@ -132,138 +133,190 @@ export class ProductsListPageComponent implements OnInit {
 
   }
 
-  getProductos(){
-    
-    if(this.searchParam){
-      this.httpClient.get(`${this.backendHost}/productos/search/${this.searchParam}`).subscribe(res=>{
-        this.productos = res;
-        this.searchedProducts = res;
-        console.log(this.productos);
-        console.log(this.searchedProducts);
-      });
-    }
-    
-    // 4 PARÁMETROS
+
+  async getProductos(searchValue?: string){
+    // 4 PARÁMETROS. El parametro search se evalúa al final de estos if anidados
     if(this.idCategoryParam && this.idLocationParam && this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=3&categoryID=${this.idCategoryParam}&departamentoID=${this.idLocationParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // 3 PARÁMETROS
     // Todos menos max price
     else if(this.idCategoryParam && this.idLocationParam && this.idMinPriceParam && !this.idMaxPriceParam){
       let parametros: string = 
         `contador=3&categoryID=${this.idCategoryParam}&departamentoID=${this.idLocationParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.options.ceil}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Todos menos min price
     else if(this.idCategoryParam && this.idLocationParam && !this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=3&categoryID=${this.idCategoryParam}&departamentoID=${this.idLocationParam}&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Todos menos location
     else if(this.idCategoryParam && !this.idLocationParam && this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&categoryID=${this.idCategoryParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.idMaxPriceParam}`;
-      console.log(parametros);
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Todos menos category
     else if(!this.idCategoryParam && this.idLocationParam && this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&departamentoID=${this.idLocationParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // 2 PARÁMETROS
     // Solo Category y Location
     else if(this.idCategoryParam && this.idLocationParam && !this.idMinPriceParam && !this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&categoryID=${this.idCategoryParam}&departamentoID=${this.idLocationParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Category y Min Price
     else if(this.idCategoryParam && !this.idLocationParam && this.idMinPriceParam && !this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&categoryID=${this.idCategoryParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.options.ceil}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Category y Max Price
     else if(this.idCategoryParam && !this.idLocationParam && !this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&categoryID=${this.idCategoryParam}&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Location y Min Price
     else if(!this.idCategoryParam && this.idLocationParam && this.idMinPriceParam && !this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&departamentoID=${this.idLocationParam}&precioMenor=${this.idMinPriceParam}&precioMayor=${this.options.ceil}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Location y Max Price
     else if(!this.idCategoryParam && this.idLocationParam && !this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=2&departamentoID=${this.idLocationParam}&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Max Price y Min Price
     else if(!this.idCategoryParam && !this.idLocationParam && this.idMinPriceParam && this.idMaxPriceParam){
       let parametros: string = 
         `contador=1&precioMenor=${this.idMinPriceParam}&precioMayor=${this.idMaxPriceParam}`;
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/${parametros}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/${parametros}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // 1 PARÁMETRO
     // Solo Category
     else if(this.idCategoryParam && !this.idLocationParam && !this.idMinPriceParam && !this.idMaxPriceParam){
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=categoria&contador=1&categoryID=${this.idCategoryParam}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/bandera=categoria&contador=1&categoryID=${this.idCategoryParam}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
+      // this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=categoria&contador=1&categoryID=${this.idCategoryParam}`).subscribe(res=>{
+      //   this.productos = res;
+      // });
     }
     // Solo Location
     else if(!this.idCategoryParam && this.idLocationParam && !this.idMinPriceParam && !this.idMaxPriceParam){
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=departamento&contador=1&departamentoID=${this.idLocationParam}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/bandera=departamento&contador=1&departamentoID=${this.idLocationParam}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Min Price
     else if(!this.idCategoryParam && !this.idLocationParam && this.idMinPriceParam && !this.idMaxPriceParam){
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=precio&contador=1&precioMenor=${this.idMinPriceParam}&precioMayor=${this.options.ceil}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/bandera=precio&contador=1&precioMenor=${this.idMinPriceParam}&precioMayor=${this.options.ceil}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
     }
     // Solo Max Price
     else if(!this.idCategoryParam && !this.idLocationParam && !this.idMinPriceParam && this.idMaxPriceParam){
-      this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=precio&contador=1&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`).subscribe(res=>{
-        this.productos = res;
-      });
+      let resp = this.httpClient
+        .get(`${this.backendHost}/productos/filtrado/bandera=precio&contador=1&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`)
+        .pipe(take(1));
+      this.productos = await lastValueFrom(resp);
+      // this.httpClient.get(`${this.backendHost}/productos/filtrado/bandera=precio&contador=1&precioMenor=${this.options.floor}&precioMayor=${this.idMaxPriceParam}`).subscribe(res=>{
+      //   this.productos = res;
+      // });
     }
     // 0 PARÁMETROS
     else{
       this.noFilterParams = true;
     }
-    
+
+
+    if(searchValue){
+      let resp = this.httpClient.get(`${this.backendHost}/productos/search/${searchValue}`).pipe(take(1));
+      
+      if(this.idCategoryParam || this.idLocationParam || this.idMinPriceParam || this.idMaxPriceParam){
+        this.searchedProducts = await lastValueFrom(resp);
+        let mergedProducts: object[] = [];
+
+        for(let i=0; i<this.searchedProducts.length; i++){
+          for(let j=0; j<this.productos.length; j++){
+            if(this.searchedProducts[i]['ID_PRODUCTO'] === this.productos[j]['ID_PRODUCTO']){
+              mergedProducts.push(this.searchedProducts[i]);
+            }
+          }
+        }
+        this.productos = mergedProducts;
+      }else{
+        this.productos = await lastValueFrom(resp);
+      }
+
+    }else if(this.searchParam){
+      let resp = this.httpClient.get(`${this.backendHost}/productos/search/${this.searchParam}`).pipe(take(1));
+      
+      if(this.idCategoryParam || this.idLocationParam || this.idMinPriceParam || this.idMaxPriceParam){
+        this.searchedProducts = await lastValueFrom(resp);
+        console.log('searched');
+        console.log(this.searchedProducts);
+        let mergedProducts: object[] = [];
+        for(let i=0; i<this.searchedProducts.length; i++){
+          for(let j=0; j<this.productos.length; j++){
+            if(this.searchedProducts[i]['ID_PRODUCTO'] === this.productos[j]['ID_PRODUCTO']){
+              mergedProducts.push(this.searchedProducts[i]);
+            }
+          }
+        }
+        this.productos = mergedProducts;
+      }else{
+        this.productos = await lastValueFrom(resp);
+      }
+    }
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
@@ -13,16 +13,14 @@ import { SharedService } from '../services/shared.service';
 })
 export class NavbarComponent implements OnInit {
 
-// public productos: string[] = ['Francisco', 'Cortes'];
-public productos: any = [];
-  // public deptos: string[] = ['Francisco', 'Cortes'];
+  @Output() searchValue = new EventEmitter<string>();;
+
+  public productos: any = [];
   public deptos: any = [];
-  // public preguntas: string[] = ['hola', 'adios'];
   public preguntas:any  = {};
   public hayError!: boolean;
   public correoRegistrado!: boolean;
   public respuestaIncorrecta!: boolean;
-  // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
   private times: number = 0;
   private backendHost: string = 'http://localhost:8888';
@@ -166,6 +164,8 @@ public productos: any = [];
       queryParams: {search: this.searchInput!.value},
       queryParamsHandling: 'merge'
     });
+
+    this.searchValue.emit(this.searchInput!.value);
   }
 
   // Getter Search
