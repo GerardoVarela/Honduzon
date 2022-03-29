@@ -1,45 +1,15 @@
-<section>
+<section id="general-section">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <div
-          class="card"
-          style="padding: 20px; padding-top: 0px; border-radius: 20px"
-        >
+        <div class="card" id="product-card">
           <div class="card-body">
             <section id="nav-card-producto">
               <div class="row" style="margin-top: -17px">
-                <div
-                  class="col"
-                  style="
-                    width: 0;
-                    min-width: auto;
-                    max-width: 15%;
-                    max-height: none;
-                    padding-right: 0px;
-                    padding-left: 0px;
-                    margin-left: 0px;
-                    text-align: center;
-                  "
-                >
-                  <i
-                    class="far fa-user-circle"
-                    style="
-                      font-size: 50px;
-                      min-width: auto;
-                      padding-right: 0px;
-                      padding-left: 0px;
-                      margin-left: 0px;
-                      margin-right: 0px;
-                      padding-top: 17px;
-                      color: #6c757d;
-                    "
-                  ></i>
+                <div class="col" id="col-user-icon">
+                  <i class="far fa-user-circle"></i>
                 </div>
-                <div
-                  class="col"
-                  style="max-width: 35%; padding-top: 12px; text-align: center"
-                >
+                <div class="col" id="col-user-details">
                   <div>
                     <strong style="color: #47525e; font-size: 20px"
                       >User name</strong
@@ -51,22 +21,9 @@
                     >
                   </div>
                 </div>
-                <div class="col" style="max-width: 50%; text-align: center">
+                <div class="col" id="col-btn-chat">
                   <div style="transform: translateY(0px)">
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                      style="
-                        transform: perspective(0px);
-                        background: #00bce4;
-                        border-color: #00bce4;
-                        border-top-left-radius: 0px;
-                        border-top-right-radius: 0px;
-                        border-bottom-right-radius: 15px;
-                        border-bottom-left-radius: 15px;
-                        padding: 10px 25px; /*padding-top: 24px;*/
-                      "
-                    >
+                    <button class="btn btn-primary" type="button" id="btn-chat">
                       Chat para comprar
                     </button>
                   </div>
@@ -97,23 +54,21 @@
                 "
               >
                 <div class="col">
-                  <h4 style="margin-bottom: 0px; margin-top: 7px">
+                  <h4
+                    style="
+                      margin: 0px 0px 7px 0px;
+                      font-weight: bold;
+                      font-size: 20px;
+                    "
+                  >
                     Xbox Controller
                   </h4>
                 </div>
-                <div
-                  class="col"
-                  style="
-                    text-align: right;
-                    padding-right: 28px;
-                    padding-left: 28px;
-                    padding-top: 12px;
-                  "
-                >
+                <div class="col" id="col-ctn-products">
                   <small style="color: #47525e">Ctn : 10</small>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" style="height: 45px">
                 <div
                   class="col"
                   style="padding-top: 10px; max-width: 10%; text-align: center"
@@ -150,15 +105,7 @@
                      San Pedro Sula
                   </h6>
                 </div>
-                <div
-                  class="col"
-                  style="
-                    text-align: right;
-                    padding-right: 28px;
-                    padding-left: 28px;
-                    padding-top: 20px;
-                  "
-                >
+                <div class="col" id="col-zip-code">
                   <small style="color: #47525e">Zip code 21101</small>
                 </div>
               </div>
@@ -177,7 +124,42 @@
       </div>
       <div class="col-md-6">
         <div class="row"></div>
-        <div class="row"></div>
+        <div class="row">
+          <div class="column">
+            <div class="card" style="border-radius: 20px">
+              <mat-tab-group>
+                <mat-tab label="Detalles del artículo">
+                  <div class="tab-content">
+                    <div
+                      id="tab-1"
+                      class="tab-pane active"
+                      role="tabpanel"
+                      style="padding: 10px 35px 0px 35px"
+                    >
+                      <div class="row" id="row-description">
+                        <div class="col">
+                          <p style="margin-bottom: 0px">
+                            Lorem ipsum dolor sit amet consectetur adipiscing
+                            elit congue, consequat rhoncus fringilla montes
+                            praesent viverra quis, laoreet nam purus cursus
+                            egestas luctus hendrerit. Lorem ipsum dolor sit amet
+                            consectetur adipiscing elit congue, consequat
+                            rhoncus fringilla montes praesent viverra quis,
+                            laoreet nam purus cursus egestas luctus hendrerit.
+                            Lorem ipsum dolor sit amet consectetur adipiscing
+                            elit congue, consequat rhoncus fringilla montes
+                            praesent viverra quis, laoreet nam purus cursus
+                            egestas luctus hendrerit.<br />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
