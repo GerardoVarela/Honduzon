@@ -11,6 +11,9 @@ const createToken = (user)=>{
         keys.jwtKey
     )
     return accessToken;
+
+
+    
 }
 
 const verifyToken = (res,req, next, redirectPath)=>{}
