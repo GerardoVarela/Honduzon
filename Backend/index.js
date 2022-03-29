@@ -9,7 +9,7 @@ const obtenerPreguntas = require('./routes/preguntas-router');
 const login = require('./routes/login-routers');
 const categorias = require('./routes/categorias-routers');
 const productos = require ('./routes/productos-routers');
-const keys = require ('../config/keys');
+const keys = require ('./config/keys.config');
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
  * -request (peticion)
@@ -20,7 +20,7 @@ const keys = require ('../config/keys');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use('jwtKey', keys.jwtKey);
+// app.use('keys', keys.jwtKey);
 app.use('/usuarios',registroRouters.router);
 app.use ('/departamentos',obtenerDepartamentos.router);
 app.use('/ciudades',obtenerCiudades.router);
