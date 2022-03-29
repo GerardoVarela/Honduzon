@@ -24,3 +24,14 @@
     color: #5C636A;
     box-shadow: none;
 }
+
+.btn-apply {
+    background: #00bce4;
+    color: #ffffff;
+    border-color: #00bce4;
+    border-radius: 20px;
+    font-weight: bold;
+    max-width: 30%;
+    text-align: center;
+    margin-top: 1%;
+}

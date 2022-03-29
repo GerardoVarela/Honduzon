@@ -5,6 +5,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
@@ -37,6 +38,8 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
     HttpClientModule,
     SharedModule,
     MatTabsModule,
+    NgxSliderModule,
+    SharedModule,
   ],
   exports: [
     CarruselComponent,
@@ -46,6 +49,7 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
     RestorePageComponent,
     ProductsListPageComponent,
     ProductDetailsPageComponent,
+    NgxSliderModule,
   ],
   providers: [],
 })

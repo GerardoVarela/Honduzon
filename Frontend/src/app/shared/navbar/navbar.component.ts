@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
@@ -13,17 +13,16 @@ import { SharedService } from '../services/shared.service';
 })
 export class NavbarComponent implements OnInit {
 
-// public productos: string[] = ['Francisco', 'Cortes'];
-public productos: any = [];
-  // public deptos: string[] = ['Francisco', 'Cortes'];
+  @Output() searchValue = new EventEmitter<string>();;
+
+  public productos: any = [];
   public deptos: any = [];
-  // public preguntas: string[] = ['hola', 'adios'];
   public preguntas:any  = {};
   public hayError!: boolean;
   public correoRegistrado!: boolean;
   public respuestaIncorrecta!: boolean;
-  // public ciudades : string[] = ['tegus', 'sps'];
   public ciudades : any = [];
+  private times: number = 0;
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
@@ -33,6 +32,7 @@ public productos: any = [];
     password: 'chomin inc'
   };
   public recoveryQuestion : string ='';
+
   searchForm = new FormGroup({
     searchInput: new FormControl('')
   });
@@ -157,10 +157,15 @@ public productos: any = [];
 
 
   search(){
-     this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
-       this.productos=res;
-     });
-    this.router.navigateByUrl('/product');
+    //  this.httpClient.get(`${this.backendHost}/productos/search/${this.searchForm.value}` ).subscribe(res=>{
+    //    this.productos=res;
+    //  });
+    this.router.navigate(['/product'], {
+      queryParams: {search: this.searchInput!.value},
+      queryParamsHandling: 'merge'
+    });
+
+    this.searchValue.emit(this.searchInput!.value);
   }
 
   // Getter Search
@@ -169,7 +174,6 @@ public productos: any = [];
   // Getters Login Form
   get formEmailLogin() { return this.loginForm.get('formEmailLogin'); }
   get formPasswordLogin() { return this.loginForm.get('formPasswordLogin'); }
-
 
   // Getters Register Form
   get formName() { return this.registerForm.get('formName'); }
