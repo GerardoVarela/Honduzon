@@ -70,12 +70,50 @@
     </div>
 </div>
 
-<section class="cardsProducts">
-    <div class="row" style="margin: 0 5%">
-        <div *ngFor="let item of productos" class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
-            <app-card-products [item]="item"></app-card-products>
+<!-- <ul class="fullclick">
+    <li>
+        <h2>Dogs</h2>
+        <p>
+        Dogs are excellent, and good people. If want to browse dogs
+        by breed, check <a href="https://codepo8.github.io/dog-browser/">
+        The dog browser</a>. Almost all dogs are good boys and girls. 
+        </p>
+        <a href="#" class="main">More dog news</a>
+        <button title="click to close" aria-label="click to close">x</button>
+    </li>
+    <li>
+        <h2>Wombats</h2>
+        <p>
+        Wombats are cute as buttons and digging machines. They look always
+        chill and jolly, but aren't a good idea to keep in the house.
+        </p>
+        <a href="#" class="main">More wombat info</a>
+        <button title="click to close" aria-label="click to close">x</button>
+    </li>
+</ul> -->
+
+<ng-container *ngIf="productos.length == 0 && petitionMade === true; else elseHayProductos">
+    <section style="text-align: center; margin: 5% 0%;">
+        <img src="../../../../assets/Sad_Periquin.png"/>
+        <h1 style="margin-top: 5px;">¡Upss! Parece que no hay nada por aquí<br /></h1>
+        <p style="color: #47525e;">
+            Parece que por el momento lo que buscas no se encuentra en<br />
+            Honduzon. Mientras tanto, ¿por qué no echas un vistazo al resto de <br />
+            productos?
+        </p>
+        <!-- <button class="btn btn-primary" type="button" style="background: #00bce4;color: #ffffff;border-color: #00bce4;border-radius: 20px;font-weight: bold;height: 42px;margin-top: 10px;">
+            Iniciar nueva búsqueda
+        </button> -->
+    </section>
+</ng-container>
+<ng-template #elseHayProductos>
+    <section class="cardsProducts">
+        <div class="row" style="margin: 0 5%">
+            <div *ngFor="let item of productos" class="col-xl-3 col-lg-4 col-md-6 col-sm-12" style="padding: 15px; border-radius: 20px">
+                <app-card-products [item]="item"></app-card-products>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</ng-template>
 
 <app-footer></app-footer>

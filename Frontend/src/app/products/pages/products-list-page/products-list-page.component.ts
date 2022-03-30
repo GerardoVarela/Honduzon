@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Options, LabelType } from "@angular-slider/ngx-slider";
 import { Location } from '@angular/common';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -28,6 +28,7 @@ export class ProductsListPageComponent implements OnInit {
   public idLocationParam?: number;
   public idMinPriceParam?: number;
   public idMaxPriceParam?: number;
+  public petitionMade: boolean = false;
 
   public options: Options = {
     floor: 0,
@@ -68,7 +69,7 @@ export class ProductsListPageComponent implements OnInit {
       this.idMinPriceParam = params['price_min'];
       this.idMaxPriceParam = params['price_max'];
       this.searchParam     = params['search'];
-      this.nextParam     = params['next'];
+      this.nextParam       = params['next'];
     });
 
     this.getProductos();
@@ -317,6 +318,7 @@ export class ProductsListPageComponent implements OnInit {
       }
     }
 
+    this.petitionMade = true;
   }
 
 }

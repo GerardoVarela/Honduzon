@@ -1,0 +1,116 @@
+#general-section {
+  padding: 20px 0px 20px 0px;
+}
+
+#product-card {
+  padding: 20px;
+  padding-top: 0px;
+  border-radius: 20px;
+}
+
+#col-user-icon {
+  width: 0;
+  min-width: auto;
+  max-width: 15%;
+  max-height: none;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-left: 0px;
+  text-align: center;
+}
+
+.fa-user-circle {
+  font-size: 50px;
+  min-width: auto;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 17px;
+  color: #6c757d;
+}
+
+#col-user-details {
+  max-width: 35%;
+  padding-top: 12px;
+  text-align: center;
+}
+
+#col-btn-chat {
+  max-width: 50%;
+  text-align: center;
+}
+
+#btn-chat {
+  transform: perspective(0px);
+  background: #00bce4;
+  border-color: #00bce4;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 10px 25px; /*padding-top: 24px;*/
+}
+
+#col-ctn-products {
+  text-align: right;
+  padding-right: 28px;
+  padding-left: 28px;
+  padding-top: 12px;
+}
+
+#col-zip-code {
+  text-align: right;
+  padding-right: 28px;
+  padding-left: 28px;
+  padding-top: 20px;
+}
+
+#row-description {
+  border-radius: 20px;
+  border: 1.5px dotted #8492a6;
+  padding: 10px;
+  color: #47525e;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  border-color: #8190a5;
+  border-width: 2px;
+}
+
+#carrusel-card-producto {
+  margin: 35px 0px;
+}
+
+/* ALFONSO */
+
+.border-button {
+  border-radius: 20px;
+  width: 93%;
+  margin-left: 4%;
+}
+
+.col-ta {
+  text-align: center;
+}
+
+.row-b {
+  border-style: solid;
+  border-left: none;
+  border-right: none;
+  border-width: 1px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.s-color {
+  color: yellow;
+  font-size: xx-large;
+}

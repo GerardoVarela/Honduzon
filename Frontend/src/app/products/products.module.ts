@@ -11,11 +11,12 @@ import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { RestorePageComponent } from './pages/restore-page/restore-page.component';
-import { CarruselProductsComponent } from './components/carrusel-products/carrusel-products.component';
 import { CardProductsComponent } from './components/card-products/card-products.component';
 import { ProductsListPageComponent } from './pages/products-list-page/products-list-page.component';
 import { CardSalesPersonComponent } from './components/card-sales-person/card-sales-person.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     LandingPageComponent,
     RestorePageComponent,
     ProductsListPageComponent,
-    CarruselProductsComponent
+    ProductDetailsPageComponent,
   ],
   imports: [
     CommonModule,
@@ -35,8 +36,10 @@ import { SharedModule } from '../shared/shared.module';
     CarouselModule,
     NgbModule,
     HttpClientModule,
+    SharedModule,
+    MatTabsModule,
     NgxSliderModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     CarruselComponent,
@@ -45,7 +48,8 @@ import { SharedModule } from '../shared/shared.module';
     LandingPageComponent,
     RestorePageComponent,
     ProductsListPageComponent,
-    CarruselProductsComponent
+    ProductDetailsPageComponent,
+    NgxSliderModule,
   ],
   providers: [],
 })

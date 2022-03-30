@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { LandingPageComponent } from './products/pages/landing-page/landing-page.component';
 import { RestorePageComponent } from './products/pages/restore-page/restore-page.component';
 import { ProductsListPageComponent } from "./products/pages/products-list-page/products-list-page.component";
+import { ProductDetailsPageComponent } from './products/pages/product-details-page/product-details-page.component';
 
 const routes: Routes = [
     {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
         path: 'product',
         component: ProductsListPageComponent,
+    },
+    {
+        path: 'product/detail/:id_product',
+        component: ProductDetailsPageComponent,
     },
     {
         path: '**',

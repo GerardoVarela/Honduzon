@@ -15,6 +15,8 @@ var express = require('express');
 var router = express.Router();
 var login = require('../model/login-model'); 
 const bcrypt = require ('bcrypt');
+const jwt = require('jsonwebtoken');
+const keys = require ('../config/keys.config');
 
 router.get('/', (req, res)=>{
      //Testing

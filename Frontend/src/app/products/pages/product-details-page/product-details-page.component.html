@@ -1,0 +1,227 @@
+<app-navbar></app-navbar>
+
+<section id="general-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" id="product-card">
+          <div class="card-body">
+            <section id="nav-card-producto">
+              <div class="row" style="margin-top: -17px">
+                <div class="col" id="col-user-icon">
+                  <i class="far fa-user-circle"></i>
+                </div>
+                <div class="col" id="col-user-details">
+                  <div>
+                    <strong style="color: #47525e; font-size: 20px"
+                      >User name</strong
+                    >
+                  </div>
+                  <div>
+                    <small style="font-size: 14px; color: #47525e"
+                      >#Products</small
+                    >
+                  </div>
+                </div>
+                <div class="col" id="col-btn-chat">
+                  <div style="transform: translateY(0px)">
+                    <button class="btn btn-primary" type="button" id="btn-chat">
+                      Chat para comprar
+                    </button>
+                  </div>
+                  <div>
+                    <small style="font-size: 14px; color: #47525e"
+                      >95% positive feedback</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="carrusel-card-producto">
+              <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let imagenes of imagenes">
+                  <div class="picsum-img-wrapper">
+                    <img [src]="imagenes.img" alt="Random first slide" />
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+            </section>
+            <section id="footer-card-producto">
+              <div
+                class="row"
+                style="
+                  border-radius: 1px;
+                  border-bottom-style: double;
+                  border-bottom-color: rgba(52, 63, 75, 0.72);
+                "
+              >
+                <div class="col">
+                  <h4
+                    style="
+                      margin: 0px 0px 7px 0px;
+                      font-weight: bold;
+                      font-size: 20px;
+                    "
+                  >
+                    Xbox Controller
+                  </h4>
+                </div>
+                <div class="col" id="col-ctn-products">
+                  <small style="color: #47525e">Ctn : 10</small>
+                </div>
+              </div>
+              <div class="row" style="height: 45px">
+                <div
+                  class="col"
+                  style="padding-top: 10px; max-width: 10%; text-align: center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    style="font-size: 40px; color: #8492a6"
+                  >
+                    <path
+                      d="M17.6569 16.6569C16.7202 17.5935 14.7616 19.5521 13.4138 20.8999C12.6327 21.681 11.3677 21.6814 10.5866 20.9003C9.26234 19.576 7.34159 17.6553 6.34315 16.6569C3.21895 13.5327 3.21895 8.46734 6.34315 5.34315C9.46734 2.21895 14.5327 2.21895 17.6569 5.34315C20.781 8.46734 20.781 13.5327 17.6569 16.6569Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 11C15 12.6569 13.6569 14 12 14C10.3431 14 9 12.6569 9 11C9 9.34315 10.3431 8 12 8C13.6569 8 15 9.34315 15 11Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="col" style="margin-top: 20px">
+                  <h6
+                    class="text-muted mb-2"
+                    style="font-size: 20px; text-align: left"
+                  >
+                     San Pedro Sula
+                  </h6>
+                </div>
+                <div class="col" id="col-zip-code">
+                  <small style="color: #47525e">Zip code 21101</small>
+                </div>
+              </div>
+              <iframe
+                allowfullscreen
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC4gSHn-fBl_Bw26uM5SZJmd-NPmwvZCoY&amp;q=Paris%2C+France&amp;zoom=11"
+                loading="lazy"
+                width="100%"
+                height="400"
+                style="margin-top: 15px; border-radius: 20px; height: 200px"
+              ></iframe>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <!-- ALFONSO -->
+          <div>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card" style="border-radius: 20px;">
+                            <div class="card-body">
+                                <div>
+                                    <h4 class="header"><strong>Microsoft Controller for Xbox One, Series X, S - Carbon Black</strong><br></h4>
+                                    <hr>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col" style="margin-top: 10px;">
+                                                <div style="display: flex;">
+                                                    <p>Precio:&nbsp;</p>
+                                                    <p style="font-weight: 500;">Lps 1200.00</p>
+                                                </div>
+                                                <div style="font-weight: 500;display: flex;margin-left: 15%;">
+                                                    <p>Anterior&nbsp;</p>
+                                                    <p style="text-decoration: line-through;">Lps 1500.00</p>
+                                                </div>
+                                                <div style="margin-left: 15%;display: flex;">
+                                                    <p>Ahorro&nbsp;</p>
+                                                    <p>Lps 300.00 (20% off)</p>
+                                                </div>
+                                                <div><div style="text-align: center; padding: -20px">    
+        <span class="visually-hidden">(*)</span>
+        <span class="s-color" style="cursor: pointer;">★</span>
+        <span class="visually-hidden">(*)</span>
+        <span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span>
+        <p style="font-size: small">5 Valoraciones
+        </p>
+        </div></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="vstack" style="height: 100%;"><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: blue;">Comprar ahora</button></a><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: #00BCE4;border-color: #00BCE4;">Agregar al carrito</button></a><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: white;border-color: #00BCE4;color: #00BCE4;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+    </svg>&nbsp;Agregar a favoritos<br></button></a></div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col-md-6 col-ta"><span class="spanv">7 vendidos</span></div>
+                                            <div class="col-md-6 col-ta"><span class="spanv">3 disponibles</span></div>
+                                          </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        </div>
+        <div class="row" style="margin-top: 2%">
+          <div class="column">
+            <div class="card" style="border-radius: 20px">
+              <mat-tab-group>
+                <mat-tab label="Detalles del artículo">
+                  <div class="tab-content">
+                    <div
+                      id="tab-1"
+                      class="tab-pane active"
+                      role="tabpanel"
+                      style="padding: 10px 35px 0px 35px"
+                    >
+                      <div class="row" id="row-description">
+                        <div class="col">
+                          <p style="margin-bottom: 0px">
+                            Lorem ipsum dolor sit amet consectetur adipiscing
+                            elit congue, consequat rhoncus fringilla montes
+                            praesent viverra quis, laoreet nam purus cursus
+                            egestas luctus hendrerit. Lorem ipsum dolor sit amet
+                            consectetur adipiscing elit congue, consequat
+                            rhoncus fringilla montes praesent viverra quis,
+                            laoreet nam purus cursus egestas luctus hendrerit.
+                            Lorem ipsum dolor sit amet consectetur adipiscing
+                            elit congue, consequat rhoncus fringilla montes
+                            praesent viverra quis, laoreet nam purus cursus
+                            egestas luctus hendrerit.<br />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

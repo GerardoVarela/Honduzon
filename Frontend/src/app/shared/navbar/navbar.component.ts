@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit {
 
   @Output() searchValue = new EventEmitter<string>();;
 
+  selectedPreg= 'Pregunta*';
+  selectedDept= 'Departamento*';
+  selectedCiud= 'Ciudad*';
+
   public productos: any = [];
   public deptos: any = [];
   public preguntas:any  = {};
