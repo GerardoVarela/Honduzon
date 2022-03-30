@@ -193,11 +193,16 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
 }
 
 async function buscarProducto(producto){
-    var pool = await mssql.connect(bdConfig.config);
-    let obtenerProductoBuscado = await pool.request()
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenerProductoBuscado = await pool.request()
         .input('NOMBRE_PRODUCTO',mssql.VarChar,producto)
         .execute('SP_BUSCAR_PRODUCTO')
-        return obtenerProductoBuscado.recordset
+        return obtenerProductoBuscado.recordset;
+    } catch (error) {
+        return error;
+    }
+    
 }
 
 async function getProductoPorCatId(catId){
@@ -218,11 +223,26 @@ async function getProductoPorCatId(catId){
     }
 }
 
-
+async function getProductoPorId (productoId){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let insertarProducto = await pool.request()
+        .input('idProductoInput',mssql.VarChar,productoId)
+        .query('SELECT Productos.NOMBRE_PRODUCTO, Productos.DESCRIPCION_PRODUCTO, Productos.CANTIDAD_PRODUCTO, Productos.CANTIDAD_PROD_VENDIDO, Productos.PRECIO, IMAGENES.IMAGEN, Usuarios.NOMBRE, Usuarios.APELLIDO, DEPARTAMENTO.NOMBRE_DEPARTAMENTO,  Usuarios.IMAGENS FROM Productos JOIN IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN JOIN Usuarios ON Productos.ID_USUARIO = Usuarios.ID_USUARIO JOIN DEPARTAMENTO ON Usuarios.ID_DEPARTAMENTO = DEPARTAMENTO.ID_DEPARTAMENTO WHERE Productos.ID_PRODUCTO = @idProductoInput')
+        return insertarProducto.recordset;
+    } catch (error) {
+        return error;
+    }
+}
 
 module.exports={
-    insertProducto:insertProducto,
-    getProductoFiltrado:getProductoFiltrado,
-    buscarProducto:buscarProducto,
-    getProductoPorCatId
+    /*
+    con ES6, cuando se exporta las funciones con mismo nombre, se puede solo poner el nombre de la funcion
+    no da error
+    */
+    insertProducto,
+    getProductoFiltrado,
+    buscarProducto,
+    getProductoPorCatId,
+    getProductoPorId
 }

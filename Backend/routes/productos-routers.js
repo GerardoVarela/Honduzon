@@ -15,7 +15,13 @@ var router = express.Router();
 
 var productoModel = require('../model/productos.model');
 
-router.get('/',(req,res)=>{});
+router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
+    productoModel.getProductoPorId(req.params.idProducto).then((resultado)=>{
+        res.send(resultado);
+        return;
+    });
+});
+
 
 router.post('/guardarproducto',(req,res)=>{
     var producto = {... req.body}
