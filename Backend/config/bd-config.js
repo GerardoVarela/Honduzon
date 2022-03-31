@@ -13,10 +13,13 @@
  * 
  */
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const config ={
     user: 'sa',
-    password: 'Asd@1223',
-    server : '192.168.1.105',
+    password: process.env.PASSWORD,
+    server : process.env.IP,
     database:'HONDUZON',
     port: 1433,
     options:{ 
