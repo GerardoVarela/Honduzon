@@ -182,7 +182,7 @@ select:focus-visible {
   background: #eceff1;
   height: 42px;
   border-color: rgba(0, 0, 0, 0);
-  width: 200px;
+  width: 300px;
   text-align: center;
 }
 
@@ -203,6 +203,7 @@ select:focus-visible {
 #mensaje {
   font-size: 18px;
   font-weight: bold;
+  /* padding-top: 12px; */
   text-align: center;
   color: rgba(70, 87, 101, 0.85);
 }

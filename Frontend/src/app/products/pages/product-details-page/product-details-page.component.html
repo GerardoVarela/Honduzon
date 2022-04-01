@@ -13,14 +13,14 @@
                 </div>
                 <div class="col" id="col-user-details">
                   <div>
-                    <strong style="color: #47525e; font-size: 20px"
-                      >User name</strong
-                    >
+                    <strong style="color: #47525e; font-size: 20px">
+                      {{productDetail[0].NOMBRE}} {{productDetail[0].APELLIDO}}
+                    </strong>
                   </div>
                   <div>
-                    <small style="font-size: 14px; color: #47525e"
-                      >#Products</small
-                    >
+                    <small style="font-size: 14px; color: #47525e">
+                      Cant. 
+                    </small>
                   </div>
                 </div>
                 <div class="col" id="col-btn-chat">
@@ -30,9 +30,9 @@
                     </button>
                   </div>
                   <div>
-                    <small style="font-size: 14px; color: #47525e"
-                      >95% positive feedback</small
-                    >
+                    <small style="font-size: 14px; color: #47525e">
+                      95% positive feedback
+                    </small>
                   </div>
                 </div>
               </div>
@@ -41,7 +41,7 @@
               <ngb-carousel>
                 <ng-template ngbSlide *ngFor="let imagenes of imagenes">
                   <div class="picsum-img-wrapper">
-                    <img [src]="imagenes.img" alt="Random first slide" />
+                    <img src="../../../../assets/{{productDetail[0].ID_CATEGORIA}}_{{idParam['id_product']}}.jpg" alt="Random first slide" />
                   </div>
                 </ng-template>
               </ngb-carousel>
@@ -56,18 +56,15 @@
                 "
               >
                 <div class="col">
-                  <h4
-                    style="
+                  <h4 style="
                       margin: 0px 0px 7px 0px;
                       font-weight: bold;
-                      font-size: 20px;
-                    "
-                  >
-                    Xbox Controller
+                      font-size: 20px;">
+                  {{productDetail[0].NOMBRE_PRODUCTO}}
                   </h4>
                 </div>
                 <div class="col" id="col-ctn-products">
-                  <small style="color: #47525e">Ctn : 10</small>
+                  <small style="color: #47525e">Ctn: {{productDetail[0].CANTIDAD_PRODUCTO}}</small>
                 </div>
               </div>
               <div class="row" style="height: 45px">
@@ -104,7 +101,7 @@
                     class="text-muted mb-2"
                     style="font-size: 20px; text-align: left"
                   >
-                     San Pedro Sula
+                   {{productDetail[0].NOMBRE_DEPARTAMENTO}}
                   </h6>
                 </div>
                 <div class="col" id="col-zip-code">
@@ -126,62 +123,79 @@
       </div>
       <div class="col-md-6">
         <div class="row">
-          <!-- ALFONSO -->
-          <div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="border-radius: 20px;">
-                            <div class="card-body">
-                                <div>
-                                    <h4 class="header"><strong>Microsoft Controller for Xbox One, Series X, S - Carbon Black</strong><br></h4>
-                                    <hr>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col" style="margin-top: 10px;">
-                                                <div style="display: flex;">
-                                                    <p>Precio:&nbsp;</p>
-                                                    <p style="font-weight: 500;">Lps 1200.00</p>
-                                                </div>
-                                                <div style="font-weight: 500;display: flex;margin-left: 15%;">
-                                                    <p>Anterior&nbsp;</p>
-                                                    <p style="text-decoration: line-through;">Lps 1500.00</p>
-                                                </div>
-                                                <div style="margin-left: 15%;display: flex;">
-                                                    <p>Ahorro&nbsp;</p>
-                                                    <p>Lps 300.00 (20% off)</p>
-                                                </div>
-                                                <div><div style="text-align: center; padding: -20px">    
-        <span class="visually-hidden">(*)</span>
-        <span class="s-color" style="cursor: pointer;">★</span>
-        <span class="visually-hidden">(*)</span>
-        <span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span><span class="visually-hidden">(*)</span><span class="s-color" style="cursor: pointer;">★</span>
-        <p style="font-size: small">5 Valoraciones
-        </p>
-        </div></div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="vstack" style="height: 100%;"><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: blue;">Comprar ahora</button></a><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: #00BCE4;border-color: #00BCE4;">Agregar al carrito</button></a><a href="#" style="margin: 15px 0;"><button class="btn btn-primary border-button" type="button" style="background-color: white;border-color: #00BCE4;color: #00BCE4;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-    </svg>&nbsp;Agregar a favoritos<br></button></a></div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="container">
-                                          <div class="row">
-                                            <div class="col-md-6 col-ta"><span class="spanv">7 vendidos</span></div>
-                                            <div class="col-md-6 col-ta"><span class="spanv">3 disponibles</span></div>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
+          <div class="col"> <!--Desde aqui comienza la tarjeta superior derecha-->
+            <div class="card" style="border-radius: 20px;">
+              <div class="card-body">
+                <div>
+                  <h4 class="header row-b" style="border-top: none; margin: 0px"><strong>{{productDetail[0].NOMBRE_PRODUCTO}}</strong><br></h4>
+                  <div>
+                    <div class="row">
+                      <div class="col" style="margin-top: 10px;">
+                        <div style="display: flex;">
+                          <p class="p-alf">Precio:&nbsp;</p>
+                          <p class="p-alf" style="font-weight: 500;">{{productDetail[0].PRECIO | currency: 'Lps. '}}</p>
                         </div>
+                        <!-- <div style="font-weight: 500;display: flex;">
+                          <p>Anterior&nbsp;</p>
+                          <p style="text-decoration: line-through;">Lps 1500.00</p>
+                        </div>
+                        <div style="display: flex;">
+                          <p>Ahorro&nbsp;</p>
+                          <p>Lps 300.00 (20% off)</p>
+                        </div> -->
+                      </div>
+                      <div class="col">
+                        <div class="vstack" style="height: 100%;">
+                          <a href="#" style="margin: 9px 0;">
+                            <button class="btn btn-primary border-button" type="button" style="background-color: blue;">
+                              Comprar ahora
+                            </button>
+                          </a>
+                          <a href="#" style="margin: 9px 0;">
+                            <button class="btn btn-primary border-button" type="button" style="background-color: #00BCE4;border-color: #00BCE4;">
+                              Agregar al carrito
+                            </button>
+                          </a>
+                          <a href="#" style="margin: 9px 0;">
+                            <button class="btn btn-primary border-button" type="button" style="background-color: white;border-color: #00BCE4;color: #00BCE4;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                              </svg>&nbsp;Agregar a favoritos<br>
+                            </button>
+                          </a>
+                          <div>
+                            <div style="text-align: center; padding: -20px">    
+                              <span class="visually-hidden">(*)</span>
+                              <span class="s-color" style="cursor: pointer;">★</span>
+                              <span class="visually-hidden">(*)</span>
+                              <span class="s-color" style="cursor: pointer;">★</span>
+                              <span class="visually-hidden">(*)</span>
+                              <span class="s-color" style="cursor: pointer;">★</span>
+                              <span class="visually-hidden">(*)</span>
+                              <span class="s-color" style="cursor: pointer;">★</span>
+                              <span class="visually-hidden">(*)</span>
+                              <span class="s-color" style="cursor: pointer;">★</span>
+                              <p style="font-size: small">5 Valoraciones</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <div class="container row-b">
+                      <div class="row">
+                        <div class="col-md-6 col-ta">
+                          <span class="spanv">{{productDetail[0].CANTIDAD_PROD_VENDIDO}} Vendidos</span>
+                        </div>
+                        <div class="col-md-6 col-ta">
+                          <span class="spanv">{{productDetail[0].CANTIDAD_PRODUCTO - productDetail[0].CANTIDAD_PROD_VENDIDO}} Disponibles</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div> 
+          </div> <!--Aqui termina la tarjeta superior derecha-->
         </div>
         <div class="row" style="margin-top: 2%">
           <div class="column">
@@ -197,7 +211,7 @@
                     >
                       <div class="row" id="row-description">
                         <div class="col">
-                          <p style="margin-bottom: 0px">
+                          <!-- <p style="margin-bottom: 0px">
                             Lorem ipsum dolor sit amet consectetur adipiscing
                             elit congue, consequat rhoncus fringilla montes
                             praesent viverra quis, laoreet nam purus cursus
@@ -209,6 +223,9 @@
                             elit congue, consequat rhoncus fringilla montes
                             praesent viverra quis, laoreet nam purus cursus
                             egestas luctus hendrerit.<br />
+                          </p> -->
+                          <p style="margin-bottom: 0px">
+                            {{productDetail[0].DESCRIPCION_PRODUCTO}}<br />
                           </p>
                         </div>
                       </div>

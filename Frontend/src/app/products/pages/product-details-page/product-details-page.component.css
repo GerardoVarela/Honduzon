@@ -90,7 +90,6 @@ img {
 }
 
 /* ALFONSO */
-
 .border-button {
   border-radius: 20px;
   width: 93%;
@@ -113,4 +112,8 @@ img {
 .s-color {
   color: yellow;
   font-size: xx-large;
+}
+
+.p-alf {
+  font-size: 26px;
 }

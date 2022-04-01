@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { lastValueFrom } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details-page',
@@ -12,11 +16,32 @@ export class ProductDetailsPageComponent implements OnInit {
     { img: '../assets/1_2.jpg' },
   ];
 
-  constructor(private _config: NgbCarouselConfig) {
+  public backendHost: string = 'http://localhost:8888';
+  public idParam!: any;
+  public productDetail!: any;
+
+  constructor(private activatedRoute: ActivatedRoute, private httpClient: HttpClient, private _config: NgbCarouselConfig) {
     _config.pauseOnHover = true;
     _config.showNavigationIndicators = true;
     _config.animation = true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.extractProductInfo();
+    
+  }
+
+  async extractProductInfo(){
+    
+    let id = this.activatedRoute.params.pipe(take(1));
+
+    this.idParam = await lastValueFrom(id);
+
+    let resp = this.httpClient.get(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`).pipe(take(1))
+    
+    this.productDetail = await lastValueFrom(resp);
+    console.log(this.productDetail)
+  }
+
 }
