@@ -24,8 +24,8 @@ router.get('/', (req, res)=>{
 })
 
 var logeado = false;
-var matchPassword = false;
-router.post('/',(req,res)=>{
+
+router.post('/',(req,res, next)=>{
     login.getUsuario(req.body.formEmailLogin).then(resultado=>{
         
         if(resultado.length>0){
@@ -40,16 +40,19 @@ router.post('/',(req,res)=>{
                     //     mensaje:"Bienvenido ",
                     //     logeado:true
                     // });
+                    next(); //next llama a la siguiente funcion dentro de la peticion, ahora, esta funcion es un middleware de la peticion
+                    
                 }else{
                     logeado = false;
                     res.send(logeado);
+                    return;
                 }
             })
             
         }else {
                 logeado = false;
                 res.send(logeado);
-
+                return;
                 // res.status(201).send( {
                 //     mensaje:"algo salio mal :(",
                 //     logeado:false
@@ -57,6 +60,12 @@ router.post('/',(req,res)=>{
         }
     });
     
+},(req, res)=>{
+    console.log('funca el middleware');
+    login.getUsuario(req.body.formEmailLogin).then(resultado=>{
+        
+        console.log(resultado);
+    });
 });
 
 

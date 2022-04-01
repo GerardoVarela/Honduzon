@@ -26,17 +26,17 @@ var bdConfig = require ('../config/bd-config');
  
  async function getUsuario(Usuariocorreo){
      try {
-         let pool = await mssql.connect(bdConfig.config);
-         let correo = await pool.request()
-         .input('correoIput', mssql.VarChar, Usuariocorreo)
-         .query('select Usuarios.CORREO_ELECTRONICO, Usuarios.CONTRASENA from Usuarios where Usuarios.CORREO_ELECTRONICO=@correoIput');
-       
-         return correo.recordset;
-     } catch (error) {
-         console.log(error);
-     }
- }
- 
+        let pool = await mssql.connect(bdConfig.config);
+        let correo = await pool.request()
+        .input('correoIput', mssql.VarChar, Usuariocorreo)
+        .query('select Usuarios.CORREO_ELECTRONICO, Usuarios.CONTRASENA from Usuarios where Usuarios.CORREO_ELECTRONICO=@correoIput');
+    
+        return correo.recordset;
+    } catch (error) {
+        return error;
+    }
+}
+
 
 
  module.exports = {
