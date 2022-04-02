@@ -23,4 +23,9 @@
 
 
 ## Modulos Utilizados (Back-end)
-[bcrypt] (#bcrypt)
+<a name="bcrypt"></a>
+
+
+
+### Modulos 
+***
