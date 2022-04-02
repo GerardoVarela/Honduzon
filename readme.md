@@ -6,13 +6,13 @@
 ***
 
 ### Miembros Grupo1 : 
-#### Front-end:
-##### Gerardo Varela (Scrum)
-##### Darwin Rodas
-##### Alfonso Sevilla 
-#### Back-end:
-##### Ariel Amador
-##### Jorge Varela
+####  Front-end:
+*  Gerardo Varela (Scrum)
+*  Darwin Rodas
+*  Alfonso Sevilla 
+ #### Back-end:
+*  Ariel Amador
+*  Jorge Varela
 
 ## Tecnologías
 ***
