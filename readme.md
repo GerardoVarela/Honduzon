@@ -1,8 +1,10 @@
 # Honduzon 
+***
 #### Proyecto Ingeniería de Software IS-802 I PAC 2022
+***
 ###### UNAH-CU
 
-
+***
 
 ### Miembros Grupo1 : 
 #### Front-end:
@@ -13,6 +15,10 @@
 ##### Ariel Amador
 ##### Jorge Varela
 
+## Tecnologías
+***
+* [Angular] (https://angular.io/)
+* [Nodejs] (https://nodejs.org/es/) : Versión 16.14.2 LTS
 
 ## Modulos Utilizados (Front-end)
 
