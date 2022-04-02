@@ -1,5 +1,8 @@
 # Honduzon 
 ***
+##Sr. Periquin
+![Sr.periquin](https://trello.com/1/cards/6218103d4f61c024bda2e185/attachments/622046e1e667b01d41c98ee9/previews/622046e2e667b01d41c98f2a/download/ventas4-removebg-preview.png)
+***
 #### Proyecto Ingeniería de Software IS-802 I PAC 2022
 ###### UNAH-CU
 
