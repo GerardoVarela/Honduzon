@@ -12,3 +12,9 @@
 #### Back-end:
 ##### Ariel Amador
 ##### Jorge Varela
+
+
+## Modulos Utilizados (Front-end)
+
+
+## Modulos Utilizados (Back-end)
