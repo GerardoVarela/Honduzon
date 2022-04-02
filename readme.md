@@ -16,14 +16,15 @@
 
 ## Tecnologías
 ***
-* [Angular] (https://angular.io/)
-* [Node js] (https://nodejs.org/es/) : Versión 16.14.2 LTS
+* [Angular](https://angular.io/)
+
+* [Node js](https://nodejs.org/es/) : Versión 16.14.2 LTS
 
 ## Modulos Utilizados (Front-end)
 
 
 ## Modulos Utilizados (Back-end)
-1. [bcrypt] (bcrypt)
+1. [bcrypt](bcrypt)
 
 
 
