@@ -35,9 +35,15 @@
 
 ## Modulos Utilizados (Back-end)
 1. [bcrypt](https://www.npmjs.com/package/bcrypt): Version 5.0.1 (Public)
- -Comando Instalación: `npm install bcrypt`
-3. 
-
+- Comando Instalación: `npm install bcrypt`
+2. [body-parser](https://www.npmjs.com/package/body-parser): Version 1.19.2 (Public)
+- Comando Instalación: `npm install body-parser`
+3. [cors](https://www.npmjs.com/package/cors): Version 2.8.5 (Public)
+- Comando Instalación: `npm install cors`
+4. [dotenv](https://www.npmjs.com/package/dotenv): Version 16.0.0  (Public)
+- Comando Instalación: `npm install dotenv --save (Recomendado)`
+5. [express](https://www.npmjs.com/package/express): Version 4.17.3 (Public)
+- Comando Instalación: `npm install express`
 
 
 
