@@ -26,7 +26,7 @@ router.get('/', (req, res)=>{
 var logeado = false;
 
 router.post('/',(req,res, next)=>{
-    login.getUsuario(req.body.formEmailLogin).then(resultado=>{
+    login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
         if(resultado.length>0){
             bcrypt.compare(req.body.formPasswordLogin,resultado[0].CONTRASENA).then(match=>{
@@ -62,7 +62,7 @@ router.post('/',(req,res, next)=>{
     
 },(req, res)=>{
     console.log('funca el middleware');
-    login.getUsuario(req.body.formEmailLogin).then(resultado=>{
+    login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
         console.log(resultado);
     });

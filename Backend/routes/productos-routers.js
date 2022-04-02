@@ -15,10 +15,22 @@ var router = express.Router();
 
 var productoModel = require('../model/productos.model');
 
+
+var numeroTotalProdUsusario = 0
+
 router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
     productoModel.getProductoPorId(req.params.idProducto).then((resultado)=>{
-        res.send(resultado);
-        return;
+        var productoPorId = {...resultado[0]}
+        console.log(productoPorId);
+        productoModel.getCantTotalProdUsuario(resultado[0].ID_USUARIO).then(resultado=>{
+            numeroTotalProdUsusario = resultado[0].CantTot;
+            productoPorId['CantidadProdTotal'] = numeroTotalProdUsusario;
+            console.log(productoPorId);
+            res.send(productoPorId);
+            return;
+        })
+        
+        
     });
 });
 

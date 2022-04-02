@@ -24,7 +24,7 @@ var bdConfig = require ('../config/bd-config');
 
 
  
- async function getUsuario(Usuariocorreo){
+ async function getCredencialesUsuario(Usuariocorreo){
      try {
         let pool = await mssql.connect(bdConfig.config);
         let correo = await pool.request()
@@ -40,6 +40,6 @@ var bdConfig = require ('../config/bd-config');
 
 
  module.exports = {
-   getUsuario:getUsuario    
+    getCredencialesUsuario  
 
  }
