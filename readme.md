@@ -23,7 +23,7 @@
 
 
 ## Modulos Utilizados (Back-end)
-<a name="bcrypt"></a>
+1. [bcrypt] (bcrypt)
 
 
 
