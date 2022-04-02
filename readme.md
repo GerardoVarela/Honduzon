@@ -17,7 +17,7 @@
 ## Tecnologías
 ***
 * [Angular] (https://angular.io/)
-* [Nodejs] (https://nodejs.org/es/) : Versión 16.14.2 LTS
+* [Node js] (https://nodejs.org/es/) : Versión 16.14.2 LTS
 
 ## Modulos Utilizados (Front-end)
 
