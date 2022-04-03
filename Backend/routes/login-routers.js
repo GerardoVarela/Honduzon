@@ -35,7 +35,6 @@ router.post('/',(req,res, next)=>{
                     match){
                         var createdToken = token.createToken(req.body.formEmailLogin,req.body.formPasswordLogin)
                         logeado = true;
-                        console.log(createdToken);
                         res.send({
                             logeado,
                             token : createdToken

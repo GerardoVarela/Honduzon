@@ -16,7 +16,13 @@ const createToken = (userEmail, userPassword)=>{
     
 }
 
-const verifyToken = (res,req, next)=>{}
+const verifyToken = (res,req, next)=>{
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== undefined){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token = bearerToken;
+    }
+}
 
 
 module.exports={
