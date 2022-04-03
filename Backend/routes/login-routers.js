@@ -16,7 +16,7 @@ var router = express.Router();
 var login = require('../model/login-model'); 
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
-const keys = require ('../config/keys.config');
+const token = require('../token/jwt');
 
 router.get('/', (req, res)=>{
      //Testing
@@ -30,11 +30,16 @@ router.post('/',(req,res, next)=>{
         
         if(resultado.length>0){
             bcrypt.compare(req.body.formPasswordLogin,resultado[0].CONTRASENA).then(match=>{
-                console.log(match);
+                
                 if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
                     match){
+                        var createdToken = token.createToken(req.body.formEmailLogin,req.body.formPasswordLogin)
                         logeado = true;
-                        res.send(logeado);
+                        console.log(createdToken);
+                        res.send({
+                            logeado,
+                            token : createdToken
+                        });
                     
                     // res.status(201).send( {
                     //     mensaje:"Bienvenido ",

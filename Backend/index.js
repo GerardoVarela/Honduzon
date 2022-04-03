@@ -20,7 +20,7 @@ const keys = require ('./config/keys.config');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-// app.set('keys', keys.jwtKey);
+app.set('keys', keys.jwtKey);
 app.use('/usuarios',registroRouters.router);
 app.use ('/departamentos',obtenerDepartamentos.router);
 app.use('/ciudades',obtenerCiudades.router);

@@ -1,10 +1,10 @@
 const {sign, verify} = require('jsonwebtoken');
 const keys = require('../config/keys.config');
 
-const createToken = (user)=>{
+const createToken = (userEmail, userPassword)=>{
     const payload = {
-        email : user.formEmailLogin,
-        password : user.formPasswordLogin
+        email : userEmail,
+        password : userPassword
     }
     const accessToken = sign(
         payload,
@@ -16,7 +16,7 @@ const createToken = (user)=>{
     
 }
 
-const verifyToken = (res,req, next, redirectPath)=>{}
+const verifyToken = (res,req, next)=>{}
 
 
 module.exports={
