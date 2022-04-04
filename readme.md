@@ -1,7 +1,7 @@
 # Honduzon 
 ***
 ##Sr. Periquin
-![Sr.periquin](https://trello.com/1/cards/6218103d4f61c024bda2e185/attachments/622046e1e667b01d41c98ee9/previews/622046e2e667b01d41c98f2a/download/ventas4-removebg-preview.png)
+
 ***
 #### Proyecto Ingeniería de Software IS-802 I PAC 2022
 ###### UNAH-CU
@@ -44,6 +44,12 @@
 - Comando Instalación: `npm install dotenv --save (Recomendado)`
 5. [express](https://www.npmjs.com/package/express): Version 4.17.3 (Public)
 - Comando Instalación: `npm install express`
-
-
-
+6. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): Version 8.5.1 (Public)
+- Comando Instalación: `npm install jsonwebtoken`
+7. [mssql](https://www.npmjs.com/package/mssql): Version 8.0.2  (Public)
+- Comando Instalación: `npm install mssql`
+8. [nodemailer](https://www.npmjs.com/package/nodemailer): Version 6.7.3 (Pubic)
+- Comando Instalación: `npm install nodemailer`
+9. [randexp](https://www.npmjs.com/package/randexp): Version 0.5.3 (Public)
+- Comando Instalación: `npm install randexp`
+10. [](): Version (Public)
