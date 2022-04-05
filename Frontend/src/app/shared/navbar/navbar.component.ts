@@ -6,6 +6,7 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 import { ThisReceiver } from '@angular/compiler';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,10 +16,6 @@ import { ThisReceiver } from '@angular/compiler';
 export class NavbarComponent implements OnInit {
 
   @Output() searchValue = new EventEmitter<string>();;
-
-  selectedPreg= 'Pregunta*';
-  selectedDept= 'Departamento*';
-  selectedCiud= 'Ciudad*';
 
   public productos: any = [];
   public deptos: any = [];
@@ -31,7 +28,7 @@ export class NavbarComponent implements OnInit {
   public successMsg!: string;
   public respLogin!: any;
   public confirmPasswordControl!: any;
-  private token : string='';
+  private token: string = '';
   public recoveryQuestion : string ='';
 
   searchForm = new FormGroup({
@@ -64,7 +61,13 @@ export class NavbarComponent implements OnInit {
     formRespRecover: new FormControl(''),
   });
 
-  constructor(private modalService: NgbModal, private httpClient: HttpClient, private router: Router, private service: SharedService) {}
+  constructor(
+    private modalService: NgbModal, 
+    private httpClient: HttpClient, 
+    private router: Router, 
+    private service: SharedService,
+    private cookieService: CookieService
+    ) {}
 
   ngOnInit(): void {
     this.preguntas = this.httpClient.get(`${this.backendHost}/preguntas/`).subscribe(res=>{
@@ -103,7 +106,8 @@ export class NavbarComponent implements OnInit {
         this.hayError = false;
         this.successMsg = 'Sesión Iniciada';
         this.modalService.dismissAll();
-        localStorage.setItem('ACCESS_TOKEN',this.token);
+        // localStorage.setItem('ACCESS_TOKEN',this.token);
+        this.cookieService.set('ACCESS_TOKEN', this.token);
         this.modalService.open(content, { size: 'sm' });
       }else{
         this.hayError = true;
@@ -200,6 +204,8 @@ export class NavbarComponent implements OnInit {
   get formRadioBRecover() { return this.recoverForm.get('formRadioBRecover'); }
   get formRespRecover() { return this.recoverForm.get('formRespRecover'); }
   
+  // TOKEN
+  get localToken(){ return this.cookieService.get('ACCESS_TOKEN'); }
 
   passwordMatch():ValidatorFn {
     return (formGroup: AbstractControl):{ [key: string]: any } | null => {
