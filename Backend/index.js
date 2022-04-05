@@ -39,5 +39,5 @@ app.get('/',(req,res)=>{
 app.listen(puerto,()=>{
     //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
     
-    console.log( `Servidor Levantado con el puerto ${puerto}`)
+    console.log( `Servidor Backend de Honduzon escuchando al puerto:${puerto}. Abra el navegador en: http://localhost:${puerto}/`)
 });

@@ -1,35 +1,20 @@
 const {sign, verify} = require('jsonwebtoken');
+const { authenticate } = require('passport');
 const keys = require('../config/keys.config');
 
-const createToken = (userEmail, userPassword)=>{
+function createToken(userEmail){
     const payload = {
-        email : userEmail,
-        password : userPassword
+        email : userEmail
     }
     const accessToken = sign(
         payload,
         keys.jwtKey
     )
     return accessToken;
-
-
-    
 }
 
-const verifyToken = (res,req, next)=>{
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== 'undefined'){
-        const bearerToken = bearerHeader.split(' ')[1];
-        req.token = bearerToken;
-        console.log('verification');
-        next();
-    }else{
-        return false;
-    }
-}
 
 
 module.exports={
-    createToken,
-    verifyToken
+    createToken
 }
