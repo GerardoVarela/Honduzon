@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
@@ -106,6 +106,7 @@ export class NavbarComponent implements OnInit {
         this.modalService.dismissAll();
         localStorage.setItem('ACCESS_TOKEN',this.token);
         this.modalService.open(content, { size: 'sm' });
+        this.getLoggedUser();
       }else{
         this.hayError = true;
       }
@@ -175,6 +176,17 @@ export class NavbarComponent implements OnInit {
     this.token = '';
     localStorage.removeItem('ACCESS_TOKEN');
   }
+
+  getLoggedUser(){
+    this.httpClient.get(`${this.backendHost}/login/getloggeduser`,{
+      headers:new HttpHeaders({
+        authorization: 'Bearer '+localStorage.getItem('ACCESS_TOKEN')||''
+      })
+    }).subscribe(res=>{
+      console.log(res);
+    })
+  }
+
 
   // Getter Search
   get searchInput() { return this.searchForm.get('searchInput'); }

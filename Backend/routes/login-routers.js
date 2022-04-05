@@ -17,6 +17,7 @@ var login = require('../model/login-model');
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
 const token = require('../token/jwt');
+const { jwtKey } = require('../config/keys.config');
 
 router.get('/', (req, res)=>{
      //Testing
@@ -33,7 +34,7 @@ router.post('/',(req,res, next)=>{
                 
                 if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
                     match){
-                        createdToken = token.createToken(req.body.formEmailLogin,req.body.formPasswordLogin)
+                        createdToken = token.createToken(req.body.formEmailLogin)
                         logeado = true;
                         res.json(createdToken);
                     
@@ -62,10 +63,35 @@ router.post('/',(req,res, next)=>{
     
 });
 
-router.get('/getloggeduser',(req,res)=>{
-    console.log(req.token);
+router.get('/getloggeduser',verifyToken,(req,res)=>{
+    jwt.verify(req.token, jwtKey,(error, authedUser)=>{
+        if (error){
+            res.send({
+                mensaje:'Token no valido',
+                tokenAutenticado: false
+            });
+        }else{
+            login.getUsuarioLogeado(authedUser.email).then(resultado =>{
+                res.send(resultado);
+            })
+        }
+        
+    })
 });
+function verifyToken(req, res, next){
 
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== undefined){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token = bearerToken;
+        next();
+    }else{
+        res.status(500).json({
+            tokenStatus:false,
+            mensaje:'No existe Token'
+        }) ;
+    }
+}
 
 
 router.get('/:',(req,res)=>{
