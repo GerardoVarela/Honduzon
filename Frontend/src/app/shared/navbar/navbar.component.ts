@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-navbar',
@@ -31,10 +32,7 @@ export class NavbarComponent implements OnInit {
   public successMsg!: string;
   public respLogin!: any;
   public confirmPasswordControl!: any;
-  public usertemp : object ={
-    email: "jvarelao@chominInc.com",
-    password: 'chomin inc'
-  };
+  private token : string='';
   public recoveryQuestion : string ='';
 
   searchForm = new FormGroup({
@@ -101,11 +99,12 @@ export class NavbarComponent implements OnInit {
   
   login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
-      
-      if(res == true){
+      this.token = res.toString();
+      if(res){
         this.hayError = false;
         this.successMsg = 'Sesión Iniciada';
         this.modalService.dismissAll();
+        localStorage.setItem('ACCESS_TOKEN',this.token);
         this.modalService.open(content, { size: 'sm' });
       }else{
         this.hayError = true;
@@ -170,6 +169,11 @@ export class NavbarComponent implements OnInit {
     });
 
     this.searchValue.emit(this.searchInput!.value);
+  }
+
+  logout():void{
+    this.token = '';
+    localStorage.removeItem('ACCESS_TOKEN');
   }
 
   // Getter Search

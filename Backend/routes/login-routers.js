@@ -24,7 +24,7 @@ router.get('/', (req, res)=>{
 })
 
 var logeado = false;
-
+var createdToken = '';
 router.post('/',(req,res, next)=>{
     login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
@@ -33,19 +33,15 @@ router.post('/',(req,res, next)=>{
                 
                 if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
                     match){
-                        var createdToken = token.createToken(req.body.formEmailLogin,req.body.formPasswordLogin)
+                        createdToken = token.createToken(req.body.formEmailLogin,req.body.formPasswordLogin)
                         logeado = true;
-                        res.send({
-                            logeado,
-                            token : createdToken
-                        });
+                        res.json(createdToken);
                     
-                    // res.status(201).send( {
-                    //     mensaje:"Bienvenido ",
-                    //     logeado:true
-                    // });
-                    next(); //next llama a la siguiente funcion dentro de la peticion, ahora, esta funcion es un middleware de la peticion
-                    
+                        // res.status(201).send( {
+                        //     mensaje:"Bienvenido ",
+                        //     logeado:true
+                        // });
+                
                 }else{
                     logeado = false;
                     res.send(logeado);
@@ -64,26 +60,22 @@ router.post('/',(req,res, next)=>{
         }
     });
     
-},(req, res)=>{
-    console.log('funca el middleware');
-    login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
-        
-        console.log(resultado);
-    });
+});
+
+router.get('/getloggeduser',(req,res)=>{
+    console.log(req.token);
 });
 
 
 
- 
- 
- router.get('/:',(req,res)=>{
-   
-        res.status(500);
-     
+router.get('/:',(req,res)=>{
+
+    res.status(500);
     
- });
- 
- 
- module.exports={
-     router : router
- }
+    
+});
+
+
+module.exports={
+    router : router
+}

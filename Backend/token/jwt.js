@@ -18,13 +18,18 @@ const createToken = (userEmail, userPassword)=>{
 
 const verifyToken = (res,req, next)=>{
     const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== undefined){
+    if (typeof bearerHeader !== 'undefined'){
         const bearerToken = bearerHeader.split(' ')[1];
         req.token = bearerToken;
+        console.log('verification');
+        next();
+    }else{
+        return false;
     }
 }
 
 
 module.exports={
-    createToken
+    createToken,
+    verifyToken
 }
