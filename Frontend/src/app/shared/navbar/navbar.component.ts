@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
   public correoRegistrado!: boolean;
   public respuestaIncorrecta!: boolean;
   public ciudades : any = [];
-  private times: number = 0;
   private backendHost: string = 'http://localhost:8888';
   public successMsg!: string;
   public respLogin!: any;
@@ -253,6 +252,7 @@ export class NavbarComponent implements OnInit {
     this.formTerms!.reset();
     
     // Recover
+    this.correoRegistrado = true;
     this.formEmailRecover!.reset();
     this.formRespRecover!.reset();
   }
