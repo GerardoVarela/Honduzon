@@ -26,6 +26,10 @@ router.get('/', (req, res)=>{
 
 var logeado = false;
 var createdToken = '';
+var loggedUser = {}
+var tempName = []
+var firstName = '';
+var lastName = '';
 router.post('/',(req,res, next)=>{
     login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
@@ -72,7 +76,15 @@ router.get('/getloggeduser',verifyToken,(req,res)=>{
             });
         }else{
             login.getUsuarioLogeado(authedUser.email).then(resultado =>{
-                res.json(resultado);
+                firstName = formatNames(resultado[0].NOMBRE);
+                lastName = formatNames(resultado[0].APELLIDO);
+
+                loggedUser = {
+                    nombreCompleto : firstName + ' ' + lastName,
+                    idUsuario : resultado[0].ID_USUARIO,
+                    imagenPerfil: resultado[0].IMAGENS
+                };
+                res.json(loggedUser);
             })
         }
         
@@ -93,7 +105,11 @@ function verifyToken(req, res, next){
     }
 }
 
+function formatNames (name){
+    tempName = name.split(' ');
+    return tempName[0];
 
+}
 router.get('/:',(req,res)=>{
 
     res.status(500);
