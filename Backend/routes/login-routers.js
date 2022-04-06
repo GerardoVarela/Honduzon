@@ -66,13 +66,13 @@ router.post('/',(req,res, next)=>{
 router.get('/getloggeduser',verifyToken,(req,res)=>{
     jwt.verify(req.token, jwtKey,(error, authedUser)=>{
         if (error){
-            res.send({
+            res.json({
                 mensaje:'Token no valido',
                 tokenAutenticado: false
             });
         }else{
             login.getUsuarioLogeado(authedUser.email).then(resultado =>{
-                res.send(resultado);
+                res.json(resultado);
             })
         }
         
@@ -86,7 +86,7 @@ function verifyToken(req, res, next){
         req.token = bearerToken;
         next();
     }else{
-        res.status(500).json({
+        res.json({
             tokenStatus:false,
             mensaje:'No existe Token'
         }) ;
