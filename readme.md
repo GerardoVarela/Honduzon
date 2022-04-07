@@ -32,6 +32,8 @@
 - Comando Instalación: `npm install --save @angular-slider/ngx-slider`
 4. [Carrusel](https://www.npmjs.com/package/ngx-owl-carousel-)
 - Comando Instalación: `npm install ngx-owl-carousel-o`
+5. [Cookie Service](https://www.npmjs.com/package/ngx-cookie-service)
+- Comando Instalación: `npm install ngx-cookie-service --save`
 
 ## Modulos Utilizados (Back-end)
 1. [bcrypt](https://www.npmjs.com/package/bcrypt): Version 5.0.1 (Public)
