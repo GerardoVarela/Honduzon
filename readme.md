@@ -56,7 +56,8 @@
 - Comando Instalación: `npm install nodemailer`
 9. [randexp](https://www.npmjs.com/package/randexp): Version 0.5.3 (Public)
 - Comando Instalación: `npm install randexp`
-
+10. [socket.io](https://www.npmjs.com/package/socket.io): Version 4.4.1 (Public)
+- Comando Instalación: `npm install socket.io`
 
 
 ###### Honduzon Copyright 2022
