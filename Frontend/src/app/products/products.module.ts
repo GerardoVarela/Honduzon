@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +17,7 @@ import { CardSalesPersonComponent } from './components/card-sales-person/card-sa
 import { SharedModule } from '../shared/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
     RestorePageComponent,
     ProductsListPageComponent,
     ProductDetailsPageComponent,
+    ChatPageComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,8 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
     MatTabsModule,
     NgxSliderModule,
     SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     CarruselComponent,
