@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
-import { ThisReceiver } from '@angular/compiler';
 import { CookieService } from 'ngx-cookie-service';
 import { take } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
@@ -98,7 +97,7 @@ export class NavbarComponent implements OnInit {
   
   register(content: any){
     this.httpClient.post(`${this.backendHost}/usuarios/guardar`, this.registerForm.value).subscribe(res=>{
-      console.log(res)
+      // console.log(res)
     });
     this.successMsg = 'Registrado';
     this.modalService.dismissAll();
@@ -131,12 +130,12 @@ export class NavbarComponent implements OnInit {
 
     this.loggedUser = await lastValueFrom(resp);
   }
-  
+
   logout(content: any):void{
     this.token = '';
     this.cookieService.delete('ACCESS_TOKEN');
     // localStorage.removeItem('ACCESS_TOKEN');
-    this.successMsg = 'Sesión cerrada con éxito';
+    this.successMsg = 'Sesión cerrada';
     this.modalService.open(content, { size: 'sm' });
   }
 

@@ -21,6 +21,7 @@ import { ProductsListPageComponent } from './pages/products-list-page/products-l
 import { CardSalesPersonComponent } from './components/card-sales-person/card-sales-person.component';
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChatPageComponent } from './pages/chat-page/chat-page.component';
     NgxSliderModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
+    CookieService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
