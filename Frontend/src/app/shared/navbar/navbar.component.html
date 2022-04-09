@@ -1,3 +1,4 @@
+
 <nav id="navbar" class="navbar navbar-light navbar-expand-lg navigation-clean">
   <div class="container">
     <a class="navbar-brand" href="#"
@@ -33,39 +34,74 @@
           </form>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item" style="padding-top: 8px">
-          <i id="icono-mensaje" class="far fa-paper-plane"></i>
-        </li>
-        <li class="nav-item">
-          <a id="mensaje" class="nav-link" href="#">Mensaje</a>
-        </li>
-        <li class="nav-item">
-          <button
-            id="btn-registro"
-            class="btn btn-primary"
-            type="button"
-            (click)="open(contentReg)"
-          >
-            ¡Regístrate!
-          </button>
-        </li>
-        <li class="nav-item" style="margin-left: 5px">
-          <button
-            id="btn-subirProducto"
-            class="btn btn-primary"
-            type="button"
-            (click)="open(contentLog)"
-          >
-            Inicia Sesión
-          </button>
-        </li>
-        <li class="nav-item" style="margin-left: 5px">
-          <button id="btn-subirProducto" class="btn btn-primary" type="button">
-            <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
-            producto
-          </button>
-        </li>
+      <ul class="navbar-nav ms-auto">         
+        <ng-container *ngIf="!cookieToken; else noBtnLogReg">
+          <li class="nav-item" style="padding-top: 8px">
+            <a role="button" (click)="open(contentLog)">
+              <i id="icono-mensaje" class="far fa-paper-plane"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="mensaje" class="nav-link" role="button" (click)="open(contentLog)">Mensaje</a>
+          </li>
+          <li class="nav-item">
+            <button
+              id="btn-registro"
+              class="btn btn-primary"
+              type="button"
+              (click)="open(contentReg)"
+            >
+              ¡Regístrate!
+            </button>
+          </li>
+          <li class="nav-item" style="margin-left: 5px">
+            <button
+              id="btn-subirProducto"
+              class="btn btn-primary"
+              type="button"
+              (click)="open(contentLog)"
+            >
+              Inicia Sesión
+            </button>
+          </li>
+          <li class="nav-item" style="margin-left: 5px">
+            <button id="btn-subirProducto" class="btn btn-primary" type="button" (click)="open(contentLog)">
+              <i class="fas fa-plus-circle" style="margin-right: 5px"></i>
+              Subir producto
+            </button>
+          </li>
+        </ng-container>
+        <ng-template #noBtnLogReg>
+          <li class="nav-item" style="padding-top: 8px">
+            <a routerLink="/chat">
+              <i id="icono-mensaje" class="far fa-paper-plane"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/chat/user/{{loggedUser.idUsuario}}" id="mensaje" class="nav-link" >Mensaje</a>
+          </li>
+          <li class="nav-item">
+            <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i>
+          </li>
+          <div ngbDropdown style="padding-top:9px; margin-right:5px">
+            <a
+                id="dropdownUser" 
+                ngbDropdownToggle
+                href="#" 
+                style="font-size: 18px; color:#00BCE4; font-weight: bold; text-decoration: none;">
+              {{loggedUser.nombreCompleto}}
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownUser">
+              <a ngbDropdownItem routerLink="/" (click)="logout(contentSuccess)">Cerrar Sesión</a>
+            </div>
+          </div>
+          <li class="nav-item" style="margin-left: 5px">
+            <button id="btn-subirProducto" class="btn btn-primary" type="button">
+              <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
+              producto
+            </button>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

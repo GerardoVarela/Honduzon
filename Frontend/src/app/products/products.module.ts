@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { SharedModule } from '../shared/shared.module';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CardCarruselComponent } from './components/card-carrusel/card-carrusel.component';
@@ -19,7 +20,7 @@ import { CardProductsComponent } from './components/card-products/card-products.
 import { ProductsListPageComponent } from './pages/products-list-page/products-list-page.component';
 import { CardSalesPersonComponent } from './components/card-sales-person/card-sales-person.component';
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
-import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
     RestorePageComponent,
     ProductsListPageComponent,
     ProductDetailsPageComponent,
+    ChatPageComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,8 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
     NgxSliderModule,
     NgxSpinnerModule,
     SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     CarruselComponent,
@@ -53,6 +57,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
     RestorePageComponent,
     ProductsListPageComponent,
     ProductDetailsPageComponent,
+    ChatPageComponent,
     NgxSliderModule,
   ],
   providers: [

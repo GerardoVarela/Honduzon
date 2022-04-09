@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 import { ThisReceiver } from '@angular/compiler';
 import { CookieService } from 'ngx-cookie-service';
+import { take } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class NavbarComponent implements OnInit {
 
-  @Output() searchValue = new EventEmitter<string>();;
+  @Output() searchValue = new EventEmitter<string>();
 
   public productos: any = [];
   public deptos: any = [];
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit {
   public confirmPasswordControl!: any;
   private token: string = '';
   public recoveryQuestion : string ='';
+  public loggedUser!: any;
 
   searchForm = new FormGroup({
     searchInput: new FormControl('')
@@ -80,6 +83,9 @@ export class NavbarComponent implements OnInit {
       this.ciudades = res;
     });
     
+    if(this.cookieService.get('ACCESS_TOKEN')){
+      this.getLoggedUser();
+    }
   }
 
   open(content: any, eraseMod?: boolean){
@@ -114,6 +120,24 @@ export class NavbarComponent implements OnInit {
         this.hayError = true;
       }
     });
+  }
+
+  async getLoggedUser(){
+    let resp = this.httpClient.get(`${this.backendHost}/login/getloggeduser`,{
+      headers:new HttpHeaders({
+        authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
+      })
+    }).pipe(take(1));
+
+    this.loggedUser = await lastValueFrom(resp);
+  }
+  
+  logout(content: any):void{
+    this.token = '';
+    this.cookieService.delete('ACCESS_TOKEN');
+    // localStorage.removeItem('ACCESS_TOKEN');
+    this.successMsg = 'Sesión cerrada con éxito';
+    this.modalService.open(content, { size: 'sm' });
   }
 
   recoverByEmail(content: any){
@@ -175,22 +199,6 @@ export class NavbarComponent implements OnInit {
     this.searchValue.emit(this.searchInput!.value);
   }
 
-  logout():void{
-    this.token = '';
-    localStorage.removeItem('ACCESS_TOKEN');
-  }
-
-  getLoggedUser(){
-    this.httpClient.get(`${this.backendHost}/login/getloggeduser`,{
-      headers:new HttpHeaders({
-        authorization: 'Bearer '+localStorage.getItem('ACCESS_TOKEN')||''
-      })
-    }).subscribe(res=>{
-      console.log(res);
-    })
-  }
-
-
   // Getter Search
   get searchInput() { return this.searchForm.get('searchInput'); }
 
@@ -217,7 +225,7 @@ export class NavbarComponent implements OnInit {
   get formRespRecover() { return this.recoverForm.get('formRespRecover'); }
   
   // TOKEN
-  get localToken(){ return this.cookieService.get('ACCESS_TOKEN'); }
+  get cookieToken(){ return this.cookieService.get('ACCESS_TOKEN'); }
 
   passwordMatch():ValidatorFn {
     return (formGroup: AbstractControl):{ [key: string]: any } | null => {

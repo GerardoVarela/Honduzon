@@ -14,20 +14,22 @@
                 <div class="col" id="col-user-details">
                   <div>
                     <strong style="color: #47525e; font-size: 20px">
-                      {{productDetail[0].NOMBRE}} {{productDetail[0].APELLIDO}}
+                      {{productDetail.NOMBRE}} {{productDetail.APELLIDO}}
                     </strong>
                   </div>
                   <div>
                     <small style="font-size: 14px; color: #47525e">
-                      Cant. 
+                      Artículos en Venta: {{productDetail.CantidadProdTotal}}
                     </small>
                   </div>
                 </div>
                 <div class="col" id="col-btn-chat">
                   <div style="transform: translateY(0px)">
-                    <button class="btn btn-primary" type="button" id="btn-chat">
-                      Chat para comprar
-                    </button>
+                    <a routerLink="/chat/user/{{productDetail.ID_USUARIO}}">
+                      <button class="btn btn-primary" type="button" id="btn-chat">
+                        Chat para comprar
+                      </button>
+                    </a>
                   </div>
                   <div>
                     <small style="font-size: 14px; color: #47525e">
@@ -41,7 +43,7 @@
               <ngb-carousel>
                 <ng-template ngbSlide *ngFor="let imagenes of imagenes">
                   <div class="picsum-img-wrapper">
-                    <img src="../../../../assets/{{productDetail[0].ID_CATEGORIA}}_{{idParam['id_product']}}.jpg" alt="Random first slide" />
+                    <img src="../../../../assets/{{productDetail.ID_CATEGORIA}}_{{idParam['id_product']}}.jpg" alt="Random first slide" />
                   </div>
                 </ng-template>
               </ngb-carousel>
@@ -60,11 +62,11 @@
                       margin: 0px 0px 7px 0px;
                       font-weight: bold;
                       font-size: 20px;">
-                  {{productDetail[0].NOMBRE_PRODUCTO}}
+                  {{productDetail.NOMBRE_PRODUCTO}}
                   </h4>
                 </div>
                 <div class="col" id="col-ctn-products">
-                  <small style="color: #47525e">Ctn: {{productDetail[0].CANTIDAD_PRODUCTO}}</small>
+                  <small style="color: #47525e">Ctn: {{productDetail.CANTIDAD_PRODUCTO}}</small>
                 </div>
               </div>
               <div class="row" style="height: 45px">
@@ -101,7 +103,7 @@
                     class="text-muted mb-2"
                     style="font-size: 20px; text-align: left"
                   >
-                   {{productDetail[0].NOMBRE_DEPARTAMENTO}}
+                   {{productDetail.NOMBRE_DEPARTAMENTO}}
                   </h6>
                 </div>
                 <div class="col" id="col-zip-code">
@@ -127,13 +129,13 @@
             <div class="card" style="border-radius: 20px;">
               <div class="card-body">
                 <div>
-                  <h4 class="header row-b" style="border-top: none; margin: 0px"><strong>{{productDetail[0].NOMBRE_PRODUCTO}}</strong><br></h4>
+                  <h4 class="header row-b" style="border-top: none; margin: 0px"><strong>{{productDetail.NOMBRE_PRODUCTO}}</strong><br></h4>
                   <div>
                     <div class="row">
                       <div class="col" style="margin-top: 10px;">
                         <div style="display: flex;">
                           <p class="p-alf">Precio:&nbsp;</p>
-                          <p class="p-alf" style="font-weight: 500;">{{productDetail[0].PRECIO | currency: 'Lps. '}}</p>
+                          <p class="p-alf" style="font-weight: 500;">{{productDetail.PRECIO | currency: 'Lps. '}}</p>
                         </div>
                         <!-- <div style="font-weight: 500;display: flex;">
                           <p>Anterior&nbsp;</p>
@@ -147,7 +149,7 @@
                       <div class="col">
                         <div class="vstack" style="height: 100%;">
                           <a href="#" style="margin: 9px 0;">
-                            <button class="btn btn-primary border-button" type="button" style="background-color: blue;">
+                            <button class="btn btn-primary border-button" type="button" style="background-color: #2E72B1;border-color: #2E72B1">
                               Comprar ahora
                             </button>
                           </a>
@@ -184,10 +186,10 @@
                     <div class="container row-b">
                       <div class="row">
                         <div class="col-md-6 col-ta">
-                          <span class="spanv">{{productDetail[0].CANTIDAD_PROD_VENDIDO}} Vendidos</span>
+                          <span class="spanv">{{productDetail.CANTIDAD_PROD_VENDIDO}} Vendidos</span>
                         </div>
                         <div class="col-md-6 col-ta">
-                          <span class="spanv">{{productDetail[0].CANTIDAD_PRODUCTO - productDetail[0].CANTIDAD_PROD_VENDIDO}} Disponibles</span>
+                          <span class="spanv">{{productDetail.CANTIDAD_PRODUCTO - productDetail.CANTIDAD_PROD_VENDIDO}} Disponibles</span>
                         </div>
                       </div>
                     </div>
@@ -211,21 +213,8 @@
                     >
                       <div class="row" id="row-description">
                         <div class="col">
-                          <!-- <p style="margin-bottom: 0px">
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit congue, consequat rhoncus fringilla montes
-                            praesent viverra quis, laoreet nam purus cursus
-                            egestas luctus hendrerit. Lorem ipsum dolor sit amet
-                            consectetur adipiscing elit congue, consequat
-                            rhoncus fringilla montes praesent viverra quis,
-                            laoreet nam purus cursus egestas luctus hendrerit.
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit congue, consequat rhoncus fringilla montes
-                            praesent viverra quis, laoreet nam purus cursus
-                            egestas luctus hendrerit.<br />
-                          </p> -->
                           <p style="margin-bottom: 0px">
-                            {{productDetail[0].DESCRIPCION_PRODUCTO}}<br />
+                            {{productDetail.DESCRIPCION_PRODUCTO}}<br />
                           </p>
                         </div>
                       </div>
@@ -240,5 +229,7 @@
     </div>
   </div>
 </section>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" type="square-jelly-box" size="medium" color="#00BCE4" [fullScreen] = "true"></ngx-spinner>
 
 <app-footer></app-footer>

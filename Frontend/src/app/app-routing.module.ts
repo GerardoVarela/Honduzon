@@ -5,6 +5,7 @@ import { LandingPageComponent } from './products/pages/landing-page/landing-page
 import { RestorePageComponent } from './products/pages/restore-page/restore-page.component';
 import { ProductsListPageComponent } from "./products/pages/products-list-page/products-list-page.component";
 import { ProductDetailsPageComponent } from './products/pages/product-details-page/product-details-page.component';
+import { ChatPageComponent } from './products/pages/chat-page/chat-page.component';
 
 const routes: Routes = [
     {
@@ -21,8 +22,12 @@ const routes: Routes = [
         component: ProductsListPageComponent,
     },
     {
-        path: 'product/detail/:id_product',
+        path: 'product/:id_product/detail',
         component: ProductDetailsPageComponent,
+    },
+    {
+        path: 'chat/user/:id_user',
+        component: ChatPageComponent,
     },
     {
         path: '**',

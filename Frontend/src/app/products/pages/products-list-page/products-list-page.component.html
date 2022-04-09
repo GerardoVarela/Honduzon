@@ -70,28 +70,6 @@
     </div>
 </div>
 
-<!-- <ul class="fullclick">
-    <li>
-        <h2>Dogs</h2>
-        <p>
-        Dogs are excellent, and good people. If want to browse dogs
-        by breed, check <a href="https://codepo8.github.io/dog-browser/">
-        The dog browser</a>. Almost all dogs are good boys and girls. 
-        </p>
-        <a href="#" class="main">More dog news</a>
-        <button title="click to close" aria-label="click to close">x</button>
-    </li>
-    <li>
-        <h2>Wombats</h2>
-        <p>
-        Wombats are cute as buttons and digging machines. They look always
-        chill and jolly, but aren't a good idea to keep in the house.
-        </p>
-        <a href="#" class="main">More wombat info</a>
-        <button title="click to close" aria-label="click to close">x</button>
-    </li>
-</ul> -->
-
 <ng-container *ngIf="productos.length == 0 && petitionMade === true; else elseHayProductos">
     <section style="text-align: center; margin: 5% 0%;">
         <img src="../../../../assets/Sad_Periquin.png"/>
@@ -115,5 +93,7 @@
         </div>
     </section>
 </ng-template>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" type="square-jelly-box" size="medium" color="#00BCE4" [fullScreen] = "true"></ngx-spinner>
 
 <app-footer></app-footer>

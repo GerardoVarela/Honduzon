@@ -228,3 +228,7 @@ select:focus-visible {
   height: 42px;
   width: 175px;
 }
+
+.dropdown-menu{
+  min-width: 10rem;
+}
