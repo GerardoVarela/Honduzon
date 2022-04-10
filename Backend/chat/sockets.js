@@ -1,4 +1,5 @@
 
+const chatModel = require('../model/chat.model');  
 
 const connectionSocket = (io)=>{
     
@@ -9,6 +10,7 @@ const connectionSocket = (io)=>{
 
         socket.on('new_chat',(chatInfo)=>{
             chatInformation = {...chatInfo};
+
         })
 
         socket.on('sendMessage',(data)=>{
