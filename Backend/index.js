@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const http = require('http').createServer(app);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const registroRouters = require('./routes/registro-routers');
@@ -10,6 +11,16 @@ const login = require('./routes/login-routers');
 const categorias = require('./routes/categorias-routers');
 const productos = require ('./routes/productos-routers');
 const keys = require ('./config/keys.config');
+
+const io = require('socket.io')(http,{
+    cors:{
+        origin: true,
+        credentials:true,
+        methods:['GET','POST'],
+    }
+});
+
+
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
  * -request (peticion)
