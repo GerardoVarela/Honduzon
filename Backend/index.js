@@ -24,6 +24,7 @@ const io = require('socket.io')(http,{
     }
 });
 
+require('./chat/sockets').connectionSocket(io);
 
 /**
  * Middlewares: funciones que tienen acceso a los objetos:
