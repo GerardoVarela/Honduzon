@@ -74,15 +74,32 @@ async function insertarMensajesPorUsuario(messageInfo){
             .input('idUser2',mssql.VarChar,idUser2)
             .query('');
             return insertarMensajes.recordset; 
-    } catch (error) {
-        return error;
+            
+    }catch(error){
+        return error
     }
 }
 
+
+
+async function getMensajePorChat(idChat){
+    try {
+
+        let pool = await mssql.connect(bdConfig.config);
+        let getMensaje = await pool.request()
+        .input('idChat',mssql.Int,idChat)
+        .query('select USUARIOS.NOMBRE  as UsuarioEmisor,MENSAJE.MENSAJE,ID_USUARIO1,ID_USUSARIO2,MENSAJE.ID_USUARIO_EMISOR FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=@idChat');
+        return getMensaje.recordset; 
+    } catch (error) {
+        return error;
+    }
+
+}
 
 module.exports={
     nuevoChat,
     getChatPorUsuario,
     existenciaChatEntreUsuarios,
-    insertarMensajesPorUsuario
+    insertarMensajesPorUsuario,
+    getMensajePorChat
 }
