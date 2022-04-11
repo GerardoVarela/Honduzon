@@ -227,11 +227,11 @@
         </div>
         <div
           class="col-md-6"
-          style="width: 65%; padding-right: 8px; padding-left: 14px"
+          style="width: 65%; padding-top: 10px; padding-right: 8px; padding-left: 14px"
         >
-          <div class="row" style="height: 510px; overflow-y: scroll">
+          <div class="col" style="height: 510px; overflow-y: scroll">
             
-            <div class="col" style="padding: 15px" *ngFor="let message of chatService.chats">
+            <div class="row" *ngFor="let message of chatService.chats">
               <ng-container *ngIf="message.messageType == 1; else elseNotCurrentUser">
                 <div style="text-align: -webkit-right">
                   <p
