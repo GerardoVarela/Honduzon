@@ -36,6 +36,8 @@
 - Comando Instalación: `npm install ngx-cookie-service --save`
 6. [Ngx Spinner](https://www.npmjs.com/package/ngx-spinner)
 - Comando Instalación: `npm install ngx-spinner --save`
+6. [Socket.io-Client](https://www.npmjs.com/package/socket.io-client)
+- Comando Instalación: `npm i socket.io-client`
 
 ## Modulos Utilizados (Back-end)
 1. [bcrypt](https://www.npmjs.com/package/bcrypt): Version 5.0.1 (Public)
