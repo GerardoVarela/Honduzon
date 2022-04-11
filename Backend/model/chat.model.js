@@ -1,5 +1,5 @@
 /**
- * @author Jvarela
+ * @author Jvarela Jamador
  * 
  * model para chats y mensajes
  * 
@@ -52,17 +52,28 @@ en caso contrario, si no existe pues retornaria un dataset vacio
 
 */ 
 async function existenciaChatEntreUsuarios(currentUser, idUser2){
+    
     try {
-        try {
-            let pool = await mssql.connect(bdConfig.config);
-            let existenciaChatPorUsuario = await pool.request()
-            .input('currentUser',mssql.Int,currentUser)
+        let pool = await mssql.connect(bdConfig.config);
+        let existenciaChatPorUsuario = await pool.request()
+        .input('currentUser',mssql.Int,currentUser)
+        .input('idUser2',mssql.Int,idUser2)
+        .query('SELECT * FROM CHAT WHERE ID_USUARIO1=currentUser AND ID_USUSARIO2 = @idUser2 OR ID_USUARIO1=@idUser2 AND ID_USUARIO2=currentUser');
+        return existenciaChatPorUsuario.recordset; 
+    } catch (error) {
+        return error;
+    }
+}
+
+async function insertarMensajesPorUsuario(messageInfo){
+    try {
+        let pool = await mssql.connect(bdConfig.config);
+            let insertarMensajes = await pool.request()
+            .input('currentChatId',mssql.Int,messageInfo.currentChat)
             .input('idUser2',mssql.Int,idUser2)
-            .query('SELECT * FROM CHAT WHERE ID_USUARIO1=currentUser AND ID_USUSARIO2 = @idUser2');
-            return existenciaChatPorUsuario.recordset; 
-        } catch (error) {
-            return error;
-        }
+            .input('idUser2',mssql.VarChar,idUser2)
+            .query('');
+            return insertarMensajes.recordset; 
     } catch (error) {
         return error;
     }
@@ -73,4 +84,5 @@ module.exports={
     nuevoChat,
     getChatPorUsuario,
     existenciaChatEntreUsuarios,
+    insertarMensajesPorUsuario
 }

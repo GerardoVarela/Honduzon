@@ -6,9 +6,6 @@ const connectionSocket = (io)=>{
     var chatInformation = {};
     var messageInformation = {};
     io.on('connection',(socket)=>{
-
-        
-
         socket.on('new_chat',(chatInfo)=>{
             chatInformation = {...chatInfo};
             chatModel.existenciaChatEntreUsuarios(chatInformation.idCurrentUser,chatInformation.idUser2).then((res)=>{
@@ -21,9 +18,7 @@ const connectionSocket = (io)=>{
                          * va a extraer los mensajes de ese chat
                          * de la tabla chat
                          */
-
-                        messageInformation['currentChat'] = res[0].ID_CHAT
-
+                        messageInformation['currentChat'] = res[0].ID_CHAT;
                     }
                 }
             })
@@ -31,7 +26,6 @@ const connectionSocket = (io)=>{
 
         socket.on('sendMessage',(data)=>{
             messageInformation={...data};
-            
             socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
         })
 
