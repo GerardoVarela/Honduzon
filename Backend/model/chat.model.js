@@ -53,19 +53,29 @@ en caso contrario, si no existe pues retornaria un dataset vacio
 */ 
 async function existenciaChatEntreUsuarios(currentUser, idUser2){
     try {
-        try {
-            let pool = await mssql.connect(bdConfig.config);
-            let existenciaChatPorUsuario = await pool.request()
-            .input('currentUser',mssql.Int,currentUser)
-            .input('idUser2',mssql.Int,idUser2)
-            .query('SELECT * FROM CHAT WHERE ID_USUARIO1=currentUser AND ID_USUSARIO2 = @idUser2');
-            return existenciaChatPorUsuario.recordset; 
-        } catch (error) {
-            return error;
-        }
+        let pool = await mssql.connect(bdConfig.config);
+        let existenciaChatPorUsuario = await pool.request()
+        .input('currentUser',mssql.Int,currentUser)
+        .input('idUser2',mssql.Int,idUser2)
+        .query('SELECT * FROM CHAT WHERE ID_USUARIO1=currentUser AND ID_USUSARIO2 = @idUser2');
+        return existenciaChatPorUsuario.recordset; 
     } catch (error) {
         return error;
     }
+}
+
+async function getMensajePorChat(idChat){
+    try {
+
+        let pool = await mssql.connect(bdConfig.config);
+        let getMensaje = await pool.request()
+        .input('idChat',mssql.Int,idChat)
+        .query('select USUARIOS.NOMBRE  as UsuarioEmisor,MENSAJE.MENSAJE,ID_USUARIO1,ID_USUSARIO2,MENSAJE.ID_USUARIO_EMISOR FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=@idChat');
+        return getMensaje.recordset; 
+    } catch (error) {
+        return error;
+    }
+
 }
 
 
@@ -73,4 +83,5 @@ module.exports={
     nuevoChat,
     getChatPorUsuario,
     existenciaChatEntreUsuarios,
+    getMensajePorChat
 }
