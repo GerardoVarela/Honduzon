@@ -1,6 +1,7 @@
 # Honduzon 
 ***
-##Sr. Periquin
+##Sr. Periquín
+![alt text](https://github.com/GerardoVarela/honduzon/blob/main/Frontend/src/assets/logo.png)
 
 ***
 #### Proyecto Ingeniería de Software IS-802 I PAC 2022
