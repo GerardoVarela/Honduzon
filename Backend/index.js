@@ -18,7 +18,7 @@ const chatRouter =require('./routes/chat-router');
 
 const io = require('socket.io')(http,{
     cors:{
-        origin: true,
+        origin: ['http://localhost:4200'],
         credentials:true,
         methods:['GET','POST'],
     }
@@ -33,7 +33,7 @@ require('./chat/sockets').connectionSocket(io);
  */
 
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.set('keys', keys.jwtKey);
@@ -53,7 +53,7 @@ app.get('/',(req,res)=>{
 
 
 
-app.listen(puerto,()=>{
+http.listen(puerto,()=>{
     //"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$"
     
     console.log( `Servidor Backend de Honduzon escuchando al puerto:${puerto}. Abra el navegador en: http://localhost:${puerto}/`)
