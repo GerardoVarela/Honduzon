@@ -1,5 +1,5 @@
 /**
- * @author Jvarela
+ * @author Jvarela Jamador
  * 
  * model para chats y mensajes
  * 
@@ -20,9 +20,9 @@ async function nuevoChat (detalleChat){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let nuevoChat = await pool.request()
-        .input('',mssql.Int,detalleChat.currentUser)
-        .input('',mssql.Int,detalleChat.usuario2)
-        .query('');
+        .input('idCurrentUser',mssql.Int,detalleChat.currentUser)
+        .input('idUsuario2',mssql.Int,detalleChat.usuario2)
+        .query('INSERT INTO CHAT(ID_USUARIO1, ID_USUARIO2) VALUES(@idCurrentUser,@idUsuario2)');
         return nuevoChat.recordset; 
     } catch (error) {
         return error;
@@ -37,8 +37,8 @@ async function getChatPorUsuario(idCurrentUser){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let chatsDeUsuario = await pool.request()
-        .input('',mssql.Int,detalleChat.idCurrentUser)
-        .query('');
+        .input('idCurrentUser',mssql.Int,idCurrentUser)
+        .query('SELECT * FROM CHAT WHERE ID_USUARIO_EMISOR = @idCurrentUser');
         return chatsDeUsuario.recordset; 
     } catch (error) {
         return error;
@@ -51,18 +51,55 @@ si ell chat ya existe pues retornará los datos del chat
 en caso contrario, si no existe pues retornaria un dataset vacio
 
 */ 
-async function existenciaChat(){
+async function existenciaChatEntreUsuarios(currentUser, idUser2){
+    
     try {
-        
+        let pool = await mssql.connect(bdConfig.config);
+        let existenciaChatPorUsuario = await pool.request()
+        .input('currentUser',mssql.Int,currentUser)
+        .input('idUser2',mssql.Int,idUser2)
+        .query('SELECT * FROM CHAT WHERE ID_USUARIO1=currentUser AND ID_USUSARIO2 = @idUser2 OR ID_USUARIO1=@idUser2 AND ID_USUARIO2=currentUser');
+        return existenciaChatPorUsuario.recordset; 
     } catch (error) {
         return error;
     }
 }
 
+async function insertarMensajesPorUsuario(messageInfo){
+    try {
+        let pool = await mssql.connect(bdConfig.config);
+            let insertarMensajes = await pool.request()
+            .input('currentChatId',mssql.Int,messageInfo.currentChat)
+            .input('idUser2',mssql.Int,idUser2)
+            .input('idUser2',mssql.VarChar,idUser2)
+            .query('');
+            return insertarMensajes.recordset; 
+            
+    }catch(error){
+        return error
+    }
+}
 
+
+
+async function getMensajePorChat(idChat){
+    try {
+
+        let pool = await mssql.connect(bdConfig.config);
+        let getMensaje = await pool.request()
+        .input('idChat',mssql.Int,idChat)
+        .query('SELECT Usuarios.NOMBRE AS USUARIO_1,(SELECT Usuarios.NOMBRE FROM Usuarios where ID_USUARIO=CHAT.ID_USUSARIO2) AS USUARIO_2, CHAT.ID_USUARIO1 AS IDUSUARIO_1, CHAT.ID_USUSARIO2, MENSAJE.MENSAJE,MENSAJE.ID_USUARIO_EMISOR   FROM CHAT JOIN Usuarios on Usuarios.ID_USUARIO = CHAT.ID_USUARIO1 JOIN MENSAJE ON MENSAJE.ID_CHAT = CHAT.ID_CHAT WHERE CHAT.ID_CHAT=@idChat');
+        return getMensaje.recordset; 
+    } catch (error) {
+        return error;
+    }
+
+}
 
 module.exports={
     nuevoChat,
     getChatPorUsuario,
-    existenciaChat
+    existenciaChatEntreUsuarios,
+    insertarMensajesPorUsuario,
+    getMensajePorChat
 }
