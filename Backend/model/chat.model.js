@@ -88,7 +88,7 @@ async function getMensajePorChat(idChat){
         let pool = await mssql.connect(bdConfig.config);
         let getMensaje = await pool.request()
         .input('idChat',mssql.Int,idChat)
-        .query('select USUARIOS.NOMBRE  as UsuarioEmisor,MENSAJE.MENSAJE,ID_USUARIO1,ID_USUSARIO2,MENSAJE.ID_USUARIO_EMISOR FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=@idChat');
+        .query('SELECT Usuarios.NOMBRE AS USUARIO_1,(SELECT Usuarios.NOMBRE FROM Usuarios where ID_USUARIO=CHAT.ID_USUSARIO2) AS USUARIO_2, CHAT.ID_USUARIO1 AS IDUSUARIO_1, CHAT.ID_USUSARIO2, MENSAJE.MENSAJE,MENSAJE.ID_USUARIO_EMISOR   FROM CHAT JOIN Usuarios on Usuarios.ID_USUARIO = CHAT.ID_USUARIO1 JOIN MENSAJE ON MENSAJE.ID_CHAT = CHAT.ID_CHAT WHERE CHAT.ID_CHAT=@idChat');
         return getMensaje.recordset; 
     } catch (error) {
         return error;

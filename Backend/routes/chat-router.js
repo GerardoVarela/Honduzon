@@ -36,15 +36,33 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
     var jsonFilt = {}
     for(i=0;i<filtroArray.length;i++){
         var tempfilt = filtroArray[i].split('=')
-       
         jsonFilt[tempfilt[0]] = tempfilt[1];
     }
-     chatModel.getMensajePorChat(jsonFilt.idChat).then(resultado=>{
-         if(jsonFilt.CurrentUser==idUser1){
-                let usuario = jsonFilt.idUser2;
-         }else if(jsonFilt.CurrentUser==idUser2){
-                let usuario= jsonFilt.idUser1;
-         }
-    res.json(resultado)
+
+/*{
+    NOMBRE : NOMBRE
+    MENSAJES:{
+        MENSAJE:'',
+        USUARIOEMISOR:
+    }
+}*/
+
+    chatModel.getMensajePorChat(jsonFilt.idChat).then(resultado=>{
+        
+        if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_1){
+            console.log(resultado[0].USUARIO_2)
+        }else 
+            if(jsonFilt.CurrentUser==resultado[0].ID_USUSARIO2){
+                console.log(resultado[0].USUARIO_1);
+            
+        }
+        res.json(resultado)
+    }
+    );
 });
-});
+
+
+
+module.exports={
+    router
+}
