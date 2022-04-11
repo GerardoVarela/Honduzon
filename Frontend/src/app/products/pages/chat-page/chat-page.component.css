@@ -1,3 +1,31 @@
 #iconBtn:active {
   transform: scale(0.9);
 }
+
+.personalMessage{
+  border: 1px;
+  border-radius: 20px;
+  border-style: dashed;
+  width: 45%;
+  margin-top: 10px;
+  padding: 5px 20px 5px 20px;
+  border-color: #8492a6;
+  text-align: justify;
+  background: #00bce4;
+  color: white;
+  align-self: flex-end;
+}
+
+.receivedMessage{
+  border: 1px;
+  border-radius: 20px;
+  border-style: dashed;
+  width: 45%;
+  margin-top: 10px;
+  padding: 5px 20px 5px 20px;
+  border-color: #8492a6;
+  text-align: justify;
+  background: #77d353;
+  color: white;
+  align-self: flex-start;
+}

@@ -232,3 +232,14 @@ select:focus-visible {
 .dropdown-menu{
   min-width: 10rem;
 }
+
+/* Modal Terms & Conds */
+.title-terms-conds {
+  font-size: x-large;
+  text-align: center;
+}
+
+.btn-accept-terms-conds {
+  background-color: #00BCE4;
+  border-color: #00bce4;
+}

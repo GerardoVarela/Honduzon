@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
   });
 
   constructor(
-    private modalService: NgbModal, 
+    private modalService: NgbModal,
     private httpClient: HttpClient, 
     private router: Router, 
     private service: SharedService,

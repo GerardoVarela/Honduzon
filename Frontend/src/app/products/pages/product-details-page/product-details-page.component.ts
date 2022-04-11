@@ -43,6 +43,7 @@ export class ProductDetailsPageComponent implements OnInit {
     let resp = this.httpClient.get(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`).pipe(take(1))
     
     this.productDetail = await lastValueFrom(resp);
+    console.log(this.productDetail);
   }
 
   async getLoggedUser(){

@@ -25,7 +25,7 @@
                 </div>
                 <div class="col" id="col-btn-chat">
                   <div style="transform: translateY(0px)">
-                    <a routerLink="/chat/user/{{loggedUser.idUsuario}}">
+                    <a routerLink="/chat/user/{{loggedUser.idUsuario}}" [queryParams]="{with: productDetail.ID_USUARIO}">
                       <button class="btn btn-primary" type="button" id="btn-chat">
                         Chat para comprar
                       </button>

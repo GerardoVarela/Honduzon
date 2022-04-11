@@ -6,7 +6,7 @@ import { io } from 'socket.io-client';
 })
 export class SocketService {
 
-  io = io('http://localhost:8000', {
+  io = io('http://localhost:8888', {
     withCredentials: true,
     autoConnect: true
   });

@@ -86,6 +86,28 @@
           "
         >
           <section>
+            <!-- <div *ngFor="let chat of chats">
+              <div class="row" style="max-height: 150px; height: 150px">
+                <div
+                  class="col"
+                  style="max-height: none; padding-top: 13px; text-align: center"
+                >
+                  <img
+                    src="../../../../assets/12.webp.jpg"
+                    style="width: 170px; border-radius: 20px; height: 125px"
+                  />
+                </div>
+                <div class="col" style="text-align: left; padding-top: 20px">
+                  <div style="color: #47525e">
+                    <small style="font-size: 20px">@User Name</small>
+                  </div>
+                  <div style="margin-top: 5px">
+                    <strong style="font-size: 26px">Xbox Controller</strong>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
             <div class="row" style="max-height: 150px; height: 150px">
               <div
                 class="col"
@@ -105,6 +127,7 @@
                 </div>
               </div>
             </div>
+
             <div class="row" style="max-height: 150px; height: 150px">
               <div
                 class="col"
@@ -207,88 +230,66 @@
           style="width: 65%; padding-right: 8px; padding-left: 14px"
         >
           <div class="row" style="height: 510px; overflow-y: scroll">
-            <div class="col" style="padding: 15px">
+            
+            <div class="col" style="padding: 15px" *ngFor="let message of chatService.chats">
+              <ng-container *ngIf="message.messageType == 1; else elseNotCurrentUser">
+                <div style="text-align: -webkit-right">
+                  <p
+                    class="personalMessage"
+                  >
+                    {{message.message}}
+                  </p>
+                </div>
+              </ng-container>
+              <ng-template #elseNotCurrentUser>
+                <div>
+                  <p
+                    class="receivedMessage"
+                  >
+                    {{message.message}}
+                  </p>
+                </div>
+              </ng-template>
+            </div>
+            
+            <!-- <div class="col" style="padding: 15px">
               <div style="text-align: -webkit-right">
                 <p
-                  style="
-                    border: 1px;
-                    border-radius: 20px;
-                    border-style: dashed;
-                    width: 45%;
-                    margin-top: 10px;
-                    padding: 5px 20px 5px 20px;
-                    border-color: #8492a6;
-                    text-align: justify;
-                    background: #00bce4;
-                    color: white;
-                  "
+                  class="personalMessage"
                 >
                   Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
                   justo odio, dapibus ac facilisis in, egestas eget quam. Donec
                   id elit non mi porta gravida at eget metus.
                 </p>
               </div>
-              <div style="margin-bottom: 20px">
+              <div>
                 <p
-                  style="
-                    border: 1px;
-                    border-radius: 20px;
-                    border-style: dashed;
-                    width: 45%;
-                    margin-top: 10px;
-                    padding: 5px 20px 5px 20px;
-                    border-color: #8492a6;
-                    text-align: justify;
-                    background: #77d353;
-                    color: white;
-                  "
+                  class="receivedMessage"
                 >
                   Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
                   justo odio, dapibus ac facilisis in, egestas eget quam. Donec
                   id elit non mi porta gravida at eget metus.
                 </p>
               </div>
-              <div style="margin-bottom: 20px">
+              <div>
                 <p
-                  style="
-                    border: 1px;
-                    border-radius: 20px;
-                    border-style: dashed;
-                    width: 45%;
-                    margin-top: 10px;
-                    padding: 5px 20px 5px 20px;
-                    border-color: #8492a6;
-                    text-align: justify;
-                    background: #77d353;
-                    color: white;
-                  "
+                  class="receivedMessage"
                 >
                   Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
                   justo odio, dapibus ac facilisis in, egestas eget quam. Donec
                   id elit non mi porta gravida at eget metus.
                 </p>
               </div>
-              <div style="text-align: -webkit-right; margin-bottom: 20px">
+              <div style="text-align: -webkit-right">
                 <p
-                  style="
-                    border: 1px;
-                    border-radius: 20px;
-                    border-style: dashed;
-                    width: 45%;
-                    margin-top: 10px;
-                    padding: 5px 20px 5px 20px;
-                    border-color: #8492a6;
-                    text-align: justify;
-                    background: #00bce4;
-                    color: white;
-                  "
+                  class="personalMessage"
                 >
                   Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
                   justo odio, dapibus ac facilisis in, egestas eget quam. Donec
                   id elit non mi porta gravida at eget metus.
                 </p>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="row" style="height: 90px">
             <div
