@@ -14,7 +14,7 @@ const connectionSocket = (io)=>{
         })
 
         socket.on('sendMessage',(data)=>{
-            socket.to(idUsuario2).emit('receiveMessage',data);
+            socket.broadcast.emit('receiveMessage',data);
         })
 
     });
