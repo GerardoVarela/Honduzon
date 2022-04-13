@@ -9,9 +9,12 @@
  */
 
 
- var express = require('express');
- var router = express.Router();
- var chatModel = require ('../model/chat.model');
+const express = require('express');
+var router = express.Router();
+const chatModel = require ('../model/chat.model');
+const jwt = require('jsonwebtoken');
+const key = require('../config/keys.config')
+
 
 router.get('/:CurrentUser', (req, res)=>{
     
@@ -62,6 +65,46 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
 });
 
 
+router.post('/newchat',(req, res)=>{
+    var existenciaChat = false;
+    var chatInfo={
+        currentUser: req.body.currentUser,
+        idUser2: req.body.idUser2
+    };
+    console.log(chatInfo);
+    chatModel.existenciaChatEntreUsuarios(chatInfo.currentUser, chatInfo.idUser2).then(resultado=>{
+        
+        if(resultado.length === 0){
+            console.log('chat sin crear')
+            chatModel.nuevoChat(chatInfo);
+            existenciaChat=true;
+            res.json(existenciaChat);
+            return;
+
+        }else{
+            console.log('chat Creado')
+            existenciaChat=true;
+            res.json(existenciaChat);
+            return;
+        }
+    });
+})
+
+//Token para despues, primero, toca verificar lo del chat 
+
+function verify (req,res,next){
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== undefined){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token = bearerToken;
+        next();
+    }else{
+        res.json({
+            tokenStatus:false,
+            mensaje:'No existe Token'
+        }) ;
+    }
+}
 
 module.exports={
     router
