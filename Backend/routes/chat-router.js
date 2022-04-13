@@ -18,7 +18,7 @@ const key = require('../config/keys.config')
 
 router.get('/:CurrentUser', (req, res)=>{
     
-    chatModel.getChatPorUsuario(req.params.CurrentUser).then(resultado =>{
+    chatModel.getChatsPorUsuario(req.params.CurrentUser).then(resultado =>{
         res.json(resultado);
     });
 });
@@ -65,12 +65,13 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
 });
 
 
-router.post('/newchat',(req, res)=>{
+router.post('/newchat/',(req, res)=>{
     var existenciaChat = false;
     var chatInfo={
         currentUser: req.body.currentUser,
-        idUser2: req.body.idUser2
+        idUser2: req.body.idUsuario2
     };
+    
     console.log(chatInfo);
     chatModel.existenciaChatEntreUsuarios(chatInfo.currentUser, chatInfo.idUser2).then(resultado=>{
         

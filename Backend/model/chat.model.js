@@ -33,7 +33,7 @@ async function nuevoChat (detalleChat){
  * Esta funcion va a recibir la lista de chat de un usuario en especifico
  * 
  */
-async function getChatPorUsuario(idCurrentUser){
+async function getChatsPorUsuario(idCurrentUser){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let chatsDeUsuario = await pool.request()
@@ -98,7 +98,7 @@ async function getMensajePorChat(idChat){
 
 module.exports={
     nuevoChat,
-    getChatPorUsuario,
+    getChatsPorUsuario,
     existenciaChatEntreUsuarios,
     insertarMensajesPorUsuario,
     getMensajePorChat

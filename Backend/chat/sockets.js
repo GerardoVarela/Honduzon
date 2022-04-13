@@ -49,6 +49,10 @@ const connectionSocket = (io)=>{
        // })
 
         socket.on('sendMessage',(data)=>{
+            var socketusers={
+
+            }
+            socketusers[data.currentUser] = socket.id;
             var existencia = {
                 currentUser : data.currentUser,
                 idUser2 : data.idUsuario2
@@ -63,12 +67,13 @@ const connectionSocket = (io)=>{
                 };
                 //messageInformation['currentChat'] = res[0].ID_CHAT;
                 //console.log(messageInformation);
-                chatModel.insertarMensajesPorUsuario(messageInformation);
+                //chatModel.insertarMensajesPorUsuario(messageInformation);
             });
-            
-            socket.broadcast.emit('receiveMessage',data);
-            
-            // socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
+            console.log(existencia.currentUser)
+            console.log(existencia.idUser2)
+            //socket.broadcast.emit('receiveMessage',data);
+           
+            socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
         })
 
     });

@@ -90,7 +90,7 @@ async function getProductoFiltrado(precio1=0.00,precio2=0.00, categoria=0,depart
                 .input('IdCategoria',mssql.Int,categoria)
                 .input('PreciomenorInput',mssql.Float,precio1)
                 .input('PrecioMayorInput',mssql.Float,precio2)
-                .query('select  Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO, Productos.ID_PRODUCTO, Productos.ID_CATEGORIA from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
+                .query('select Productos.ID_USUARIO Productos.NOMBRE_PRODUCTO,Productos.DESCRIPCION_PRODUCTO,Productos.CANTIDAD_PRODUCTO,IMAGENES.IMAGEN,Productos.PRECIO, Productos.ID_PRODUCTO, Productos.ID_CATEGORIA from Productos join Usuarios on Productos.ID_USUARIO=Usuarios.ID_USUARIO join IMAGENES ON PRODUCTOS.ID_IMAGEN=IMAGENES.ID_IMAGEN  where'+
                 '(ID_CIUDAD=@ciudadInput and ID_DEPARTAMENTO=@departamentoInput)'+
                 'OR (ID_CATEGORIA=@IdCategoria and (PRECIO<=@PrecioMayorInput and Precio>=@PreciomenorInput))'+
                 'or (ID_CATEGORIA=@IdCategoria and ID_DEPARTAMENTO=@departamentoInput)'+
