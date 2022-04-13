@@ -12,7 +12,7 @@ interface MessageInfo{
   providedIn: 'root'
 })
 export class ChatService {
-
+  public chatInfo: object = {};
   public chats: MessageInfo[] = [];
 
   constructor(private socket: SocketService) {
@@ -20,8 +20,15 @@ export class ChatService {
   }
 
   sendMessage(messageInfo: MessageInfo){
+    this.chatInfo ={
+      currentUser:1,
+      idUser2:2
+    };
     this.chats.push(messageInfo);
-    this.socket.io.emit('sendMessage', messageInfo);
+    this.socket.io.emit('new_chat',this.chatInfo);
+    this.socket.io.emit('sendMessage', messageInfo)
+    
+    
   }
 
   onReceiveMessage(){
@@ -30,4 +37,5 @@ export class ChatService {
       this.chats.push(messageInfo);
     });
   }
+  
 }

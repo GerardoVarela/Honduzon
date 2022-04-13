@@ -38,8 +38,8 @@ export class ChatPageComponent implements OnInit {
     let messageInfo = {
       message: this.nuevoMensaje,
       messageType: 1,
-      currentUser: this.idParam['id_user'],
-      idUsuario2: usuario2,
+      currentUser: 1,
+      idUsuario2: 2,
     };
 
     this.chatService.sendMessage(messageInfo);
