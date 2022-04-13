@@ -227,11 +227,10 @@
         </div>
         <div
           class="col-md-6"
-          style="width: 65%; padding-top: 10px; padding-right: 8px; padding-left: 14px"
+          style="height:600px; max-height:600px; width: 65%; padding-top: 10px;"
         >
-          <div class="col" style="height: 510px; overflow-y: scroll">
-            
-            <div class="row" *ngFor="let message of chatService.chats">
+          <div class="col" id="scrollChat" style="height: 510px; max-height: 510px; padding-bottom: 5px; overflow-y: scroll">
+            <div class="row" style="width: 100%" *ngFor="let message of chatService.chats">
               <ng-container *ngIf="message.messageType == 1; else elseNotCurrentUser">
                 <div style="text-align: -webkit-right">
                   <p
@@ -251,47 +250,8 @@
                 </div>
               </ng-template>
             </div>
-            
-            <!-- <div class="col" style="padding: 15px">
-              <div style="text-align: -webkit-right">
-                <p
-                  class="personalMessage"
-                >
-                  Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                  justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                  id elit non mi porta gravida at eget metus.
-                </p>
-              </div>
-              <div>
-                <p
-                  class="receivedMessage"
-                >
-                  Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                  justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                  id elit non mi porta gravida at eget metus.
-                </p>
-              </div>
-              <div>
-                <p
-                  class="receivedMessage"
-                >
-                  Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                  justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                  id elit non mi porta gravida at eget metus.
-                </p>
-              </div>
-              <div style="text-align: -webkit-right">
-                <p
-                  class="personalMessage"
-                >
-                  Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                  justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                  id elit non mi porta gravida at eget metus.
-                </p>
-              </div>
-            </div> -->
           </div>
-          <div class="row" style="height: 90px">
+          <div class="row" style="height: 90px; padding-bottom: 10px">
             <div
               class="col"
               style="padding: 0px; background: #eceff1; text-align: center"
@@ -339,8 +299,8 @@
             </div>
           </div>
         </div>
-      </div>
+       </div> 
       <!-- </div> -->
-    </div>
-  </div>
+    </div> 
+  </div> 
 </section>

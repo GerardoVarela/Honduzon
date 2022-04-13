@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -22,7 +22,13 @@ export class ProductDetailsPageComponent implements OnInit {
   public productDetail!: any;
   public loggedUser?: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private httpClient: HttpClient, private _config: NgbCarouselConfig, private cookieService: CookieService) {
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private httpClient: HttpClient, 
+    private _config: NgbCarouselConfig, 
+    private cookieService: CookieService,
+    private router: Router
+    ) {
     _config.pauseOnHover = true;
     _config.showNavigationIndicators = true;
     _config.animation = true;
@@ -54,5 +60,19 @@ export class ProductDetailsPageComponent implements OnInit {
     }).pipe(take(1));
 
     this.loggedUser = await lastValueFrom(resp);
+  }
+
+  goToChat(idCurrentUser: number, idUsuario2: number){
+
+    let chatInfo = {
+      currentUser: idCurrentUser,
+      idUsuario2: idUsuario2
+    };
+
+    // this.httpClient.post(`${this.backendHost}/`, chatInfo);
+
+    this.router.navigate([`/chat/user/${idCurrentUser}`], {
+      queryParams: {with: idUsuario2}
+    });
   }
 }

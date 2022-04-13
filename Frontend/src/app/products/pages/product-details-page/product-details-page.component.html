@@ -25,11 +25,11 @@
                 </div>
                 <div class="col" id="col-btn-chat">
                   <div style="transform: translateY(0px)">
-                    <a routerLink="/chat/user/{{loggedUser.idUsuario}}" [queryParams]="{with: productDetail.ID_USUARIO}">
-                      <button class="btn btn-primary" type="button" id="btn-chat">
+                    <!-- <a routerLink="/chat/user/{{loggedUser.idUsuario}}" [queryParams]="{with: productDetail.ID_USUARIO}"> -->
+                      <button class="btn btn-primary" type="button" id="btn-chat" (click)="goToChat(loggedUser.idUsuario, productDetail.ID_USUARIO)">
                         Chat para comprar
                       </button>
-                    </a>
+                    <!-- </a> -->
                   </div>
                   <div>
                     <small style="font-size: 14px; color: #47525e">
