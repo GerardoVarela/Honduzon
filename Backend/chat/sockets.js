@@ -54,8 +54,8 @@ const connectionSocket = (io)=>{
             }
             socketusers[data.currentUser] = socket.id;
             var existencia = {
-                currentUser : data.currentUser,
-                idUser2 : data.idUsuario2
+                currentUser : 1,
+                idUser2 : 2
             };
             console.log(existencia);
             chatModel.existenciaChatEntreUsuarios(existencia.currentUser,existencia.idUser2).then((res)=>{
@@ -71,9 +71,12 @@ const connectionSocket = (io)=>{
             });
             console.log(existencia.currentUser)
             console.log(existencia.idUser2)
-            //socket.broadcast.emit('receiveMessage',data);
-           
-            socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
+            socket.to(existencia.idUser2).emit('receiveMessage',{
+                data,
+                
+                from: socket.id
+            });
+            //socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
         })
 
     });

@@ -21,7 +21,7 @@ export class ProductDetailsPageComponent implements OnInit {
   public idParam!: any;
   public productDetail!: any;
   public loggedUser?: any;
-
+  public createdChat : any;
   constructor(
     private activatedRoute: ActivatedRoute, 
     private httpClient: HttpClient, 
@@ -60,6 +60,8 @@ export class ProductDetailsPageComponent implements OnInit {
     }).pipe(take(1));
 
     this.loggedUser = await lastValueFrom(resp);
+    console.log('aqui')
+    console.log(this.loggedUser)
   }
 
   goToChat(idCurrentUser: number, idUsuario2: number){
@@ -68,9 +70,15 @@ export class ProductDetailsPageComponent implements OnInit {
       currentUser: idCurrentUser,
       idUsuario2: idUsuario2
     };
-
-    // this.httpClient.post(`${this.backendHost}/`, chatInfo);
-
+    console.log(idCurrentUser);
+    console.log(idUsuario2);
+    console.log(chatInfo);
+    this.createdChat = this.httpClient.post(`${this.backendHost}/chat/newchat`, chatInfo).subscribe(res=>{
+      
+      this.createdChat = res;
+    });
+    
+    console.log(this.createdChat);
     this.router.navigate([`/chat/user/${idCurrentUser}`], {
       queryParams: {with: idUsuario2}
     });

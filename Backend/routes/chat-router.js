@@ -65,7 +65,7 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
 });
 
 
-router.post('/newchat/',(req, res)=>{
+router.post('/newchat',(req, res)=>{
     var existenciaChat = false;
     var chatInfo={
         currentUser: req.body.currentUser,
@@ -80,13 +80,13 @@ router.post('/newchat/',(req, res)=>{
             chatModel.nuevoChat(chatInfo);
             existenciaChat=true;
             res.json(existenciaChat);
-            return;
+            return existenciaChat;
 
         }else{
             console.log('chat Creado')
             existenciaChat=true;
             res.json(existenciaChat);
-            return;
+            return existenciaChat;
         }
     });
 })
