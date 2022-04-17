@@ -14,7 +14,7 @@ var router = express.Router();
 const chatModel = require ('../model/chat.model');
 const jwt = require('jsonwebtoken');
 const key = require('../config/keys.config')
-
+const algorithms = require ('../logic/functions.logic');
 
 router.get('/:CurrentUser', (req, res)=>{
     
@@ -32,34 +32,48 @@ router.get('/mensajes',(req, res)=>{
 
 router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
 
-    var filtro = req.params.detalleChat;
-    
-    var filtroArray = filtro.split('&');
-    
-    var jsonFilt = {}
-    for(i=0;i<filtroArray.length;i++){
-        var tempfilt = filtroArray[i].split('=')
-        jsonFilt[tempfilt[0]] = tempfilt[1];
-    }
-
-/*{
-    NOMBRE : NOMBRE
-    MENSAJES:{
-        MENSAJE:'',
-        USUARIOEMISOR:
-    }
-}*/
+    var tempmessage = {};
+    var jsonFilt = algorithms.urlToJsonFormatter(req.params.detalleChat);
+    var mensajes = [];
 
     chatModel.getMensajePorChat(jsonFilt.idChat).then(resultado=>{
-        
-        if(jsonFilt.CurrentUser==resultado[0].ID_USUARIO1){
-            console.log(resultado[0].USUARIO_2)
-        }else 
-            if(jsonFilt.CurrentUser==resultado[0].ID_USUSARIO2){
-                console.log(resultado[0].USUARIO_1);
+
+        var chatLleno = false; 
+        if(resultado.length === 0){
+            res.send(chatLleno);
+        }else{
+            for(var i = 0 ; i< resultado.length; i++){
+                console.log(i)
+            }
+            if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_1){
+                for(var i = 0 ; i<resultado.length; i++){
+                    
+                    tempmessage[resultado[i].ID_USUARIO_EMISOR]=resultado[i].MENSAJE
+                    console.log(tempmessage);
+                    mensajes.push(tempmessage);
+                    tempmessage={};
+                }
+                res.json({
+                    usuario_vendedor:resultado[0].USUARIO_2,
+                    mensajes
+                })
+            }else 
+                if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_2){
+                for(var i = 0 ; i<resultado.length; i++){
+                    tempmessage[resultado[i].ID_USUARIO_EMISOR]=resultado[i].MENSAJE
+                    console.log(tempmessage);
+                    mensajes.push(tempmessage);
+                    tempmessage={};
+                }
+                res.json({
+                    usuario_vendedor:resultado[0].USUARIO_1,
+                    mensajes
+                })
+                
+            }
             
         }
-        res.json(resultado)
+        
     }
     );
 });

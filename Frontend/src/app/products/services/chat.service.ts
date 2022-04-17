@@ -20,14 +20,10 @@ export class ChatService {
   }
 
   sendMessage(messageInfo: MessageInfo){
-    this.chatInfo ={
-      currentUser:1,
-      idUser2:2
-    };
-    this.chats.push(messageInfo);
-    this.socket.io.emit('new_chat',this.chatInfo);
-    this.socket.io.emit('sendMessage', messageInfo)
     
+    this.chats.push(messageInfo);
+    
+    this.socket.io.emit('sendMessage', messageInfo)
     
   }
 

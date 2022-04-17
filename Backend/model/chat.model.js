@@ -84,12 +84,13 @@ async function insertarMensajesPorUsuario(messageInfo){
 
 async function getMensajePorChat(idChat){
     try {
-
+        
         let pool = await mssql.connect(bdConfig.config);
-        let getMensaje = await pool.request()
+        
+        let getmensajechat = await pool.request()
         .input('idChat',mssql.Int,idChat)
-        .query('SELECT Usuarios.NOMBRE AS USUARIO_1,(SELECT Usuarios.NOMBRE FROM Usuarios where ID_USUARIO=CHAT.ID_USUSARIO2) AS USUARIO_2, CHAT.ID_USUARIO1 AS IDUSUARIO_1, CHAT.ID_USUSARIO2, MENSAJE.MENSAJE,MENSAJE.ID_USUARIO_EMISOR   FROM CHAT JOIN Usuarios on Usuarios.ID_USUARIO = CHAT.ID_USUARIO1 JOIN MENSAJE ON MENSAJE.ID_CHAT = CHAT.ID_CHAT WHERE CHAT.ID_CHAT=@idChat');
-        return getMensaje.recordset; 
+        .query('SELECT Usuarios.NOMBRE AS USUARIO_1,(SELECT Usuarios.NOMBRE FROM Usuarios where ID_USUARIO=CHAT.ID_USUSARIO2) AS USUARIO_2, CHAT.ID_USUARIO1 AS IDUSUARIO_1, CHAT.ID_USUSARIO2 AS IDUSUARIO_2, MENSAJE.MENSAJE, MENSAJE.ID_USUARIO_EMISOR FROM CHAT JOIN Usuarios on Usuarios.ID_USUARIO = CHAT.ID_USUARIO1 JOIN MENSAJE ON MENSAJE.ID_CHAT = CHAT.ID_CHAT WHERE CHAT.ID_CHAT=@idChat');
+        return  getmensajechat.recordset;
     } catch (error) {
         return error;
     }
