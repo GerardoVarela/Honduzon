@@ -67,16 +67,16 @@ const connectionSocket = (io)=>{
                 };
                 //messageInformation['currentChat'] = res[0].ID_CHAT;
                 //console.log(messageInformation);
-                //chatModel.insertarMensajesPorUsuario(messageInformation);
+                chatModel.insertarMensajesPorUsuario(messageInformation);
             });
-            console.log(existencia.currentUser)
-            console.log(existencia.idUser2)
-            socket.to(existencia.idUser2).emit('receiveMessage',{
-                data,
+            // console.log(existencia.currentUser)
+            // console.log(existencia.idUser2)
+            // socket.to(existencia.idUser2).emit('receiveMessage',{
+            //     data,
                 
-                from: socket.id
-            });
-            //socket.to(chatInformation.idUsuario2).emit('receiveMessage',data);
+            //     from: socket.id
+            // });
+            socket.broadcast.emit('receiveMessage',data);
         })
 
     });
