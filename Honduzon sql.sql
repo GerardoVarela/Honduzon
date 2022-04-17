@@ -379,18 +379,32 @@ CREATE TABLE MENSAJE (
 )
 
 
-select * from chat
+select * from chat where ID_CHAT=6
 select * from usuarios
-insert into chat values(1,3)
-insert into MENSAJE values(5,1,'que ondas')
+select * from MENSAJE
+insert into chat values(1,1003)
+insert into MENSAJE values(6,1003,'que pedo chomin')
+
+INSERT INTO Usuarios (NOMBRE,APELLIDO,CORREO_ELECTRONICO,TELEFONO,CONTRASENA,DIRECCION,RESPUESTA)
+VALUES ('Darwin','Rodas','drprueba@gmail.com','3333-3333','DRPrueba123$','Col. Nueva', 'Rojo')
 
 /*CHAT ENTRE DOS USUARIOS FILTRADO POR USUARIOS*/
 select USUARIOS.NOMBRE,MENSAJE.MENSAJE FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAT.ID_USUARIO1=1 and CHAT.ID_USUSARIO2=3
 
 /* FILTRADO POR CHAT*/
-select * FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=5
+SELECT Usuarios.NOMBRE AS USUARIO_1,(SELECT Usuarios.NOMBRE FROM Usuarios where ID_USUARIO=1003) AS USUARIO_2, CHAT.ID_USUARIO1, CHAT.ID_USUSARIO2, MENSAJE.MENSAJE FROM CHAT JOIN Usuarios on Usuarios.ID_USUARIO = CHAT.ID_USUARIO1 JOIN MENSAJE ON MENSAJE.ID_CHAT = CHAT.ID_CHAT WHERE CHAT.ID_CHAT=6 ;
+
+
+SELECT NOMBRE,ID_MENSAJE,(select * from usuarios)  from mensaje join chat on mensaje.ID_CHAT=chat.ID_CHAT join Usuarios on 
+chat.ID_USUARIO1=usuarios.ID_USUARIO or CHAT.ID_USUSARIO2=Usuarios.ID_USUARIO where chat.ID_CHAT=6 
 
 /*Filtrador POR CHAT Y USUARIOS*/
 select USUARIOS.NOMBRE,MENSAJE.MENSAJE FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=5 and CHAT.ID_USUARIO1=1 and CHAT.ID_USUSARIO2=3
 
+
+if current_user==id_usuario1 
+receptor=idUsuario2
+else if current_user==idusuario2
+receptor =idUsuario1 
+else 'no lo se chomin esto no funca'
 
