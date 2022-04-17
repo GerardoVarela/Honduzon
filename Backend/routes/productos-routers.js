@@ -15,7 +15,7 @@ var router = express.Router();
 
 var productoModel = require('../model/productos.model');
 
-
+var algorithms = require('../logic/functions.logic')
 var numeroTotalProdUsusario = 0
 
 router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
@@ -46,16 +46,8 @@ router.post('/guardarproducto',(req,res)=>{
 router.get('/filtradoproducto',(req,res)=>{})
 
 router.get('/filtrado/:detallesfiltro',(req,res)=>{
-    var filtro = req.params.detallesfiltro;
     
-    var filtroArray = filtro.split('&');
-    
-    var jsonFilt = {}
-    for(i=0;i<filtroArray.length;i++){
-        var tempfilt = filtroArray[i].split('=')
-       
-        jsonFilt[tempfilt[0]] = tempfilt[1];
-    }
+    var jsonFilt = algorithms.urlToJsonFormatter(req.params.detallesfiltro); 
     
     productoModel.getProductoFiltrado(jsonFilt.precioMenor,jsonFilt.precioMayor,jsonFilt.categoryID,jsonFilt.departamentoID,jsonFilt.ciudadID,jsonFilt.contador,jsonFilt.bandera).then(resultado=>{
         res.send(resultado)
@@ -78,7 +70,7 @@ router.get('/getprodcat/:idCat',(req,res)=>{
             /*
             No tiene productos la categoria
             */ 
-           return res.send(false);
+            return res.send(false);
         }else{
             res.send(resultado)
         }
