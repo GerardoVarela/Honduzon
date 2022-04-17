@@ -25,3 +25,9 @@
   background: #77d353;
   color: white;
 }
+
+.selected{
+  background-color: #00bce4;
+  color: white;
+  border-radius: 20px;
+}

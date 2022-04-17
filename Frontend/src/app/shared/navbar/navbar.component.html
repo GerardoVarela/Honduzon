@@ -78,7 +78,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="/chat/user/{{loggedUser.idUsuario}}" id="mensaje" class="nav-link" >Mensaje</a>
+            <a *ngIf="loggedUser !== undefined" 
+                routerLink="/chat/user/{{loggedUser.idUsuario}}" 
+                id="mensaje" 
+                class="nav-link">
+              Mensaje
+            </a>            
           </li>
           <li class="nav-item">
             <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i>
@@ -88,6 +93,7 @@
                 id="dropdownUser" 
                 ngbDropdownToggle
                 href="#" 
+                *ngIf="loggedUser !== undefined"
                 style="font-size: 18px; color:#00BCE4; font-weight: bold; text-decoration: none;">
               {{loggedUser.nombreCompleto}}
             </a>

@@ -73,14 +73,18 @@ export class ProductDetailsPageComponent implements OnInit {
     console.log(idCurrentUser);
     console.log(idUsuario2);
     console.log(chatInfo);
-    this.createdChat = this.httpClient.post(`${this.backendHost}/chat/newchat`, chatInfo).subscribe(res=>{
+    this.httpClient.post(`${this.backendHost}/chat/newchat`, chatInfo).subscribe(res=>{
       
       this.createdChat = res;
+      
+      if(this.createdChat === true){
+        
+        this.router.navigate([`/chat/user/${idCurrentUser}`], {
+          queryParams: {with: idUsuario2}
+        });
+      }
+      
     });
-    
-    console.log(this.createdChat);
-    this.router.navigate([`/chat/user/${idCurrentUser}`], {
-      queryParams: {with: idUsuario2}
-    });
+  
   }
 }

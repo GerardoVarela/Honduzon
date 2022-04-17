@@ -254,6 +254,7 @@ values('Gimnasio','Encuentra los elementos necesarios para ponerte en forma.',1)
 insert into Categoria(NOMBRE_CATEGORIA,DESCRIPCION_CATEGORIA,ID_ADMINISTRADOR)
 values('Juguetes','Lleva la diversión hasta tu casa con estos increíbles juguetes.',1)
 
+/*
 INSERT INTO Usuarios
 VALUES ('Darwin','Rodas','drprueba@gmail.com','3333-3333','DRPrueba123$','Col. Nueva', 'Rojo',1,1,2,1)
 INSERT INTO Usuarios
@@ -264,10 +265,15 @@ INSERT INTO Usuarios
 VALUES ('Alfonso','Sevilla','asprueba@gmail.com','7777-7777','ASPrueba123$','Col. Prueba', 'Rodri',3,1,1,1)
 INSERT INTO Usuarios
 VALUES ('Gerardo','Varela','gvprueba@gmail.com','8888-8888','GVPrueba123$','Col. Vieja', 'Sr. Periquin',2,1,1,1)
-INSERT INTO Usuarios
-VALUES ('Prueba','PruebaApellido','prueba@gmail.com','9999-9999','Prueba123$','Res. Prueba', 'Pedro',3,1,1,1)
-
+*/
+SELECT * FROM Usuarios
+SELECT * FROM Productos
 insert into IMAGENES values (0)
+
+/*
+DELETE FROM Productos
+DBCC CHECKIDENT ('Productos', RESEED, 0);
+*/
 
 /* Videojuegos */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
@@ -303,7 +309,7 @@ values ('Tenis blancos',
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Suéter rayado',
 		'Tela de lana, color blanco con azul marino, talla única.',
-		40,2,330,6,1,2)
+		40,2,330,3,1,2)
 
 /* Tecnología */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
@@ -325,7 +331,7 @@ values ('Mesa Plegable',
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Mancuernas',
 		'Mancuernas de hierro, base cuadrada, 30 kg, color plateado.',
-		4,0,800,6,1,5)
+		4,0,800,2,1,5)
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Discos',
 		'Discos de goma, 10 cm de diámetro, 10 kg, color negro.',
@@ -345,7 +351,7 @@ values ('Cuerda de salto',
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
 values ('Bicicletas estáticas',
 		'Ideal para recorrer largas distancias desde casa, con marcaje de recorrido.',
-		4,0,2300,6,1,5)
+		4,0,2300,5,1,5)
 
 /* Juguetes */
 insert into Productos(NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,PRECIO,ID_USUARIO,ID_IMAGEN,ID_CATEGORIA)
@@ -380,7 +386,7 @@ CREATE TABLE MENSAJE (
 
 
 select * from chat
-select * from usuarios
+SELECT * FROM Productos
 insert into chat values(1,3)
 insert into MENSAJE values(5,1,'que ondas')
 

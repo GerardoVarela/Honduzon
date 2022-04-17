@@ -86,143 +86,49 @@
           "
         >
           <section>
-            <!-- <div *ngFor="let chat of chats">
-              <div class="row" style="max-height: 150px; height: 150px">
-                <div
-                  class="col"
-                  style="max-height: none; padding-top: 13px; text-align: center"
-                >
-                  <img
-                    src="../../../../assets/12.webp.jpg"
-                    style="width: 170px; border-radius: 20px; height: 125px"
-                  />
+            <div *ngFor="let chat of allUserChats">
+              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.ID_USUSARIO2)">
+                <div [ngClass]="{'selected': chat.ID_CHAT === chatSelected}" class="row" style="max-height: 150px; height: 150px">
+                  <div
+                    class="col"
+                    style="max-height: none; padding-top: 13px; text-align: center"
+                  >
+                    <img
+                      src="../../../../assets/12.webp"
+                      style="width: 170px; border-radius: 20px; height: 125px"
+                    />
+                  </div>
+                  <div class="col" style="text-align: left; padding-top: 20px">
+                    <div style="color: #47525e">
+                      <small style="font-size: 20px">@User Name</small>
+                    </div>
+                    <div style="margin-top: 5px">
+                      <strong style="font-size: 26px">Xbox Controller</strong>
+                    </div>
+                  </div>
                 </div>
-                <div class="col" style="text-align: left; padding-top: 20px">
-                  <div style="color: #47525e">
-                    <small style="font-size: 20px">@User Name</small>
-                  </div>
-                  <div style="margin-top: 5px">
-                    <strong style="font-size: 26px">Xbox Controller</strong>
-                  </div>
+              </a>
+            </div>
+
+            <!-- <div class="row" style="max-height: 150px; height: 150px">
+              <div
+                class="col"
+                style="max-height: none; padding-top: 13px; text-align: center"
+              >
+                <img
+                  src="../../../../assets/12.webp"
+                  style="width: 170px; border-radius: 20px; height: 125px"
+                />
+              </div>
+              <div class="col" style="text-align: left; padding-top: 20px">
+                <div style="color: #47525e">
+                  <small style="font-size: 20px">@User Name</small>
+                </div>
+                <div style="margin-top: 5px">
+                  <strong style="font-size: 26px">Xbox Controller</strong>
                 </div>
               </div>
             </div> -->
-
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div>
           </section>
         </div>
         <div
