@@ -103,32 +103,18 @@
                       <small style="font-size: 20px">@User Name</small>
                     </div>
                     <div style="margin-top: 5px">
-                      <strong style="font-size: 26px">Xbox Controller</strong>
+                      <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else notCurrent">
+                        <strong style="font-size: 26px">{{chat.user2}}</strong>
+                      </ng-container>
+                      <ng-template #notCurrent>
+                        <strong style="font-size: 26px">{{chat.user1}}</strong>
+                      </ng-template>
+                      
                     </div>
                   </div>
                 </div>
               </a>
             </div>
-
-            <!-- <div class="row" style="max-height: 150px; height: 150px">
-              <div
-                class="col"
-                style="max-height: none; padding-top: 13px; text-align: center"
-              >
-                <img
-                  src="../../../../assets/12.webp"
-                  style="width: 170px; border-radius: 20px; height: 125px"
-                />
-              </div>
-              <div class="col" style="text-align: left; padding-top: 20px">
-                <div style="color: #47525e">
-                  <small style="font-size: 20px">@User Name</small>
-                </div>
-                <div style="margin-top: 5px">
-                  <strong style="font-size: 26px">Xbox Controller</strong>
-                </div>
-              </div>
-            </div> -->
           </section>
         </div>
         <div

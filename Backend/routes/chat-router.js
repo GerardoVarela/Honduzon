@@ -52,7 +52,7 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
 
     chatModel.getMensajePorChat(jsonFilt.idChat).then(resultado=>{
         
-        if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_1){
+        if(jsonFilt.CurrentUser==resultado[0].ID_USUARIO1){
             console.log(resultado[0].USUARIO_2)
         }else 
             if(jsonFilt.CurrentUser==resultado[0].ID_USUSARIO2){

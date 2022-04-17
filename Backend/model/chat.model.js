@@ -38,7 +38,7 @@ async function getChatsPorUsuario(idCurrentUser){
         let pool = await mssql.connect(bdConfig.config);
         let chatsDeUsuario = await pool.request()
         .input('idCurrentUser',mssql.Int,idCurrentUser)
-        .query('SELECT * FROM CHAT WHERE ID_USUARIO1 = @idCurrentUser OR ID_USUSARIO2 = @idCurrentUser');
+        .query('SELECT CHAT.ID_CHAT,CHAT.id_USUARIO1,CHAT.ID_USUSARIO2,usuarios.NOMBRE as user1,(select NOMBRE from usuarios where ID_USUARIO=chat.ID_USUSARIO2)as user2 FROM CHAT join usuarios on chat.ID_USUARIO1=Usuarios.ID_USUARIO WHERE ID_USUARIO1 = @idCurrentUser OR ID_USUSARIO2 = @idCurrentUser      ');
         return chatsDeUsuario.recordset; 
     } catch (error) {
         return error;

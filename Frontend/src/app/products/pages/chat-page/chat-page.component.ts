@@ -18,6 +18,7 @@ export class ChatPageComponent implements OnInit {
   public idParam: any;
   public idCurrentUser: any;
   public allUserChats: any;
+  public chatMsgs: any;
   public chatSelected: number | undefined; 
 
   constructor(
@@ -39,9 +40,16 @@ export class ChatPageComponent implements OnInit {
     this.idCurrentUser = this.idParam['id_user'];
     
     let msgs = this.httpClient.get(`${this.backendHost}/chat/${this.idCurrentUser}`).pipe(take(1));
-
+    
     this.allUserChats = await lastValueFrom(msgs);
     console.log(this.allUserChats);
+
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   this.idCategoryParam = params['with'];
+    // });
+    
+    // if(){}
+
   }
 
   enviarMensaje() {
@@ -76,8 +84,13 @@ export class ChatPageComponent implements OnInit {
     this.nuevoMensaje = '';
   }
 
-  selectChat(idChat: number, idNewUser: number){
+  async selectChat(idChat: number, idNewUser: number){
     this.chatSelected = idChat;
+
+    let historial = this.httpClient.get(`${this.backendHost}/chat/mensajesPorChat/CurrentUser=${this.idCurrentUser}&idChat=${idChat}`).pipe(take(1));
+    
+    this.chatMsgs = await lastValueFrom(historial);
+    console.log(this.chatMsgs);
   }
 
 }
