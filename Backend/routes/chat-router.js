@@ -85,8 +85,6 @@ router.post('/newchat',(req, res)=>{
         currentUser: req.body.currentUser,
         idUser2: req.body.idUsuario2
     };
-    
-    console.log(chatInfo);
     chatModel.existenciaChatEntreUsuarios(chatInfo.currentUser, chatInfo.idUser2).then(resultado=>{
         
         if(resultado.length === 0){
