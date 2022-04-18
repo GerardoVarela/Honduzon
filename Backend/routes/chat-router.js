@@ -49,7 +49,7 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
                 for(var i = 0 ; i<resultado.length; i++){
                     
                     tempmessage[resultado[i].ID_USUARIO_EMISOR]=resultado[i].MENSAJE
-                    console.log(tempmessage);
+                    
                     mensajes.push(tempmessage);
                     tempmessage={};
                 }
@@ -61,7 +61,7 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
                 if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_2){
                 for(var i = 0 ; i<resultado.length; i++){
                     tempmessage[resultado[i].ID_USUARIO_EMISOR]=resultado[i].MENSAJE
-                    console.log(tempmessage);
+                    
                     mensajes.push(tempmessage);
                     tempmessage={};
                 }

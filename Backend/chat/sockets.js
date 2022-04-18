@@ -3,7 +3,7 @@ const chatModel = require('../model/chat.model');
 
 const connectionSocket = (io)=>{
     
-    var chatInformation = {};
+    var users = {};
     var messageInformation = {};
     
     io.on('connection',(socket)=>{
@@ -47,23 +47,26 @@ const connectionSocket = (io)=>{
 
 
        // })
-
+        socket.on('new_connection',function(currentUserId){
+            console.log(socket.id);
+            console.log(currentUserId);
+            io.emit('user_connected', socket.id)
+        });
         socket.on('sendMessage',(data)=>{
             var socketusers={
 
             }
             socketusers[data.currentUser] = socket.id;
+            console.log(data)
             var existencia = {
-                currentUser : 1,
-                idUser2 : 2
+                currentUser : data.currentUser,
+                idUser2 : data.idUsuario2
             };
-            console.log(existencia);
-            chatModel.existenciaChatEntreUsuarios(existencia.currentUser,existencia.idUser2).then((res)=>{
-                 //console.log(res)
+            chatModel.existenciaChatEntreUsuarios(existencia.currentUser,existencia.idUser2).then((respuesta)=>{
                 messageInformation={
                     currentUser: data.currentUser,
                     message: data.message,
-                    currentChat:res[0].ID_CHAT
+                    currentChat:respuesta[0].ID_CHAT
                 };
                 //messageInformation['currentChat'] = res[0].ID_CHAT;
                 //console.log(messageInformation);

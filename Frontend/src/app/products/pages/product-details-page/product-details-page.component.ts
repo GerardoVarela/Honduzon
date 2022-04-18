@@ -5,7 +5,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-
+import { SocketService } from '../../services/socket.service';
 @Component({
   selector: 'app-product-details-page',
   templateUrl: './product-details-page.component.html',
@@ -27,7 +27,8 @@ export class ProductDetailsPageComponent implements OnInit {
     private httpClient: HttpClient, 
     private _config: NgbCarouselConfig, 
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private socket : SocketService
     ) {
     _config.pauseOnHover = true;
     _config.showNavigationIndicators = true;
@@ -65,7 +66,7 @@ export class ProductDetailsPageComponent implements OnInit {
   }
 
   goToChat(idCurrentUser: number, idUsuario2: number){
-
+    this.socket.io.emit('new_connection',idCurrentUser);
     let chatInfo = {
       currentUser: idCurrentUser,
       idUsuario2: idUsuario2
