@@ -1,8 +1,8 @@
 
-const chatModel = require('../model/chat.model');  
+const chatModel = require('../model/chat.model');
 
 const connectionSocket = (io)=>{
-    
+
     var usersOnline = {};
     var messageInformation = {};
     var socketusers={
@@ -14,22 +14,22 @@ const connectionSocket = (io)=>{
         //     chatInformation = {...chatInfo};
         //     console.log(chatInformation)
         //     chatModel.existenciaChatEntreUsuarios(chatInformation.currentUser,chatInformation.idUser2).then((res)=>{
-                
+
         //         if(res.length ===0){
         //             chatModel.nuevoChat(chatInformation);
-                    
+
         //         }
         //         else{
         //             if(res.length!==0){
         //                 messageInformation['currentChat'] = res[0].ID_CHAT;
         //         //         /**
-        //         //          * Va a buscar ese chat y 
+        //         //          * Va a buscar ese chat y
         //         //          * va a extraer los mensajes de ese chat
         //         //          * de la tabla chat
         //         //          */
         //         //         messageInformation['currentChat'] = res[0].ID_CHAT;
-                        
-                        
+
+
         //         //         chatModel.insertarMensajesPorUsuario(messageInformation);
         //             }
         //         // }
@@ -49,20 +49,23 @@ const connectionSocket = (io)=>{
 
 
        // })
-        socket.on('new_connection',function(){
+        socket.on('new_connection',(user)=>{
+            console.log(`New ${user} connected with the id`, socket.id);
             io.emit('user_connected', socket.id)
         });
         socket.on('sendMessage',(data)=>{
-            
-            usersOnline[data.currentUser] = socket.id;
-            console.log(data)
+
+            usersOnline[parseInt(data.currentUser)] = socket.id;
+
             var existencia = {
-                currentUser : data.currentUser,
+                currentUser : parseInt(data.currentUser),
                 idUser2 : data.idUsuario2
             };
+            console.log(existencia)
+            console.log(usersOnline);
             chatModel.existenciaChatEntreUsuarios(existencia.currentUser,existencia.idUser2).then((respuesta)=>{
                 messageInformation={
-                    currentUser: data.currentUser,
+                    currentUser: parseInt(data.currentUser),
                     message: data.message,
                     currentChat:respuesta[0].ID_CHAT
                 };
@@ -74,18 +77,17 @@ const connectionSocket = (io)=>{
             // console.log(existencia.idUser2)
             // socket.to(existencia.idUser2).emit('receiveMessage',{
             //     data,
-                
+
             //     from: socket.id
             // });
             for(key in usersOnline ){
-                
-                if(data.currentUser == key){
+
+                if(data.idUsuario2 == key){
                     var to = usersOnline[data.idUsuario2]
                 }
             }
-            socket.to(to).emit('receiveMessage',data
-                
-            );
+            //socket.to(to).emit('receiveMessage',data);
+            socket.broadcast.emit('receiveMessage',data);
         })
 
     });

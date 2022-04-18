@@ -23,9 +23,9 @@ export class ProductDetailsPageComponent implements OnInit {
   public loggedUser?: any;
   public createdChat : any;
   constructor(
-    private activatedRoute: ActivatedRoute, 
-    private httpClient: HttpClient, 
-    private _config: NgbCarouselConfig, 
+    private activatedRoute: ActivatedRoute,
+    private httpClient: HttpClient,
+    private _config: NgbCarouselConfig,
     private cookieService: CookieService,
     private router: Router,
     private socket : SocketService
@@ -42,13 +42,13 @@ export class ProductDetailsPageComponent implements OnInit {
   }
 
   async extractProductInfo(){
-    
+
     let id = this.activatedRoute.params.pipe(take(1));
 
     this.idParam = await lastValueFrom(id);
 
     let resp = this.httpClient.get(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`).pipe(take(1))
-    
+
     this.productDetail = await lastValueFrom(resp);
     console.log(this.productDetail);
   }
@@ -71,19 +71,19 @@ export class ProductDetailsPageComponent implements OnInit {
       currentUser: idCurrentUser,
       idUsuario2: idUsuario2
     };
-    
+
     this.httpClient.post(`${this.backendHost}/chat/newchat`, chatInfo).subscribe(res=>{
-      
+
       this.createdChat = res;
-      
+
       if(this.createdChat === true){
-        
+
         this.router.navigate([`/chat/user/${idCurrentUser}`], {
           queryParams: {with: idUsuario2}
         });
       }
-      
+
     });
-  
+
   }
 }

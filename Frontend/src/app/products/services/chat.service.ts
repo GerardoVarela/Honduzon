@@ -16,7 +16,9 @@ export class ChatService {
   public chats: MessageInfo[] = [];
   constructor(private socket: SocketService) {
     this.onReceiveMessage();
-    this.socket.io.on('user_connected',()=>{});
+    this.socket.io.on('user_connected',(id)=>{
+      console.log('this id',id);
+    });
   }
 
   sendMessage(messageInfo: MessageInfo){
