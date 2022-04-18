@@ -66,7 +66,7 @@ export class ProductDetailsPageComponent implements OnInit {
   }
 
   goToChat(idCurrentUser: number, idUsuario2: number){
-    this.socket.io.emit('new_connection',idCurrentUser);
+    this.socket.io.emit('new_connection');
     let chatInfo = {
       currentUser: idCurrentUser,
       idUsuario2: idUsuario2

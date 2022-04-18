@@ -14,16 +14,15 @@ interface MessageInfo{
 export class ChatService {
   public chatInfo: object = {};
   public chats: MessageInfo[] = [];
-
   constructor(private socket: SocketService) {
     this.onReceiveMessage();
+    this.socket.io.on('user_connected',()=>{});
   }
 
   sendMessage(messageInfo: MessageInfo){
     
     this.chats.push(messageInfo);
-    
-    this.socket.io.emit('sendMessage', messageInfo)
+    this.socket.io.emit('sendMessage',messageInfo)
     
   }
 

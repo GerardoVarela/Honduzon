@@ -42,9 +42,6 @@ router.get('/mensajesPorChat/:detalleChat',(req, res)=>{
         if(resultado.length === 0){
             res.send(chatLleno);
         }else{
-            for(var i = 0 ; i< resultado.length; i++){
-                console.log(i)
-            }
             if(jsonFilt.CurrentUser==resultado[0].IDUSUARIO_1){
                 for(var i = 0 ; i<resultado.length; i++){
                     

@@ -3,9 +3,11 @@ const chatModel = require('../model/chat.model');
 
 const connectionSocket = (io)=>{
     
-    var users = {};
+    var usersOnline = {};
     var messageInformation = {};
-    
+    var socketusers={
+
+    }
     io.on('connection',(socket)=>{
         // let nuevoChatCreado = false;
         // socket.on('new_chat',(chatInfo)=>{
@@ -47,16 +49,12 @@ const connectionSocket = (io)=>{
 
 
        // })
-        socket.on('new_connection',function(currentUserId){
-            console.log(socket.id);
-            console.log(currentUserId);
+        socket.on('new_connection',function(){
             io.emit('user_connected', socket.id)
         });
         socket.on('sendMessage',(data)=>{
-            var socketusers={
-
-            }
-            socketusers[data.currentUser] = socket.id;
+            
+            usersOnline[data.currentUser] = socket.id;
             console.log(data)
             var existencia = {
                 currentUser : data.currentUser,
@@ -79,7 +77,15 @@ const connectionSocket = (io)=>{
                 
             //     from: socket.id
             // });
-            socket.broadcast.emit('receiveMessage',data);
+            for(key in usersOnline ){
+                
+                if(data.currentUser == key){
+                    var to = usersOnline[data.idUsuario2]
+                }
+            }
+            socket.to(to).emit('receiveMessage',data
+                
+            );
         })
 
     });
