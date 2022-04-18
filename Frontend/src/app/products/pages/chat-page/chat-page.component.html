@@ -85,7 +85,7 @@
         >
           <section>
             <div *ngFor="let chat of allUserChats">
-              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.ID_USUSARIO2, chat.user1, chat.user2)">
+              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.id_USUARIO1, chat.ID_USUSARIO2, chat.user1, chat.user2)">
                 <div [ngClass]="{'selected': chat.ID_CHAT === chatSelected}" class="row" style="max-height: 150px; height: 150px">
                   <div
                     class="col"
@@ -127,6 +127,29 @@
           style="height:600px; max-height:600px; width: 65%; padding-top: 10px;"
         >
           <div class="col" id="scrollChat" style="height: 510px; max-height: 510px; padding-bottom: 5px; overflow-y: scroll">
+            <div *ngIf="chatSelected != undefined &&chatMsgs != undefined">
+              <div class="row" style="width: 100%;" *ngFor="let message of chatMsgs.mensajes">
+                <!-- <p> {{message[idCurrentUser]}} </p> -->
+                <!-- <ng-container *ngIf="message[idCurrentUser] == 1; else elseNotCurrentUser"> -->
+                  <div *ngIf="message[idCurrentUser] != undefined" style="text-align: -webkit-right">
+                    <p
+                      class="personalMessage"
+                    >
+                      {{message[idCurrentUser]}}
+                    </p>
+                  </div>
+                <!-- </ng-container>
+                <ng-template #elseNotCurrentUser> -->
+                  <div *ngIf="message[idUserToSend] != undefined">
+                    <p
+                      class="receivedMessage"
+                    >
+                      {{message[idUserToSend]}}
+                    </p>
+                  </div>
+                <!-- </ng-template> -->
+              </div>
+            </div>
             <div class="row" style="width: 100%" *ngFor="let message of chatService.chats">
               <ng-container *ngIf="message.messageType == 1; else elseNotCurrentUser">
                 <div style="text-align: -webkit-right">
@@ -165,7 +188,7 @@
                     height: 45px;
                     margin-top: 20px;
                   "
-                  placeholder="Escribe un mensaje ..."
+                  [placeholder]="msgPlaceholder"
                 />
               </form>
             </div>
@@ -179,18 +202,11 @@
                 text-align: left;
               "
             >
-              <button style="border: none" (click)="enviarMensaje()">
+              <button style="border: none" (click)="enviarMensaje()" [disabled]="chatSelected === undefined">
                 <i
                   id="iconBtn"
+                  [ngClass]="{'icon-btn': chatSelected != undefined,'icon-btn-disabled': chatSelected == undefined}"
                   class="fa fa-send"
-                  style="
-                    font-size: 30px;
-                    margin-top: 15px;
-                    background: #00a6ff;
-                    color: rgb(255, 255, 255);
-                    padding: 15px;
-                    border-radius: 30px;
-                  "
                 ></i>
               </button>
             </div>

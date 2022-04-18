@@ -71,9 +71,7 @@ export class ProductDetailsPageComponent implements OnInit {
       currentUser: idCurrentUser,
       idUsuario2: idUsuario2
     };
-    console.log(idCurrentUser);
-    console.log(idUsuario2);
-    console.log(chatInfo);
+    
     this.httpClient.post(`${this.backendHost}/chat/newchat`, chatInfo).subscribe(res=>{
       
       this.createdChat = res;

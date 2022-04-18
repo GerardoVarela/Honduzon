@@ -271,7 +271,7 @@ SELECT * FROM Productos
 insert into IMAGENES values (0)
 
 /*
-DELETE FROM Productos
+DELETE FROM MENSAJE
 DBCC CHECKIDENT ('Productos', RESEED, 0);
 */
 

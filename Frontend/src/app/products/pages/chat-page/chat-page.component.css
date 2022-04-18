@@ -1,6 +1,25 @@
+.icon-btn{
+  font-size: 30px;
+  margin-top: 15px;
+  background-color: #00a6ff;
+  color: rgb(255, 255, 255);
+  padding: 15px;
+  border-radius: 30px;
+}
+
+.icon-btn-disabled{
+  font-size: 30px;
+  margin-top: 15px;
+  background-color: #8492a6;
+  color: rgb(255, 255, 255);
+  padding: 15px;
+  border-radius: 30px;
+}
+
 #iconBtn:active {
   transform: scale(0.9);
 }
+
 
 .personalMessage{
   border: 1px;
