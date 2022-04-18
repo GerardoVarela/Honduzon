@@ -55,7 +55,7 @@ const connectionSocket = (io)=>{
             socketusers[data.currentUser] = socket.id;
             var existencia = {
                 currentUser : 1,
-                idUser2 : 2
+                idUser2 : 4
             };
             console.log(existencia);
             chatModel.existenciaChatEntreUsuarios(existencia.currentUser,existencia.idUser2).then((res)=>{
