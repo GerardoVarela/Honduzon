@@ -67,9 +67,7 @@
           class="col-md-3"
           style="width: 50%; text-align: left; padding-top: 13px"
         >
-          <strong style="font-size: 22px; color: #47525e"
-            >User name (seller)</strong
-          >
+          <strong style="font-size: 22px; color: #47525e">{{nameToShow}} {{role}}</strong>
         </div>
       </div>
       <!-- </div> -->
@@ -87,20 +85,27 @@
         >
           <section>
             <div *ngFor="let chat of allUserChats">
-              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.ID_USUSARIO2)">
+              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.ID_USUSARIO2, chat.user1, chat.user2)">
                 <div [ngClass]="{'selected': chat.ID_CHAT === chatSelected}" class="row" style="max-height: 150px; height: 150px">
                   <div
                     class="col"
-                    style="max-height: none; padding-top: 13px; text-align: center"
-                  >
-                    <img
-                      src="../../../../assets/12.webp"
-                      style="width: 170px; border-radius: 20px; height: 125px"
-                    />
+                    style="max-height: none; padding-top: 13px; text-align: center">
+                    <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else otherAvatar">
+                      <img
+                        src="../../../../assets/avatars/avatar_man_{{chat.ID_USUSARIO2}}.jpg"
+                        style="width: 125px; border-radius: 20px; height: 130px"
+                      />
+                    </ng-container>
+                    <ng-template #otherAvatar>
+                      <img
+                        src="../../../../assets/avatars/avatar_man_{{chat.id_USUARIO1}}.jpg"
+                        style="width: 125px; border-radius: 20px; height: 130px"
+                      /> 
+                    </ng-template>
                   </div>
                   <div class="col" style="text-align: left; padding-top: 20px">
                     <div style="color: #47525e">
-                      <small style="font-size: 20px">@User Name</small>
+                      <small style="font-size: 20px">@Usuario</small>
                     </div>
                     <div style="margin-top: 5px">
                       <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else notCurrent">

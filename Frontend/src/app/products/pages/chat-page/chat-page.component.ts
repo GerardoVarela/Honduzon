@@ -15,6 +15,8 @@ export class ChatPageComponent implements OnInit {
   
   public backendHost: string = 'http://localhost:8888';
   public nuevoMensaje: string = '';
+  public nameToShow: string = '';
+  public role: string = '';
   public idParam: any;
   public idCurrentUser: any;
   public allUserChats: any;
@@ -53,19 +55,12 @@ export class ChatPageComponent implements OnInit {
   }
 
   enviarMensaje() {
-    
-    // let usuario2;
-    // if(this.idParam['id_user'] == 1002){
-    //   usuario2 = 1003;
-    // }else{
-    //   usuario2 = 1002;
-    // }
 
     let messageInfo = {
       message: this.nuevoMensaje,
       messageType: 1,
       currentUser: 1,
-      idUsuario2: 2,
+      idUsuario2: 4,
     };
 
     if(this.nuevoMensaje !== ''){
@@ -84,13 +79,24 @@ export class ChatPageComponent implements OnInit {
     this.nuevoMensaje = '';
   }
 
-  async selectChat(idChat: number, idNewUser: number){
+  async selectChat(idChat: number, idUser2: number, nameUser1: string, nameUser2: string){
+        
     this.chatSelected = idChat;
 
     let historial = this.httpClient.get(`${this.backendHost}/chat/mensajesPorChat/CurrentUser=${this.idCurrentUser}&idChat=${idChat}`).pipe(take(1));
     
     this.chatMsgs = await lastValueFrom(historial);
     console.log(this.chatMsgs);
+
+    
+    if(this.idCurrentUser == idUser2){
+      this.nameToShow = nameUser1; // Por la forma en que guardamos la información en una sala de chat
+      this.role = '(comprador)';     // Usuario 1 siempre es el comprador, mientras que el usuario 2 vendedor
+    }else{
+      this.nameToShow = nameUser2;
+      this.role = '(vendedor)';
+    }
+
   }
 
 }
