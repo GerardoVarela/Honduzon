@@ -18,7 +18,7 @@ const adminLogin = require('../model/admin.model');
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
 const token = require('../token/jwt');
-const { jwtKey } = require('../config/keys.config');
+const { jwtKey,adminJwtKey } = require('../config/keys.config');
 
 
 var isAdmin = false;
@@ -105,18 +105,39 @@ function verifyToken(req, res, next){
 
 function adminVerification(req,res,next){
     adminLogin.getCredencialesAdministrador(req.body.formEmailLogin).then((resultado)=>{
-        if(resultado.length === 0){
+        if(resultado.length == 0){
             next();
         }else{
             isAdmin = true;
-            console.log(isAdmin);
-            res.status(200).send(isAdmin);
+            
+            createdAdminToken = token.createToken(req.body.formEmailLogin,isAdmin);
+            logeado = true;
+            res.status(200).json({isAdmin,logeado,createdAdminToken});
+            return;
         }
     });
 }
 
 function loggedAdministrator(req,res,next){
-    next();
+    jwt.verify(req.token, adminJwtKey,(error, authedUser)=>{
+        if (error){
+            next();
+        }else{
+            adminLogin.getAdminLogeado(authedUser.email).then(resultado =>{
+                firstName = formatNames(resultado[0].NOMBRE);
+                lastName = formatNames(resultado[0].APELLIDO);
+
+                loggedAdmin = {
+                    nombreCompleto : firstName + ' ' + lastName,
+                    idAdminitrador : resultado[0].ID_ADMINISTRADOR,
+                    imagenPerfil: resultado[0].IMAGENS
+                };
+                res.status(200).json(loggedAdmin);
+                return;
+            })
+        }
+        
+    })
 }
 
 

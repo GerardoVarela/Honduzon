@@ -14,13 +14,12 @@ async function getCredencialesAdministrador(correoAdmin){
     }
 }
 
-async function getAdminLogeado(adminEmail, adminPassword ){
+async function getAdminLogeado(adminEmail){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let correoUsuario = await pool.request()
         .input('correoInput',mssql.VarChar, adminEmail)
-        .input('passwordInput',mssql.VarChar, adminPassword)
-        .query('SELECT ID_ADMINISTRADOR,NOMBRE, APELLIDO FROM ADMINISTRADOR WHERE CORREO_ELECTRONICO = @correoInput AND CONTRASENA=@passwordInput');
+        .query('SELECT ID_ADMINISTRADOR,NOMBRE, APELLIDO FROM ADMINISTRADOR WHERE CORREO_ELECTRONICO = @correoInput');
         
         return correoUsuario.recordset;
     } catch (error) {
