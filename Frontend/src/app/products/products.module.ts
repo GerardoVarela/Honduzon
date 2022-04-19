@@ -22,6 +22,7 @@ import { CardSalesPersonComponent } from './components/card-sales-person/card-sa
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AdminModulePageComponent } from './pages/admin-module-page/admin-module-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CookieService } from 'ngx-cookie-service';
     ProductsListPageComponent,
     ProductDetailsPageComponent,
     ChatPageComponent,
+    AdminModulePageComponent,
   ],
   imports: [
     CommonModule,
