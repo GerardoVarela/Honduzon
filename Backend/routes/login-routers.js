@@ -105,6 +105,10 @@ function verifyToken(req, res, next){
     }
 }
 
+function isAdmin(req,res,next){
+    
+}
+
 function formatNames (name){
     tempName = name.split(' ');
     return tempName[0];
