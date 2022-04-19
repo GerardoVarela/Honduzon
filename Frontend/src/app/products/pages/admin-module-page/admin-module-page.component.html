@@ -54,6 +54,8 @@
           <div class="row">
             <div class="col-md-3" style="text-align: center">
               <div
+                type="button"
+                (click)="openLG(contenido)"
                 id="card-module"
                 class="card"
                 style="
@@ -146,3 +148,157 @@
     </div>
   </div>
 </section>
+
+<ng-template #contenido let-modal>
+  <div
+    class="modal-header"
+    style="
+      border-radius: 20px;
+      border-width: 1px;
+      border-bottom-style: solid;
+      text-align: center;
+    "
+  >
+    <strong
+      style="
+        font-size: 25px;
+        text-shadow: 1px 1px black;
+        margin-left: 15px;
+        color: #00bce4;
+      "
+      >Categorias</strong
+    >
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+      style="margin-right: 15px"
+    ></button>
+  </div>
+  <div class="modal-body" style="text-align: center">
+    <div
+      class="container"
+      style="
+        text-align: left;
+        min-height: 150px;
+        max-height: 4000px;
+        overflow-y: scroll;
+        margin-top: 15px;
+      "
+    >
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row" style>
+        <div class="col" style>
+          <div
+            style="
+              background: #e5e5e5;
+              height: 35px;
+              border-style: solid;
+              border-width: 1px;
+              border-color: #47525e63;
+              padding: 5px 0px 0px 15px;
+            "
+          >
+            <strong>Bold</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <div class="container" style="text-align: center">
+      <div class="row">
+        <div class="col-md-12">
+          <button
+            class="btn btn-primary"
+            type="button"
+            style="background: #00bce4; color: white; border: #00bce4"
+          >
+            Agregar categoria
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
