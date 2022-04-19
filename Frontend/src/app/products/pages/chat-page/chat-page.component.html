@@ -92,13 +92,13 @@
                     style="max-height: none; padding-top: 13px; text-align: center">
                     <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else otherAvatar">
                       <img
-                        src="../../../../assets/avatars/avatar_man_{{chat.ID_USUSARIO2}}.jpg"
+                        src="../../../../assets/profile-pics/user_{{chat.ID_USUSARIO2}}.jpg"
                         style="width: 125px; border-radius: 20px; height: 130px"
                       />
                     </ng-container>
                     <ng-template #otherAvatar>
                       <img
-                        src="../../../../assets/avatars/avatar_man_{{chat.id_USUARIO1}}.jpg"
+                        src="../../../../assets/profile-pics/user_{{chat.id_USUARIO1}}.jpg"
                         style="width: 125px; border-radius: 20px; height: 130px"
                       /> 
                     </ng-template>
@@ -127,7 +127,7 @@
           style="height:600px; max-height:600px; width: 65%; padding-top: 10px;"
         >
           <div class="col" id="scrollChat" style="height: 510px; max-height: 510px; padding-bottom: 5px; overflow-y: scroll">
-            <div *ngIf="chatSelected != undefined &&chatMsgs != undefined">
+            <div *ngIf="chatSelected != undefined && chatMsgs != undefined">
               <div class="row" style="width: 100%;" *ngFor="let message of chatMsgs.mensajes">
                 <!-- <p> {{message[idCurrentUser]}} </p> -->
                 <!-- <ng-container *ngIf="message[idCurrentUser] == 1; else elseNotCurrentUser"> -->
@@ -150,25 +150,28 @@
                 <!-- </ng-template> -->
               </div>
             </div>
+            <!-- <div *ngIf="chatSelected != undefined">
+
+            </div> -->
             <div class="row" style="width: 100%" *ngFor="let message of chatService.chats">
-              <ng-container *ngIf="message.messageType == 1; else elseNotCurrentUser">
-                <div style="text-align: -webkit-right">
+              <!-- <ng-container *ngIf="message.messageType == 1 && message.chatId == chatSelected; else elseNotCurrentUser"> -->
+                <div *ngIf="message.messageType == 1 && message.chatId == chatSelected" style="text-align: -webkit-right">
                   <p
                     class="personalMessage"
                   >
                     {{message.message}}
                   </p>
                 </div>
-              </ng-container>
-              <ng-template #elseNotCurrentUser>
-                <div>
+              <!-- </ng-container>
+              <ng-template #elseNotCurrentUser> -->
+                <div *ngIf="message.messageType == 2 && message.chatId == chatSelected">
                   <p
                     class="receivedMessage"
                   >
                     {{message.message}}
                   </p>
                 </div>
-              </ng-template>
+              <!-- </ng-template> -->
             </div>
           </div>
           <div class="row" style="height: 90px; padding-bottom: 10px">
