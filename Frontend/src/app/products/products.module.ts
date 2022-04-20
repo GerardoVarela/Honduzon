@@ -61,6 +61,7 @@ import { AdminModulePageComponent } from './pages/admin-module-page/admin-module
     ProductsListPageComponent,
     ProductDetailsPageComponent,
     ChatPageComponent,
+    AdminModulePageComponent,
     NgxSliderModule,
   ],
   providers: [

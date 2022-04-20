@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-chat-page',
@@ -30,6 +31,7 @@ export class ChatPageComponent implements OnInit {
     public chatService: ChatService, 
     private activatedRoute: ActivatedRoute,
     private httpClient: HttpClient, 
+    private modalService: NgbModal,
     @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
@@ -102,6 +104,11 @@ export class ChatPageComponent implements OnInit {
       this.role = '(vendedor)';
     }
 
+  }
+
+  report(content: any, idUser: number){
+
+    this.modalService.open(content, {centered: true});
   }
 
 }

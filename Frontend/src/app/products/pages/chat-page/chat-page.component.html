@@ -46,7 +46,7 @@
           <strong style="font-size: 40px; color: #47525e">Chat</strong>
         </div>
         <div class="col-md-3" style="width: 15%; text-align: center">
-          <svg
+          <svg *ngIf="chatSelected != undefined"
             class="bi bi-emoji-smile"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -62,13 +62,28 @@
               d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"
             ></path>
           </svg>
+          <!-- <img *ngIf="chatSelected != undefined" src="../../../../assets/profile-pics/user_{{idUserToSend}}.jpg" width="45px" height="45px" style="border-radius: 20px;"> -->
         </div>
         <div
           class="col-md-3"
           style="width: 50%; text-align: left; padding-top: 13px"
         >
-          <strong style="font-size: 22px; color: #47525e">{{nameToShow}} {{role}}</strong>
+          <ng-container *ngIf="chatSelected != undefined; else noNameToShow">
+            <strong style="font-size: 22px; color: #47525e">{{nameToShow}} {{role}}</strong>
+            <a role="button" (click)="report(contentReport, idUserToSend)">
+              <img src="../../../../assets/warning.png" width="25x" height="25px" style="margin-left: 10px; margin-bottom: 5px;">
+            </a>
+          </ng-container>
+          <ng-template #noNameToShow>
+            <strong style="font-size: 22px; color: #47525e">Sala de Chat</strong>
+          </ng-template>     
         </div>
+        <!-- <div
+          class="col-md-4"
+          style="width: 5%; text-align: right; padding-top: 13px"
+        >
+            <i class="fa-solid fa-circle-exclamation" style="color:red"></i>
+        </div> -->
       </div>
       <!-- </div> -->
       <!-- <div class="container" style="padding: 0px"> -->
@@ -220,3 +235,48 @@
     </div> 
   </div> 
 </section>
+
+<!-- Modal Report -->
+<ng-template #contentReport let-modalReport>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalReport.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center; padding-left: 10px; padding-right: 10px">
+    <div class="row" style="padding-bottom: 20px;">
+      <h2 class="modal-title">Denuncia</h2>
+      <small style="text-align: left!important;">
+        Ya se trate de mal comportamiento, una estafa u otro tipo de queja que tengas, denuncia al usuario.<br> 
+        Cada denuncia es revisada a detalle, por lo que le pedimos que especifique bien el problema.
+      </small>
+    </div>
+    <!-- <div class="row">
+      <form [formGroup]="registerForm">
+        <div class="form-floating">
+          <input
+            type="text"
+            formControlName="formName"
+            class="border-bottom-custom form-control"
+            id="floatingName"
+            placeholder="Nombre"
+            [class.is-invalid]="formName!.invalid && formName!.touched"
+          />
+          <label for="floatingName">Nombre*</label>
+          <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+      </form>
+    </div> -->
+    <div class="row">
+      <label for="exampleFormControlInput1" class="form-label">Asunto</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" style="padding-left: 25px; width: 350px" placeholder="Asunto específico y corto">
+    </div>
+    <div class="row">
+      <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="padding-left: 25px; width: 350px" placeholder="Detalle específicamente los sucesos"></textarea>
+    </div>
+  </div>
+</ng-template>
