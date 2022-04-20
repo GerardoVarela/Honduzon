@@ -14,4 +14,8 @@ export class AdminModulePageComponent implements OnInit {
   openLG(content: any) {
     this.modalService.open(content, { size: 'lg' });
   }
+
+  openSM(content: any) {
+    this.modalService.open(content, { size: 'sm' });
+  }
 }
