@@ -6,6 +6,7 @@ import { RestorePageComponent } from './products/pages/restore-page/restore-page
 import { ProductsListPageComponent } from "./products/pages/products-list-page/products-list-page.component";
 import { ProductDetailsPageComponent } from './products/pages/product-details-page/product-details-page.component';
 import { ChatPageComponent } from './products/pages/chat-page/chat-page.component';
+import { AdminModulePageComponent } from './products/pages/admin-module-page/admin-module-page.component';
 
 const routes: Routes = [
     {
@@ -28,6 +29,10 @@ const routes: Routes = [
     {
         path: 'chat/user/:id_user',
         component: ChatPageComponent,
+    },
+    {
+        path: 'home/admin',
+        component: AdminModulePageComponent,
     },
     {
         path: '**',
