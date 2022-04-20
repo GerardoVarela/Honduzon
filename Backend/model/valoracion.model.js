@@ -6,14 +6,14 @@ async function getValoracion(ID_USUARIO){
         var pool = await mssql.connect(bdConfig.config);
         let getvaloracion = await pool.request()
         .input('ID_USUARIO',mssql.Int,ID_USUARIO)
-        .query('select round(sum(valoracion)/count(VALORACION),1) from valoracion where ID_USUARIO=@ID_USUARIO')                
+        .query('select round(sum(valoracion)/count(VALORACION),1) AS VALORACION_USUARIO from VALORACION where ID_USUARIO=@ID_USUARIO')                
         return getvaloracion.recordset;
     } catch (error) {
         return error;
     }
 }
 
-async function insertValoraciones(valoracion){
+async function insertValoracion(valoracion){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let insertarValoracion = await pool.request()
@@ -28,5 +28,5 @@ async function insertValoraciones(valoracion){
 
 module.exports = {
     getValoracion,
-    insertValoraciones
+    insertValoracion
 }
