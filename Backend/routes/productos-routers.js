@@ -81,6 +81,8 @@ router.get('/getprodcat/:idCat',(req,res)=>{
 router.delete('/borrarproducto',(req,res)=>{});
 
 
+
+
 module.exports={
     router:router
 }

@@ -103,7 +103,7 @@ ALTER TABLE LISTA_DESEOS
 ADD CONSTRAINT FKLD_USUARIO FOREIGN KEY(ID_USUARIO) REFERENCES USUARIOS(ID_USUARIO)
 
 CREATE TABLE VALORACION(
-ID_VALORACION INT,
+ID_VALORACION INT identity(1,1),
 ID_USUARIO INT,
 VALORACION FLOAT ,
 CONSTRAINT CHECK_VALORACION
@@ -414,16 +414,52 @@ chat.ID_USUARIO1=usuarios.ID_USUARIO or CHAT.ID_USUSARIO2=Usuarios.ID_USUARIO wh
 select USUARIOS.NOMBRE,MENSAJE.MENSAJE FROM MENSAJE join chat on MENSAJE.ID_CHAT=chat.ID_CHAT join USUARIOS on Mensaje.ID_USUARIO_EMISOR=USUARIOS.ID_USUARIO  WHERE CHAt.ID_CHAT=5 and CHAT.ID_USUARIO1=1 and CHAT.ID_USUSARIO2=3
 
 
-/*MODIFICACIONES DE LA TABLA USUARIO Y CATEGORIAS */
+/*MODIFICACIONES DE LA TABLA USUARIO Y CATEGORIAS Y PRODUCTOS */
 ALTER TABLE USUARIOS
 ADD ESTADO BIT
 
 ALTER TABLE CATEGORIA
 ADD ESTADO BIT
 
-if current_user==id_usuario1 
-receptor=idUsuario2
-else if current_user==idusuario2
-receptor =idUsuario1 
-else 'no lo se chomin esto no funca'
+ALTER TABLE PRODUCTOS
+ADD ESTADO BIT
 
+/*TABLA DENUNCIAS*/
+
+CREATE TABLE DENUNCIAS(
+denunciasID int primary key identity(1,1),
+denunciadoID int,
+denuncianteID int,
+PRODUCTOID int,
+descripcion varchar(100),
+motivo varchar(150),
+foreign key (denunciadoID) references Usuarios (ID_USUARIO),
+foreign key (denuncianteID) references Usuarios (ID_USUARIO),
+foreign key (PRODUCTOID) references PRoductos (ID_PRODUCTO)
+
+);
+
+select * from DENUNCIAS where denunciadoID=1
+
+insert into DENUNCIAS values( 1,1003,1,'el joycon venia malo','producto en mal etado')
+
+select * from USUARIOSxCATEGORIAS
+
+select * from Usuarios
+
+select * from VALORACION
+
+insert into valoracion 
+values (1003,5)
+insert into valoracion 
+values (1003,4)
+insert into valoracion 
+values (1003,3)
+insert into valoracion 
+values (1,4)
+
+select round(sum(valoracion)/count(VALORACION),1) from valoracion where ID_USUARIO=1
+
+
+
+select valoracion from valoracion where ID_USUARIO=1003

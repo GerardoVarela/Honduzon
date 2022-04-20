@@ -250,6 +250,7 @@ async function getCantTotalProdUsuario (idUsuario){
 }
 
 
+
 module.exports={
     /*
     con ES6, cuando se exporta las funciones con mismo nombre, se puede solo poner el nombre de la funcion
@@ -260,5 +261,6 @@ module.exports={
     buscarProducto,
     getProductoPorCatId,
     getProductoPorId,
-    getCantTotalProdUsuario
+    getCantTotalProdUsuario,
+    
 }

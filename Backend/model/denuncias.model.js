@@ -5,42 +5,45 @@ var mssql = require('mssql');
 
 
 
-async function getDenuncias(){
+async function getDenunciaDeUsuario(ID_USUARIO){
     try {
-        var pool = await mssql.connect(bdConfig.config);
-        let listaDenuncias = await pool.request()
-        .input('',mssql.VarChar, )
-        .query('');
-        
-        return listaDenuncias.recordset;
-    } catch (error) {
-        console.log(error);
-        process.exit(1);
-    }}
+        var pool = await new mssql.ConnectionPool(bdConfig).connect();
+        var result = await pool.request()
+            .input('ID_USUARIO', mssql.Int, idUsuario)
+            .query('select * from DENUNCIAS where denunciadoID = @idUsuario');
+        return result.recordset;     
+    } 
+            catch (error) {
+                     return error;
+                } 
+}
     
 
 
 
 
-async function insertarDenuncia(detalleDenuncia){
+async function insertarDenuncia(DENUNCIAS){
     try {
         let pool = await mssql.connect(bdConfig.config);
-        let insertDenuncia = await pool.request()
-        .input('', mssql.VarChar, )
-        .query('');
+        let insertardenuncias = await pool.request()
+        .input('denunciadoID', mssql.Int,denunciadoID )
+        .input('denuncianteID', mssql.Int,denuncianteID )
+        .input('productoID', mssql.Int,productoID )
+        .input('descripcion', mssql.VarChar,descripcion )
+        .input('motivo', mssql.VarChar,motivo )
+        .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@productoID,@descripcion,@motivo)');
     
-        return insertDenuncia.recordset;
+        return insertardenuncias.recordset;
     } catch (error) {
         return error;
     }
 }
 
-async function getDenunciaDeUsuario(idDenuncia){
+async function getDenuncias(){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let correo = await pool.request()
-        .input('', mssql.VarChar, )
-        .query('');
+        .query('select * from DENUNCIAS');
     
         return correo.recordset;
     } catch (error) {
@@ -69,6 +72,8 @@ async function filtradoDenuncia(){
 
 module.exports = {
     getDenuncias,
+    insertarDenuncia,
+    getDenunciaDeUsuario
     
 
 }
