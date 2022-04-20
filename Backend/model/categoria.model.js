@@ -18,7 +18,7 @@ async function insertCategoria(categoria){
         .input('DESCRIPCION_CATEGORIA', mssql.VarChar,categoria.formCategoryDescription)
         .input('IMAGEN_CATEGORIA',mssql.VarBinary,categoria.formImageInput)
         .input('ID_ADMINISTRADOR',mssql.Int,categoria.formAdmin)
-        .execute('SP_INSERTAR_CATEGORIA'); 
+        .query('INSERT INTO Categoria(NOMBRE_CATEGORIA, DESCRIPCION_CATEGORIA, ID_ADMINISTRADOR) VALUES (@NOMBRE_CATEGORIA,@DESCRIPCION_CATEGORIA,@ID_ADMINISTRADOR)'); 
         return insertarCategoria.recordsets;
     } catch (error) {
         console.log(error);
@@ -63,8 +63,21 @@ async function obtenerExistenciaCategoria(nombreCategoria){
     }
 }
 
-async function editarCategoria(categoriaModificada, categoriaId){
-
+async function editarCategoria(detalleCategoria, categoriaId){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let insertarCategoria = await pool.request()
+        .input('ID_CATEGORIA', mssql.VarChar,categoriaId)
+        .input('NOMBRE_CATEGORIA', mssql.VarChar,detalleCategoria.formCategoryName)
+        .input('DESCRIPCION_CATEGORIA', mssql.VarChar,detalleCategoria.formCategoryDescription)
+        .input('IMAGEN_CATEGORIA',mssql.VarBinary,detalleCategoria.formImageInput)
+        .input('ID_ADMINISTRADOR',mssql.Int,detalleCategoria.formAdmin)
+        .query('UPDATE Categoria SET NOMBRE_CATEGORIA = @NOMBRE_CATEGORIA, DESCRIPCION_CATEGORIA = @DESCRIPCION_CATEGORIA, IMAGEN_CATEGORIA=@IMAGEN_CATEGORIA,ID_ADMINISTRADOR=@ID_ADMINISTRADOR WHERE ID_CATEGORIA=@ID_CATEGORIA'); 
+        return insertarCategoria.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
 module.exports={
@@ -72,5 +85,5 @@ module.exports={
     obtenerCategorias:obtenerCategorias,
     obtenerCategoria:obtenerCategoria,
     editarCategoria,
-    obtenerExistenciaCategoria
+    obtenerExistenciaCategoria,
 }

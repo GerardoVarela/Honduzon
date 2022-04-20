@@ -23,7 +23,8 @@ router.get('/',(req,res)=>{
 });
 
 router.post('/guardar',verificacionCategoria,(req,res)=>{
-    const categoria ={...req.body};
+    var categoria ={...req.body};
+    
         categoriaModel.insertCategoria(categoria).then(resultado=>{
             res.send({
                 registroCat: true
@@ -34,8 +35,15 @@ router.post('/guardar',verificacionCategoria,(req,res)=>{
 
 
 
-router.post('/editarCategoria/:idCategoria',(req,res)=>{
-    
+router.put('/editarCategoria/:idCategoria',(req,res)=>{
+    console.log(req.params.idCategoria);
+    console.log(req.body);
+    var detalleCategoria = {...req.body};
+    categoriaModel.editarCategoria(detalleCategoria,req.params.idCategoria).then((resultado)=>{
+        res.json({
+            edicionCategoria: true
+        })
+    })
 });
 
 
