@@ -9,6 +9,34 @@ var bdConfig = require('../config/bd-config');
 const mssql = require('mssql');
 
 
+// async function insertUsuario(usuario){
+//     /**
+//      * Fucion que inserta el usuario. usuario es el @param, que contiene toda al informacion del usuario en forma de Json
+//      * Los componentes de ese Json como ser nombre, departamento, contraseña, ciudad, password, se metera a la bd por medio de un 
+//      * pool request con un Stored Procedure en la base de datos.
+//      * Posible nombre del Stored Procedure: SP_Insert_Usuario
+//      * 
+//      */
+//     try {
+//         var pool = await mssql.connect(bdConfig.config);
+//         let insertarUsuario = await pool.request()
+//             .input('NOMBRE', mssql.VarChar,usuario.nombre)
+//             .input('APELLIDO', mssql.VarChar,usuario.apellido)
+//             .input('CORREO_ELECTRONICO',mssql.VarChar,usuario.email)
+//             .input('TELEFONO',mssql.VarChar,usuario.telefono)
+//             .input('DIRECCION',mssql.VarChar,usuario.direccion)
+//             .input('RESPUESTA',mssql.VarChar,usuario.respuesta)
+//             .input('ID_DEPARTAMENTO',mssql.Int,usuario.departamento)
+//             .input('CONTRASENA',mssql.VarChar,usuario.contrasena)
+//             .input('ID_CIUDAD',mssql.Int,usuario.ciudad)
+//             .input('ID_PREGUNTA',mssql.Int,usuario.pregunta)
+//             .query('INSERT INTO Usuarios VALUES (@NOMBRE ,@APELLIDO ,@CORREO_ELECTRONICO,@TELEFONO ,@DIRECCION,@RESPUESTA,@ID_DEPARTAMENTO ,@CONTRASENA ,@ID_CIUDAD ,1,@ID_PREGUNTA )'); //NO SE HA CREADO EL STORED PROCEDURE
+//         return insertarUsuario.recordsets;
+//     } catch (error) {
+//         console.log(error);
+//         process.exit(1);
+//     }
+// }
 async function insertUsuario(usuario){
     /**
      * Fucion que inserta el usuario. usuario es el @param, que contiene toda al informacion del usuario en forma de Json
@@ -30,7 +58,7 @@ async function insertUsuario(usuario){
             .input('CONTRASENA',mssql.VarChar,usuario.contrasena)
             .input('ID_CIUDAD',mssql.Int,usuario.ciudad)
             .input('ID_PREGUNTA',mssql.Int,usuario.pregunta)
-            .execute('SP_INSERTAR_USUARIO'); //NO SE HA CREADO EL STORED PROCEDURE
+            .query('INSERT INTO Usuarios(NOMBRE,APELLIDO,CORREO_ELECTRONICO,TELEFONO,DIRECCION,RESPUESTA,ID_DEPARTAMENTO,CONTRASENA,ID_CIUDAD,ESTADO,ID_PREGUNTA) VALUES (@NOMBRE ,@APELLIDO ,@CORREO_ELECTRONICO,@TELEFONO ,@DIRECCION,@RESPUESTA,@ID_DEPARTAMENTO ,@CONTRASENA ,@ID_CIUDAD ,1,@ID_PREGUNTA )'); //NO SE HA CREADO EL STORED PROCEDURE
         return insertarUsuario.recordsets;
     } catch (error) {
         console.log(error);
