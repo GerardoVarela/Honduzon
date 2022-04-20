@@ -28,9 +28,7 @@ async function getAdminLogeado(adminEmail){
 }
 
 
-async function accionDenuncia(){
 
-}
 
 module.exports={
     getCredencialesAdministrador,

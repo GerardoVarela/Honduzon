@@ -28,4 +28,10 @@ router.post('/insertardenuncia', (req, res) => {
     });
 }); 
 
+router.delete('/borrarDenuncia/:idDenuncia',(req,res)=>{
+    denunciasmodel.darBajaDenuncia(req.params.idDenuncia).then(resultado=>{
+        res.json(true);
+    })
+})
+
 module.exports = { router: router };
