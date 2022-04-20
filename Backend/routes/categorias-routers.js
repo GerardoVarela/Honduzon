@@ -46,6 +46,12 @@ router.put('/editarCategoria/:idCategoria',(req,res)=>{
     })
 });
 
+router.delete('/borrarCategoria/:idCategoria',(req,res)=>{
+    categoriaModel.darBajaCategoria(req.params.idCategoria).then(resultado=>{
+        res.json(true);
+    })
+})
+
 
 function verificacionCategoria(req,res,next){
     const categoria ={...req.body};

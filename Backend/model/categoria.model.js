@@ -80,10 +80,24 @@ async function editarCategoria(detalleCategoria, categoriaId){
     }
 }
 
+async function darBajaCategoria(idCategoria){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let insertarCategoria = await pool.request()
+        .input('ID_CATEGORIA', mssql.VarChar,idCategoria)
+        .query('UPDATE Categoria SET ESTADO = 0 WHERE ID_CATEGORIA=@ID_CATEGORIA'); 
+        return insertarCategoria.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
+
 module.exports={
     insertCategoria:insertCategoria,
     obtenerCategorias:obtenerCategorias,
     obtenerCategoria:obtenerCategoria,
     editarCategoria,
     obtenerExistenciaCategoria,
+    darBajaCategoria
 }
