@@ -12,7 +12,7 @@
 
 ### Miembros Grupo1 : 
 ####  Front-end:
-*  Gerardo Varela (Scrum)
+*  Gerardo Varela (Scrum Master)
 *  Darwin Rodas
 *  Alfonso Sevilla 
  #### Back-end:
