@@ -10,6 +10,7 @@ const obtenerPreguntas = require('./routes/preguntas-router');
 const login = require('./routes/login-routers');
 const categorias = require('./routes/categorias-routers');
 const productos = require ('./routes/productos-routers');
+const admin = require('./routes/admin.routers');
 const keys = require ('./config/keys.config');
 
 const chatRouter =require('./routes/chat-router');
@@ -45,6 +46,7 @@ app.use('/login',login.router);
 app.use('/categorias',categorias.router);
 app.use('/productos',productos.router);
 app.use('/chat', chatRouter.router);
+app.use('/administrador',admin.router);
 puerto = 8888;
 // app.set('templates', path.join(__dirname,'recuperacion-constraseña'));
 app.get('/',(req,res)=>{
