@@ -11,26 +11,24 @@
  */
 
 
-var express = require('express');
-var router = express.Router();
-var login = require('../model/login-model'); 
+const express = require('express');
+const router = express.Router();
+const login = require('../model/login-model');
+const adminLogin = require('../model/admin.model'); 
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
 const token = require('../token/jwt');
-const { jwtKey } = require('../config/keys.config');
+const { jwtKey,adminJwtKey } = require('../config/keys.config');
 
-router.get('/', (req, res)=>{
-     //Testing
 
-})
-
+var isAdmin = false;
 var logeado = false;
 var createdToken = '';
 var loggedUser = {}
 var tempName = []
 var firstName = '';
 var lastName = '';
-router.post('/',(req,res, next)=>{
+router.post('/',adminVerification,(req,res, next)=>{
     login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
         if(resultado.length>0){
@@ -38,7 +36,7 @@ router.post('/',(req,res, next)=>{
                 
                 if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
                     match){
-                        createdToken = token.createToken(req.body.formEmailLogin)
+                        createdToken = token.createToken(req.body.formEmailLogin,isAdmin);
                         logeado = true;
                         res.json(createdToken);
                     
@@ -67,7 +65,7 @@ router.post('/',(req,res, next)=>{
     
 });
 
-router.get('/getloggeduser',verifyToken,(req,res)=>{
+router.get('/getloggeduser',verifyToken,loggedAdministrator,(req,res)=>{
     jwt.verify(req.token, jwtKey,(error, authedUser)=>{
         if (error){
             res.json({
@@ -104,6 +102,44 @@ function verifyToken(req, res, next){
         }) ;
     }
 }
+
+function adminVerification(req,res,next){
+    adminLogin.getCredencialesAdministrador(req.body.formEmailLogin).then((resultado)=>{
+        if(resultado.length == 0){
+            next();
+        }else{
+            isAdmin = true;
+            
+            createdAdminToken = token.createToken(req.body.formEmailLogin,isAdmin);
+            logeado = true;
+            res.status(200).json({isAdmin,logeado,createdAdminToken});
+            return;
+        }
+    });
+}
+
+function loggedAdministrator(req,res,next){
+    jwt.verify(req.token, adminJwtKey,(error, authedUser)=>{
+        if (error){
+            next();
+        }else{
+            adminLogin.getAdminLogeado(authedUser.email).then(resultado =>{
+                firstName = formatNames(resultado[0].NOMBRE);
+                lastName = formatNames(resultado[0].APELLIDO);
+
+                loggedAdmin = {
+                    nombreCompleto : firstName + ' ' + lastName,
+                    idAdminitrador : resultado[0].ID_ADMINISTRADOR,
+                    imagenPerfil: resultado[0].IMAGENS
+                };
+                res.status(200).json(loggedAdmin);
+                return;
+            })
+        }
+        
+    })
+}
+
 
 function formatNames (name){
     tempName = name.split(' ');

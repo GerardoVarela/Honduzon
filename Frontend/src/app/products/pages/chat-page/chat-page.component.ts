@@ -56,6 +56,7 @@ export class ChatPageComponent implements OnInit {
     if(this.chatSelected !== undefined){
       let messageInfo = {
         message: this.nuevoMensaje,
+        chatId: this.chatSelected,
         messageType: 1,
         currentUser: this.idCurrentUser,
         idUsuario2: this.idUserToSend,

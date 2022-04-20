@@ -4,6 +4,7 @@ import { SocketService } from './socket.service';
 interface MessageInfo{
   message: string,
   messageType: number,
+  chatId: number,
   currentUser: number,
   idUsuario2: number,
 }

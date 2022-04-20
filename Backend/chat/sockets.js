@@ -86,8 +86,8 @@ const connectionSocket = (io)=>{
                     var to = usersOnline[data.idUsuario2]
                 }
             }
-            //socket.to(to).emit('receiveMessage',data);
-            socket.broadcast.emit('receiveMessage',data);
+            socket.to(to).emit('receiveMessage',data);
+            // socket.broadcast.emit('receiveMessage',data);
         })
 
     });
