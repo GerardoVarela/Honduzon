@@ -10,10 +10,10 @@ const obtenerPreguntas = require('./routes/preguntas-router');
 const login = require('./routes/login-routers');
 const categorias = require('./routes/categorias-routers');
 const productos = require ('./routes/productos-routers');
-const valoraciones = require('./routes/valoraciones-routers');
+const valoraciones = require('./routes/valoraciones.router');
 const admin = require('./routes/admin.routers');
 const keys = require ('./config/keys.config');
-const denuncias = require('./routes/denuncias-routers');
+const denuncias = require('./routes/denuncias.router');
 
 const chatRouter =require('./routes/chat-router');
 

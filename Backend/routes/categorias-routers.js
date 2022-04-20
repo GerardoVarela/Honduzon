@@ -22,17 +22,44 @@ router.get('/',(req,res)=>{
     });
 });
 
-router.post('/guardar',(req,res)=>{
+router.post('/guardar',verificacionCategoria,(req,res)=>{
     const categoria ={...req.body};
-    // console.log(categoria);
-    categoriaModel.insertCategoria(categoria).then(resultado=>{
-        res.send({
-            mensaje: 'Categoria ingresada con exito',
-            registroCat: true
-        })
-    })
+        categoriaModel.insertCategoria(categoria).then(resultado=>{
+            res.send({
+                registroCat: true
+            });
+    });
 });
 
+
+
+
+router.post('/editarCategoria/:idCategoria',(req,res)=>{
+    
+});
+
+
+function verificacionCategoria(req,res,next){
+    const categoria ={...req.body};
+    var existenciaCategoria = true;
+    categoriaModel.obtenerExistenciaCategoria(categoria.formCategoryName).then((resultado)=>{
+        if(typeof(resultado) == undefined){
+            res.status(500).send({
+                mensaje:'Error en el servidor'
+            })
+        }else{
+            console.log(resultado);
+            if(resultado.length == 0){
+                next();
+            }else{
+                res.json({
+                    existenciaCategoria
+                });
+                return;
+            }
+        }
+    })
+}
 
 module.exports={
     router:router

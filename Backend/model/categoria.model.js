@@ -51,6 +51,18 @@ async function obtenerCategoria(categoriaId){
     }
 }
 
+async function obtenerExistenciaCategoria(nombreCategoria){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let existenciaCategoria = await pool.request()
+        .input('CategoriaInput',mssql.VarChar,nombreCategoria)
+        .query('SELECT * FROM [dbo].[Categoria] WHERE NOMBRE_CATEGORIA= @CategoriaInput') 
+        return existenciaCategoria.recordset;
+    } catch (error) {
+        return error;
+    }
+}
+
 async function editarCategoria(categoriaModificada, categoriaId){
 
 }
@@ -59,5 +71,6 @@ module.exports={
     insertCategoria:insertCategoria,
     obtenerCategorias:obtenerCategorias,
     obtenerCategoria:obtenerCategoria,
-    editarCategoria:editarCategoria
+    editarCategoria,
+    obtenerExistenciaCategoria
 }
