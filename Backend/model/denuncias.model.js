@@ -28,7 +28,6 @@ async function insertarDenuncia(DENUNCIAS){
         let insertardenuncias = await pool.request()
         .input('denunciadoID', mssql.Int,denunciadoID )
         .input('denuncianteID', mssql.Int,denuncianteID )
-        .input('productoID', mssql.Int,productoID )
         .input('descripcion', mssql.VarChar,descripcion )
         .input('motivo', mssql.VarChar,motivo )
         .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@productoID,@descripcion,@motivo)');
