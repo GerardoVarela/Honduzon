@@ -5,7 +5,13 @@ var denunciasmodel = require('../model/denuncias.model');
 
 router.get('/getdenuncias', (req, res) => {
     denunciasmodel.getDenuncias().then((resultado) => {
-        res.send(resultado);
+        if(resultado.length == 0){
+            res.json(false)
+            return;
+        }{
+            res.send(resultado);
+        }
+        
     });
 }); 
 
