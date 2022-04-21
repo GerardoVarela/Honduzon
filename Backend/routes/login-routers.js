@@ -28,7 +28,25 @@ var loggedUser = {}
 var tempName = []
 var firstName = '';
 var lastName = '';
-router.post('/',adminVerification,(req,res, next)=>{
+
+
+router.post('/adminVerification',(req,res, next)=>{
+    adminLogin.getCredencialesAdministrador(req.body.formEmailLogin).then((resultado)=>{
+        if(resultado.length == 0){
+            res.send(false)
+        }else{
+            
+            
+            createdAdminToken = token.createToken(req.body.formEmailLogin,isAdmin);
+            logeado = true;
+            res.status(200).json(createdAdminToken);
+            return;
+        }
+    });
+});
+
+
+router.post('/',(req,res, next)=>{
     login.getCredencialesUsuario(req.body.formEmailLogin).then(resultado=>{
         
         if(resultado.length>0){
@@ -65,7 +83,9 @@ router.post('/',adminVerification,(req,res, next)=>{
     
 });
 
-router.get('/getloggeduser',verifyToken,loggedAdministrator,(req,res)=>{
+
+
+router.get('/getloggeduser',verifyToken,(req,res)=>{
     jwt.verify(req.token, jwtKey,(error, authedUser)=>{
         if (error){
             res.json({
@@ -88,40 +108,17 @@ router.get('/getloggeduser',verifyToken,loggedAdministrator,(req,res)=>{
         
     })
 });
-function verifyToken(req, res, next){
 
-    const bearerHeader = req.headers['authorization'];
-    if (typeof bearerHeader !== undefined){
-        const bearerToken = bearerHeader.split(' ')[1];
-        req.token = bearerToken;
-        next();
-    }else{
-        res.json({
-            tokenStatus:false,
-            mensaje:'No existe Token'
-        }) ;
-    }
-}
 
-function adminVerification(req,res,next){
-    adminLogin.getCredencialesAdministrador(req.body.formEmailLogin).then((resultado)=>{
-        if(resultado.length == 0){
-            next();
-        }else{
-            isAdmin = true;
-            
-            createdAdminToken = token.createToken(req.body.formEmailLogin,isAdmin);
-            logeado = true;
-            res.status(200).json({isAdmin,logeado,createdAdminToken});
-            return;
-        }
-    });
-}
 
-function loggedAdministrator(req,res,next){
+
+router.get('/loggedAdministrator',verifyToken,(req,res)=>{
     jwt.verify(req.token, adminJwtKey,(error, authedUser)=>{
         if (error){
-            next();
+            res.json({
+                mensaje:'Token no valido',
+                tokenAutenticado: false
+            });
         }else{
             adminLogin.getAdminLogeado(authedUser.email).then(resultado =>{
                 firstName = formatNames(resultado[0].NOMBRE);
@@ -138,6 +135,20 @@ function loggedAdministrator(req,res,next){
         }
         
     })
+});
+function verifyToken(req, res, next){
+
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== undefined){
+        const bearerToken = bearerHeader.split(' ')[1];
+        req.token = bearerToken;
+        next();
+    }else{
+        res.json({
+            tokenStatus:false,
+            mensaje:'No existe Token'
+        }) ;
+    }
 }
 
 

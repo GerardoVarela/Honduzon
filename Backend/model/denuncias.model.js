@@ -22,14 +22,14 @@ async function getDenunciaDeUsuario(ID_USUARIO){
 
 
 
-async function insertarDenuncia(DENUNCIAS){
+async function insertarDenuncia(denuncia){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let insertardenuncias = await pool.request()
-        .input('denunciadoID', mssql.Int,denunciadoID )
-        .input('denuncianteID', mssql.Int,denuncianteID )
-        .input('descripcion', mssql.VarChar,descripcion )
-        .input('motivo', mssql.VarChar,motivo )
+        .input('denunciadoID', mssql.Int,denuncia.denunciadoID )
+        .input('denuncianteID', mssql.Int,denuncia.denuncianteID )
+        .input('descripcion', mssql.VarChar,denuncia.descripcion )
+        .input('motivo', mssql.VarChar,denuncia.motivo )
         .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@productoID,@descripcion,@motivo)');
     
         return insertardenuncias.recordset;
