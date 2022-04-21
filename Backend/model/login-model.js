@@ -12,7 +12,7 @@ async function getUsuarioLogeado(correo){
         var pool = await mssql.connect(bdConfig.config);
         let correoUsuario = await pool.request()
         .input('correoInput',mssql.VarChar, correo)
-        .query('SELECT ID_USUARIO,NOMBRE, APELLIDO, IMAGENS FROM Usuarios WHERE CORREO_ELECTRONICO = @correoInput');
+        .query('SELECT ID_USUARIO,NOMBRE, APELLIDO, IMAGENS FROM Usuarios WHERE CORREO_ELECTRONICO = @correoInput and estado = 1');
         
         return correoUsuario.recordset;
     } catch (error) {
