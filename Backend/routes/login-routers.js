@@ -94,15 +94,24 @@ router.get('/getloggeduser',verifyToken,(req,res)=>{
             });
         }else{
             login.getUsuarioLogeado(authedUser.email).then(resultado =>{
-                firstName = formatNames(resultado[0].NOMBRE);
-                lastName = formatNames(resultado[0].APELLIDO);
 
-                loggedUser = {
+                if(resultado.length == 0){
+                    res.send(false);
+                    return;
+                }else{
+                    firstName = formatNames(resultado[0].NOMBRE);
+                    lastName = formatNames(resultado[0].APELLIDO);
+
+                    loggedUser = {
                     nombreCompleto : firstName + ' ' + lastName,
                     idUsuario : resultado[0].ID_USUARIO,
                     imagenPerfil: resultado[0].IMAGENS
-                };
-                res.json(loggedUser);
+                    };
+                    res.json(loggedUser);
+                    return;
+                }
+
+                
             })
         }
         
