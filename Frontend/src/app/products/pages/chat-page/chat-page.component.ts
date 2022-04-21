@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-page',
@@ -18,6 +19,7 @@ export class ChatPageComponent implements OnInit {
   public nuevoMensaje: string = '';
   public nameToShow: string = '';
   public role: string = '';
+  public successMsg : string = '';
   public msgPlaceholder: string = 'Seleccione un chat para comenzar a chatear...';
   public idParam: any;
   public withQParam: any;
@@ -26,6 +28,11 @@ export class ChatPageComponent implements OnInit {
   public allUserChats: any;
   public chatMsgs: any;
   public chatSelected: number | undefined; 
+
+  reportForm = new FormGroup({
+    formTopic: new FormControl('', Validators.required),
+    formDescription: new FormControl('', Validators.required),
+  });
 
   constructor(
     public chatService: ChatService, 
@@ -106,9 +113,28 @@ export class ChatPageComponent implements OnInit {
 
   }
 
-  report(content: any, idUser: number){
+  get formTopic() { return this.reportForm.get('formTopic'); }
+  get formDescription() { return this.reportForm.get('formDescription'); }
 
+  openReport(content: any){
     this.modalService.open(content, {centered: true});
+  }
+
+  report(content: any){
+    let jsonReport = {
+      denunciadoID : this.idUserToSend,
+      denuncianteID : this.idCurrentUser,
+      descripcion: this.formDescription,
+      motivo: this.formTopic,
+    };
+
+    this.httpClient.post(`${this.backendHost}/insertardenuncia`, jsonReport).subscribe(res=>{
+      console.log(res);
+    });
+    
+    this.successMsg = 'Denuncia realizada';
+    this.modalService.dismissAll();
+    this.modalService.open(content, { size: 'sm' });
   }
 
 }

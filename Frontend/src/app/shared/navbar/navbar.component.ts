@@ -9,6 +9,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { take } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
 
+interface Admin{
+  isAdmin: boolean,
+  logeado: boolean,
+  createdAdminToken: string
+}
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -21,6 +27,7 @@ export class NavbarComponent implements OnInit {
   public productos: any = [];
   public deptos: any = [];
   public preguntas:any  = {};
+  public loggedAdmin: boolean = false;
   public hayError!: boolean;
   public correoRegistrado!: boolean;
   public respuestaIncorrecta!: boolean;
@@ -32,6 +39,7 @@ export class NavbarComponent implements OnInit {
   private token: string = '';
   public recoveryQuestion : string ='';
   public loggedUser!: any;
+  public adminData: object = {};
 
   searchForm = new FormGroup({
     searchInput: new FormControl('')
@@ -107,14 +115,26 @@ export class NavbarComponent implements OnInit {
   login(content: any){
     this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
       this.token = res.toString();
+
       if(res){
         this.hayError = false;
         this.successMsg = 'Sesión Iniciada';
         this.modalService.dismissAll();
-        // localStorage.setItem('ACCESS_TOKEN',this.token);
-        this.cookieService.set('ACCESS_TOKEN', this.token);
-        this.modalService.open(content, { size: 'sm' });
-        this.getLoggedUser();
+        if(typeof this.token === 'string'){
+
+          // localStorage.setItem('ACCESS_TOKEN',this.token);
+          this.cookieService.set('ACCESS_TOKEN', this.token);
+          this.modalService.open(content, { size: 'sm' });
+          this.getLoggedUser();
+          console.log(res);
+          console.log(this.token);
+        }else{
+          this.loggedAdmin = true;
+          this.adminData = res;
+          console.log(res);
+        }
+        
+
       }else{
         this.hayError = true;
       }

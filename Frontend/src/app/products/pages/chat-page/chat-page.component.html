@@ -70,7 +70,7 @@
         >
           <ng-container *ngIf="chatSelected != undefined; else noNameToShow">
             <strong style="font-size: 22px; color: #47525e">{{nameToShow}} {{role}}</strong>
-            <a role="button" (click)="report(contentReport, idUserToSend)">
+            <a role="button" (click)="openReport(contentReport)">
               <img src="../../../../assets/warning.png" width="25x" height="25px" style="margin-left: 10px; margin-bottom: 5px;">
             </a>
           </ng-container>
@@ -254,29 +254,42 @@
         Cada denuncia es revisada a detalle, por lo que le pedimos que especifique bien el problema.
       </small>
     </div>
-    <!-- <div class="row">
-      <form [formGroup]="registerForm">
-        <div class="form-floating">
-          <input
-            type="text"
-            formControlName="formName"
-            class="border-bottom-custom form-control"
-            id="floatingName"
-            placeholder="Nombre"
-            [class.is-invalid]="formName!.invalid && formName!.touched"
-          />
-          <label for="floatingName">Nombre*</label>
-          <div class="invalid-feedback">Campo obligatorio.</div>
-        </div>
-      </form>
-    </div> -->
-    <div class="row">
-      <label for="exampleFormControlInput1" class="form-label">Asunto</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" style="padding-left: 25px; width: 350px" placeholder="Asunto específico y corto">
-    </div>
-    <div class="row">
-      <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="padding-left: 25px; width: 350px" placeholder="Detalle específicamente los sucesos"></textarea>
-    </div>
+    <form [formGroup]="reportForm">
+      <div class="row" style="justify-content: center">
+        <label for="exampleFormControlInput1" class="form-label">Asunto</label>
+        <input 
+            type="email" 
+            class="form-control" 
+            id="exampleFormControlInput1" 
+            style="padding-left: 25px; width: 400px" 
+            placeholder="Asunto específico y corto">
+      </div>
+      <div class="row" style="justify-content: center">
+        <label for="exampleFormControlTextarea1" class="form-label" style="margin-top:5px">Descripción</label>
+        <textarea 
+            class="form-control" 
+            id="exampleFormControlTextarea1" 
+            rows="3" 
+            style="padding-left: 25px; width: 400px" 
+            placeholder="Detalle específicamente los sucesos"></textarea>
+      </div>
+      <div class="row" style="margin-top: 10px; justify-content: right; padding-right: 25px;">
+        <button type="submit" 
+                style="color: white; background-color: #00bce4; margin-right: 5px; width: 150px; border-radius: 20px; border-width: 0px;" 
+                (click)="report(contentSuccess)">Enviar Denuncia</button>
+        <button style="color: white; background-color: red; width: 100px; border-radius: 20px; border-width: 0px;" 
+                (click)="modalReport.dismiss()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!--Modal Success-->
+<ng-template #contentSuccess let-modalSuccess>
+  <div
+    class="modal-body success-modal"
+    style="text-align: center; border-radius: 20px"
+  >
+    <p><br />{{ successMsg }} con éxito</p>
   </div>
 </ng-template>
