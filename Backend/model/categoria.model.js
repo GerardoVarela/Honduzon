@@ -30,7 +30,7 @@ async function obtenerCategorias(){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let categorias = await pool.request()
-        .query('SELECT * FROM [dbo].[Categoria]') 
+        .query('SELECT * FROM [dbo].[Categoria] where ESTADO = 1') 
         return categorias.recordset;
     } catch (error) {
         console.log(error);
