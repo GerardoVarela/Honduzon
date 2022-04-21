@@ -14,7 +14,7 @@ async function getDenunciaDeUsuario(ID_USUARIO){
         return result.recordset;     
     } 
             catch (error) {
-                     return error;
+                    return error;
                 } 
 }
     
