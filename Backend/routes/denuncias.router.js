@@ -26,7 +26,7 @@ router.get('/getdenuncias/:idUsuario', (req, res) => {
 
 router.post('/insertardenuncia', (req, res) => {
     let denuncia = {...req.body}
-    denunciasmodel.insertDenuncia(denuncia).then((resultado) => {
+    denunciasmodel.insertarDenuncia(denuncia).then((resultado) => {
         res.status(201).send({
             mensaje: 'Denuncia ingresada con exito',
             registroDenuncia: true
