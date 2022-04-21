@@ -30,7 +30,7 @@ async function insertarDenuncia(denuncia){
         .input('denuncianteID', mssql.Int,denuncia.denuncianteID )
         .input('descripcion', mssql.VarChar,denuncia.descripcion )
         .input('motivo', mssql.VarChar,denuncia.motivo )
-        .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@productoID,@descripcion,@motivo)');
+        .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@descripcion,@motivo)');
     
         return insertardenuncias.recordset;
     } catch (error) {
