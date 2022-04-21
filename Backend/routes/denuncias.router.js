@@ -8,7 +8,7 @@ router.get('/getdenuncias', (req, res) => {
         if(resultado.length == 0){
             res.json(false)
             return;
-        }{
+        }else{
             res.send(resultado);
         }
         
