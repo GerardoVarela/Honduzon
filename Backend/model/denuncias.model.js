@@ -42,7 +42,7 @@ async function getDenuncias(){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let correo = await pool.request()
-        .query('select * from DENUNCIAS');
+        .query('select * from DENUNCIAS JOIN Usuarios ON DENUNCIAS.denunciadoID = Usuarios.ID_USUARIO');
     
         return correo.recordset;
     } catch (error) {

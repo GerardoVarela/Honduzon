@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <section>
   <div
     class="card"
@@ -45,7 +47,7 @@
               class="col-md-6"
               style="width: 75%; padding-top: 40px; padding-left: 50px"
             >
-              <strong style="font-size: 40px">Gerardo Varela </strong>
+              <strong style="font-size: 40px">Pedro Alejandro</strong>
             </div>
           </div>
         </div>
@@ -191,10 +193,10 @@
         margin-top: 15px;
       "
     >
-      <div class="row" style>
-        <div class="col" style>
+      <div class="col">
+        <div class="row" *ngFor="let cat of categories">
           <div
-            (click)="openLG(contenido2)"
+            (click)="openLG(contenido2, cat.NOMBRE_CATEGORIA, cat.ID_CATEGORIA)"
             (click)="modal.dismiss('Cross click')"
             id="cat"
             style="
@@ -206,7 +208,7 @@
               padding: 5px 0px 0px 15px;
             "
           >
-            <strong>Bold</strong>
+            <strong>{{cat.NOMBRE_CATEGORIA}}</strong>
           </div>
         </div>
       </div>
@@ -260,7 +262,7 @@
     ></button>
   </div>
   <div class="modal-body" style="text-align: center">
-    <strong style="font-size: 25px; margin-left: 15px">Nombre Categoria</strong>
+    <strong style="font-size: 25px; margin-left: 15px">{{categorysNameSelected}}</strong>
     <div class="container" style="margin-top: 15px">
       <div class="row">
         <div class="col-md-6">
@@ -273,6 +275,7 @@
             <div class="col">
               <button
                 class="btn btn-success"
+                (click)="actualizarCategoria()"
                 type="button"
                 style="
                   background: #13ce66;
@@ -291,6 +294,7 @@
               <button
                 class="btn btn-danger"
                 type="button"
+                (click)="eliminarCategoria()"
                 style="
                   background: #ff0005;
                   min-width: 200px;
@@ -311,6 +315,7 @@
               <input
                 type="text"
                 placeholder="Nombre Categoria"
+                [(ngModel)]="newCategoryName"
                 style="
                   border-radius: 20px;
                   min-width: 300px;
@@ -326,6 +331,7 @@
               <input
                 type="text"
                 placeholder="Ingrese una descripcion"
+                [(ngModel)]="newCategoryDescription"
                 style="
                   min-height: 150px;
                   border-radius: 20px;
@@ -401,6 +407,7 @@
               <button
                 class="btn btn-info"
                 type="button"
+                (click)="addNewCategory()"
                 style="
                   background: #00bce4;
                   min-width: 200px;
@@ -422,6 +429,7 @@
               <input
                 type="text"
                 placeholder="Nombre Categoria"
+                [(ngModel)]="addNewCategoryName"
                 style="
                   border-radius: 20px;
                   min-width: 300px;
@@ -437,6 +445,7 @@
               <input
                 type="text"
                 placeholder="Ingrese una descripcion"
+                [(ngModel)]="addNewCategoryDescription"
                 style="
                   min-height: 150px;
                   border-radius: 20px;
@@ -511,15 +520,15 @@
         "
       >
         <div class="row">
-          <div class="col-md-4" style="text-align: center">
+          <div class="col-md-6" style="text-align: center">
             <strong>Usuario</strong>
           </div>
-          <div class="col-md-4" style="text-align: center">
+          <div class="col-md-6" style="text-align: center">
             <strong>Asunto</strong>
           </div>
-          <div class="col-md-4" style="text-align: center">
+          <!-- <div class="col-md-4" style="text-align: center">
             <strong>Fecha</strong>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -538,6 +547,7 @@
         <div
           class="row"
           type="button"
+          *ngFor="let den of denuncias"
           (click)="openLG(contenido4)"
           (click)="modal.dismiss('Cross click')"
           id="cat"
@@ -554,7 +564,7 @@
           "
         >
           <div
-            class="col-md-4"
+            class="col-md-6"
             style="
               text-align: left;
               border-right-style: solid;
@@ -562,10 +572,10 @@
               border-color: #47525e63;
             "
           >
-            <strong>Master Race Jorge Miguel Varela Oliva</strong>
+            <strong>{{den.NOMBRE}} {{den.APELLIDO}}</strong>
           </div>
           <div
-            class="col-md-4"
+            class="col-md-6"
             style="
               text-align: left;
               border-right-style: solid;
@@ -573,13 +583,13 @@
               border-color: #47525e63;
             "
           >
-            <strong>El scrum nos explota y no paga lo debido</strong>
+            <strong>{{den.motivo}}</strong>
           </div>
-          <div class="col-md-4" style="text-align: center">
+          <!-- <div class="col-md-4" style="text-align: center">
             <strong>12/06/2022</strong>
-          </div>
+          </div> -->
         </div>
-        <div
+        <!-- <div
           class="row"
           type="button"
           (click)="openLG(contenido4)"
@@ -666,7 +676,7 @@
           <div class="col-md-4" style="text-align: center">
             <strong>12/06/2022</strong>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

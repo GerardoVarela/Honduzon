@@ -254,12 +254,13 @@
         Cada denuncia es revisada a detalle, por lo que le pedimos que especifique bien el problema.
       </small>
     </div>
-    <form [formGroup]="reportForm">
+    <!-- <form [formGroup]="reportForm"> -->
       <div class="row" style="justify-content: center">
         <label for="exampleFormControlInput1" class="form-label">Asunto</label>
         <input 
             type="email" 
             class="form-control" 
+            [(ngModel)]="motivoDenuncia"
             id="exampleFormControlInput1" 
             style="padding-left: 25px; width: 400px" 
             placeholder="Asunto específico y corto">
@@ -268,6 +269,7 @@
         <label for="exampleFormControlTextarea1" class="form-label" style="margin-top:5px">Descripción</label>
         <textarea 
             class="form-control" 
+            [(ngModel)]="descripcionDenuncia"
             id="exampleFormControlTextarea1" 
             rows="3" 
             style="padding-left: 25px; width: 400px" 
@@ -280,7 +282,7 @@
         <button style="color: white; background-color: red; width: 100px; border-radius: 20px; border-width: 0px;" 
                 (click)="modalReport.dismiss()">Cancelar</button>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </ng-template>
 

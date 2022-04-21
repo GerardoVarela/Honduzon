@@ -432,14 +432,19 @@ CREATE TABLE DENUNCIAS(
 denunciasID int primary key identity(1,1),
 denunciadoID int,
 denuncianteID int,
-PRODUCTOID int,
 descripcion varchar(100),
 motivo varchar(150),
 foreign key (denunciadoID) references Usuarios (ID_USUARIO),
 foreign key (denuncianteID) references Usuarios (ID_USUARIO),
-foreign key (PRODUCTOID) references PRoductos (ID_PRODUCTO)
 
 );
+
+UPDATE Usuarios SET ESTADO = 1;
+UPDATE Categoria SET ESTADO = 1;
+UPDATE Productos SET ESTADO = 1;
+
+UPDATE Categoria SET ESTADO = 1 WHERE ID_CATEGORIA = 7
+SELECT * FROM Categoria
 
 select * from DENUNCIAS where denunciadoID=1
 
