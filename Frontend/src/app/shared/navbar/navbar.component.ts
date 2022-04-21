@@ -9,12 +9,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { take } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
 
-interface Admin{
-  isAdmin: boolean,
-  logeado: boolean,
-  createdAdminToken: string
-}
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -37,8 +31,10 @@ export class NavbarComponent implements OnInit {
   public respLogin!: any;
   public confirmPasswordControl!: any;
   private token: string = '';
+  private respuesta!: any;
   public recoveryQuestion : string ='';
   public loggedUser!: any;
+  public loggedUserAdmin!: any;
   public adminData: object = {};
 
   searchForm = new FormGroup({
@@ -112,33 +108,58 @@ export class NavbarComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' });
   }
   
-  login(content: any){
-    this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
-      this.token = res.toString();
+  async login(content: any){
 
+    this.httpClient.post(`${this.backendHost}/login/adminVerification`, this.loginForm.value).subscribe(res=>{
+      this.token = res.toString();
+      console.log(res)
       if(res){
         this.hayError = false;
+        this.loggedAdmin = true;
         this.successMsg = 'Sesión Iniciada';
         this.modalService.dismissAll();
-        if(typeof this.token === 'string'){
 
+        // localStorage.setItem('ACCESS_TOKEN',this.token);
+        this.cookieService.set('ACCESS_TOKEN', this.token);
+        this.modalService.open(content, { size: 'sm' });
+        this.getLoggedAdmin();
+        console.log(res);
+        console.log(this.token);
+      }
+    });
+
+    if(this.loggedAdmin != true){
+      this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
+        this.token = res.toString();
+        if(res){
+          this.hayError = false;
+          this.successMsg = 'Sesión Iniciada';
+          this.modalService.dismissAll();
+  
           // localStorage.setItem('ACCESS_TOKEN',this.token);
           this.cookieService.set('ACCESS_TOKEN', this.token);
           this.modalService.open(content, { size: 'sm' });
           this.getLoggedUser();
           console.log(res);
           console.log(this.token);
+          
         }else{
-          this.loggedAdmin = true;
-          this.adminData = res;
-          console.log(res);
+          this.hayError = true;
         }
-        
+      });
+    }
+  }
 
-      }else{
-        this.hayError = true;
-      }
-    });
+  async getLoggedAdmin(){
+    let respAdmin = this.httpClient.get(`${this.backendHost}/login/loggedAdministrator`,{
+      headers:new HttpHeaders({
+        authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
+      })
+    }).pipe(take(1));
+
+    this.loggedUserAdmin = await lastValueFrom(respAdmin);
+    console.log(this.loggedUserAdmin);
+    this.router.navigate(['/home/admin']);
   }
 
   async getLoggedUser(){
@@ -149,12 +170,14 @@ export class NavbarComponent implements OnInit {
     }).pipe(take(1));
 
     this.loggedUser = await lastValueFrom(resp);
+    console.log(this.loggedUser);
   }
 
   logout(content: any):void{
     this.token = '';
     this.cookieService.delete('ACCESS_TOKEN');
     // localStorage.removeItem('ACCESS_TOKEN');
+    this.loggedAdmin = false;
     this.successMsg = 'Sesión cerrada';
     this.modalService.open(content, { size: 'sm' });
   }

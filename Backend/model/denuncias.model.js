@@ -30,7 +30,7 @@ async function insertarDenuncia(denuncia){
         .input('denuncianteID', mssql.Int,denuncia.denuncianteID )
         .input('descripcion', mssql.VarChar,denuncia.descripcion )
         .input('motivo', mssql.VarChar,denuncia.motivo )
-        .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@productoID,@descripcion,@motivo)');
+        .query('insert into DENUNCIAS values (@denunciadoID,@denuncianteID,@descripcion,@motivo)');
     
         return insertardenuncias.recordset;
     } catch (error) {
@@ -42,7 +42,7 @@ async function getDenuncias(){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let correo = await pool.request()
-        .query('select * from DENUNCIAS');
+        .query('select * from DENUNCIAS JOIN Usuarios ON DENUNCIAS.denunciadoID = Usuarios.ID_USUARIO');
     
         return correo.recordset;
     } catch (error) {

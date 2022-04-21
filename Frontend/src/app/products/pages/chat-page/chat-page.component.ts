@@ -20,6 +20,8 @@ export class ChatPageComponent implements OnInit {
   public nameToShow: string = '';
   public role: string = '';
   public successMsg : string = '';
+  public motivoDenuncia: string = '';
+  public descripcionDenuncia : string = '';
   public msgPlaceholder: string = 'Seleccione un chat para comenzar a chatear...';
   public idParam: any;
   public withQParam: any;
@@ -124,11 +126,13 @@ export class ChatPageComponent implements OnInit {
     let jsonReport = {
       denunciadoID : this.idUserToSend,
       denuncianteID : this.idCurrentUser,
-      descripcion: this.formDescription,
-      motivo: this.formTopic,
+      descripcion: this.descripcionDenuncia,
+      motivo: this.motivoDenuncia,
     };
 
-    this.httpClient.post(`${this.backendHost}/insertardenuncia`, jsonReport).subscribe(res=>{
+    console.log(JSON.stringify(jsonReport));
+
+    this.httpClient.post(`${this.backendHost}/denuncias/insertardenuncia`, jsonReport).subscribe(res=>{
       console.log(res);
     });
     
