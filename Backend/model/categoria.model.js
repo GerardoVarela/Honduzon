@@ -17,7 +17,7 @@ async function insertCategoria(categoria){
         .input('NOMBRE_CATEGORIA', mssql.VarChar,categoria.formCategoryName)
         .input('DESCRIPCION_CATEGORIA', mssql.VarChar,categoria.formCategoryDescription)
         .input('IMAGEN_CATEGORIA',mssql.VarBinary,categoria.formImageInput)
-        .input('ID_ADMINISTRADOR',mssql.Int,categoria.formAdmin)
+        .input('ID_ADMINISTRADOR',mssql.Int,categoria.currentAdmin)
         .query('INSERT INTO Categoria(NOMBRE_CATEGORIA, DESCRIPCION_CATEGORIA, ID_ADMINISTRADOR) VALUES (@NOMBRE_CATEGORIA,@DESCRIPCION_CATEGORIA,@ID_ADMINISTRADOR)'); 
         return insertarCategoria.recordsets;
     } catch (error) {
