@@ -33,6 +33,8 @@ router.post('/guardar',verificacionCategoria,(req,res)=>{
 });
 
 
+router.post('/suscribir',(req,res)=>{});
+
 
 
 router.put('/editarCategoria/:idCategoria',(req,res)=>{
