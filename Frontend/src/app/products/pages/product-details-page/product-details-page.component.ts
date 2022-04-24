@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselConfig, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,15 +17,18 @@ export class ProductDetailsPageComponent implements OnInit {
     { img: '../assets/1_2.jpg' },
   ];
 
-  public backendHost: string = 'http://localhost:8888';
-  public idParam!: any;
-  public productDetail!: any;
-  public loggedUser?: any;
-  public createdChat : any;
+  public backendHost    : string = 'http://localhost:8888';
+  public idParam!       : any;
+  public productDetail! : any;
+  public loggedUser?    : any;
+  public createdChat    : any;
+  public currentRate    : number = 5; 
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private httpClient: HttpClient,
     private _config: NgbCarouselConfig,
+    private ratingConfig: NgbRatingConfig,
     private cookieService: CookieService,
     private router: Router,
     private socket : SocketService
@@ -33,6 +36,7 @@ export class ProductDetailsPageComponent implements OnInit {
     _config.pauseOnHover = true;
     _config.showNavigationIndicators = true;
     _config.animation = true;
+    ratingConfig.max = 5;
   }
 
   ngOnInit(): void {
@@ -47,8 +51,8 @@ export class ProductDetailsPageComponent implements OnInit {
 
     this.idParam = await lastValueFrom(id);
 
+    console.log(this.idParam['id_product'])
     let resp = this.httpClient.get(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`).pipe(take(1))
-
     this.productDetail = await lastValueFrom(resp);
     console.log(this.productDetail);
   }
@@ -85,5 +89,15 @@ export class ProductDetailsPageComponent implements OnInit {
 
     });
 
+  }
+
+  rated(idRatedUser: number){
+    
+    let rateJson= {
+      ID_USUARIO: idRatedUser, 
+      VALORACION: this.currentRate
+    }
+    this.httpClient.put(`${this.backendHost}/valoraciones/insertarvaloracion`, rateJson).subscribe( console.log );
+    
   }
 }
