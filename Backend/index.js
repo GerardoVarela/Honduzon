@@ -17,6 +17,7 @@ const denuncias = require('./routes/denuncias.router');
 
 const chatRouter =require('./routes/chat-router');
 
+const scheduler = require('./jobs/jobscheduler.jobs').startSchedulingFunction();
 
 
 const io = require('socket.io')(http,{
