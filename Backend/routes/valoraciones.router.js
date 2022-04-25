@@ -18,10 +18,11 @@ router.post('/insertarvaloracion',validacionValoracion,(req,res)=>{
 
 router.get('/valoracion/:ID_USUARIO',(req,res)=>{
     valoracionModel.getValoracion(req.params.ID_USUARIO).then(resultado=>{
-        if(resultado[0].VALORACION_USUARIO== null){
-            return res.send([{
+        if(resultado[0].VALORACION_USUARIO == null){
+            res.send([{
                 VALORACION_USUARIO: 0
             }]);
+            return ;
         }else{
             res.status(200).json(resultado);
             return;

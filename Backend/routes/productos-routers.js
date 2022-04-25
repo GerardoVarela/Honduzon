@@ -79,10 +79,14 @@ router.get('/getprodcat/:idCat',(req,res)=>{
 })
 
 
-router.delete('/borrarproducto',(req,res)=>{});
+router.delete('/borrarproducto',(req,res)=>{
+    //Funcion para darle de baja a algun producto
+});
 
 
-
+router.post('/listaDeseos',(req,res)=>{
+    //Funcion para la listas de deseos
+});
 
 module.exports={
     router:router

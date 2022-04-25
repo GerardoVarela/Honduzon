@@ -251,6 +251,21 @@ async function getCantTotalProdUsuario (idUsuario){
 
 
 
+async function darBajaProducto(idProducto){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let darBajaProd = await pool.request()
+        .input('idProducto', mssql.Int, idProducto)
+        .query('UPDATE Productos SET ESTADO = 0 WHERE ID_PRODUCTO = @idProducto');
+        return darBajaProd.recordset;
+    } catch (error) {
+        return error;
+    }
+}
+
+
+
+
 module.exports={
     /*
     con ES6, cuando se exporta las funciones con mismo nombre, se puede solo poner el nombre de la funcion

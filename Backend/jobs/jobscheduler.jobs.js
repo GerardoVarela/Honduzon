@@ -1,9 +1,7 @@
 const Bree = require('bree');
 
 
-async function scheduleEmail(){
 
-}
 
 const bree = new Bree({
 
