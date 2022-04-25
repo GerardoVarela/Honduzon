@@ -5,7 +5,7 @@ var valoracionModel = require('../model/valoracion.model');
 
 
 
-router.post('/insertarvaloracion',(req,res)=>{
+router.post('/insertarvaloracion',validacionValoracion,(req,res)=>{
     let valoracion = {...req.body}
     valoracionModel.insertValoracion(valoracion).then(resultado=>{
         res.status(201).send({
@@ -18,11 +18,35 @@ router.post('/insertarvaloracion',(req,res)=>{
 
 router.get('/valoracion/:ID_USUARIO',(req,res)=>{
     valoracionModel.getValoracion(req.params.ID_USUARIO).then(resultado=>{
-        if(resultado.length==0){
-            return res.send(0);
-        }else 
-        res.send(resultado)
+        if(resultado[0].VALORACION_USUARIO== null){
+            return res.send([{
+                VALORACION_USUARIO: 0
+            }]);
+        }else{
+            res.status(200).json(resultado);
+            return;
+        } 
     })
 })
+
+
+function validacionValoracion (req,res,next){
+    let valoracion = {...req.body};
+    valoracionModel.existenciaValoracion(valoracion.ID_USUARIO_VALORA).then(resultado=>{
+        if(resultado.length==0){
+            next();
+        }else{
+            valoracionModel.updateValoracion(valoracion).then(resultado=>{
+                res.status(200).send({
+                    mensaje:'Actualizacion Valoracion ha sido Existosa',
+                    updateValoracion:true
+                });
+                return;
+            });
+        } 
+        
+    })
+}
+
 
 module.exports={router:router}
