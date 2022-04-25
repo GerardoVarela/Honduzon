@@ -19,6 +19,7 @@ async function insertValoracion(valoracion){
         let insertarValoracion = await pool.request()
         .input('ID_USUARIO',mssql.Int,valoracion.ID_USUARIO)
         .input('VALORACION',mssql.Int,valoracion.VALORACION)
+        .input('ID_USUARIO_VALORA',mssql.Int,valoracion.ID_USUARIO_VALORA)
         .query('INSERT INTO VALORACION (ID_USUARIO,VALORACION) VALUES (@ID_USUARIO,@VALORACION)')
         return insertarValoracion.recordset;
     } catch (error) {

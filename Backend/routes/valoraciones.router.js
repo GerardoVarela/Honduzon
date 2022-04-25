@@ -5,7 +5,7 @@ var valoracionModel = require('../model/valoracion.model');
 
 
 
-router.post('/insertarvaloracion',(req,res)=>{
+router.put('/insertarvaloracion',(req,res)=>{
     let valoracion = {...req.body}
     valoracionModel.insertValoracion(valoracion).then(resultado=>{
         res.status(201).send({
