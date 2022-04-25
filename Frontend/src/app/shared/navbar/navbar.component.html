@@ -86,14 +86,16 @@
                 Mensaje
               </a>            
             </li>
-            <li class="nav-item">
-              <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i>
+            <li class="nav-item" *ngIf="loggedUser !== undefined">
+              <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
+              <img src="../../../assets/profile-pics/user_{{loggedUser.idUsuario}}.jpg" 
+                    alt="../../../assets/profile-pics/user_default.jpg"
+                    style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
             </li>
             <div ngbDropdown style="padding-top:9px; margin-right:5px">
               <a
                   id="dropdownUser" 
                   ngbDropdownToggle
-                  href="#" 
                   *ngIf="loggedUser !== undefined"
                   style="font-size: 18px; color:#00BCE4; font-weight: bold; text-decoration: none;">
                 {{loggedUser.nombreCompleto}}
@@ -107,6 +109,12 @@
                 <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
                 producto
               </button>
+            </li>
+            <li class="nav-item" style="padding-top: 8px">
+              <!-- <a routerLink="/chat"> -->
+              <a role="button" (click)="open(contentWishList)">
+                <i id="iconBookmark" class="fas fa-bookmark"></i>
+              </a>
             </li>
           </ng-container>
           <ng-template #adminGotLogged>
@@ -451,7 +459,7 @@
   </div>
 </ng-template>
 
-
+<!-- Modal Términos y Condiciones-->
 <ng-template #contentTermsConds let-modalTermsConds>
   <div id="modal-1" class="modal fade show" role="dialog" tabindex="-1" style="display: block;" aria-hidden="true" aria-labelledby="titulo-honduzon">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -487,6 +495,30 @@
   </div>
 </ng-template>
 
+<!-- Modal Wish List -->
+<ng-template #contentWishList let-modalWishList>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalWishList.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center; margin-bottom: 10px">
+    <div class="row" style="padding-bottom: 20px">
+      <h4 class="modal-title">
+        Lista de Deseos
+      </h4>
+    </div>
+
+    <div class="row" style="text-align: left; margin-left: 50px;">
+      <li>Probando</li>
+    </div>
+
+  </div>
+</ng-template>
+
 <!-- Modal Recuperar Contraseña -->
 <ng-template #contentRecover let-modalRecover>
   <div class="modal-header">
@@ -517,32 +549,6 @@
         <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
 
-      <!-- <div class="form-check">
-        <input class="form-check-input" 
-                style="margin-top: 0!important" 
-                type="radio" 
-                value="email" 
-                name="formRadioBRecover" 
-                formControlName="formRadioBRecover" 
-                id="flexRadioDefault1" 
-                checked>
-        <label class="form-check-label" for="flexRadioDefault1">
-          Recibir correo electrónico
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" 
-                style="margin-top: 0!important" 
-                type="radio" 
-                value="question" 
-                name="formRadioBRecover" 
-                formControlName="formRadioBRecover"
-                id="flexRadioDefault2"  (click)="showQuestion()">
-        <label class="form-check-label" for="flexRadioDefault2">
-          Contestar pregunta de seguridad
-        </label>
-      </div> -->
-
       <button
         id="btn-modal"
         class="btn btn-primary btn-blue-animate"
@@ -551,49 +557,9 @@
         (click)="recoverByEmail(contentSuccess)">
           Enviar Correo
       </button>
-      <!-- <ng-container *ngIf="formRadioBRecover!.value === 'email'; else elseThenAns">
-        <button
-          id="btn-modal"
-          class="btn btn-primary btn-blue-animate"
-          type="submit"
-          [disabled]="formEmailRecover!.value === null || formEmailRecover!.value === ''"
-          (click)="recoverByEmail(contentSuccess)">
-            Enviar Correo
-        </button>
-      </ng-container>
-      <ng-template #elseThenAns>
-        <div style="text-align: center; margin-top: 5%">
-          <p id="texto" style="margin-bottom: 0!important">{{recoveryQuestion}}</p>
-        </div>
-
-        <div class="form-floating">
-          <input
-            type="text"
-            formControlName="formRespRecover"
-            class="border-bottom-custom form-control"
-            id="floatingResp"
-            placeholder="Respuesta"
-            [class.is-invalid]="formRespRecover!.touched && (formRespRecover!.value === null || formRespRecover!.value === '')"
-          />
-          <label for="floatingResp">Respuesta</label>
-          <div class="invalid-feedback">Campo obligatorio.</div>
-        </div>
-
-        <button
-          id="btn-modal"
-          class="btn btn-primary btn-blue-animate"
-          type="submit"
-          [disabled]="(formRespRecover!.value === null || formRespRecover!.value === '') || (formEmailRecover!.value === null || formEmailRecover!.value === '')"
-          (click)="recoverByAnswer()">
-            Enviar Respuesta
-        </button>
-      </ng-template> -->
       <div *ngIf="correoRegistrado === false" class="alert alert-danger">
         Este correo no está registrado en la plataforma.
       </div>
-      <!-- <div *ngIf="(respuestaIncorrecta === true) && (correoRegistrado === true)" class="alert alert-danger">
-        Respuesta incorrecta.
-      </div> -->
     </form>
   </div>
 </ng-template>

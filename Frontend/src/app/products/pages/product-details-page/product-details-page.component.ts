@@ -3,9 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarouselConfig, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { switchMap, take, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../../services/socket.service';
+import { ProductDetail } from '../../interfaces/product-detail.interface';
+
+interface Valoracion{
+  VALORACION_USUARIO: number
+}
+
 @Component({
   selector: 'app-product-details-page',
   templateUrl: './product-details-page.component.html',
@@ -23,6 +29,8 @@ export class ProductDetailsPageComponent implements OnInit {
   public loggedUser?    : any;
   public createdChat    : any;
   public currentRate    : number = 5; 
+  public valoracion     : number | undefined; 
+  public isRated   : boolean = false; 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,9 +60,14 @@ export class ProductDetailsPageComponent implements OnInit {
     this.idParam = await lastValueFrom(id);
 
     console.log(this.idParam['id_product'])
-    let resp = this.httpClient.get(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`).pipe(take(1))
-    this.productDetail = await lastValueFrom(resp);
-    console.log(this.productDetail);
+
+    this.httpClient.get<ProductDetail>(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`)
+        .pipe(
+          tap( res => this.productDetail = res),
+          switchMap( ({ID_USUARIO}) => this.httpClient.get<Valoracion[]>(`${this.backendHost}/valoraciones/valoracion/${ID_USUARIO}`) )
+        )
+        .subscribe( res => this.valoracion = res[0].VALORACION_USUARIO);
+
   }
 
   async getLoggedUser(){
@@ -91,13 +104,23 @@ export class ProductDetailsPageComponent implements OnInit {
 
   }
 
-  rated(idRatedUser: number){
+  rated(idRatedUser: number, idCurrentUser: number){
     
     let rateJson= {
       ID_USUARIO: idRatedUser, 
-      VALORACION: this.currentRate
+      VALORACION: this.currentRate,
+      ID_USUARIO_VALORA: idCurrentUser,
     }
-    this.httpClient.put(`${this.backendHost}/valoraciones/insertarvaloracion`, rateJson).subscribe( console.log );
+    this.httpClient.post(`${this.backendHost}/valoraciones/insertarvaloracion`, rateJson).subscribe( console.log );
+    
+    this.httpClient.get<ProductDetail>(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`)
+        .pipe(
+          tap( res => this.productDetail = res),
+          switchMap( ({ID_USUARIO}) => this.httpClient.get<Valoracion[]>(`${this.backendHost}/valoraciones/valoracion/${ID_USUARIO}`) )
+        )
+        .subscribe( res => this.valoracion = res[0].VALORACION_USUARIO);
+
+    this.isRated = true;
     
   }
 }

@@ -2,8 +2,8 @@
 
 <section id="general-section"> 
   <div class="container">
-    <div *ngIf="productDetail === undefined" style="height:500px; position: relative"></div>
-    <div class="row" *ngIf="productDetail !== undefined">
+    <div *ngIf="productDetail === undefined && valoracion === undefined" style="height:500px; position: relative"></div>
+    <div class="row" *ngIf="productDetail !== undefined && valoracion !== undefined">
       <div class="col-md-6">
         <div class="card" id="product-card">
           <div class="card-body">
@@ -31,11 +31,6 @@
                         Chat para comprar
                       </button>
                     <!-- </a> -->
-                  </div>
-                  <div>
-                    <small style="font-size: 14px; color: #47525e">
-                      95% positive feedback
-                    </small>
                   </div>
                 </div>
               </div>
@@ -170,8 +165,9 @@
                           </a>
                           <div>
                             <div style="text-align: center; padding: -20px">    
-                              <ngb-rating class="s-color" [(rate)]="currentRate" (rateChange)="rated(productDetail.ID_USUARIO)"></ngb-rating>
-                              <p style="font-size: small">5 Valoraciones</p>
+                              <ngb-rating class="s-color" [(rate)]="currentRate" (rateChange)="rated(productDetail.ID_USUARIO, loggedUser.idUsuario)"></ngb-rating>
+                              <p style="font-size: small">{{valoracion}} Valoraciones</p>
+                              <div *ngIf="isRated !== false" class="text-success">¡Gracias!</div>
                             </div>
                           </div>
                         </div>

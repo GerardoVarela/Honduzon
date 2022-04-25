@@ -28,3 +28,17 @@ img {
   border-color: #8190a5;
   border-width: 2px;
 }
+
+#productName:hover{
+  text-decoration: underline;
+  text-decoration-color: #8190a5;
+}
+
+#heartIcon:hover {
+  transform: scale(0.9);
+  /* bacolor:red; */
+}
+
+.selectedHeart{
+  color: tomato;
+}

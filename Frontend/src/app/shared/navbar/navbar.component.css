@@ -200,6 +200,7 @@ select:focus-visible {
   color: rgba(51, 51, 51, 0.6);
 }
 
+
 #mensaje {
   font-size: 18px;
   font-weight: bold;
@@ -242,4 +243,11 @@ select:focus-visible {
 .btn-accept-terms-conds {
   background-color: #00BCE4;
   border-color: #00bce4;
+}
+
+#iconBookmark {
+  font-size: 25px;
+  margin-left: 10px;
+  height: 16px;
+  color: #00bce4;
 }
