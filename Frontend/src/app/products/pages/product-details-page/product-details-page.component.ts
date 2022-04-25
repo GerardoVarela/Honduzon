@@ -113,12 +113,8 @@ export class ProductDetailsPageComponent implements OnInit {
     }
     this.httpClient.post(`${this.backendHost}/valoraciones/insertarvaloracion`, rateJson).subscribe( console.log );
     
-    this.httpClient.get<ProductDetail>(`${this.backendHost}/productos/obtenerdetalleproducto/${this.idParam['id_product']}`)
-        .pipe(
-          tap( res => this.productDetail = res),
-          switchMap( ({ID_USUARIO}) => this.httpClient.get<Valoracion[]>(`${this.backendHost}/valoraciones/valoracion/${ID_USUARIO}`) )
-        )
-        .subscribe( res => this.valoracion = res[0].VALORACION_USUARIO);
+    this.httpClient.get<Valoracion[]>(`${this.backendHost}/valoraciones/valoracion/${idRatedUser}`)
+      .subscribe( res => this.valoracion = res[0].VALORACION_USUARIO);
 
     this.isRated = true;
     
