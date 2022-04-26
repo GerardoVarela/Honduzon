@@ -6,7 +6,7 @@ const Bree = require('bree');
 const bree = new Bree({
 
         jobs:[{
-            name:'sendAnunciosEmails',
+            name:'emailLogic',
             // cron:'* * * * *',
             interval:'Every 10 seconds',
             worker:{

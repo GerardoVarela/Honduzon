@@ -1,4 +1,4 @@
-var pdf = require('html-pdf');
+const pdf = require('html-pdf')
 
 function plantillaPDF(nombreCategoria, articulosAnuncio,){}
 
@@ -22,7 +22,7 @@ var contenido = `
     <div class="card-group">
         <div class="card"><img class="card-img-top w-100 d-block">
             <div class="card-body">
-                <h4 class="card-title">${nombreCategoria}</h4>
+                <h4 class="card-title">marito</h4>
                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
             </div>
         </div>
@@ -66,7 +66,7 @@ var contenido = `
 </html>
 `;
 
-pdf.create(contenido).toFile(`./anunciosPdf/${nombreCategoria}.pdf`, function(err, res) {
+pdf.create(contenido).toFile(`marito.pdf`, function(err, res) {
     if (err){
         console.log(err);
     } else {

@@ -175,13 +175,26 @@ async function obtenerTablaSuscripcion(){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenersuscripcion = await pool.request()
-        .query('SELECT Categoria.NOMBRE_CATEGORIA AS NOMBRE_CATEGORIA FROM USUARIOSxCATEGORIAS JOIN Categoria ON Categoria.ID_CATEGORIA = USUARIOSxCATEGORIAS.ID_CATEGORIA');
+        .query('SELECT CATEGORIA.ID_CATEGORIA,Usuarios.CORREO_ELECTRONICO,Usuarios.ID_USUARIO FROM USUARIOSxCATEGORIAS JOIN Categoria ON USUARIOSxCATEGORIAS.ID_CATEGORIA= Categoria.ID_CATEGORIA JOIN USUARIOS ON USUARIOSxCATEGORIAS.ID_USUARIO=Usuarios.ID_USUARIO GROUP BY CORREO_ELECTRONICO,CATEGORIA.ID_CATEGORIA,Usuarios.ID_USUARIO');
         return obtenersuscripcion.recordset;
     }catch (error) {
         return error;
     }
 }
- 
+
+async function getCategoriasSuscritas(correoElectronico){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let getCategoriasSuscritas = await pool.request()
+        .input('correoELectronico',mssql.VarChar, correoElectronico)
+        .query('select CATEGORIA.NOMBRE_CATEGORIA from usuariosXcategorias join Categoria on usuariosxcategorias.ID_CATEGORIA=categoria.ID_CATEGORIA join usuarios on usuariosxcategorias.ID_USUARIO=usuarios.id_usuario where usuarios.CORREO_ELECTRONICO = @correoELectronico');
+        return getCategoriasSuscritas.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+
 module.exports={
     insertCategoria:insertCategoria,
     obtenerCategorias:obtenerCategorias,
@@ -195,5 +208,6 @@ module.exports={
     obtenerSuscripcionesUsuario,
     obtenerSuscripcionDeUsuario,
     obtenerSuscripcionesdeUsuarios,
-    obtenerTablaSuscripcion
+    obtenerTablaSuscripcion,
+    getCategoriasSuscritas
 }
