@@ -64,7 +64,7 @@ router.post('/suscribir',verificacionSuscripcion,(req,res)=>{
     console.log('despues del middle ware')
     var suscripcionDeCategoria = {...req.body}
     categoriaModel.suscripcionCategoria(suscripcionDeCategoria).then(resultado=>{
-        res.send({
+        res.json({
             mensaje:'Inscrito en esa categoria exitosamente',
             eliminacionSuscripcion:false
         })
@@ -113,11 +113,11 @@ function verificacionSuscripcion(req,res,next){
             next();
         }else{
             categoriaModel.eliminarSuscripcion(detalleSuscripcion).then(resultado=>{
-                res.send({
+                res.json({
                     mensaje:'Eliminada suscripcion exitosamente',
                     eliminacionSuscripcion: true
-                })
-            })
+                });
+            });
 
         }
     });
