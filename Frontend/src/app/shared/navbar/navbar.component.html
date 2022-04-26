@@ -1,4 +1,3 @@
-
 <nav id="navbar" class="navbar navbar-light navbar-expand-lg navigation-clean">
   <div class="container">
     <a class="navbar-brand" href="#"
@@ -8,10 +7,8 @@
       class="navbar-toggler"
       data-bs-toggle="collapse"
       data-bs-target="#navcol-1"
-      >
-      <span class="visually-hidden">
-        Toggle navigation
-      </span>
+    >
+      <span class="visually-hidden"> Toggle navigation </span>
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="navcol-1" class="collapse navbar-collapse">
@@ -24,17 +21,25 @@
               type="search"
               placeholder="Buscar artículos"
             />
-            <button type="submit" 
-                    class="btn btn-link" 
-                    style="box-shadow: none;"
-                    (click)="search()"
-                    [disabled]="(searchInput!.value === null) || (searchInput!.value === '')">
-              <i id="icono-lupa" style="margin: 0!important" class="fas fa-search"></i>
+            <button
+              type="submit"
+              class="btn btn-link"
+              style="box-shadow: none"
+              (click)="search()"
+              [disabled]="
+                searchInput!.value === null || searchInput!.value === ''
+              "
+            >
+              <i
+                id="icono-lupa"
+                style="margin: 0 !important"
+                class="fas fa-search"
+              ></i>
             </button>
           </form>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">         
+      <ul class="navbar-nav ms-auto">
         <ng-container *ngIf="!cookieToken; else verifyLoggedUser">
           <li class="nav-item" style="padding-top: 8px">
             <a role="button" (click)="open(contentLog)">
@@ -42,7 +47,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a id="mensaje" class="nav-link" role="button" (click)="open(contentLog)">Mensaje</a>
+            <a
+              id="mensaje"
+              class="nav-link"
+              role="button"
+              (click)="open(contentLog)"
+              >Mensaje</a
+            >
           </li>
           <li class="nav-item">
             <button
@@ -65,7 +76,12 @@
             </button>
           </li>
           <li class="nav-item" style="margin-left: 5px">
-            <button id="btn-subirProducto" class="btn btn-primary" type="button" (click)="open(contentLog)">
+            <button
+              id="btn-subirProducto"
+              class="btn btn-primary"
+              type="button"
+              (click)="open(contentAddProduct)"
+            >
               <i class="fas fa-plus-circle" style="margin-right: 5px"></i>
               Subir producto
             </button>
@@ -79,35 +95,61 @@
               </a>
             </li>
             <li class="nav-item">
-              <a *ngIf="loggedUser !== undefined" 
-                  routerLink="/chat/user/{{loggedUser.idUsuario}}" 
-                  id="mensaje" 
-                  class="nav-link">
+              <a
+                *ngIf="loggedUser !== undefined"
+                routerLink="/chat/user/{{ loggedUser.idUsuario }}"
+                id="mensaje"
+                class="nav-link"
+              >
                 Mensaje
-              </a>            
+              </a>
             </li>
             <li class="nav-item" *ngIf="loggedUser !== undefined">
               <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
-              <img src="../../../assets/profile-pics/user_{{loggedUser.idUsuario}}.jpg" 
-                    alt="../../../assets/profile-pics/user_default.jpg"
-                    style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
+              <img
+                src="../../../assets/profile-pics/user_{{
+                  loggedUser.idUsuario
+                }}.jpg"
+                alt="../../../assets/profile-pics/user_default.jpg"
+                style="
+                  border-radius: 30px;
+                  width: 40px;
+                  height: 45px;
+                  margin-right: 5px;
+                "
+              />
             </li>
-            <div ngbDropdown style="padding-top:9px; margin-right:5px">
+            <div ngbDropdown style="padding-top: 9px; margin-right: 5px">
               <a
-                  id="dropdownUser" 
-                  ngbDropdownToggle
-                  *ngIf="loggedUser !== undefined"
-                  style="font-size: 18px; color:#00BCE4; font-weight: bold; text-decoration: none;">
-                {{loggedUser.nombreCompleto}}
+                id="dropdownUser"
+                ngbDropdownToggle
+                *ngIf="loggedUser !== undefined"
+                style="
+                  font-size: 18px;
+                  color: #00bce4;
+                  font-weight: bold;
+                  text-decoration: none;
+                "
+              >
+                {{ loggedUser.nombreCompleto }}
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a ngbDropdownItem routerLink="/" (click)="logout(contentSuccess)">Cerrar Sesión</a>
+                <a
+                  ngbDropdownItem
+                  routerLink="/"
+                  (click)="logout(contentSuccess)"
+                  >Cerrar Sesión</a
+                >
               </div>
             </div>
             <li class="nav-item" style="margin-left: 5px">
-              <button id="btn-subirProducto" class="btn btn-primary" type="button">
-                <i class="fas fa-plus-circle" style="margin-right: 5px"></i>Subir
-                producto
+              <button
+                id="btn-subirProducto"
+                class="btn btn-primary"
+                type="button"
+              >
+                <i class="fas fa-plus-circle" style="margin-right: 5px"></i
+                >Subir producto
               </button>
             </li>
             <li class="nav-item" style="padding-top: 8px">
@@ -119,18 +161,37 @@
           </ng-container>
           <ng-template #adminGotLogged>
             <li class="nav-item">
-              <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i>
+              <i
+                class="far fa-user-circle"
+                style="
+                  color: #00bce4;
+                  margin-left: 5px;
+                  margin-right: 5px;
+                  font-size: 40px;
+                "
+              ></i>
             </li>
-            <div ngbDropdown style="padding-top:9px; margin-right:5px">
+            <div ngbDropdown style="padding-top: 9px; margin-right: 5px">
               <a
-                  id="dropdownUser" 
-                  ngbDropdownToggle
-                  href="#" 
-                  style="font-size: 18px; color:#00BCE4; font-weight: bold; text-decoration: none;">
+                id="dropdownUser"
+                ngbDropdownToggle
+                href="#"
+                style="
+                  font-size: 18px;
+                  color: #00bce4;
+                  font-weight: bold;
+                  text-decoration: none;
+                "
+              >
                 Pedro Alejandro
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a ngbDropdownItem routerLink="/" (click)="logout(contentSuccess)">Cerrar Sesión</a>
+                <a
+                  ngbDropdownItem
+                  routerLink="/"
+                  (click)="logout(contentSuccess)"
+                  >Cerrar Sesión</a
+                >
               </div>
             </div>
           </ng-template>
@@ -189,10 +250,12 @@
         Correo o contraseña incorrecta.
       </div>
     </form>
-    <a id="texto" href="#" (click)="open(contentRecover, true)">Recuperar Contraseña</a>
+    <a id="texto" href="#" (click)="open(contentRecover, true)"
+      >Recuperar Contraseña</a
+    >
     <small style="color: #8190a5">|</small>
     <a id="texto" href="#" (click)="open(contentReg, true)">Regístrate</a>
-    
+
     <div class="row">
       <small style="margin-top: 40px"
         >Al iniciar estás aceptando nuestros</small
@@ -374,7 +437,7 @@
         <option value="" disabled>Ciudad*</option>
         <option *ngFor="let cit of ciudades" value="{{ cit.ID_CIUDAD }}">
           {{ cit.CIUDAD }}
-        </option> 
+        </option>
       </select>
       <div
         *ngIf="formCity!.invalid && (formCity!.dirty || formCity!.touched)"
@@ -389,7 +452,7 @@
         aria-label="Preguntas"
         formControlName="formPreg"
       >
-      <option value="" disabled>Preguntas*</option>
+        <option value="" disabled>Preguntas*</option>
         <option *ngFor="let preg of preguntas" value="{{ preg.ID_PREGUNTA }}">
           {{ preg.PREGUNTA }}
         </option>
@@ -435,8 +498,20 @@
         />
         <label class="form-check-label">
           He leído y acepto los
-          <a role="button" (click)="open(contentTermsConds)" style="color: #00bce4">Términos</a> y
-          <a role="button" (click)="open(contentTermsConds)" style="color: #00bce4">Condiciones</a> de Honduzon.
+          <a
+            role="button"
+            (click)="open(contentTermsConds)"
+            style="color: #00bce4"
+            >Términos</a
+          >
+          y
+          <a
+            role="button"
+            (click)="open(contentTermsConds)"
+            style="color: #00bce4"
+            >Condiciones</a
+          >
+          de Honduzon.
         </label>
       </div>
 
@@ -461,36 +536,136 @@
 
 <!-- Modal Términos y Condiciones-->
 <ng-template #contentTermsConds let-modalTermsConds>
-  <div id="modal-1" class="modal fade show" role="dialog" tabindex="-1" style="display: block;" aria-hidden="true" aria-labelledby="titulo-honduzon">
+  <div
+    id="modal-1"
+    class="modal fade show"
+    role="dialog"
+    tabindex="-1"
+    style="display: block"
+    aria-hidden="true"
+    aria-labelledby="titulo-honduzon"
+  >
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="titulo-honduzon">
-                  <img src="../../../assets/logo.png" style="width: 40px;" />
-                  Honduzon
-                </h4>
-                <button
-                  type="button"
-                  class="btn-close"
-                  aria-label="Close"
-                  (click)="modalTermsConds.dismiss('Cross click')">
-                </button>
-                <!-- <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-            <div class="modal-body">
-                <h1 class="title-terms-conds"><strong>Términos y Condiciones de Uso</strong><br /></h1>
-                <p><strong>INFORMACIÓN RELEVANTE</strong><br />Es requisito necesario para la adquisición de los productos que se ofrecen en este sitio, que lea y acepte los siguientes Términos y Condiciones que a continuación se redactan. El uso de nuestros servicios así como la compra de nuestros productos implicará que usted ha leído y aceptado los Términos y Condiciones de Uso en el presente documento. Todas los productos  que son ofrecidos por nuestro sitio web pudieran ser creadas, cobradas, enviadas o presentadas por una página web tercera y en tal caso estarían sujetas a sus propios Términos y Condiciones. En algunos casos, para adquirir un producto, será necesario el registro por parte del usuario, con ingreso de datos personales fidedignos y definición de una contraseña. El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier momento, en caso de que se haya registrado y que sea necesario para la compra de alguno de nuestros productos. honduzon.com no asume la responsabilidad en caso de que entregue dicha clave a terceros. Todas las compras y transacciones que se lleven a cabo por medio de este sitio web, están sujetas a un proceso de confirmación y verificación, el cual podría incluir la verificación del stock y disponibilidad de producto, validación de la forma de pago, validación de la factura (en caso de existir) y el cumplimiento de las condiciones requeridas por el medio de pago seleccionado. En algunos casos puede que se requiera una verificación por medio de correo electrónico. Los precios de los productos ofrecidos en esta Tienda Online es válido solamente en las compras realizadas en este sitio web<br /><br /><strong>LICENCIA</strong><br />HONDUZON a través de su sitio web concede una licencia para que los usuarios utilicen  los productos que son vendidos en este sitio web de acuerdo a los Términos y Condiciones que se describen en este documento.<br /><br /><strong>USO NO AUTORIZADO</strong><br />En caso de que aplique (para venta de software, templetes, u otro producto de diseño y programación) usted no puede colocar uno de nuestros productos, modificado o sin modificar, en un CD, sitio web o ningún otro medio y ofrecerlos para la redistribución o la reventa de ningún tipo.<br /><br /><strong>PROPIEDAD</strong><br />Usted no puede declarar propiedad intelectual o exclusiva a ninguno de nuestros productos, modificado o sin modificar. Todos los productos son propiedad  de los proveedores del contenido. En caso de que no se especifique lo contrario, nuestros productos se proporcionan  sin ningún tipo de garantía, expresa o implícita. En ningún esta compañía será  responsables de ningún daño incluyendo, pero no limitado a, daños directos, indirectos, especiales, fortuitos o consecuentes u otras pérdidas resultantes del uso o de la imposibilidad de utilizar nuestros productos.<br /><br /><strong>POLÍTICA DE REEMBOLSO Y GARANTÍA</strong><br />En el caso de productos que sean  mercancías irrevocables no-tangibles, no realizamos reembolsos después de que se envíe el producto, usted tiene la responsabilidad de entender antes de comprarlo.  Le pedimos que lea cuidadosamente antes de comprarlo. Hacemos solamente excepciones con esta regla cuando la descripción no se ajusta al producto. Hay algunos productos que pudieran tener garantía y posibilidad de reembolso pero este será especificado al comprar el producto. En tales casos la garantía solo cubrirá fallas de fábrica y sólo se hará efectiva cuando el producto se haya usado correctamente. La garantía no cubre averías o daños ocasionados por uso indebido. Los términos de la garantía están asociados a fallas de fabricación y funcionamiento en condiciones normales de los productos y sólo se harán efectivos estos términos si el equipo ha sido usado correctamente. Esto incluye:– De acuerdo a las especificaciones técnicas indicadas para cada producto.<br />– En condiciones ambientales acorde con las especificaciones indicadas por el fabricante.<br />– En uso específico para la función con que fue diseñado de fábrica.<br />– En condiciones de operación eléctricas acorde con las especificaciones y tolerancias indicadas.<br /><br /><strong>COMPROBACIÓN ANTIFRAUDE</strong><br />La compra del cliente puede ser aplazada para la comprobación antifraude. También puede ser suspendida por más tiempo para una investigación más rigurosa, para evitar transacciones fraudulentas.<br /><br /><strong>PRIVACIDAD</strong><br />Este honduzon.com garantiza que la información personal que usted envía cuenta con la seguridad necesaria. Los datos ingresados por usuario o en el caso de requerir una validación de los pedidos no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales. La suscripción a boletines de correos electrónicos publicitarios es voluntaria y podría ser seleccionada al momento de crear su cuenta.<br /><br />HONDUZON reserva los derechos de cambiar o de modificar estos términos sin previo aviso.</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-light" style="border-radius: 20px" type="button" (click)="modalTermsConds.dismiss()">
-                Cancelar
-              </button>
-              <!-- <button class="btn btn-primary btn-accept-terms-conds" style="border-radius: 20px" type="button"> -->
-              <button class="btn btn-primary btn-accept-terms-conds" style="border-radius: 20px" type="button" (click)="formTerms!.setValue(true); modalTermsConds.dismiss()">
-                Aceptar
-              </button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="titulo-honduzon">
+            <img src="../../../assets/logo.png" style="width: 40px" />
+            Honduzon
+          </h4>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modalTermsConds.dismiss('Cross click')"
+          ></button>
+          <!-- <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
+        <div class="modal-body">
+          <h1 class="title-terms-conds">
+            <strong>Términos y Condiciones de Uso</strong><br />
+          </h1>
+          <p>
+            <strong>INFORMACIÓN RELEVANTE</strong><br />Es requisito necesario
+            para la adquisición de los productos que se ofrecen en este sitio,
+            que lea y acepte los siguientes Términos y Condiciones que a
+            continuación se redactan. El uso de nuestros servicios así como la
+            compra de nuestros productos implicará que usted ha leído y aceptado
+            los Términos y Condiciones de Uso en el presente documento. Todas
+            los productos  que son ofrecidos por nuestro sitio web pudieran ser
+            creadas, cobradas, enviadas o presentadas por una página web tercera
+            y en tal caso estarían sujetas a sus propios Términos y Condiciones.
+            En algunos casos, para adquirir un producto, será necesario el
+            registro por parte del usuario, con ingreso de datos personales
+            fidedignos y definición de una contraseña. El usuario puede elegir y
+            cambiar la clave para su acceso de administración de la cuenta en
+            cualquier momento, en caso de que se haya registrado y que sea
+            necesario para la compra de alguno de nuestros productos.
+            honduzon.com no asume la responsabilidad en caso de que entregue
+            dicha clave a terceros. Todas las compras y transacciones que se
+            lleven a cabo por medio de este sitio web, están sujetas a un
+            proceso de confirmación y verificación, el cual podría incluir la
+            verificación del stock y disponibilidad de producto, validación de
+            la forma de pago, validación de la factura (en caso de existir) y el
+            cumplimiento de las condiciones requeridas por el medio de pago
+            seleccionado. En algunos casos puede que se requiera una
+            verificación por medio de correo electrónico. Los precios de los
+            productos ofrecidos en esta Tienda Online es válido solamente en las
+            compras realizadas en este sitio web<br /><br /><strong
+              >LICENCIA</strong
+            ><br />HONDUZON a través de su sitio web concede una licencia para
+            que los usuarios utilicen  los productos que son vendidos en este
+            sitio web de acuerdo a los Términos y Condiciones que se describen
+            en este documento.<br /><br /><strong>USO NO AUTORIZADO</strong
+            ><br />En caso de que aplique (para venta de software, templetes, u
+            otro producto de diseño y programación) usted no puede colocar uno
+            de nuestros productos, modificado o sin modificar, en un CD, sitio
+            web o ningún otro medio y ofrecerlos para la redistribución o la
+            reventa de ningún tipo.<br /><br /><strong>PROPIEDAD</strong
+            ><br />Usted no puede declarar propiedad intelectual o exclusiva a
+            ninguno de nuestros productos, modificado o sin modificar. Todos los
+            productos son propiedad  de los proveedores del contenido. En caso
+            de que no se especifique lo contrario, nuestros productos se
+            proporcionan  sin ningún tipo de garantía, expresa o implícita. En
+            ningún esta compañía será  responsables de ningún daño incluyendo,
+            pero no limitado a, daños directos, indirectos, especiales,
+            fortuitos o consecuentes u otras pérdidas resultantes del uso o de
+            la imposibilidad de utilizar nuestros productos.<br /><br /><strong
+              >POLÍTICA DE REEMBOLSO Y GARANTÍA</strong
+            ><br />En el caso de productos que sean  mercancías irrevocables
+            no-tangibles, no realizamos reembolsos después de que se envíe el
+            producto, usted tiene la responsabilidad de entender antes de
+            comprarlo.  Le pedimos que lea cuidadosamente antes de comprarlo.
+            Hacemos solamente excepciones con esta regla cuando la descripción
+            no se ajusta al producto. Hay algunos productos que pudieran tener
+            garantía y posibilidad de reembolso pero este será especificado al
+            comprar el producto. En tales casos la garantía solo cubrirá fallas
+            de fábrica y sólo se hará efectiva cuando el producto se haya usado
+            correctamente. La garantía no cubre averías o daños ocasionados por
+            uso indebido. Los términos de la garantía están asociados a fallas
+            de fabricación y funcionamiento en condiciones normales de los
+            productos y sólo se harán efectivos estos términos si el equipo ha
+            sido usado correctamente. Esto incluye:– De acuerdo a las
+            especificaciones técnicas indicadas para cada producto.<br />– En
+            condiciones ambientales acorde con las especificaciones indicadas
+            por el fabricante.<br />– En uso específico para la función con que
+            fue diseñado de fábrica.<br />– En condiciones de operación
+            eléctricas acorde con las especificaciones y tolerancias
+            indicadas.<br /><br /><strong>COMPROBACIÓN ANTIFRAUDE</strong
+            ><br />La compra del cliente puede ser aplazada para la comprobación
+            antifraude. También puede ser suspendida por más tiempo para una
+            investigación más rigurosa, para evitar transacciones
+            fraudulentas.<br /><br /><strong>PRIVACIDAD</strong><br />Este
+            honduzon.com garantiza que la información personal que usted envía
+            cuenta con la seguridad necesaria. Los datos ingresados por usuario
+            o en el caso de requerir una validación de los pedidos no serán
+            entregados a terceros, salvo que deba ser revelada en cumplimiento a
+            una orden judicial o requerimientos legales. La suscripción a
+            boletines de correos electrónicos publicitarios es voluntaria y
+            podría ser seleccionada al momento de crear su cuenta.<br /><br />HONDUZON
+            reserva los derechos de cambiar o de modificar estos términos sin
+            previo aviso.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-light"
+            style="border-radius: 20px"
+            type="button"
+            (click)="modalTermsConds.dismiss()"
+          >
+            Cancelar
+          </button>
+          <!-- <button class="btn btn-primary btn-accept-terms-conds" style="border-radius: 20px" type="button"> -->
+          <button
+            class="btn btn-primary btn-accept-terms-conds"
+            style="border-radius: 20px"
+            type="button"
+            (click)="formTerms!.setValue(true); modalTermsConds.dismiss()"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
@@ -507,15 +682,12 @@
   </div>
   <div class="modal-body col" style="text-align: center; margin-bottom: 10px">
     <div class="row" style="padding-bottom: 20px">
-      <h4 class="modal-title">
-        Lista de Deseos
-      </h4>
+      <h4 class="modal-title">Lista de Deseos</h4>
     </div>
 
-    <div class="row" style="text-align: left; margin-left: 50px;">
+    <div class="row" style="text-align: left; margin-left: 50px">
       <li>Probando</li>
     </div>
-
   </div>
 </ng-template>
 
@@ -544,7 +716,10 @@
           id="floatingEmailRecover"
           placeholder="name@example.com"
           pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$"
-          [class.is-invalid]="formEmailRecover!.touched && formEmailRecover!.invalid"/>
+          [class.is-invalid]="
+            formEmailRecover!.touched && formEmailRecover!.invalid
+          "
+        />
         <label for="formEmailRecover">Correo electrónico</label>
         <div class="invalid-feedback">Campo obligatorio.</div>
       </div>
@@ -553,9 +728,12 @@
         id="btn-modal"
         class="btn btn-primary btn-blue-animate"
         type="submit"
-        [disabled]="formEmailRecover!.value === null || formEmailRecover!.value === ''"
-        (click)="recoverByEmail(contentSuccess)">
-          Enviar Correo
+        [disabled]="
+          formEmailRecover!.value === null || formEmailRecover!.value === ''
+        "
+        (click)="recoverByEmail(contentSuccess)"
+      >
+        Enviar Correo
       </button>
       <div *ngIf="correoRegistrado === false" class="alert alert-danger">
         Este correo no está registrado en la plataforma.
@@ -571,5 +749,206 @@
     style="text-align: center; border-radius: 20px"
   >
     <p><br />{{ successMsg }} con éxito</p>
+  </div>
+</ng-template>
+
+<!-- Modal Subir producto -->
+<ng-template #contentAddProduct let-modalReg>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalReg.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body col" style="text-align: center">
+    <!-- Título y Subtítulo -->
+
+    <div class="row" style="padding-bottom: 20px">
+      <h2 class="modal-title">¡Sube un producto!</h2>
+      <small style="color: #8190a5"
+        >Solo ingresa los datos correspondientes <br />¡Asi de facil!</small
+      >
+    </div>
+    <div class="container" style="margin-top: 15px; padding: 0px 15px 0px 15px">
+      <div class="row" style="padding-bottom: 20px">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput"
+            placeholder="Nombre del producto"
+          />
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 15px">
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            id="inputCity"
+            placeholder="Establece un precio"
+          />
+        </div>
+        <div class="col-md-6">
+          <select id="inputState" class="form-select">
+            <option selected style="color: #8190a5">Estado del producto</option>
+            <option>Nuevo</option>
+            <option>Usado</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 15px">
+        <div class="col">
+          <label for="inputState" class="form-label"
+            >Selecciona una categoria</label
+          >
+          <select id="inputState" class="form-select">
+            <option selected>Deportes</option>
+            <option>Muebles</option>
+            <option>Tecnologia</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px">
+        <div class="col">
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label"
+              >Sube una foto de tu producto</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              id="formFileMultiple"
+              multiple
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding-bottom: 20px">
+        <div class="col">
+          <textarea
+            class="form-control"
+            aria-label="With textarea"
+            placeholder="Escribe una descripcion"
+            style="min-height: 100px"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button
+            (click)="modalReg.dismiss('Cross click')"
+            class="btn btn-primary"
+            type="button"
+            style="
+              background: #00bce4;
+              color: white;
+              border: #00bce4;
+              border-radius: 20px;
+              padding: 10px 25px 10px 25px;
+            "
+          >
+            Subir producto
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal Subir producto -->
+<ng-template #contenido3 let-modal>
+  <div
+    class="modal-header"
+    style="
+      border-radius: 20px;
+      border-width: 1px;
+      border-bottom-style: solid;
+      text-align: center;
+    "
+  >
+    <strong
+      style="
+        font-size: 25px;
+        text-shadow: 1px 1px black;
+        margin-left: 15px;
+        color: #00bce4;
+      "
+      >Agregar categoria</strong
+    >
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+      style="margin-right: 15px"
+    ></button>
+  </div>
+  <div class="modal-body" style="text-align: center">
+    <div class="container" style="margin-top: 15px">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col">
+              <input type="file" style="margin-top: 20px" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button
+                class="btn btn-info"
+                type="button"
+                style="
+                  background: #00bce4;
+                  min-width: 200px;
+                  margin-top: 65px;
+                  border-radius: 20px;
+                  min-height: 75px;
+                  color: white;
+                "
+              >
+                Agregar categoria
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row" style="margin-top: 20px">
+            <div class="col">
+              <input
+                type="text"
+                placeholder="Nombre Categoria"
+                style="
+                  border-radius: 20px;
+                  min-width: 300px;
+                  background: #eceff1;
+                  border-color: #47525e36;
+                  padding: 5px 15px 5px 15px;
+                "
+              />
+            </div>
+          </div>
+          <div class="row" style="margin-top: 30px">
+            <div class="col">
+              <input
+                type="text"
+                placeholder="Ingrese una descripcion"
+                style="
+                  min-height: 150px;
+                  border-radius: 20px;
+                  min-width: 300px;
+                  border-color: #47525e36;
+                  background: #eceff1;
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-template>
