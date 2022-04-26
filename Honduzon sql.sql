@@ -116,10 +116,12 @@ CREATE TABLE VALORACION(
 ID_VALORACION INT identity(1,1),
 ID_USUARIO INT,
 VALORACION FLOAT ,
+ID_USUARIO_VALORA INT,
 CONSTRAINT CHECK_VALORACION
 CHECK(VALORACION>=1 AND VALORACION<=5),
 CONSTRAINT PK_VALORACION PRIMARY KEY(ID_VALORACION),
-constraint fkv_usuario foreign key(ID_USUARIO) references USUARIOs(ID_USUARIO)
+constraint fkv_usuario foreign key(ID_USUARIO) references USUARIOs(ID_USUARIO),
+constraint fkv_usuario foreign key(ID_USUARIO_VALORA) references USUARIOs(ID_USUARIO)
 )
 
 CREATE TABLE USUARIOSxCATEGORIAS(
@@ -475,6 +477,7 @@ values (1,4)
 
 select round(sum(valoracion)/count(VALORACION),1) from valoracion where ID_USUARIO=1
 
+ALTER TABLE VALORACION ADD ID_USUARIO_VALORA INT;
 
 
 select valoracion from valoracion where ID_USUARIO=1003

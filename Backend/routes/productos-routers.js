@@ -21,6 +21,7 @@ var numeroTotalProdUsusario = 0
 router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
     productoModel.getProductoPorId(req.params.idProducto).then((resultado)=>{
         var productoPorId = {...resultado[0]}
+        console.log(resultado[0])
         productoModel.getCantTotalProdUsuario(resultado[0].ID_USUARIO).then(resultado=>{
             numeroTotalProdUsusario = resultado[0].CantTot;
             productoPorId['CantidadProdTotal'] = numeroTotalProdUsusario;
@@ -78,10 +79,14 @@ router.get('/getprodcat/:idCat',(req,res)=>{
 })
 
 
-router.delete('/borrarproducto',(req,res)=>{});
+router.delete('/borrarproducto',(req,res)=>{
+    //Funcion para darle de baja a algun producto
+});
 
 
-
+router.post('/listaDeseos',(req,res)=>{
+    //Funcion para la listas de deseos
+});
 
 module.exports={
     router:router

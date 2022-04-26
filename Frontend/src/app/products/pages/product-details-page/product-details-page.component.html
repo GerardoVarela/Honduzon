@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
-<section id="general-section">
+<section id="general-section"> 
   <div class="container">
-    <div class="row">
+    <div *ngIf="productDetail === undefined && valoracion === undefined" style="height:500px; position: relative"></div>
+    <div class="row" *ngIf="productDetail !== undefined && valoracion !== undefined">
       <div class="col-md-6">
         <div class="card" id="product-card">
           <div class="card-body">
@@ -19,7 +20,7 @@
                   </div>
                   <div>
                     <small style="font-size: 14px; color: #47525e">
-                      Artículos en Venta: {{productDetail.CantidadProdTotal}}
+                      Artículos publicados: {{productDetail.CantidadProdTotal}}
                     </small>
                   </div>
                 </div>
@@ -30,11 +31,6 @@
                         Chat para comprar
                       </button>
                     <!-- </a> -->
-                  </div>
-                  <div>
-                    <small style="font-size: 14px; color: #47525e">
-                      95% positive feedback
-                    </small>
                   </div>
                 </div>
               </div>
@@ -61,7 +57,7 @@
                   <h4 style="
                       margin: 0px 0px 7px 0px;
                       font-weight: bold;
-                      font-size: 20px;">
+                      font-size: 20px;">                      
                   {{productDetail.NOMBRE_PRODUCTO}}
                   </h4>
                 </div>
@@ -100,7 +96,7 @@
                 </div>
                 <div class="col" style="margin-top: 20px">
                   <h6
-                    class="text-muted mb-2"
+                                        class="text-muted mb-2"
                     style="font-size: 20px; text-align: left"
                   >
                    {{productDetail.NOMBRE_DEPARTAMENTO}}
@@ -129,7 +125,9 @@
             <div class="card" style="border-radius: 20px;">
               <div class="card-body">
                 <div>
-                  <h4 class="header row-b" style="border-top: none; margin: 0px"><strong>{{productDetail.NOMBRE_PRODUCTO}}</strong><br></h4>
+                  <h4 class="header row-b" style="border-top: none; margin: 0px">
+                    <strong>{{productDetail.NOMBRE_PRODUCTO}}</strong><br>
+                  </h4>
                   <div>
                     <div class="row">
                       <div class="col" style="margin-top: 10px;">
@@ -167,17 +165,9 @@
                           </a>
                           <div>
                             <div style="text-align: center; padding: -20px">    
-                              <span class="visually-hidden">(*)</span>
-                              <span class="s-color" style="cursor: pointer;">★</span>
-                              <span class="visually-hidden">(*)</span>
-                              <span class="s-color" style="cursor: pointer;">★</span>
-                              <span class="visually-hidden">(*)</span>
-                              <span class="s-color" style="cursor: pointer;">★</span>
-                              <span class="visually-hidden">(*)</span>
-                              <span class="s-color" style="cursor: pointer;">★</span>
-                              <span class="visually-hidden">(*)</span>
-                              <span class="s-color" style="cursor: pointer;">★</span>
-                              <p style="font-size: small">5 Valoraciones</p>
+                              <ngb-rating class="s-color" [(rate)]="currentRate" (rateChange)="rated(productDetail.ID_USUARIO, loggedUser.idUsuario)"></ngb-rating>
+                              <p style="font-size: small">{{valoracion}} Valoraciones</p>
+                              <div *ngIf="isRated !== false" class="text-success">¡Gracias!</div>
                             </div>
                           </div>
                         </div>

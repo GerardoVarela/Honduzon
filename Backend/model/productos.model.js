@@ -226,10 +226,10 @@ async function getProductoPorCatId(catId){
 async function getProductoPorId (productoId){
     try {
         var pool = await mssql.connect(bdConfig.config);
-        let insertarProducto = await pool.request()
+        let getProducto = await pool.request()
         .input('idProductoInput',mssql.Int,productoId)
-        .query('SELECT Productos.ID_CATEGORIA, Productos.NOMBRE_PRODUCTO, Productos.DESCRIPCION_PRODUCTO, Productos.CANTIDAD_PRODUCTO, Productos.CANTIDAD_PROD_VENDIDO, Productos.PRECIO, IMAGENES.IMAGEN, Usuarios.NOMBRE, Usuarios.APELLIDO, Usuarios.ID_USUARIO, DEPARTAMENTO.NOMBRE_DEPARTAMENTO,  Usuarios.IMAGENS FROM Productos JOIN IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN JOIN Usuarios ON Productos.ID_USUARIO = Usuarios.ID_USUARIO JOIN DEPARTAMENTO ON Usuarios.ID_DEPARTAMENTO = DEPARTAMENTO.ID_DEPARTAMENTO WHERE Productos.ID_PRODUCTO = @idProductoInput and estado=1')
-        return insertarProducto.recordset;
+        .query('SELECT Productos.ID_CATEGORIA, Productos.NOMBRE_PRODUCTO, Productos.DESCRIPCION_PRODUCTO, Productos.CANTIDAD_PRODUCTO, Productos.CANTIDAD_PROD_VENDIDO, Productos.PRECIO, IMAGENES.IMAGEN, Usuarios.NOMBRE, Usuarios.APELLIDO, Usuarios.ID_USUARIO, DEPARTAMENTO.NOMBRE_DEPARTAMENTO,  Usuarios.IMAGENS FROM Productos JOIN IMAGENES ON Productos.ID_IMAGEN = IMAGENES.ID_IMAGEN JOIN Usuarios ON Productos.ID_USUARIO = Usuarios.ID_USUARIO JOIN DEPARTAMENTO ON Usuarios.ID_DEPARTAMENTO = DEPARTAMENTO.ID_DEPARTAMENTO WHERE Productos.ID_PRODUCTO = @idProductoInput AND Productos.ESTADO=1 ')
+        return getProducto.recordset;
     } catch (error) {
         return error;
     }
@@ -248,6 +248,21 @@ async function getCantTotalProdUsuario (idUsuario){
 
 
 }
+
+
+
+async function darBajaProducto(idProducto){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let darBajaProd = await pool.request()
+        .input('idProducto', mssql.Int, idProducto)
+        .query('UPDATE Productos SET ESTADO = 0 WHERE ID_PRODUCTO = @idProducto');
+        return darBajaProd.recordset;
+    } catch (error) {
+        return error;
+    }
+}
+
 
 
 
