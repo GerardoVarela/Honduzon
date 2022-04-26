@@ -19,7 +19,7 @@ const bree = new Bree({
 
 
 async function startSchedulingFunction(){
-    //return bree.start();
+    return bree.start();
 }
 
 module.exports={

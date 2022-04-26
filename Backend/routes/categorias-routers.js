@@ -33,7 +33,6 @@ router.post('/guardar',verificacionCategoria,(req,res)=>{
 });
 
 
-router.post('/suscribir',(req,res)=>{});
 
 
 
@@ -53,6 +52,34 @@ router.delete('/borrarCategoria/:idCategoria',(req,res)=>{
         res.json(true);
     })
 })
+
+
+
+/**
+ * suscripcion a categoria
+ * 
+ */
+
+router.post('/suscribir',verificacionSuscripcion,(req,res)=>{
+    console.log('despues del middle ware')
+    var suscripcionDeCategoria = {...req.body}
+    categoriaModel.suscripcionCategoria(suscripcionDeCategoria).then(resultado=>{
+        res.send({
+            mensaje:'Inscrito en esa categoria exitosamente',
+            eliminacionSuscripcion:false
+        })
+    });
+});
+
+
+
+/**
+ * 
+ * Middlewares
+ * 
+ * 
+ * 
+ */
 
 
 function verificacionCategoria(req,res,next){
@@ -75,6 +102,25 @@ function verificacionCategoria(req,res,next){
             }
         }
     })
+}
+
+
+function verificacionSuscripcion(req,res,next){
+    var detalleSuscripcion = {...req.body};
+
+    categoriaModel.obtenerSuscripcionDeUsuario(detalleSuscripcion).then(resultado=>{
+        if(resultado.length==0){
+            next();
+        }else{
+            categoriaModel.eliminarSuscripcion(detalleSuscripcion).then(resultado=>{
+                res.send({
+                    mensaje:'Eliminada suscripcion exitosamente',
+                    eliminacionSuscripcion: true
+                })
+            })
+
+        }
+    });
 }
 
 module.exports={

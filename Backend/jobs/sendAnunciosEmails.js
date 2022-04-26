@@ -1,6 +1,7 @@
 
 const nodeMailer = require('nodemailer');
 
+const emailLogic = require('./emailLogic').main();
 
 let transporter = nodeMailer.createTransport({
     service:'gmail',
@@ -14,13 +15,13 @@ let transporter = nodeMailer.createTransport({
 
 })
 
-function mailOption(email,contrasena){
+function mailOption(emails,attachments){
     return {
         from:'honduzon2022@gmail.com',
-        to:`${email}`,
-        subject:'Recuperacion de Cuenta de Honduzon',
-        text:`Hey ${email}, bienvenido a la recuperacion de contraseña, se ha generado un codigo para que puedas recuperar tu constraseña\ncodigo de recuperacion: ${contrasena}\n\n
-        Si crees que es un error, no hagas nada.\n Atte. Equipo de Honduzon \n`
+        to:`${emails}`,
+        subject:'Anuncios Semanales de tus Categorías',
+        text:`Hey, estos son los anuncios de esta semana de las categorias a las que estas suscrito:\n`,
+        attachments:attachments
     }
 }
 
@@ -36,7 +37,6 @@ function sendEmail(mailOption){
 
 
 module.exports= {
-    transporter,
     mailOption,
     sendEmail
 }
