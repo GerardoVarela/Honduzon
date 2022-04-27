@@ -548,7 +548,7 @@
           class="row"
           type="button"
           *ngFor="let den of denuncias"
-          (click)="openLG(contenido4)"
+          (click)="openLG(contenido4, den.denunciasID)"
           (click)="modal.dismiss('Cross click')"
           id="cat"
           style="
@@ -652,7 +652,7 @@
             </p>
           </div>
         </div>
-        <div class="col-md-6" style="width: 30%">
+        <!-- <div class="col-md-6" style="width: 30%">
           <strong style="margin-left: 20px">Fecha</strong>
           <div
             style="
@@ -664,7 +664,7 @@
           >
             <p style="padding: 10px">12/04/2022</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="container">
         <div class="row">

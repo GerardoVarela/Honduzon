@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-card-carrusel',
@@ -10,6 +11,8 @@ export class CardCarruselComponent implements OnInit {
 
   @Input() img!: number;
 
+  public token: string = '';
+  public selectedSub: boolean = true;
 
   category: any[] = [
     {
@@ -44,9 +47,15 @@ export class CardCarruselComponent implements OnInit {
     },
   ];
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookieService: CookieService) { 
+  }
   
   ngOnInit(): void {
+    
+    if(this.cookieService.get('ACCESS_TOKEN')){
+      this.token = this.cookieService.get('ACCESS_TOKEN');
+    }
+
   }
 
   search(idCategory: number){
@@ -55,6 +64,10 @@ export class CardCarruselComponent implements OnInit {
     this.router.navigate(['/product'], {
       queryParams: {category: idCategory}
     });
+  }
+
+  subscribe(){
+    this.selectedSub = !this.selectedSub;
   }
 
 }

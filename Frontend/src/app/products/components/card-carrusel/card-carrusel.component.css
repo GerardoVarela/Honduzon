@@ -27,7 +27,7 @@ img {
   text-align: end;
 }
 
-#btn-Cards {
+.btn-cards {
   background: rgba(13, 110, 253, 0);
   color: #00bce4;
   border-color: #00bce4;
@@ -35,4 +35,8 @@ img {
   font-weight: bold;
   height: 42px;
   width: 100%;
+}
+
+#btn-sub:hover {
+
 }

@@ -83,15 +83,117 @@ async function editarCategoria(detalleCategoria, categoriaId){
 async function darBajaCategoria(idCategoria){
     try {
         var pool = await mssql.connect(bdConfig.config);
-        let insertarCategoria = await pool.request()
+        let darBajaCategoria = await pool.request()
         .input('ID_CATEGORIA', mssql.VarChar,idCategoria)
         .query('UPDATE Categoria SET ESTADO = 0 WHERE ID_CATEGORIA=@ID_CATEGORIA'); 
-        return insertarCategoria.recordsets;
+        return darBajaCategoria.recordsets;
     } catch (error) {
         console.log(error);
         process.exit(1);
     }
 }
+
+async function suscripcionCategoria(detalleSuscripcion){
+    console.log(detalleSuscripcion)
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let suscripcionCategoria = await pool.request()
+        .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
+        .input('idCat', mssql.Int, detalleSuscripcion.ID_Categoria)
+        .query('INSERT INTO USUARIOSxCATEGORIAS VALUES (@idUsuario,@idCat)');
+        return suscripcionCategoria.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+
+async function eliminarSuscripcion(detalleSuscripcion){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let deleteSuscripcionCategoria = await pool.request()
+        .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
+        .input('idCat', mssql.Int, detalleSuscripcion.ID_Categoria)
+        .query('DELETE FROM USUARIOSxCATEGORIAS WHERE ID_CATEGORIA=@idCat AND ID_USUARIO=@idUsuario');
+        return deleteSuscripcionCategoria.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function renovarSuscripcionCategoria(detalleSuscripcion){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let reSuscribirCategoria = await pool.request()
+        .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
+        .input('idCat', mssql.Int, detalleSuscripcion.ID_Categoria)
+        .query('UPDATE USUARIOSxCATEGORIAS SET ESTADO = 1 WHERE ID_CATEGORIA=@idCat AND ID_USUARIO = @idUsuario');
+        return reSuscribirCategoria.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function obtenerSuscripcionesUsuario(detalleSuscripcion){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenersuscripciones = await pool.request()
+        .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
+        .query('SELECT * FROM USUARIOSxCATEGORIAS WHERE ID_USUARIO = @idUsuario');
+        return obtenersuscripciones.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function obtenerSuscripcionesdeUsuarios(nombreCat){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenersuscripciones = await pool.request()
+        .input('nombreCat',mssql.VarChar, nombreCat)
+        .query('SELECT Categoria.NOMBRE_CATEGORIA, Usuarios.CORREO_ELECTRONICO, USUARIOSxCATEGORIAS.ID_USUARIO, USUARIOSxCATEGORIAS.ID_CATEGORIA  FROM USUARIOSxCATEGORIAS JOIN Usuarios ON Usuarios.ID_USUARIO = USUARIOSxCATEGORIAS.ID_USUARIO JOIN Categoria ON Categoria.ID_CATEGORIA = USUARIOSxCATEGORIAS.ID_CATEGORIA WHERE Categoria.NOMBRE_CATEGORIA = @nombreCat');
+        return obtenersuscripciones.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function obtenerSuscripcionDeUsuario(detalleSuscripcion){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenersuscripcion = await pool.request()
+        .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
+        .input('idCat', mssql.Int, detalleSuscripcion.ID_Categoria)
+        .query('SELECT * FROM USUARIOSxCATEGORIAS WHERE (ID_CATEGORIA=@idCat AND ID_USUARIO = @idUsuario)');
+        return obtenersuscripcion.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function obtenerTablaSuscripcion(){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let obtenersuscripcion = await pool.request()
+        .query('SELECT CATEGORIA.ID_CATEGORIA,Usuarios.CORREO_ELECTRONICO,Usuarios.ID_USUARIO FROM USUARIOSxCATEGORIAS JOIN Categoria ON USUARIOSxCATEGORIAS.ID_CATEGORIA= Categoria.ID_CATEGORIA JOIN USUARIOS ON USUARIOSxCATEGORIAS.ID_USUARIO=Usuarios.ID_USUARIO GROUP BY CORREO_ELECTRONICO,CATEGORIA.ID_CATEGORIA,Usuarios.ID_USUARIO');
+        return obtenersuscripcion.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
+async function getCategoriasSuscritas(correoElectronico){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let getCategoriasSuscritas = await pool.request()
+        .input('correoELectronico',mssql.VarChar, correoElectronico)
+        .query('select CATEGORIA.NOMBRE_CATEGORIA from usuariosXcategorias join Categoria on usuariosxcategorias.ID_CATEGORIA=categoria.ID_CATEGORIA join usuarios on usuariosxcategorias.ID_USUARIO=usuarios.id_usuario where usuarios.CORREO_ELECTRONICO = @correoELectronico');
+        return getCategoriasSuscritas.recordset;
+    }catch (error) {
+        return error;
+    }
+}
+
 
 module.exports={
     insertCategoria:insertCategoria,
@@ -99,5 +201,13 @@ module.exports={
     obtenerCategoria:obtenerCategoria,
     editarCategoria,
     obtenerExistenciaCategoria,
-    darBajaCategoria
+    darBajaCategoria,
+    suscripcionCategoria,
+    eliminarSuscripcion,
+    renovarSuscripcionCategoria,
+    obtenerSuscripcionesUsuario,
+    obtenerSuscripcionDeUsuario,
+    obtenerSuscripcionesdeUsuarios,
+    obtenerTablaSuscripcion,
+    getCategoriasSuscritas
 }

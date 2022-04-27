@@ -15,6 +15,7 @@ export class AdminModulePageComponent implements OnInit {
   public denuncias: any;
   public categories: any;
   public idCategorySelected?: number;
+  public idReportSelected?: number;
   public categorysNameSelected: string = '';
   public addNewCategoryName: string = '';
   public addNewCategoryDescription: string = '';
@@ -27,22 +28,27 @@ export class AdminModulePageComponent implements OnInit {
 
   }
 
-  openLG(content: any, nameCategory?: string, idCategory?: number) {
+  openLG(content: any, nameCategory?: string, idCategory?: number, idReport?: number) {
     
     this.httpClient.get(`${this.backendHost}/denuncias/getdenuncias`).subscribe(res=>{
       this.denuncias = res; 
       console.log(res); 
     });
     
+    if(idReport){
+      this.idReportSelected = idReport;
+      // this.httpClient.get(`${this.backendHost}/denuncias/getdenuncias/${}`).subscribe(res=>{
+      //   this.denuncias = res; 
+      //   console.log(res); 
+      // });
+    }
+
     console.log('denuncias');
     console.log(this.denuncias);
     
     this.httpClient.get(`${this.backendHost}/categorias`).subscribe(res=>{
       this.categories = res;  
     });
-    // let cats = this.httpClient.get(`${this.backendHost}/categorias`).pipe(take(1));
-
-    // this.categories = lastValueFrom(cats);
 
     if(nameCategory){
       this.categorysNameSelected = nameCategory;

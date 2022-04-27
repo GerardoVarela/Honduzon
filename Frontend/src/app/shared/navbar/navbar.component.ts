@@ -123,16 +123,18 @@ export class NavbarComponent implements OnInit {
         this.cookieService.set('ACCESS_TOKEN', this.token);
         this.modalService.open(content, { size: 'sm' });
         this.getLoggedAdmin();
+        this.loggedUser = undefined;
         console.log(res);
         console.log(this.token);
       }
     });
 
-    if(this.loggedAdmin != true){
+    if(this.loggedAdmin !== true){
       this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
         this.token = res.toString();
         if(res){
           this.hayError = false;
+          this.loggedAdmin = true;
           this.successMsg = 'Sesión Iniciada';
           this.modalService.dismissAll();
   
@@ -140,6 +142,7 @@ export class NavbarComponent implements OnInit {
           this.cookieService.set('ACCESS_TOKEN', this.token);
           this.modalService.open(content, { size: 'sm' });
           this.getLoggedUser();
+          this.loggedUserAdmin = undefined;
           console.log(res);
           console.log(this.token);
           
@@ -179,6 +182,7 @@ export class NavbarComponent implements OnInit {
     // localStorage.removeItem('ACCESS_TOKEN');
     this.loggedAdmin = false;
     this.successMsg = 'Sesión cerrada';
+    this.router.navigate(['/']);
     this.modalService.open(content, { size: 'sm' });
   }
 
