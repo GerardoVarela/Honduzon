@@ -54,7 +54,11 @@ router.get('/getDenuncia/:id_Denuncia',(req,res)=>{
     });
 });
 
-
+router.delete('/darBajaUsuario/:idUsuario',(req,res)=>{
+    denunciasmodel.darBajaUsuario(req.params.idUsuario).then(resultado=>{
+        res.json(true);
+    })
+})
 
 
 module.exports = { router: router };
