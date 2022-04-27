@@ -23,6 +23,7 @@ import { ProductDetailsPageComponent } from './pages/product-details-page/produc
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminModulePageComponent } from './pages/admin-module-page/admin-module-page.component';
+import { UserDetailsPageComponent } from './pages/user-details-page/user-details-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AdminModulePageComponent } from './pages/admin-module-page/admin-module
     ProductDetailsPageComponent,
     ChatPageComponent,
     AdminModulePageComponent,
+    UserDetailsPageComponent,
   ],
   imports: [
     CommonModule,
@@ -65,9 +67,9 @@ import { AdminModulePageComponent } from './pages/admin-module-page/admin-module
     NgxSliderModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
-    CookieService
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    CookieService,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductsModule {}
