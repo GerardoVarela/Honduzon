@@ -72,24 +72,24 @@
           </li>
         </ng-container>
         <ng-template #verifyLoggedUser>
-          <ng-container *ngIf="loggedAdmin === false; else adminGotLogged">
+          <ng-container *ngIf="loggedUserAdmin === undefined; else adminGotLogged">
             <li class="nav-item" style="padding-top: 8px">
               <a routerLink="/chat">
                 <i id="icono-mensaje" class="far fa-paper-plane"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a *ngIf="loggedUser !== undefined" 
+              <a
                   routerLink="/chat/user/{{loggedUser.idUsuario}}" 
                   id="mensaje" 
                   class="nav-link">
                 Mensaje
               </a>            
             </li>
-            <li class="nav-item" *ngIf="loggedUser !== undefined">
+            <li class="nav-item">
               <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
               <img src="../../../assets/profile-pics/user_{{loggedUser.idUsuario}}.jpg" 
-                    alt="../../../assets/profile-pics/user_default.jpg"
+                    alt="user_img"
                     style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
             </li>
             <div ngbDropdown style="padding-top:9px; margin-right:5px">
@@ -101,7 +101,7 @@
                 {{loggedUser.nombreCompleto}}
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a ngbDropdownItem routerLink="/" (click)="logout(contentSuccess)">Cerrar Sesión</a>
+                <a ngbDropdownItem (click)="logout(contentSuccess)">Cerrar Sesión</a>
               </div>
             </div>
             <li class="nav-item" style="margin-left: 5px">
@@ -121,6 +121,12 @@
             <li class="nav-item">
               <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i>
             </li>
+            <li class="nav-item">
+              <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
+              <img src="../../../assets/profile-pics/admin.jpg" 
+                    alt="admin_img"
+                    style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
+            </li>
             <div ngbDropdown style="padding-top:9px; margin-right:5px">
               <a
                   id="dropdownUser" 
@@ -130,7 +136,7 @@
                 Pedro Alejandro
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a ngbDropdownItem routerLink="/" (click)="logout(contentSuccess)">Cerrar Sesión</a>
+                <a ngbDropdownItem (click)="logout(contentSuccess)">Cerrar Sesión</a>
               </div>
             </div>
           </ng-template>
