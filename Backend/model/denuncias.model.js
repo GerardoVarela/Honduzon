@@ -52,7 +52,7 @@ async function getDenuncias(){
 async function darBajaDenuncia(idDenuncia){
     try {
         var pool = await mssql.connect(bdConfig.config);
-        let insertarCategoria = await pool.request()
+        let darBajaDenuncia = await pool.request()
         .input('idDenuncia', mssql.VarChar,idDenuncia)
         .query('UPDATE DENUNCIAS SET ESTADO = 0 WHERE denunciasID=@idDenuncia'); 
         return darBajaDenuncia.recordsets;
@@ -61,6 +61,23 @@ async function darBajaDenuncia(idDenuncia){
         process.exit(1);
     }
 }
+
+
+
+async function getDenuncia(id_Denuncia){
+    try {
+        var pool = await new mssql.ConnectionPool(bdConfig).connect();
+        var result = await pool.request()
+            .input('id_Denuncia', mssql.Int, id_Denuncia)
+            .query('select * from DENUNCIAS where denunciasID = @id_Denuncia');
+        return result.recordset;     
+    } 
+            catch (error) {
+                    return error;
+                } 
+}
+
+
 
 /**
  * 
@@ -85,7 +102,8 @@ module.exports = {
     getDenuncias,
     insertarDenuncia,
     getDenunciaDeUsuario,
-    darBajaDenuncia
+    darBajaDenuncia,
+    getDenuncia
     
 
 }

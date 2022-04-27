@@ -17,7 +17,7 @@ let transporter = nodeMailer.createTransport({
 function mailOption(email,attachments){
     return {
         from:'honduzon2022@gmail.com',
-        to:`jvarelao@unah.hn`,
+        to:`${email}`,
         subject:'Anuncios Semanales de tus Categorías',
         text:`Hey, estos son los anuncios de esta semana de las categorias a las que estas suscrito:\n`,
         attachments:attachments
