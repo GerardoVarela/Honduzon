@@ -46,4 +46,15 @@ router.delete('/borrarDenuncia/:idDenuncia',(req,res)=>{
     })
 })
 
+router.get('/getDenuncia/:id_Denuncia',(req,res)=>{
+    denunciasmodel.getDenuncia(req.params.id_Denuncia).then(resultado=>{
+        res.json(
+            resultado
+        );
+    });
+});
+
+
+
+
 module.exports = { router: router };
