@@ -37,6 +37,15 @@ img {
   width: 100%;
 }
 
-#btn-sub:hover {
+.btn-sub-selected {
+  background-color: limegreen;
+  border-color: limegreen;
+  color:white;
 
+}
+
+.btn-unsub-selected {
+  background-color: tomato;
+  border-color: tomato;
+  color:white;
 }

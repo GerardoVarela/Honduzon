@@ -124,8 +124,6 @@ export class NavbarComponent implements OnInit {
         this.modalService.open(content, { size: 'sm' });
         this.getLoggedAdmin();
         this.loggedUser = undefined;
-        console.log(res);
-        console.log(this.token);
       }
     });
 
@@ -143,8 +141,6 @@ export class NavbarComponent implements OnInit {
           this.modalService.open(content, { size: 'sm' });
           this.getLoggedUser();
           this.loggedUserAdmin = undefined;
-          console.log(res);
-          console.log(this.token);
           
         }else{
           this.hayError = true;

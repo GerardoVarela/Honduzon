@@ -35,8 +35,13 @@
               <div class="col">
                 <button id="btn-sub" 
                         class="btn btn-primary btn-cards" 
+                        [ngClass]="{
+                          'btn-sub-selected': selectedSub === true
+                        }"
+                        [disabled]="token === ''"
+                        (click)="subscribe()"
                         type="button">
-                  Suscribirme
+                  {{ selectedSub ? 'Suscrito' : 'Suscribirme' }}
                 </button>
               </div>
             </div>
