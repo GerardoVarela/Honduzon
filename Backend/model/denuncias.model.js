@@ -10,7 +10,7 @@ async function getDenunciaDeUsuario(ID_USUARIO){
         var pool = await new mssql.ConnectionPool(bdConfig).connect();
         var result = await pool.request()
             .input('ID_USUARIO', mssql.Int, idUsuario)
-            .query('select * from DENUNCIAS where denunciadoID = @idUsuario');
+            .query('select * from DENUNCIAS where denunciadoID = @idUsuario AND ESTADO=1');
         return result.recordset;     
     } 
             catch (error) {
@@ -29,7 +29,7 @@ async function insertarDenuncia(denuncia){
         .input('denuncianteID', mssql.Int,denuncia.denuncianteID)
         .input('descripcion', mssql.VarChar,denuncia.descripcion)
         .input('motivo', mssql.VarChar,denuncia.motivo)
-        .query('insert into DENUNCIAS(denunciadoID,denuncianteID,descripcion,motivo) values (@denunciadoID,@denuncianteID,@descripcion,@motivo)');
+        .query('insert into DENUNCIAS(denunciadoID,denuncianteID,descripcion,motivo,ESTADO) values (@denunciadoID,@denuncianteID,@descripcion,@motivo,1)');
     
         return insertardenuncias.recordset;
     } catch (error) {
@@ -41,7 +41,7 @@ async function getDenuncias(){
     try {
         let pool = await mssql.connect(bdConfig.config);
         let correo = await pool.request()
-        .query('select * from DENUNCIAS JOIN Usuarios ON DENUNCIAS.denunciadoID = Usuarios.ID_USUARIO');
+        .query('select * from DENUNCIAS JOIN Usuarios ON DENUNCIAS.denunciadoID = Usuarios.ID_USUARIO AND ESTADO = 1');
     
         return correo.recordset;
     } catch (error) {
@@ -69,7 +69,7 @@ async function getDenuncia(id_Denuncia){
         var pool = await new mssql.ConnectionPool(bdConfig).connect();
         var result = await pool.request()
             .input('id_Denuncia', mssql.Int, id_Denuncia)
-            .query('select * from DENUNCIAS where denunciasID = @id_Denuncia');
+            .query('select * from DENUNCIAS where denunciasID = @id_Denuncia AND ESTADO = 1');
         return result.recordset;     
     } 
             catch (error) {
@@ -77,6 +77,19 @@ async function getDenuncia(id_Denuncia){
                 } 
 }
 
+
+async function darBajaUsuario(idUsuario){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let darBajaDenuncia = await pool.request()
+        .input('idUsuario', mssql.VarChar,idUsuario)
+        .query('UPDATE Usuarios SET ESTADO = 0 WHERE ID_USUARIO=@idUsuario'); 
+        return darBajaDenuncia.recordsets;
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 
 /**
@@ -103,7 +116,7 @@ module.exports = {
     insertarDenuncia,
     getDenunciaDeUsuario,
     darBajaDenuncia,
-    getDenuncia
-    
+    getDenuncia,
+    darBajaUsuario
 
 }
