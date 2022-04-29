@@ -7,7 +7,7 @@ var mssql = require('mssql');
 
 async function getDenunciaDeUsuario(ID_USUARIO){
     try {
-        var pool = await new mssql.connect(bdConfig).connect();
+        var pool = await new mssql.connect(bdConfig);
         var result = await pool.request()
             .input('ID_USUARIO', mssql.Int, idUsuario)
             .query('select * from DENUNCIAS where (denunciadoID = @idUsuario AND ESTADO=1)');
@@ -66,15 +66,15 @@ async function darBajaDenuncia(idDenuncia){
 
 async function getDenuncia(id_Denuncia){
     try {
-        var pool = await new mssql.connect(bdConfig).connect();
+        var pool = await new mssql.connect(bdConfig);
         var result = await pool.request()
-            .input('id_Denuncia', mssql.Int, id_Denuncia)
-            .query('select * from DENUNCIAS where denunciasID = @id_Denuncia AND ESTADO = 1');
+        .input('id_Denuncia', mssql.Int, id_Denuncia)
+        .query('select DENUNCIAS.motivo, DENUNCIAS.descripcion, DENUNCIAS.denunciadoID, DENUNCIAS.denuncianteID, Usuarios.NOMBRE, Usuarios.APELLIDO from DENUNCIAS JOIN Usuarios ON DENUNCIAS.denunciadoID = Usuarios.ID_USUARIO where denunciasID = @id_Denuncia AND DENUNCIAS.ESTADO = 1');
         return result.recordset;     
     } 
-            catch (error) {
-                    return error;
-                } 
+    catch (error) {
+        return error;
+    } 
 }
 
 

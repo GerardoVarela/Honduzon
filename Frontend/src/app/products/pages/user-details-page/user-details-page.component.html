@@ -1,0 +1,189 @@
+<section style="padding: 40px">
+  <div
+    class="card"
+    style="border-radius: 10px; border-style: solid; border-bottom-style: solid"
+  >
+    <div
+      class="card-body"
+      style="
+        padding: 0px;
+        border-width: 1px;
+        border-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-radius: 10px;
+      "
+    >
+      <header
+        style="
+          max-height: 100px;
+          border-radius: 10px;
+          background: #969faa36;
+          margin: 0px;
+          margin-bottom: 100px;
+          border-width: 0px;
+          border-style: solid;
+          border-bottom-width: 1px;
+        "
+      >
+        <div class="container" style="max-height: 110px">
+          <div class="row" style="max-height: 110px">
+            <div
+              class="col-md-6"
+              style="width: 25%; text-align: right; max-height: 100px"
+            >
+              <img
+                style="
+                  transform: translateY(10px);
+                  width: 170px;
+                  border-radius: 90px;
+                  border-width: 1px;
+                  border-style: solid;
+                "
+                src="../../../../assets/user.png"
+              />
+            </div>
+            <div
+              class="col-md-6"
+              style="width: 75%; padding-top: 40px; padding-left: 50px"
+            >
+              <strong style="font-size: 40px">Gerardo Varela </strong>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main style="padding-left: 5%; padding-right: 5%; margin-bottom: 15px">
+        <h4
+          style="
+            border-radius: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.354);
+            text-align: center;
+            font-size: 25px;
+            text-shadow: 1px 1px black;
+            color: #00bce4;
+          "
+        >
+          Tus Articulos en venta ahora mismo
+        </h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4" style="padding: 15px">
+              <div class="card" style="border-radius: 20px">
+                <div class="card-body" style="border-radius: 20px">
+                  <div style="text-align: center; margin-bottom: 10px">
+                    <img
+                      src="../../../../assets/01.jpg"
+                      style="border-radius: 20px; width: 100%"
+                    />
+                  </div>
+                  <h6
+                    class="text-muted card-subtitle mb-2"
+                    style="
+                      padding-top: 10px;
+                      font-weight: bold;
+                      font-size: 18px;
+                    "
+                  >
+                    VideoJuegos
+                  </h6>
+                  <p class="card-text" style="text-align: justify">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
+                    justo odio, dapibus ac facilisis in, egestas eget quam.
+                    Donec id elit non mi porta gravida at eget metus.
+                  </p>
+                  <div style="text-align: center">
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      (click)="openSM(content_confirm_delete)"
+                      style="border-radius: 10px"
+                    >
+                      [X] Eliminar publicación
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- Modal confirmar eliminar anuncio -->
+<ng-template #content_confirm_delete let-modal>
+  <div
+    class="modal-header"
+    style="
+      border-radius: 20px;
+      border-width: 1px;
+      border-bottom-style: solid;
+      text-align: center;
+    "
+  >
+    <strong
+      style="
+        font-size: 25px;
+        text-shadow: 1px 1px black;
+        margin-left: 15px;
+        color: #00bce4;
+      "
+      >Tus Articulos</strong
+    >
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+      style="margin-right: 15px"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div style="text-align: center">
+      <p style="margin-bottom: 0px">
+        ¿Estas seguro que desesas eliminar este articulo?
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container" style="text-align: center">
+      <div class="row">
+        <div class="col-md-6" style="padding: 0px">
+          <button
+            class="btn btn-success"
+            type="button"
+            style="
+              color: white;
+              background: #13ce66;
+              border: #13ce66;
+              min-width: 120px;
+              border-radius: 20px;
+            "
+          >
+            Ignorar
+          </button>
+        </div>
+        <div class="col-md-6" style="padding: 0px">
+          <button
+            class="btn btn-danger"
+            type="button"
+            style="
+              color: white;
+              background: #ff0005;
+              max-height: 40px;
+              min-width: 120px;
+              border-radius: 20px;
+            "
+          >
+            [X] Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -88,7 +88,7 @@
           </li>
         </ng-container>
         <ng-template #verifyLoggedUser>
-          <ng-container *ngIf="loggedAdmin === false; else adminGotLogged">
+          <ng-container *ngIf="loggedUser !== undefined; else adminGotLogged">
             <li class="nav-item" style="padding-top: 8px">
               <a routerLink="/chat">
                 <i id="icono-mensaje" class="far fa-paper-plane"></i>
@@ -96,28 +96,19 @@
             </li>
             <li class="nav-item">
               <a
-                *ngIf="loggedUser !== undefined"
-                routerLink="/chat/user/{{ loggedUser.idUsuario }}"
-                id="mensaje"
-                class="nav-link"
-              >
+                  *ngIf="loggedUser !== undefined"
+                  routerLink="/chat/user/{{loggedUser.idUsuario}}" 
+                  id="mensaje" 
+                  class="nav-link">
                 Mensaje
               </a>
             </li>
-            <li class="nav-item" *ngIf="loggedUser !== undefined">
+            <li class="nav-item">
               <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
-              <img
-                src="../../../assets/profile-pics/user_{{
-                  loggedUser.idUsuario
-                }}.jpg"
-                alt="../../../assets/profile-pics/user_default.jpg"
-                style="
-                  border-radius: 30px;
-                  width: 40px;
-                  height: 45px;
-                  margin-right: 5px;
-                "
-              />
+              <img *ngIf="loggedUser !== undefined"
+                    src="../../../assets/profile-pics/user_{{loggedUser.idUsuario}}.jpg" 
+                    alt="user_img"
+                    style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
             </li>
             <div ngbDropdown style="padding-top: 9px; margin-right: 5px">
               <a
@@ -134,12 +125,7 @@
                 {{ loggedUser.nombreCompleto }}
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a
-                  ngbDropdownItem
-                  routerLink="/"
-                  (click)="logout(contentSuccess)"
-                  >Cerrar Sesión</a
-                >
+                <a ngbDropdownItem (click)="logout(contentSuccess)">Cerrar Sesión</a>
               </div>
             </div>
             <li class="nav-item" style="margin-left: 5px">
@@ -147,6 +133,7 @@
                 id="btn-subirProducto"
                 class="btn btn-primary"
                 type="button"
+                (click)="open(contentAddProduct)"
               >
                 <i class="fas fa-plus-circle" style="margin-right: 5px"></i
                 >Subir producto
@@ -171,7 +158,13 @@
                 "
               ></i>
             </li>
-            <div ngbDropdown style="padding-top: 9px; margin-right: 5px">
+            <li class="nav-item">
+              <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
+              <img src="../../../assets/profile-pics/admin.jpg" 
+                    alt="admin_img"
+                    style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
+            </li>
+            <div ngbDropdown style="padding-top:9px; margin-right:5px">
               <a
                 id="dropdownUser"
                 ngbDropdownToggle
@@ -186,12 +179,7 @@
                 Pedro Alejandro
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownUser">
-                <a
-                  ngbDropdownItem
-                  routerLink="/"
-                  (click)="logout(contentSuccess)"
-                  >Cerrar Sesión</a
-                >
+                <a ngbDropdownItem (click)="logout(contentSuccess)">Cerrar Sesión</a>
               </div>
             </div>
           </ng-template>
@@ -753,13 +741,13 @@
 </ng-template>
 
 <!-- Modal Subir producto -->
-<ng-template #contentAddProduct let-modalReg>
+<ng-template #contentAddProduct let-modalAddProduct>
   <div class="modal-header">
     <button
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modalReg.dismiss('Cross click')"
+      (click)="modalAddProduct.dismiss('Cross click')"
     ></button>
   </div>
   <div class="modal-body col" style="text-align: center">
@@ -840,7 +828,7 @@
       <div class="row">
         <div class="col-md-12">
           <button
-            (click)="modalReg.dismiss('Cross click')"
+            (click)="modalAddProduct.dismiss('Cross click')"
             class="btn btn-primary"
             type="button"
             style="

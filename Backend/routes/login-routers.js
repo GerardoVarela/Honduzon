@@ -35,7 +35,7 @@ router.post('/adminVerification',(req,res, next)=>{
         if(resultado.length == 0){
             res.send(false)
         }else{
-            
+            isAdmin = true;
             
             createdAdminToken = token.createToken(req.body.formEmailLogin,isAdmin);
             logeado = true;
@@ -54,6 +54,7 @@ router.post('/',(req,res, next)=>{
                 
                 if(resultado[0].CORREO_ELECTRONICO==req.body.formEmailLogin && 
                     match){
+                        isAdmin = false;
                         createdToken = token.createToken(req.body.formEmailLogin,isAdmin);
                         logeado = true;
                         res.json(createdToken);

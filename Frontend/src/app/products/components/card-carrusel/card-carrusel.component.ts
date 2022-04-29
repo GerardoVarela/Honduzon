@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { take } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
+import { LoggedUser } from '../../interfaces/logged-user.interface';
 
 @Component({
   selector: 'app-card-carrusel',
@@ -10,6 +15,10 @@ export class CardCarruselComponent implements OnInit {
 
   @Input() img!: number;
 
+  public token: string = '';
+  public idCurrentUser?: number;
+  public backendHost: string = 'http://localhost:8888';
+  public selectedSub: boolean = false;
 
   category: any[] = [
     {
@@ -44,9 +53,29 @@ export class CardCarruselComponent implements OnInit {
     },
   ];
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookieService: CookieService, private httpClient: HttpClient) { 
+  }
   
   ngOnInit(): void {
+    
+    if(this.cookieService.get('ACCESS_TOKEN')){
+      this.token = this.cookieService.get('ACCESS_TOKEN');
+    }else{
+      this.token = '';
+    }
+
+  }
+
+  ngDoCheck(): void {
+    
+    if(this.cookieService.get('ACCESS_TOKEN')){
+      this.token = this.cookieService.get('ACCESS_TOKEN');
+      
+      this.getLoggedUser();
+    }else{
+      this.token = '';
+    }
+
   }
 
   search(idCategory: number){
@@ -55,6 +84,32 @@ export class CardCarruselComponent implements OnInit {
     this.router.navigate(['/product'], {
       queryParams: {category: idCategory}
     });
+  }
+
+  subscribe(){
+    this.selectedSub = !this.selectedSub;
+
+    let idCat = this.img - 1;
+    
+    let subInfo = {
+      ID_CurrentUser: this.idCurrentUser,
+      ID_Categoria: idCat,
+    }
+
+    this.httpClient.post(`${this.backendHost}/categorias/suscribir`, subInfo).subscribe( console.log );
+    
+  }
+
+  async getLoggedUser(){
+    let resp = this.httpClient.get<LoggedUser>(`${this.backendHost}/login/getloggeduser`,{
+      headers:new HttpHeaders({
+        authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
+      })
+    }).subscribe( res => {
+      this.idCurrentUser = res.idUsuario;
+    });
+
+    
   }
 
 }

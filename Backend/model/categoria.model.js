@@ -194,6 +194,28 @@ async function getCategoriasSuscritas(correoElectronico){
     }
 }
 
+/**
+ *
+ * 
+ * Model para lo del pdf xd
+ * 
+ * 
+ *  
+ 
+ */
+
+
+async function obtenerProductoPorCategoria(categoriaId){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let getCategoriasSuscritas = await pool.request()
+        .input('categoriaId',mssql.Int, categoriaId)
+        .query('SELECT * FROM Productos WHERE Productos.ID_CATEGORIA = @categoriaId');
+        return getCategoriasSuscritas.recordset;
+    }catch (error) {
+        return error;
+    }
+}
 
 module.exports={
     insertCategoria:insertCategoria,
@@ -209,5 +231,6 @@ module.exports={
     obtenerSuscripcionDeUsuario,
     obtenerSuscripcionesdeUsuarios,
     obtenerTablaSuscripcion,
-    getCategoriasSuscritas
+    getCategoriasSuscritas,
+    obtenerProductoPorCategoria:obtenerProductoPorCategoria
 }

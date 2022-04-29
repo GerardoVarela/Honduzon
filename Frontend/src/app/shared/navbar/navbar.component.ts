@@ -112,6 +112,7 @@ export class NavbarComponent implements OnInit {
 
     this.httpClient.post(`${this.backendHost}/login/adminVerification`, this.loginForm.value).subscribe(res=>{
       this.token = res.toString();
+      console.log('probando')
       console.log(res)
       if(res){
         this.hayError = false;
@@ -123,16 +124,16 @@ export class NavbarComponent implements OnInit {
         this.cookieService.set('ACCESS_TOKEN', this.token);
         this.modalService.open(content, { size: 'sm' });
         this.getLoggedAdmin();
-        console.log(res);
-        console.log(this.token);
+        this.loggedUser = undefined;
       }
     });
 
-    if(this.loggedAdmin != true){
+    if(this.loggedAdmin !== true){
       this.httpClient.post(`${this.backendHost}/login`, this.loginForm.value).subscribe(res=>{
         this.token = res.toString();
         if(res){
           this.hayError = false;
+          this.loggedAdmin = true;
           this.successMsg = 'Sesión Iniciada';
           this.modalService.dismissAll();
   
@@ -140,8 +141,8 @@ export class NavbarComponent implements OnInit {
           this.cookieService.set('ACCESS_TOKEN', this.token);
           this.modalService.open(content, { size: 'sm' });
           this.getLoggedUser();
-          console.log(res);
-          console.log(this.token);
+          console.log(this.loggedUser);
+          this.loggedUserAdmin = undefined;
           
         }else{
           this.hayError = true;
@@ -155,10 +156,10 @@ export class NavbarComponent implements OnInit {
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
-    }).pipe(take(1));
+    }).subscribe( res => this.loggedUserAdmin = res );
 
-    this.loggedUserAdmin = await lastValueFrom(respAdmin);
-    console.log(this.loggedUserAdmin);
+    // this.loggedUserAdmin = await lastValueFrom(respAdmin);
+    // console.log(this.loggedUserAdmin);
     this.router.navigate(['/home/admin']);
   }
 
@@ -179,6 +180,7 @@ export class NavbarComponent implements OnInit {
     // localStorage.removeItem('ACCESS_TOKEN');
     this.loggedAdmin = false;
     this.successMsg = 'Sesión cerrada';
+    this.router.navigate(['/']);
     this.modalService.open(content, { size: 'sm' });
   }
 
