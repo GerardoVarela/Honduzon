@@ -19,6 +19,7 @@ export class AdminModulePageComponent implements OnInit {
   public categorysNameSelected: string = '';
   public addNewCategoryName: string = '';
   public addNewCategoryDescription: string = '';
+  public detalleDenunciaSeleccionada: any;
   public newCategoryName: string = '';
   public newCategoryDescription: string = '';
 
@@ -31,14 +32,14 @@ export class AdminModulePageComponent implements OnInit {
   openLG(content: any, nameCategory?: string, idCategory?: number, idReport?: number) {
     
     this.httpClient.get(`${this.backendHost}/denuncias/getdenuncias`).subscribe(res=>{
-      this.denuncias = res; 
-      console.log(res); 
+      this.denuncias = res;
     });
     
-    if(idReport){
+    if(idReport !== undefined){
       this.idReportSelected = idReport;
       this.httpClient.get(`${this.backendHost}/denuncias/getdenuncia/${idReport}`).subscribe(res=>{
-        console.log(res); 
+        this.detalleDenunciaSeleccionada = res;
+        console.log(res);
       });
     }
 
@@ -90,6 +91,20 @@ export class AdminModulePageComponent implements OnInit {
     };
 
     this.httpClient.post(`${this.backendHost}/categorias/guardar`, contenido).subscribe(res=>{
+    });
+
+    this.modalService.dismissAll();
+  }
+
+  ignoreReport(){
+    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe(res=>{
+    });
+
+    this.modalService.dismissAll();
+  }
+
+  putUserDown(idDenunciado: number){
+    this.httpClient.delete(`${this.backendHost}/denuncias/darBajaUsuario/${idDenunciado}`).subscribe(res=>{
     });
 
     this.modalService.dismissAll();

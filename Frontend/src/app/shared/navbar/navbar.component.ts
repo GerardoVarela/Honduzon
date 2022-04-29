@@ -112,6 +112,7 @@ export class NavbarComponent implements OnInit {
 
     this.httpClient.post(`${this.backendHost}/login/adminVerification`, this.loginForm.value).subscribe(res=>{
       this.token = res.toString();
+      console.log('probando')
       console.log(res)
       if(res){
         this.hayError = false;
@@ -140,6 +141,7 @@ export class NavbarComponent implements OnInit {
           this.cookieService.set('ACCESS_TOKEN', this.token);
           this.modalService.open(content, { size: 'sm' });
           this.getLoggedUser();
+          console.log(this.loggedUser);
           this.loggedUserAdmin = undefined;
           
         }else{
@@ -154,10 +156,10 @@ export class NavbarComponent implements OnInit {
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
-    }).pipe(take(1));
+    }).subscribe( res => this.loggedUserAdmin = res );
 
-    this.loggedUserAdmin = await lastValueFrom(respAdmin);
-    console.log(this.loggedUserAdmin);
+    // this.loggedUserAdmin = await lastValueFrom(respAdmin);
+    // console.log(this.loggedUserAdmin);
     this.router.navigate(['/home/admin']);
   }
 

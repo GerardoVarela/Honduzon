@@ -548,7 +548,7 @@
           class="row"
           type="button"
           *ngFor="let den of denuncias"
-          (click)="openLG(contenido4, den.denunciasID)"
+          (click)="openLG(contenido4, undefined, undefined, den.denunciasID)"
           (click)="modal.dismiss('Cross click')"
           id="cat"
           style="
@@ -646,14 +646,14 @@
           <div
             style="background: #eceff1; border-radius: 15px; border-width: 1px"
           >
-            <p style="padding: 10px; text-align: justify">
-              Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-              odio, dapibus ac facilisis in.
+            <p *ngIf="detalleDenunciaSeleccionada !== undefined"
+                style="padding: 10px; text-align: justify">
+              {{detalleDenunciaSeleccionada[0].motivo}}
             </p>
           </div>
         </div>
-        <!-- <div class="col-md-6" style="width: 30%">
-          <strong style="margin-left: 20px">Fecha</strong>
+        <div class="col-md-6" style="width: 30%">
+          <strong style="margin-left: 20px">Denunciado</strong>
           <div
             style="
               background: #eceff1;
@@ -662,15 +662,16 @@
               text-align: center;
             "
           >
-            <p style="padding: 10px">12/04/2022</p>
+            <p style="padding: 10px">{{detalleDenunciaSeleccionada[0].NOMBRE}} {{detalleDenunciaSeleccionada[0].APELLIDO}}</p>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-md-12" style="margin-top: 15px">
             <strong style="margin-left: 15px">Detalles</strong>
             <p
+              *ngIf="detalleDenunciaSeleccionada !== undefined"
               style="
                 border-radius: 20px;
                 border-width: 1px;
@@ -679,12 +680,7 @@
                 margin-top: 5px;
               "
             >
-              Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-              odio, dapibus ac facilisis in, egestas eget quam. Donec id elit
-              non mi porta gravida at eget metus.<br /><br />Nullam id dolor id
-              nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac
-              facilisis in, egestas eget quam. Donec id elit non mi porta
-              gravida at eget metus.
+            {{detalleDenunciaSeleccionada[0].descripcion}}
             </p>
           </div>
         </div>
@@ -698,6 +694,7 @@
           <button
             class="btn btn-success"
             type="button"
+            (click)="ignoreReport()"
             style="
               color: white;
               background: #13ce66;
@@ -712,6 +709,7 @@
           <button
             class="btn btn-danger"
             type="button"
+            (click)="putUserDown(detalleDenunciaSeleccionada[0].denunciadoID)"
             style="color: white; background: #ff0005; min-width: 150px"
           >
             [X] Dar de baja
