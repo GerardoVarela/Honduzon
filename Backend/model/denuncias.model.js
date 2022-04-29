@@ -7,7 +7,7 @@ var mssql = require('mssql');
 
 async function getDenunciaDeUsuario(ID_USUARIO){
     try {
-        var pool = await new mssql.ConnectionPool(bdConfig).connect();
+        var pool = await new mssql.connect(bdConfig).connect();
         var result = await pool.request()
             .input('ID_USUARIO', mssql.Int, idUsuario)
             .query('select * from DENUNCIAS where denunciadoID = @idUsuario AND ESTADO=1');
@@ -66,7 +66,7 @@ async function darBajaDenuncia(idDenuncia){
 
 async function getDenuncia(id_Denuncia){
     try {
-        var pool = await new mssql.ConnectionPool(bdConfig).connect();
+        var pool = await new mssql.connect(bdConfig).connect();
         var result = await pool.request()
             .input('id_Denuncia', mssql.Int, id_Denuncia)
             .query('select * from DENUNCIAS where denunciasID = @id_Denuncia AND ESTADO = 1');
