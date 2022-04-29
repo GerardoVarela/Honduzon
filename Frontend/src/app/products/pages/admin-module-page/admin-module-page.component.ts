@@ -37,10 +37,9 @@ export class AdminModulePageComponent implements OnInit {
     
     if(idReport){
       this.idReportSelected = idReport;
-      // this.httpClient.get(`${this.backendHost}/denuncias/getdenuncias/${}`).subscribe(res=>{
-      //   this.denuncias = res; 
-      //   console.log(res); 
-      // });
+      this.httpClient.get(`${this.backendHost}/denuncias/getdenuncia/${idReport}`).subscribe(res=>{
+        console.log(res); 
+      });
     }
 
     console.log('denuncias');

@@ -37,11 +37,11 @@ async function getListaVerificacionDeseosUsuario(productoListaDeseo){
  * 
  */
 
-async function getListaDeseoUsuario(detalleUsuarioListaDeseo){
+async function getListaDeseoUsuario(CURRENT_USER){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let obtenerListaDeseoUsuario = await pool.request()
-        .input('idUsuario',mssql,idUsuario)
+        .input('idUsuario',mssql,CURRENT_USER)
         .query('');
         return obtenerListaDeseoUsuario.recordset
     } catch (error) {
@@ -63,10 +63,27 @@ async function darBajaProductoListaDeseos(detalleListaDeseo){
     }
 }
 
+async function renovarProductoListaDeseo(detalleListaDeseo){
+    try {
+        var pool = await mssql.connect(bdConfig.config);
+        let darBajaProductoListaDeseo =  await pool.request()
+        .input('idProducto',mssql.Int,detalleListaDeseo.ID_PRODUCTO)
+        .input('idUsuario',mssql.Int,detalleListaDeseo.CURRENT_USER)
+        .query('UPDATE LISTA_DESEOS SET ESTADO = 1 WHERE ID_USUARIO=@idUsuario AND ID_PRODUCTO= @idProducto');
+        return darBajaProductoListaDeseo.recordset;
+    } catch (error) {
+        return error;
+    }
+}
 
 async function borrarProductoListaDeseos(detalleListaDeseo){
     try {
-        
+        var pool = await mssql.connect(bdConfig.config);
+        let borrarProductoListaDeseo =  await pool.request()
+        .input('idProducto',mssql.Int,detalleListaDeseo.ID_PRODUCTO)
+        .input('idUsuario',mssql.Int,detalleListaDeseo.CURRENT_USER)
+        .query('DELETE FROM LISTA_DESEOS WHERE ID_USUARIO=@idUsuario AND ID_PRODUCTO= @idProducto');
+        return borrarProductoListaDeseo.recordset;
     } catch (error) {
         return error;
     }
@@ -77,5 +94,7 @@ module.exports={
     agregarProductosListaDeseos,
     darBajaProductoListaDeseos,
     borrarProductoListaDeseos,
-    getListaVerificacionDeseosUsuario
+    getListaVerificacionDeseosUsuario,
+    renovarProductoListaDeseo,
+    getListaDeseoUsuario
 }
