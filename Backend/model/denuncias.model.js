@@ -7,7 +7,7 @@ var mssql = require('mssql');
 
 async function getDenunciaDeUsuario(ID_USUARIO){
     try {
-        var pool = await new mssql.connect(bdConfig).connect();
+        var pool = await new mssql.connect(bdConfig);
         var result = await pool.request()
             .input('ID_USUARIO', mssql.Int, idUsuario)
             .query('select * from DENUNCIAS where (denunciadoID = @idUsuario AND ESTADO=1)');

@@ -16,7 +16,7 @@ router.get('/getdenuncias', (req, res) => {
 }); 
 
 router.get('/getdenuncias/:idUsuario', (req, res) => {
-    denunciasmodel.getDenunciasPorUsuario(req.params.idUsuario).then((resultado) => {
+    denunciasmodel.getDenunciaDeUsuario(req.params.idUsuario).then((resultado) => {
         if(resultado.length==0){    
             res.send(0);
         }else
