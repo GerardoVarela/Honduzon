@@ -505,7 +505,8 @@ ALTER TABLE PRODUCTOS ADD DescripcionEstado varchar(50)
 UPDATE Productos SET FECHA =GETDATE() WHERE ID_PRODUCTO=2
 UPDATE Productos SET Estado=0,descripcionEstado='fecha vencida'  WHERE DATEDIFF (DAY, FECHA , GETDATE() )=60
 
-
+select * from Productos where estado=0 and DescripcionEstado='fecha vencida'
+update Productos set estado=1,DescripcionEstado='disponible',fecha=getdate() where id_Producto=2
 
 SELECT * FROM Productos
 
