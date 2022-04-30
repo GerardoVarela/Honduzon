@@ -14,7 +14,7 @@ const bree = new Bree({
                 }
             }
         },
-        {
+        /*{
             name:'pdfLogic',
             // cron:'* * * * *',
             interval:'Every 10 seconds',
@@ -23,7 +23,7 @@ const bree = new Bree({
                     description:'Este job enviara emails cada semana con los anuncios de cada categoria. Este solo es una prueba.'
                 }
             }
-        }
+        }*/
     ]
 });
 
