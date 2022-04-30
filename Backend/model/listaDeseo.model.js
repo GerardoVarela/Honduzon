@@ -42,7 +42,7 @@ async function getListaDeseoUsuario(CURRENT_USER){
         var pool = await mssql.connect(bdConfig.config);
         let obtenerListaDeseoUsuario = await pool.request()
         .input('idUsuario',mssql,CURRENT_USER)
-        .query('');
+        .query('select Productos.nombre_Producto from LISTA_DESEOS join Productos on LISTA_DESEOS.ID_PRODUCTO=productos.ID_PRODUCTO where id_usuario=@idUsuario');
         return obtenerListaDeseoUsuario.recordset
     } catch (error) {
         return error;

@@ -279,5 +279,5 @@ module.exports={
     getProductoPorCatId,
     getProductoPorId,
     getCantTotalProdUsuario,
-    
+    darBajaProducto
 }
