@@ -21,7 +21,9 @@ async function insertProducto(producto){
         .input('ID_USUARIO',mssql.Int,producto.userID)
         .input('ID_CATEGORIA',mssql.Int,producto.categoryID)
         .input('ID_IMAGEN',mssql.Int,producto.formImage)
-        .execute('SP_INSERTAR_PRODUCTO');
+        .query('INSERT INTO PRODUCTOS (NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,VALORACIONES,'+
+            'PRECIO,ID_USUARIO,ID_CATEGORIA,ID_IMAGEN,FECHA) VALUES(@NOMBRE_PRODUCTO,@DESCRIPCION_PRODUCTO,@CANTIDAD_PRODUCTO,@CANTIDAD_PROD_VENDIDO,@VALORACIONES,'+   
+            '@PRECIO,@ID_USUARIO,@ID_CATEGORIA,@ID_IMAGEN,GETDATE())')
         return insertarProducto.recordset
 
     } catch (error) {
