@@ -20,7 +20,9 @@ async function insertProducto(producto){
         .input('PRECIO',mssql.Float,producto.formPrice)
         .input('ID_USUARIO',mssql.Int,producto.userID)
         .input('ID_CATEGORIA',mssql.Int,producto.categoryID)
+        .input('ESTADO',mssql.Int,producto.formState)
         .input('ID_IMAGEN',mssql.Int,producto.formImage)
+        .input('IMAGEN_PRODUCTO',mssql.Int,producto.formProductImage)
         .execute('SP_INSERTAR_PRODUCTO');
         return insertarProducto.recordset
 
