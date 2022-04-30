@@ -9,5 +9,6 @@ function mainLogic(){
 
 
 };
-mainLogic();
-
+module.exports={
+    mainLogic
+}
