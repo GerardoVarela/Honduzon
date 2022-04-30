@@ -9,10 +9,13 @@ function mainLogic(){
         resultado.forEach(element=>{
             categoriaModel.obtenerProductoPorCategoria(element.ID_CATEGORIA).then(resultado2=>{
                 //console.log(resultado2);
-                //productos.push
+                productos.push(resultado2.NOMBRE_PRODUCTO)
+                
+                var contenido = pdfTemplate.plantillaPDF(element.NOMBRE_CATEGORIA,productos);
+            pdfTemplate.generatePdfTest(element.NOMBRE_CATEGORIA,contenido);
             });
-            var contenido = pdfTemplate.plantillaPDF(element.NOMBRE_CATEGORIA);
-            pdfTemplate.generatePdfTest(element.NOMBRE_CATEGORIA,contenido)
+            
+            
         }) 
         
         

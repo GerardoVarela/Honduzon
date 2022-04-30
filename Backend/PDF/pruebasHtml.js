@@ -1,6 +1,6 @@
  const pdf = require('html-pdf')
 
-function plantillaPDF(nombreCategoria){
+function plantillaPDF(nombreCategoria,products){
     var contenido = `
  <!DOCTYPE html>
  <html lang="en">
@@ -56,6 +56,9 @@ function plantillaPDF(nombreCategoria){
              </div>
          </div>
      </div>
+     <script >
+        ${products}.foreach(element=>{})
+     </script>
      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
  </body>
@@ -75,9 +78,6 @@ function plantillaPDF(nombreCategoria){
 
 const dotenv = require('dotenv');
 dotenv.config();
-const PDFDocument = require('pdfkit');
-const fs = require('fs');
-
 
 async function generatePdfTest(pdfTitle,content){
     //fs.createWriteStream(`${process.env.pdfPath}`+`${pdfTitle}.pdf`,'');

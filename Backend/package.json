@@ -26,7 +26,6 @@
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "pdfjs-dist": "^2.13.216",
-    "pdfkit": "^0.13.0",
     "randexp": "^0.5.3",
     "socket.io": "^4.4.1",
     "tedious": "^14.3.0"
