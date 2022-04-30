@@ -1,6 +1,7 @@
  const pdf = require('html-pdf')
 
 function plantillaPDF(nombreCategoria,products){
+    console.log(products);
     var contenido = `
  <!DOCTYPE html>
  <html lang="en">
@@ -57,7 +58,7 @@ function plantillaPDF(nombreCategoria,products){
          </div>
      </div>
      <script >
-        ${products}.foreach(element=>{})
+        foreach(element=>{})
      </script>
      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
