@@ -1,5 +1,5 @@
 const pdf = require('html-pdf');
-function plantillaPDF(nombreCategoria,products){
+function plantillaPDF(nombreCategoria,products,productDescription){
     
     productos=[]
     // console.log(nombreCategoria);
@@ -7,8 +7,8 @@ function plantillaPDF(nombreCategoria,products){
     for (var j = 0; j<products.length;j++){
         productos.push(
             `<div class="card-body">
-                 <h4 class="card-title">${products[j]}</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                 <h3 class="card-title">${products[j]}</h3>
+                 <p class="card-text">${productDescription[j]}</p>
              </div>
             `
         )
