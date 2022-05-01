@@ -187,7 +187,7 @@ async function getCategoriasSuscritas(correoElectronico){
         var pool = await mssql.connect(bdConfig.config);
         let getCategoriasSuscritas = await pool.request()
         .input('correoELectronico',mssql.VarChar, correoElectronico)
-        .query('select CATEGORIA.NOMBRE_CATEGORIA from usuariosXcategorias join Categoria on usuariosxcategorias.ID_CATEGORIA=categoria.ID_CATEGORIA join usuarios on usuariosxcategorias.ID_USUARIO=usuarios.id_usuario where usuarios.CORREO_ELECTRONICO = @correoELectronico');
+        .query('select CATEGORIA.NOMBRE_CATEGORIA, CATEGORIA.ID_CATEGORIA from usuariosXcategorias join Categoria on usuariosxcategorias.ID_CATEGORIA=categoria.ID_CATEGORIA join usuarios on usuariosxcategorias.ID_USUARIO=usuarios.id_usuario where usuarios.CORREO_ELECTRONICO = @correoELectronico');
         return getCategoriasSuscritas.recordset;
     }catch (error) {
         return error;

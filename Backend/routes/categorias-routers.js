@@ -12,7 +12,7 @@
 
 var express = require('express');
 var router = express.Router();
-
+var logic = require('../logic/functions.logic');
 var categoriaModel = require ('../model/categoria.model');
 
 
@@ -60,14 +60,23 @@ router.delete('/borrarCategoria/:idCategoria',(req,res)=>{
  * 
  */
 
-router.post('/suscribir',verificacionSuscripcion,(req,res)=>{
-    console.log('despues del middle ware')
+router.post('/suscribir',(req,res)=>{
     var suscripcionDeCategoria = {...req.body}
     categoriaModel.suscripcionCategoria(suscripcionDeCategoria).then(resultado=>{
         res.json({
             mensaje:'Inscrito en esa categoria exitosamente',
             eliminacionSuscripcion:false
         })
+    });
+});
+
+router.delete('/borrarSuscripcion/:detalleSuscipcion',(req,res)=>{
+    var detalleSuscripcion = logic.urlToJsonFormatter(req.params.detalleSuscipcion);
+    categoriaModel.eliminarSuscripcion(detalleSuscripcion).then(resultado=>{
+        res.json({
+            mensaje:'Eliminada suscripcion exitosamente',
+            eliminacionSuscripcion: true
+        });
     });
 });
 
@@ -105,23 +114,6 @@ function verificacionCategoria(req,res,next){
 }
 
 
-function verificacionSuscripcion(req,res,next){
-    var detalleSuscripcion = {...req.body};
-
-    categoriaModel.obtenerSuscripcionDeUsuario(detalleSuscripcion).then(resultado=>{
-        if(resultado.length==0){
-            next();
-        }else{
-            categoriaModel.eliminarSuscripcion(detalleSuscripcion).then(resultado=>{
-                res.json({
-                    mensaje:'Eliminada suscripcion exitosamente',
-                    eliminacionSuscripcion: true
-                });
-            });
-
-        }
-    });
-}
 
 module.exports={
     router:router

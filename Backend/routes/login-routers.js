@@ -18,6 +18,7 @@ const adminLogin = require('../model/admin.model');
 const bcrypt = require ('bcrypt');
 const jwt = require('jsonwebtoken');
 const token = require('../token/jwt');
+const categoriaModel = require('../model/categoria.model');
 const { jwtKey,adminJwtKey } = require('../config/keys.config');
 
 
@@ -108,7 +109,27 @@ router.get('/getloggeduser',verifyToken,(req,res)=>{
                     idUsuario : resultado[0].ID_USUARIO,
                     imagenPerfil: resultado[0].IMAGENS
                     };
-                    res.json(loggedUser);
+                    categoriaModel.getCategoriasSuscritas(authedUser.email).then(resultado2=>{
+                        if(resultado2.length == 0){
+                            res.json({loggedUser,
+                                mensaje:'No tiene suscripciones en Categorias',
+                                suscripciones: false
+                            });
+                        }else{
+                            var idCats=[];
+                            for (var i = 0; i< resultado2.length; i++){
+                                idCats.push(resultado2[i].ID_CATEGORIA);
+                            }
+                            console.log(idCats);
+                            res.json({loggedUser,
+                                suscripciones:true,
+                                categoriasSuscritas:idCats
+                            });
+                            return;
+                        }
+                        
+                    });
+                    
                     return;
                 }
 
