@@ -1,9 +1,20 @@
- const pdf = require('html-pdf')
-
+const pdf = require('html-pdf');
 function plantillaPDF(nombreCategoria,products){
     
+    productos=[]
+    // console.log(nombreCategoria);
+    // console.log(products)
+    for (var j = 0; j<products.length;j++){
+        productos.push(
+            `<div class="card-body">
+                 <h4 class="card-title">${products[j]}</h4>
+                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+             </div>
+            `
+        )
+        
+    }
     
-    console.log(products);
     var contenido = `
  <!DOCTYPE html>
  <html lang="en">
@@ -19,56 +30,14 @@ function plantillaPDF(nombreCategoria,products){
      <header>
          <h1 class="display-3 text-uppercase" style="padding-right: 10px;padding-bottom: 10px;">${nombreCategoria}</h1>
      </header> 
-     <div class="card-group" id="card-group">
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">marito</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">Title</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">Title</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
+     <div class="card-group">`+`${productos.join(' ')}`+`
+         
      </div>
-     <div class="card-group">
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">Title</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">Title</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
-         <div class="card"><img class="card-img-top w-100 d-block">
-             <div class="card-body">
-                 <h4 class="card-title">Title</h4>
-                 <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-             </div>
-         </div>
-     </div>
-     <script >
-     for (const product in ${products}) {
-        document.getElementById('card-group').innerHTML+= '<h1>NONONONO </h1>';
-        } 
-     </script>
-     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+     
  </body>
  </html>
  `;
+ productos=[]
  return contenido;
 }
 
@@ -86,14 +55,20 @@ dotenv.config();
 
 async function generatePdfTest(pdfTitle,content){
     //fs.createWriteStream(`${process.env.pdfPath}`+`${pdfTitle}.pdf`,'');
-     pdf.create(content).toFile(`${process.env.pdfPath}`+`${pdfTitle}.pdf`, function(err, res) {
-     if (err){
-         console.log(err);
-     } else {
-         console.log(res);
-     }
- });
+    pdf.create(content).toFile(`${process.env.pdfPath}`+`${pdfTitle}.pdf`, function(err, res) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(res);
+        }
+    });
 }
+
+
+
+
+
+
 
 module.exports={
     generatePdfTest,
