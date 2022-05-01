@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -6,13 +6,20 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   templateUrl: './carrusel.component.html',
   styleUrls: ['./carrusel.component.css'],
 })
-export class CarruselComponent implements OnInit {
+export class CarruselComponent implements OnInit, OnChanges {
   
+  @Input() token: string = '';
+  newToken: string = '';
+
   imgs: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.newToken = this.token;
+  }
 
   customOptions: OwlOptions = {
     loop: false,

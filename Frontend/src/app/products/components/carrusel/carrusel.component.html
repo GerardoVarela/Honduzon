@@ -22,7 +22,7 @@
     <div class="row">
       <owl-carousel-o [options]="customOptions">
         <ng-template carouselSlide *ngFor="let img of imgs">
-          <app-card-carrusel [img]="img"></app-card-carrusel>
+          <app-card-carrusel [img]="img" [token]="newToken"></app-card-carrusel>
         </ng-template>
       </owl-carousel-o>
     </div>

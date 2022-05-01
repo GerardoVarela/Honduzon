@@ -842,8 +842,8 @@
             >
             <select id="inputState" formControlName="categoryID" class="form-select">
               <option selected>Deportes</option>
-              <option>Muebles</option>
-              <option>Tecnologia</option>
+              <option value="1">Muebles</option>
+              <option value="2">Tecnologia</option>
             </select>
             <div
               *ngIf="categoryID!.invalid && (categoryID!.dirty || formDept!.touched)"

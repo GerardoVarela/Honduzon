@@ -1,6 +1,6 @@
-<app-navbar></app-navbar>
+<app-navbar (newToken)="receiveToken($event)"></app-navbar>
 
-<app-carrusel></app-carrusel>
+<app-carrusel [token]="token"></app-carrusel>
 
 <!-- <app-card-sales-person></app-card-sales-person> -->
 

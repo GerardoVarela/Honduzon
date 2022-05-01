@@ -17,6 +17,7 @@ import { lastValueFrom } from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   @Output() searchValue = new EventEmitter<string>();
+  @Output() newToken = new EventEmitter<string>();
 
   public productos: any = [];
   public deptos: any = [];
@@ -97,6 +98,8 @@ export class NavbarComponent implements OnInit {
     
     if(this.cookieService.get('ACCESS_TOKEN')){
       this.getLoggedUser();
+    }else{
+      this.newToken.emit('nada');
     }
   }
 
@@ -134,6 +137,8 @@ export class NavbarComponent implements OnInit {
         this.modalService.open(content, { size: 'sm' });
         this.getLoggedAdmin();
         this.loggedUser = undefined;
+      }else{
+        this.newToken.emit('nada');
       }
     });
 
@@ -180,12 +185,13 @@ export class NavbarComponent implements OnInit {
     }).pipe(take(1));
 
     this.loggedUser = await lastValueFrom(resp);
-    console.log(this.loggedUser);
+    this.newToken.emit(this.cookieService.get('ACCESS_TOKEN'));
   }
 
   logout(content: any):void{
     this.token = '';
     this.cookieService.delete('ACCESS_TOKEN');
+    this.newToken.emit('nada');
     // localStorage.removeItem('ACCESS_TOKEN');
     this.loggedAdmin = false;
     this.successMsg = 'Sesión cerrada';

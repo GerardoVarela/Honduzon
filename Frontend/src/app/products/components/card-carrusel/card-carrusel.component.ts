@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,8 +14,8 @@ import { LoggedUser } from '../../interfaces/logged-user.interface';
 export class CardCarruselComponent implements OnInit {
 
   @Input() img!: number;
+  @Input() token!: string;
 
-  public token: string = '';
   public idCurrentUser?: number;
   public backendHost: string = 'http://localhost:8888';
   public selectedSub: boolean = false;
@@ -58,25 +58,23 @@ export class CardCarruselComponent implements OnInit {
   
   ngOnInit(): void {
     
-    if(this.cookieService.get('ACCESS_TOKEN')){
-      this.token = this.cookieService.get('ACCESS_TOKEN');
-    }else{
-      this.token = '';
-    }
-
   }
 
-  ngDoCheck(): void {
+  // ngAfterViewInit(){
+  //   console.log('ye')
+  // }
+
+  // ngDoCheck(): void {
     
-    if(this.cookieService.get('ACCESS_TOKEN')){
-      this.token = this.cookieService.get('ACCESS_TOKEN');
+  //   if(this.cookieService.get('ACCESS_TOKEN')){
+  //     this.token = this.cookieService.get('ACCESS_TOKEN');
       
-      this.getLoggedUser();
-    }else{
-      this.token = '';
-    }
+  //     this.getLoggedUser();
+  //   }else{
+  //     this.token = '';
+  //   }
 
-  }
+  // }
 
   search(idCategory: number){
     // CAMBIAR PETICIÓN
