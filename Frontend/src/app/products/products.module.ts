@@ -24,7 +24,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
 import { ProductsListPageComponent } from './pages/products-list-page/products-list-page.component';
 import { RestorePageComponent } from './pages/restore-page/restore-page.component';
-// import { UserDetailsPageComponent } from './pages/user-details-page/user-details-page.component';
+import { UserDetailsPageComponent } from './pages/user-details-page/user-details-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { RestorePageComponent } from './pages/restore-page/restore-page.componen
     ProductDetailsPageComponent,
     ProductsListPageComponent,
     RestorePageComponent,
-    // UserDetailsPageComponent,
+    UserDetailsPageComponent,
   ],
   imports: [
     CarouselModule,
@@ -66,6 +66,7 @@ import { RestorePageComponent } from './pages/restore-page/restore-page.componen
     ProductDetailsPageComponent,
     ProductsListPageComponent,
     RestorePageComponent,
+    UserDetailsPageComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },

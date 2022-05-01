@@ -1,11 +1,4 @@
- const pdf = require('html-pdf')
-
-function plantillaPDF(nombreCategoria,products){
-    
-    
-    console.log(products);
-    var contenido = `
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html lang="en">
  <head>
      <meta charset="utf-8">
@@ -59,43 +52,7 @@ function plantillaPDF(nombreCategoria,products){
              </div>
          </div>
      </div>
-     <script >
-     for (const product in ${products}) {
-        document.getElementById('card-group').innerHTML+= '<h1>NONONONO </h1>';
-        } 
-     </script>
      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
  </body>
  </html>
- `;
- return contenido;
-}
-
- 
-//  pdf.create(contenido).toFile(`marito.pdf`, function(err, res) {
-//      if (err){
-//          console.log(err);
-//      } else {
-//          console.log(res);
-//      }
-//  });
-
-const dotenv = require('dotenv');
-dotenv.config();
-
-async function generatePdfTest(pdfTitle,content){
-    //fs.createWriteStream(`${process.env.pdfPath}`+`${pdfTitle}.pdf`,'');
-     pdf.create(content).toFile(`${process.env.pdfPath}`+`${pdfTitle}.pdf`, function(err, res) {
-     if (err){
-         console.log(err);
-     } else {
-         console.log(res);
-     }
- });
-}
-
-module.exports={
-    generatePdfTest,
-    plantillaPDF
-}

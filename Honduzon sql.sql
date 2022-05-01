@@ -192,7 +192,8 @@ RESPUESTA,
 ID_DEPARTAMENTO ,
 CONTRASENA ,
 ID_CIUDAD ,
-ID_PREGUNTA 
+ID_PREGUNTA,
+
 	) VALUES (
 	@NOMBRE ,
 @APELLIDO ,
@@ -203,7 +204,8 @@ ID_PREGUNTA
 @ID_DEPARTAMENTO ,
 @CONTRASENA ,
 @ID_CIUDAD ,
-@ID_PREGUNTA 
+@ID_PREGUNTA,
+
 );
 END
 
@@ -272,6 +274,13 @@ VALUES ('Alfonso','Sevilla','asprueba@gmail.com','7777-7777','ASPrueba123$','Col
 INSERT INTO Usuarios
 VALUES ('Gerardo','Varela','gvprueba@gmail.com','8888-8888','GVPrueba123$','Col. Vieja', 'Sr. Periquin',2,1,1,1)
 */
+
+
+/*INSERT PARA PRODUCTOSS*/
+	INSERT INTO PRODUCTOS (NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,VALORACIONES,
+	PRECIO,ID_USUARIO,ID_CATEGORIA,ID_IMAGEN,FECHA) VALUES()
+
+
 SELECT * FROM Usuarios
 SELECT * FROM Productos
 insert into IMAGENES values (0)
@@ -491,11 +500,13 @@ ALTER TABLE Usuarios ADD IMAGEN_USUARIO VARCHAR(500)
 
 /*Agregar campo fecha y consulta para el Job*/
 ALTER TABLE PRODUCTOS ADD FECHA DATE 
-
+ALTER TABLE PRODUCTOS ADD DescripcionEstado varchar(50)
 
 UPDATE Productos SET FECHA =GETDATE() WHERE ID_PRODUCTO=2
-UPDATE Productos SET Estado=0 WHERE DATEDIFF (DAY, FECHA , GETDATE() )=30
+UPDATE Productos SET Estado=0,descripcionEstado='fecha vencida'  WHERE DATEDIFF (DAY, FECHA , GETDATE() )=60
 
+select * from Productos where estado=0 and DescripcionEstado='fecha vencida'
+update Productos set estado=1,DescripcionEstado='disponible',fecha=getdate() where id_Producto=2
 
 SELECT * FROM Productos
 

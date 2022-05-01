@@ -8,6 +8,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var adminModel=require('../model/admin.model');
 const jwt = require('jsonwebtoken');
 const { adminJwtKey } = require('../config/keys.config');
 
@@ -33,8 +34,23 @@ router.get('/denuncias',verifyToken,(req,res)=>{
 });
 
 
+router.get('/productosvencidos',(req,res)=>{
+    adminModel.getProductosVencidos().then(resultado=>
+     {
+         if(resultado.length==0){
+                res.json(0);
+     }  else {  res.send(resultado);}
+    });
+});
 
-
+router.put('/actualizarproductosvencidos',(req,res)=>{
+    adminModel.updateProductoVencido(req.body.idProducto).then(resultado=>
+        {
+         
+                res.json({mensaje:'Producto actualizado' });
+            
+        });
+});
 
 
 

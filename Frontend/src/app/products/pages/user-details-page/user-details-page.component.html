@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <section style="padding: 40px">
   <div
     class="card"
@@ -35,19 +37,21 @@
               <img
                 style="
                   transform: translateY(10px);
-                  width: 170px;
+                  width: 145px;
+                  height: 165px;
                   border-radius: 90px;
                   border-width: 1px;
                   border-style: solid;
                 "
-                src="../../../../assets/user.png"
+                src="../../../../assets/profile-pics/user_{{idUser}}.jpg"
               />
             </div>
             <div
+              *ngIf="loggedUser !== undefined"
               class="col-md-6"
               style="width: 75%; padding-top: 40px; padding-left: 50px"
             >
-              <strong style="font-size: 40px">Gerardo Varela </strong>
+              <strong style="font-size: 40px">{{loggedUser.nombreCompleto}}</strong>
             </div>
           </div>
         </div>

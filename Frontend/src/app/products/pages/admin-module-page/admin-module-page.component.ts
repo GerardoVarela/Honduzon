@@ -63,8 +63,7 @@ export class AdminModulePageComponent implements OnInit {
   }
 
   eliminarCategoria(){
-    this.httpClient.delete(`${this.backendHost}/categorias/borrarCategoria/${this.idCategorySelected}`).subscribe(res=>{
-    });
+    this.httpClient.delete(`${this.backendHost}/categorias/borrarCategoria/${this.idCategorySelected}`).subscribe( console.log );
     
     this.modalService.dismissAll();
   }
@@ -76,8 +75,7 @@ export class AdminModulePageComponent implements OnInit {
       formImageInput: null,
     };
 
-    this.httpClient.put(`${this.backendHost}/categorias/editarCategoria/${this.idCategorySelected}`, contenido).subscribe(res=>{
-    });
+    this.httpClient.put(`${this.backendHost}/categorias/editarCategoria/${this.idCategorySelected}`, contenido).subscribe( console.log );
     
     this.modalService.dismissAll();
   }
@@ -90,23 +88,22 @@ export class AdminModulePageComponent implements OnInit {
       currentAdmin: 1,
     };
 
-    this.httpClient.post(`${this.backendHost}/categorias/guardar`, contenido).subscribe(res=>{
-    });
+    this.httpClient.post(`${this.backendHost}/categorias/guardar`, contenido).subscribe( console.log );
 
     this.modalService.dismissAll();
   }
 
   ignoreReport(){
-    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe(res=>{
-    });
+    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe( console.log );
 
     this.modalService.dismissAll();
   }
 
   putUserDown(idDenunciado: number){
-    this.httpClient.delete(`${this.backendHost}/denuncias/darBajaUsuario/${idDenunciado}`).subscribe(res=>{
-    });
-
+    this.httpClient.delete(`${this.backendHost}/denuncias/darBajaUsuario/${idDenunciado}`).subscribe( console.log );
+    
+    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe( console.log );
+    
     this.modalService.dismissAll();
   }
 }

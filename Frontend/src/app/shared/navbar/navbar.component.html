@@ -80,7 +80,7 @@
               id="btn-subirProducto"
               class="btn btn-primary"
               type="button"
-              (click)="open(contentAddProduct)"
+              (click)="open(contentLog)"
             >
               <i class="fas fa-plus-circle" style="margin-right: 5px"></i>
               Subir producto
@@ -88,7 +88,7 @@
           </li>
         </ng-container>
         <ng-template #verifyLoggedUser>
-          <ng-container *ngIf="loggedUser !== undefined; else adminGotLogged">
+          <ng-container *ngIf="loggedUser !== undefined && loggedUserAdmin === undefined; else adminGotLogged">
             <li class="nav-item" style="padding-top: 8px">
               <a routerLink="/chat">
                 <i id="icono-mensaje" class="far fa-paper-plane"></i>
@@ -124,7 +124,8 @@
               >
                 {{ loggedUser.nombreCompleto }}
               </a>
-              <div ngbDropdownMenu aria-labelledby="dropdownUser">
+              <div ngbDropdownMenu aria-labelledby="dropdownUser" *ngIf="loggedUser !== undefined">
+                <a ngbDropdownItem routerLink="/profile/user/{{loggedUser.idUsuario}}">Mi perfil</a>
                 <a ngbDropdownItem (click)="logout(contentSuccess)">Cerrar Sesión</a>
               </div>
             </div>
@@ -756,99 +757,171 @@
     <div class="row" style="padding-bottom: 20px">
       <h2 class="modal-title">¡Sube un producto!</h2>
       <small style="color: #8190a5"
-        >Solo ingresa los datos correspondientes <br />¡Asi de facil!</small
+        >Solo ingresa los datos correspondientes <br />¡Así de fácil!</small
       >
     </div>
     <div class="container" style="margin-top: 15px; padding: 0px 15px 0px 15px">
-      <div class="row" style="padding-bottom: 20px">
-        <div class="col">
-          <input
-            type="text"
-            class="form-control"
-            id="formGroupExampleInput"
-            placeholder="Nombre del producto"
-          />
-        </div>
-      </div>
-      <div class="row" style="padding-bottom: 15px">
-        <div class="col-md-6">
-          <input
-            type="text"
-            class="form-control"
-            id="inputCity"
-            placeholder="Establece un precio"
-          />
-        </div>
-        <div class="col-md-6">
-          <select id="inputState" class="form-select">
-            <option selected style="color: #8190a5">Estado del producto</option>
-            <option>Nuevo</option>
-            <option>Usado</option>
-          </select>
-        </div>
-      </div>
-      <div class="row" style="padding-bottom: 15px">
-        <div class="col">
-          <label for="inputState" class="form-label"
-            >Selecciona una categoria</label
-          >
-          <select id="inputState" class="form-select">
-            <option selected>Deportes</option>
-            <option>Muebles</option>
-            <option>Tecnologia</option>
-          </select>
-        </div>
-      </div>
-      <div class="row" style="padding-bottom: 20px">
-        <div class="col">
-          <div class="mb-3">
-            <label for="formFileMultiple" class="form-label"
-              >Sube una foto de tu producto</label
-            >
+      
+      <form [formGroup]="uploadForm">
+        <!-- Nombre del producto -->
+        <div class="row" style="padding-bottom: 20px">
+          <div class="col">
             <input
+              type="text"
               class="form-control"
-              type="file"
-              id="formFileMultiple"
-              multiple
+              formControlName="formProdName"
+              id="formGroupExampleInput"
+              placeholder="Nombre del producto"
+              [class.is-invalid]="formProdName!.invalid && formProdName!.touched"
             />
+            <div class="invalid-feedback">
+              Campo obligatorio.
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="row" style="padding-bottom: 20px">
-        <div class="col">
-          <textarea
-            class="form-control"
-            aria-label="With textarea"
-            placeholder="Escribe una descripcion"
-            style="min-height: 100px"
-          ></textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <button
-            (click)="modalAddProduct.dismiss('Cross click')"
-            class="btn btn-primary"
-            type="button"
-            style="
-              background: #00bce4;
-              color: white;
-              border: #00bce4;
-              border-radius: 20px;
-              padding: 10px 25px 10px 25px;
-            "
+        <!-- Precio y Estado del producto -->
+        <div class="row" style="padding-bottom: 15px">
+          <div class="col">
+            <label for="inputCity" class="form-label"
+            >Establece un precio</label
           >
-            Subir producto
-          </button>
+            <input
+              type="number"
+              min="1"
+              max="500000"
+              class="form-control"
+              formControlName="formPrice"
+              id="inputCity"
+              placeholder="Establece un precio"
+              [class.is-invalid]="formPrice!.invalid && formPrice!.touched"
+            />
+            <div class="invalid-feedback">
+              <ng-container *ngIf="formPrice!.dirty; else obligatoryPrice">
+                El precio debe ser mayor que 0 y menor o igual que 500000
+              </ng-container>
+              <ng-template #obligatoryPrice> Campo obligatorio. </ng-template>
+            </div>
+          </div>
+          <!-- <div class="col-md-6">
+            <select id="inputState" formControlName="formState" class="form-select">
+              <option selected style="color: #8190a5">Estado del producto</option>
+              <option value="0">Nuevo</option>
+              <option value="used">Usado</option>
+            </select>
+          </div> -->
         </div>
-      </div>
+        <!-- Cantidad del producto -->
+        <div class="row" style="padding-bottom: 20px">
+          <div class="col">
+            <label for="inputQuantity" class="form-label"
+              >Cantidad de productos disponibles</label
+            >
+            <input
+              id="inputQuantity"
+              type="number"
+              min="1"
+              max="120"
+              class="form-control"
+              formControlName="formQuantityProd"
+              placeholder="Cantidad de productos"
+              [class.is-invalid]="formQuantityProd!.invalid && formQuantityProd!.touched"
+            />
+            <div class="invalid-feedback">
+              <ng-container *ngIf="formQuantityProd!.dirty; else obligatoryPrice">
+                La cantidad de productos debe ser mayor que 0 y menor o igual que 120
+              </ng-container>
+              <ng-template #obligatoryPrice> Campo obligatorio. </ng-template>
+            </div>
+          </div>
+        </div>
+        <!-- Selecciona una categoría -->
+        <div class="row" style="padding-bottom: 15px">
+          <div class="col">
+            <label for="inputState" class="form-label"
+              >Selecciona una categoría</label
+            >
+            <select id="inputState" formControlName="categoryID" class="form-select">
+              <option selected>Deportes</option>
+              <option>Muebles</option>
+              <option>Tecnologia</option>
+            </select>
+            <div
+              *ngIf="categoryID!.invalid && (categoryID!.dirty || formDept!.touched)"
+              class="invalid-feedback-select"
+            >
+              <div *ngIf="categoryID!.errors?.['required']">Campo Obligatorio.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Foto del producto -->
+        <div class="row" style="padding-bottom: 20px">
+          <div class="col">
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label"
+                >Sube una foto de tu producto</label
+              >
+              <!-- <input
+                class="form-control"
+                type="file"
+                id="formFileMultiple"
+                multiple
+              /> -->
+              <input
+                class="form-control"
+                formControlName="formImage"
+                type="text"
+                id="formFileMultiple"
+                [class.is-invalid]="formImage!.invalid && formImage!.touched"
+              />
+              <div class="invalid-feedback">
+                Campo obligatorio.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Descripción del producto -->
+        <div class="row" style="padding-bottom: 20px">
+          <div class="col">
+            <textarea
+              class="form-control"
+              aria-label="With textarea"
+              formControlName="formDescripcion"
+              placeholder="Escribe una descripción"
+              style="min-height: 100px"
+              [class.is-invalid]="formDescripcion!.invalid && formDescripcion!.touched"
+            ></textarea>
+            <div class="invalid-feedback">
+              Campo obligatorio.
+            </div>
+          </div>
+        </div>
+        <!-- Botón del producto -->
+        <div class="row">
+          <div class="col-md-12" *ngIf="loggedUser !== undefined">
+            <button
+              (click)="upload(contentSuccess, loggedUser.idUsuario)"
+              class="btn btn-primary"
+              type="button"
+              style="
+                background: #00bce4;
+                color: white;
+                border: #00bce4;
+                border-radius: 20px;
+                padding: 10px 25px 10px 25px;
+              "
+              [disabled]="uploadForm!.invalid"
+            >
+              Subir producto
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </ng-template>
 
 <!-- Modal Subir producto -->
-<ng-template #contenido3 let-modal>
+<!-- <ng-template #contenido3 let-modal>
   <div
     class="modal-header"
     style="
@@ -939,4 +1012,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template> -->

@@ -16,14 +16,13 @@ async function insertProducto(producto){
         .input('DESCRIPCION_PRODUCTO',mssql.VarChar,producto.formDescripcion)
         .input('CANTIDAD_PRODUCTO',mssql.Int,producto.formQuantityProd)
         .input('CANTIDAD_PROD_VENDIDO',mssql.Int,producto.formQuantitySold)
-        .input('VALORACIONES',mssql.Int,producto.formRanks)
         .input('PRECIO',mssql.Float,producto.formPrice)
         .input('ID_USUARIO',mssql.Int,producto.userID)
         .input('ID_CATEGORIA',mssql.Int,producto.categoryID)
-        .input('ESTADO',mssql.Int,producto.formState)
-        .input('ID_IMAGEN',mssql.Int,producto.formImage)
-        .input('IMAGEN_PRODUCTO',mssql.Int,producto.formProductImage)
-        .execute('SP_INSERTAR_PRODUCTO');
+        .input('IMAGEN_PRODUCTO',mssql.Int,producto.formImage)
+        .query("INSERT INTO PRODUCTOS (NOMBRE_PRODUCTO,DESCRIPCION_PRODUCTO,CANTIDAD_PRODUCTO,CANTIDAD_PROD_VENDIDO,"+
+            "PRECIO,ID_USUARIO,ID_CATEGORIA,ID_IMAGEN,ESTADO,FECHA,DescripcionEstado,IMAGEN_PRODUCTO) VALUES(@NOMBRE_PRODUCTO,@DESCRIPCION_PRODUCTO,@CANTIDAD_PRODUCTO,@CANTIDAD_PROD_VENDIDO,"+   
+            "@PRECIO,@ID_USUARIO,@ID_CATEGORIA,1,1,GETDATE(),'DISPONIBLE',@IMAGEN_PRODUCTO)")
         return insertarProducto.recordset
 
     } catch (error) {
@@ -279,5 +278,5 @@ module.exports={
     getProductoPorCatId,
     getProductoPorId,
     getCantTotalProdUsuario,
-    
+    darBajaProducto
 }

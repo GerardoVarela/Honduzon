@@ -67,6 +67,15 @@ export class NavbarComponent implements OnInit {
     formRespRecover: new FormControl(''),
   });
 
+  uploadForm = new FormGroup({
+    formProdName: new FormControl('', Validators.required),
+    formPrice: new FormControl(1, [Validators.required, Validators.max(500000), Validators.min(1)]),
+    categoryID: new FormControl(1, Validators.required),
+    formImage: new FormControl('', Validators.required),
+    formDescripcion: new FormControl('', Validators.required),
+    formQuantityProd: new FormControl(1, [Validators.required, Validators.max(120), Validators.min(1)]),
+  });
+
   constructor(
     private modalService: NgbModal,
     private httpClient: HttpClient, 
@@ -184,6 +193,26 @@ export class NavbarComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' });
   }
 
+  upload(content: any, idCurrentUser: number){
+
+    let productInfo = {
+      formProdName: this.formProdName,
+      formDescripcion: this.formDescripcion,
+      formQuantityProd: this.formQuantityProd,
+      formQuantitySold: 0,
+      formPrice: this.formPrice,
+      userID: idCurrentUser,
+      categoryID: this.categoryID,
+      formImage: this.formImage,
+    }
+    this.httpClient.post(`${this.backendHost}/productos/guardarproducto`, productInfo).subscribe( console.log );
+    this.modalService.dismissAll();
+    
+    this.successMsg = 'Producto subido';
+    this.modalService.open(content, { size: 'sm' });
+    
+  }
+
   recoverByEmail(content: any){
     this.httpClient.get(`${this.backendHost}/usuarios/recuperacionemail/${this.recoverForm.value.formEmailRecover}`).subscribe(res=>{
       if(res == true){
@@ -268,6 +297,14 @@ export class NavbarComponent implements OnInit {
   get formRadioBRecover() { return this.recoverForm.get('formRadioBRecover'); }
   get formRespRecover() { return this.recoverForm.get('formRespRecover'); }
   
+  // Getters Upload Form
+  get formProdName() { return this.uploadForm.get('formProdName'); }
+  get formPrice() { return this.uploadForm.get('formPrice'); }
+  get categoryID() { return this.uploadForm.get('categoryID'); }
+  get formImage() { return this.uploadForm.get('formImage'); }
+  get formDescripcion() { return this.uploadForm.get('formDescripcion'); }
+  get formQuantityProd() { return this.uploadForm.get('formQuantityProd'); }
+
   // TOKEN
   get cookieToken(){ return this.cookieService.get('ACCESS_TOKEN'); }
 
