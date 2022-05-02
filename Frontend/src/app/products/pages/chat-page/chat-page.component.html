@@ -297,11 +297,9 @@
                 style="border: none"
                 (click)="enviarMensaje()"
                 [disabled]="chatSelected === undefined"
-                (click)="openReport(contentReport)"
               >
                 <i
                   id="iconBtn"
-                  (click)="openReport(contentReport)"
                   [ngClass]="{
                     'icon-btn': chatSelected != undefined,
                     'icon-btn-disabled': chatSelected == undefined
@@ -318,92 +316,6 @@
   </div>
 </section>
 
-<!-- Modal Report -->
-<ng-template #contentReport let-modalReport>
-  <div class="modal-header">
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modalReport.dismiss('Cross click')"
-    ></button>
-  </div>
-  <div
-    class="modal-body col"
-    style="text-align: center; padding-left: 10px; padding-right: 10px"
-  >
-    <div class="row" style="padding-bottom: 20px">
-      <h2 class="modal-title">Denuncia</h2>
-      <small style="text-align: left !important">
-        Ya se trate de mal comportamiento, una estafa u otro tipo de queja que
-        tengas, denuncia al usuario.<br />
-        Cada denuncia es revisada a detalle, por lo que le pedimos que
-        especifique bien el problema.
-      </small>
-    </div>
-    <!-- <form [formGroup]="reportForm"> -->
-    <div class="row" style="justify-content: center">
-      <label for="exampleFormControlInput1" class="form-label">Asunto</label>
-      <input
-        type="email"
-        class="form-control"
-        [(ngModel)]="motivoDenuncia"
-        id="exampleFormControlInput1"
-        style="padding-left: 25px; width: 400px"
-        placeholder="Asunto específico y corto"
-      />
-    </div>
-    <div class="row" style="justify-content: center">
-      <label
-        for="exampleFormControlTextarea1"
-        class="form-label"
-        style="margin-top: 5px"
-        >Descripción</label
-      >
-      <textarea
-        class="form-control"
-        [(ngModel)]="descripcionDenuncia"
-        id="exampleFormControlTextarea1"
-        rows="3"
-        style="padding-left: 25px; width: 400px"
-        placeholder="Detalle específicamente los sucesos"
-      ></textarea>
-    </div>
-    <div
-      class="row"
-      style="margin-top: 10px; justify-content: right; padding-right: 25px"
-    >
-      <button
-        type="submit"
-        style="
-          color: white;
-          background-color: #00bce4;
-          margin-right: 5px;
-          width: 150px;
-          border-radius: 20px;
-          border-width: 0px;
-        "
-        (click)="report(contentSuccess)"
-      >
-        Enviar Denuncia
-      </button>
-      <button
-        style="
-          color: white;
-          background-color: red;
-          width: 100px;
-          border-radius: 20px;
-          border-width: 0px;
-        "
-        (click)="modalReport.dismiss()"
-      >
-        Cancelar
-      </button>
-    </div>
-    <!-- </form> -->
-  </div>
-</ng-template>
-
 <!--Modal Success-->
 <ng-template #contentSuccess let-modalSuccess>
   <div
@@ -411,5 +323,157 @@
     style="text-align: center; border-radius: 20px"
   >
     <p><br />{{ successMsg }} con éxito</p>
+  </div>
+</ng-template>
+
+<!-- Modal Report -->
+<ng-template #contentReport let-modal>
+  <div
+    class="modal-header"
+    style="
+      border-radius: 20px;
+      border-width: 1px;
+      border-bottom-style: solid;
+      text-align: center;
+    "
+  >
+    <strong
+      style="
+        font-size: 25px;
+        text-shadow: 1px 1px black;
+        margin-left: 15px;
+        color: #00bce4;
+      "
+      >Sistema de denuncias</strong
+    >
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+      style="margin-right: 15px"
+    ></button>
+  </div>
+  <div class="modal-body" style="text-align: center">
+    <div
+      class="container"
+      style="
+        text-align: left;
+        min-height: 150px;
+        max-height: 4000px;
+        margin-top: 15px;
+      "
+    >
+      <div class="row">
+        <div class="col">
+          <div style="text-align: center">
+            <strong
+              style="
+                font-size: 25px;
+                text-shadow: 1px 1px #00bce4;
+                margin-left: 15px;
+                color: black;
+                text-align: center;
+              "
+              >¿Deseas realizar una denuncia?</strong
+            >
+          </div>
+          <div
+            class="row"
+            style="
+              text-align: justify !important;
+              padding: 0px 20px;
+              font-size: 13px;
+              margin-bottom: 5px;
+            "
+          >
+            <div class="col-md 6">
+              <small>
+                <br />Si ha recibido malos tratos o comportamientos no
+                apropiados por parte de este usuario,
+                <span style="color: red; font-weight: bold"
+                  >¡Por favor reportarlo!</span
+                >
+              </small>
+            </div>
+            <div class="col-md 6">
+              <small>
+                <br />
+                Su denuncia será tomada en cuenta y revisada para una próxima
+                sanción de considerarse necesario.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+        style="justify-content: center; text-align: center; margin-bottom: 15px"
+      >
+        <label for="exampleFormControlInput1" class="form-label">Asunto</label>
+        <input
+          type="email"
+          class="form-control"
+          [(ngModel)]="motivoDenuncia"
+          id="exampleFormControlInput1"
+          style="padding-left: 25px; width: 400px; border-radius: 15px"
+          placeholder="Especifícanos el asunto"
+        />
+      </div>
+      <div class="row" style="justify-content: center; text-align: center">
+        <label
+          for="exampleFormControlTextarea1"
+          class="form-label"
+          style="margin-top: 5px"
+          >Descripción</label
+        >
+        <textarea
+          class="form-control"
+          [(ngModel)]="descripcionDenuncia"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          style="
+            padding-left: 25px;
+            width: 400px;
+            height: 150px;
+            border-radius: 15px;
+          "
+          placeholder="Escribe los detalles de la situación"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="padding: 5px 20px">
+    <div class="container" style="text-align: center">
+      <div class="row" style="justify-content: right; padding-right: 25px">
+        <button
+          type="submit"
+          style="
+            color: white;
+            background-color: #00bce4;
+            margin-right: 5px;
+            width: 150px;
+            border-radius: 20px;
+            border-width: 0px;
+            height: 40px;
+          "
+          (click)="report(contentSuccess)"
+        >
+          Enviar Denuncia
+        </button>
+        <button
+          style="
+            color: white;
+            background-color: red;
+            width: 100px;
+            border-radius: 20px;
+            border-width: 0px;
+          "
+          (click)="modal.dismiss()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
   </div>
 </ng-template>
