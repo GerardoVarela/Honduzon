@@ -12,9 +12,11 @@ NOMBRE_DEPARTAMENTO NVARCHAR(200) NOT NULL,
 CONSTRAINT PK_DEPARTAMENTO PRIMARY KEY (ID_DEPARTAMENTO)
 );
 
-select count (categoria.ID_CATEGORIA),categoria.ID_CATEGORIA,categoria.NOMBRE_CATEGORIA from UsuariosxCategorias join categoria on USUARIOSxCATEGORIAS.ID_CATEGORIA=categoria.ID_CATEGORIA group by categoria.ID_CATEGORIA,categoria.nombre_categoria
-select count (productos.ID_PRODUCTO)as cantidadSuscritos,categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria
-select (SUM (VALORACION)/count (valoracion.id_usuario)),nombre,valoracion.id_usuario from valoracion join usuarios on valoracion.id_usuario=usuarios.ID_USUARIO group by usuarios.ID_USUARIO,nombre,valoracion.id_usuario
+select count (categoria.ID_CATEGORIA) as categoriaSuscrita,categoria.ID_CATEGORIA,categoria.NOMBRE_CATEGORIA from UsuariosxCategorias join categoria on USUARIOSxCATEGORIAS.ID_CATEGORIA=categoria.ID_CATEGORIA group by categoria.ID_CATEGORIA,categoria.nombre_categoria order by categoriaSuscrita desc
+select top 2 count (productos.ID_PRODUCTO)as cantidadSuscritos,categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria order by cantidadSuscritos desc
+select top 10 (SUM (VALORACION)/count (valoracion.id_usuario)) as valoracion,nombre,valoracion.id_usuario from valoracion join usuarios on valoracion.id_usuario=usuarios.ID_USUARIO group by usuarios.ID_USUARIO,nombre,valoracion.id_usuario order by valoracion desc
+
+select top 5 count (productos.ID_PRODUCTO) as cantidadSuscritos,categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria order by cantidadSuscritos desc   
 
 select * from usuariosxcategorias
 select * from productos
