@@ -33,7 +33,9 @@ router.get('/valoracion/:ID_USUARIO',(req,res)=>{
 
 function validacionValoracion (req,res,next){
     let valoracion = {...req.body};
-    valoracionModel.existenciaValoracion(valoracion.ID_USUARIO_VALORA).then(resultado=>{
+    console.log(valoracion);
+    valoracionModel.existenciaValoracion(valoracion.ID_USUARIO_VALORA,valoracion.ID_USUARIO).then(resultado=>{
+        console.log(resultado);
         if(resultado.length==0){
             next();
         }else{
