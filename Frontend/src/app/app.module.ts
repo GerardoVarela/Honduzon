@@ -10,6 +10,7 @@ import { ProductsModule } from './products/products.module';
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
