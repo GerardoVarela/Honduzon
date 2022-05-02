@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SharedModule } from '../shared/shared.module';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
@@ -54,6 +55,7 @@ import { UserDetailsPageComponent } from './pages/user-details-page/user-details
     RouterModule,
     SharedModule,
     SharedModule,
+    NgxChartsModule,
   ],
   exports: [
     AdminModulePageComponent,
@@ -66,7 +68,7 @@ import { UserDetailsPageComponent } from './pages/user-details-page/user-details
     ProductDetailsPageComponent,
     ProductsListPageComponent,
     RestorePageComponent,
-    UserDetailsPageComponent
+    UserDetailsPageComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },

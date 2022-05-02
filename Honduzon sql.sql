@@ -12,8 +12,13 @@ NOMBRE_DEPARTAMENTO NVARCHAR(200) NOT NULL,
 CONSTRAINT PK_DEPARTAMENTO PRIMARY KEY (ID_DEPARTAMENTO)
 );
 
+select count (categoria.ID_CATEGORIA),categoria.ID_CATEGORIA,categoria.NOMBRE_CATEGORIA from UsuariosxCategorias join categoria on USUARIOSxCATEGORIAS.ID_CATEGORIA=categoria.ID_CATEGORIA group by categoria.ID_CATEGORIA,categoria.nombre_categoria
+select count (productos.ID_PRODUCTO)as cantidadSuscritos,categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria
+select (SUM (VALORACION)/count (valoracion.id_usuario)),nombre,valoracion.id_usuario from valoracion join usuarios on valoracion.id_usuario=usuarios.ID_USUARIO group by usuarios.ID_USUARIO,nombre,valoracion.id_usuario
 
-
+select * from usuariosxcategorias
+select * from productos
+select * from valoracion
 
 CREATE TABLE CIUDAD(
 ID_CIUDAD INT IDENTITY(1,1) NOT NULL,
@@ -497,6 +502,9 @@ ALTER TABLE Usuarios ADD IMAGEN_USUARIO VARCHAR(500)
 /*Agregar campo fecha y consulta para el Job*/
 ALTER TABLE PRODUCTOS ADD FECHA DATE 
 ALTER TABLE PRODUCTOS ADD DescripcionEstado varchar(50)
+
+
+select Productos.nombre_Producto from LISTA_DESEOS join Productos on LISTA_DESEOS.ID_PRODUCTO=productos.ID_PRODUCTO where id_usuario=
 
 UPDATE Productos SET FECHA =GETDATE() WHERE ID_PRODUCTO=2
 UPDATE Productos SET Estado=0,descripcionEstado='fecha vencida'  WHERE DATEDIFF (DAY, FECHA , GETDATE() )=60

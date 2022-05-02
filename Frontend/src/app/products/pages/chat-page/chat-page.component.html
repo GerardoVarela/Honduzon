@@ -46,7 +46,8 @@
           <strong style="font-size: 40px; color: #47525e">Chat</strong>
         </div>
         <div class="col-md-3" style="width: 15%; text-align: center">
-          <svg *ngIf="chatSelected != undefined"
+          <svg
+            *ngIf="chatSelected != undefined"
             class="bi bi-emoji-smile"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -69,14 +70,23 @@
           style="width: 50%; text-align: left; padding-top: 13px"
         >
           <ng-container *ngIf="chatSelected != undefined; else noNameToShow">
-            <strong style="font-size: 22px; color: #47525e">{{nameToShow}} {{role}}</strong>
+            <strong style="font-size: 22px; color: #47525e"
+              >{{ nameToShow }} {{ role }}</strong
+            >
             <a role="button" (click)="openReport(contentReport)">
-              <img src="../../../../assets/warning.png" width="25x" height="25px" style="margin-left: 10px; margin-bottom: 5px;">
+              <img
+                src="../../../../assets/warning.png"
+                width="25x"
+                height="25px"
+                style="margin-left: 10px; margin-bottom: 5px"
+              />
             </a>
           </ng-container>
           <ng-template #noNameToShow>
-            <strong style="font-size: 22px; color: #47525e">Sala de Chat</strong>
-          </ng-template>     
+            <strong style="font-size: 22px; color: #47525e"
+              >Sala de Chat</strong
+            >
+          </ng-template>
         </div>
         <!-- <div
           class="col-md-4"
@@ -100,22 +110,51 @@
         >
           <section>
             <div *ngFor="let chat of allUserChats">
-              <a role="button" (click)="selectChat(chat.ID_CHAT, chat.id_USUARIO1, chat.ID_USUSARIO2, chat.user1, chat.user2)">
-                <div [ngClass]="{'selected': chat.ID_CHAT === chatSelected}" class="row" style="max-height: 150px; height: 150px">
+              <a
+                role="button"
+                (click)="
+                  selectChat(
+                    chat.ID_CHAT,
+                    chat.id_USUARIO1,
+                    chat.ID_USUSARIO2,
+                    chat.user1,
+                    chat.user2
+                  )
+                "
+              >
+                <div
+                  [ngClass]="{ selected: chat.ID_CHAT === chatSelected }"
+                  class="row"
+                  style="max-height: 150px; height: 150px"
+                >
                   <div
                     class="col"
-                    style="max-height: none; padding-top: 13px; text-align: center">
-                    <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else otherAvatar">
+                    style="
+                      max-height: none;
+                      padding-top: 13px;
+                      text-align: center;
+                    "
+                  >
+                    <ng-container
+                      *ngIf="
+                        idCurrentUser == chat.id_USUARIO1;
+                        else otherAvatar
+                      "
+                    >
                       <img
-                        src="../../../../assets/profile-pics/user_{{chat.ID_USUSARIO2}}.jpg"
+                        src="../../../../assets/profile-pics/user_{{
+                          chat.ID_USUSARIO2
+                        }}.jpg"
                         style="width: 125px; border-radius: 20px; height: 130px"
                       />
                     </ng-container>
                     <ng-template #otherAvatar>
                       <img
-                        src="../../../../assets/profile-pics/user_{{chat.id_USUARIO1}}.jpg"
+                        src="../../../../assets/profile-pics/user_{{
+                          chat.id_USUARIO1
+                        }}.jpg"
                         style="width: 125px; border-radius: 20px; height: 130px"
-                      /> 
+                      />
                     </ng-template>
                   </div>
                   <div class="col" style="text-align: left; padding-top: 20px">
@@ -123,13 +162,21 @@
                       <small style="font-size: 20px">@Usuario</small>
                     </div>
                     <div style="margin-top: 5px">
-                      <ng-container *ngIf="idCurrentUser == chat.id_USUARIO1; else notCurrent">
-                        <strong style="font-size: 26px">{{chat.user2}}</strong>
+                      <ng-container
+                        *ngIf="
+                          idCurrentUser == chat.id_USUARIO1;
+                          else notCurrent
+                        "
+                      >
+                        <strong style="font-size: 26px">{{
+                          chat.user2
+                        }}</strong>
                       </ng-container>
                       <ng-template #notCurrent>
-                        <strong style="font-size: 26px">{{chat.user1}}</strong>
+                        <strong style="font-size: 26px">{{
+                          chat.user1
+                        }}</strong>
                       </ng-template>
-                      
                     </div>
                   </div>
                 </div>
@@ -139,53 +186,79 @@
         </div>
         <div
           class="col-md-6"
-          style="height:600px; max-height:600px; width: 65%; padding-top: 10px;"
+          style="
+            height: 600px;
+            max-height: 600px;
+            width: 65%;
+            padding-top: 10px;
+          "
         >
-          <div class="col" id="scrollChat" style="height: 510px; max-height: 510px; padding-bottom: 5px; overflow-y: scroll">
+          <div
+            class="col"
+            id="scrollChat"
+            style="
+              height: 510px;
+              max-height: 510px;
+              padding-bottom: 5px;
+              overflow-y: scroll;
+            "
+          >
             <div *ngIf="chatSelected != undefined && chatMsgs != undefined">
-              <div class="row" style="width: 100%;" *ngFor="let message of chatMsgs.mensajes">
+              <div
+                class="row"
+                style="width: 100%"
+                *ngFor="let message of chatMsgs.mensajes"
+              >
                 <!-- <p> {{message[idCurrentUser]}} </p> -->
                 <!-- <ng-container *ngIf="message[idCurrentUser] == 1; else elseNotCurrentUser"> -->
-                  <div *ngIf="message[idCurrentUser] != undefined" style="text-align: -webkit-right">
-                    <p
-                      class="personalMessage"
-                    >
-                      {{message[idCurrentUser]}}
-                    </p>
-                  </div>
+                <div
+                  *ngIf="message[idCurrentUser] != undefined"
+                  style="text-align: -webkit-right"
+                >
+                  <p class="personalMessage">
+                    {{ message[idCurrentUser] }}
+                  </p>
+                </div>
                 <!-- </ng-container>
                 <ng-template #elseNotCurrentUser> -->
-                  <div *ngIf="message[idUserToSend] != undefined">
-                    <p
-                      class="receivedMessage"
-                    >
-                      {{message[idUserToSend]}}
-                    </p>
-                  </div>
+                <div *ngIf="message[idUserToSend] != undefined">
+                  <p class="receivedMessage">
+                    {{ message[idUserToSend] }}
+                  </p>
+                </div>
                 <!-- </ng-template> -->
               </div>
             </div>
             <!-- <div *ngIf="chatSelected != undefined">
 
             </div> -->
-            <div class="row" style="width: 100%" *ngFor="let message of chatService.chats">
+            <div
+              class="row"
+              style="width: 100%"
+              *ngFor="let message of chatService.chats"
+            >
               <!-- <ng-container *ngIf="message.messageType == 1 && message.chatId == chatSelected; else elseNotCurrentUser"> -->
-                <div *ngIf="message.messageType == 1 && message.chatId == chatSelected" style="text-align: -webkit-right">
-                  <p
-                    class="personalMessage"
-                  >
-                    {{message.message}}
-                  </p>
-                </div>
+              <div
+                *ngIf="
+                  message.messageType == 1 && message.chatId == chatSelected
+                "
+                style="text-align: -webkit-right"
+              >
+                <p class="personalMessage">
+                  {{ message.message }}
+                </p>
+              </div>
               <!-- </ng-container>
               <ng-template #elseNotCurrentUser> -->
-                <div *ngIf="message.messageType == 2 && message.chatId == chatSelected">
-                  <p
-                    class="receivedMessage"
-                  >
-                    {{message.message}}
-                  </p>
-                </div>
+              <div
+                *ngIf="
+                  message.messageType == 2 && message.chatId == chatSelected
+                "
+              >
+                <p class="receivedMessage">
+                  {{ message.message }}
+                </p>
+              </div>
               <!-- </ng-template> -->
             </div>
           </div>
@@ -220,20 +293,29 @@
                 text-align: left;
               "
             >
-              <button style="border: none" (click)="enviarMensaje()" [disabled]="chatSelected === undefined">
+              <button
+                style="border: none"
+                (click)="enviarMensaje()"
+                [disabled]="chatSelected === undefined"
+                (click)="openReport(contentReport)"
+              >
                 <i
                   id="iconBtn"
-                  [ngClass]="{'icon-btn': chatSelected != undefined,'icon-btn-disabled': chatSelected == undefined}"
+                  (click)="openReport(contentReport)"
+                  [ngClass]="{
+                    'icon-btn': chatSelected != undefined,
+                    'icon-btn-disabled': chatSelected == undefined
+                  }"
                   class="fa fa-send"
                 ></i>
               </button>
             </div>
           </div>
         </div>
-       </div> 
+      </div>
       <!-- </div> -->
-    </div> 
-  </div> 
+    </div>
+  </div>
 </section>
 
 <!-- Modal Report -->
@@ -246,42 +328,78 @@
       (click)="modalReport.dismiss('Cross click')"
     ></button>
   </div>
-  <div class="modal-body col" style="text-align: center; padding-left: 10px; padding-right: 10px">
-    <div class="row" style="padding-bottom: 20px;">
+  <div
+    class="modal-body col"
+    style="text-align: center; padding-left: 10px; padding-right: 10px"
+  >
+    <div class="row" style="padding-bottom: 20px">
       <h2 class="modal-title">Denuncia</h2>
-      <small style="text-align: left!important;">
-        Ya se trate de mal comportamiento, una estafa u otro tipo de queja que tengas, denuncia al usuario.<br> 
-        Cada denuncia es revisada a detalle, por lo que le pedimos que especifique bien el problema.
+      <small style="text-align: left !important">
+        Ya se trate de mal comportamiento, una estafa u otro tipo de queja que
+        tengas, denuncia al usuario.<br />
+        Cada denuncia es revisada a detalle, por lo que le pedimos que
+        especifique bien el problema.
       </small>
     </div>
     <!-- <form [formGroup]="reportForm"> -->
-      <div class="row" style="justify-content: center">
-        <label for="exampleFormControlInput1" class="form-label">Asunto</label>
-        <input 
-            type="email" 
-            class="form-control" 
-            [(ngModel)]="motivoDenuncia"
-            id="exampleFormControlInput1" 
-            style="padding-left: 25px; width: 400px" 
-            placeholder="Asunto específico y corto">
-      </div>
-      <div class="row" style="justify-content: center">
-        <label for="exampleFormControlTextarea1" class="form-label" style="margin-top:5px">Descripción</label>
-        <textarea 
-            class="form-control" 
-            [(ngModel)]="descripcionDenuncia"
-            id="exampleFormControlTextarea1" 
-            rows="3" 
-            style="padding-left: 25px; width: 400px" 
-            placeholder="Detalle específicamente los sucesos"></textarea>
-      </div>
-      <div class="row" style="margin-top: 10px; justify-content: right; padding-right: 25px;">
-        <button type="submit" 
-                style="color: white; background-color: #00bce4; margin-right: 5px; width: 150px; border-radius: 20px; border-width: 0px;" 
-                (click)="report(contentSuccess)">Enviar Denuncia</button>
-        <button style="color: white; background-color: red; width: 100px; border-radius: 20px; border-width: 0px;" 
-                (click)="modalReport.dismiss()">Cancelar</button>
-      </div>
+    <div class="row" style="justify-content: center">
+      <label for="exampleFormControlInput1" class="form-label">Asunto</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="motivoDenuncia"
+        id="exampleFormControlInput1"
+        style="padding-left: 25px; width: 400px"
+        placeholder="Asunto específico y corto"
+      />
+    </div>
+    <div class="row" style="justify-content: center">
+      <label
+        for="exampleFormControlTextarea1"
+        class="form-label"
+        style="margin-top: 5px"
+        >Descripción</label
+      >
+      <textarea
+        class="form-control"
+        [(ngModel)]="descripcionDenuncia"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        style="padding-left: 25px; width: 400px"
+        placeholder="Detalle específicamente los sucesos"
+      ></textarea>
+    </div>
+    <div
+      class="row"
+      style="margin-top: 10px; justify-content: right; padding-right: 25px"
+    >
+      <button
+        type="submit"
+        style="
+          color: white;
+          background-color: #00bce4;
+          margin-right: 5px;
+          width: 150px;
+          border-radius: 20px;
+          border-width: 0px;
+        "
+        (click)="report(contentSuccess)"
+      >
+        Enviar Denuncia
+      </button>
+      <button
+        style="
+          color: white;
+          background-color: red;
+          width: 100px;
+          border-radius: 20px;
+          border-width: 0px;
+        "
+        (click)="modalReport.dismiss()"
+      >
+        Cancelar
+      </button>
+    </div>
     <!-- </form> -->
   </div>
 </ng-template>

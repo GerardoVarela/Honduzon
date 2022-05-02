@@ -10,7 +10,6 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./admin-module-page.component.css'],
 })
 export class AdminModulePageComponent implements OnInit {
-  
   private backendHost: string = 'http://localhost:8888';
   public denuncias: any;
   public categories: any;
@@ -25,32 +24,38 @@ export class AdminModulePageComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  openLG(content: any, nameCategory?: string, idCategory?: number, idReport?: number) {
-    
-    this.httpClient.get(`${this.backendHost}/denuncias/getdenuncias`).subscribe(res=>{
-      this.denuncias = res;
-    });
-    
-    if(idReport !== undefined){
-      this.idReportSelected = idReport;
-      this.httpClient.get(`${this.backendHost}/denuncias/getdenuncia/${idReport}`).subscribe(res=>{
-        this.detalleDenunciaSeleccionada = res;
-        console.log(res);
+  openLG(
+    content: any,
+    nameCategory?: string,
+    idCategory?: number,
+    idReport?: number
+  ) {
+    this.httpClient
+      .get(`${this.backendHost}/denuncias/getdenuncias`)
+      .subscribe((res) => {
+        this.denuncias = res;
       });
+
+    if (idReport !== undefined) {
+      this.idReportSelected = idReport;
+      this.httpClient
+        .get(`${this.backendHost}/denuncias/getdenuncia/${idReport}`)
+        .subscribe((res) => {
+          this.detalleDenunciaSeleccionada = res;
+          console.log(res);
+        });
     }
 
     console.log('denuncias');
     console.log(this.denuncias);
-    
-    this.httpClient.get(`${this.backendHost}/categorias`).subscribe(res=>{
-      this.categories = res;  
+
+    this.httpClient.get(`${this.backendHost}/categorias`).subscribe((res) => {
+      this.categories = res;
     });
 
-    if(nameCategory){
+    if (nameCategory) {
       this.categorysNameSelected = nameCategory;
       this.idCategorySelected = idCategory;
     }
@@ -62,48 +67,116 @@ export class AdminModulePageComponent implements OnInit {
     this.modalService.open(content, { size: 'sm' });
   }
 
-  eliminarCategoria(){
-    this.httpClient.delete(`${this.backendHost}/categorias/borrarCategoria/${this.idCategorySelected}`).subscribe( console.log );
-    
+  openXL(content: any) {
+    this.modalService.open(content, { size: 'xl' });
+  }
+
+  eliminarCategoria() {
+    this.httpClient
+      .delete(
+        `${this.backendHost}/categorias/borrarCategoria/${this.idCategorySelected}`
+      )
+      .subscribe(console.log);
+
     this.modalService.dismissAll();
   }
 
-  actualizarCategoria(){
-    let contenido={
+  actualizarCategoria() {
+    let contenido = {
       formCategoryName: this.newCategoryName,
       formCategoryDescription: this.newCategoryDescription,
       formImageInput: null,
     };
 
-    this.httpClient.put(`${this.backendHost}/categorias/editarCategoria/${this.idCategorySelected}`, contenido).subscribe( console.log );
-    
+    this.httpClient
+      .put(
+        `${this.backendHost}/categorias/editarCategoria/${this.idCategorySelected}`,
+        contenido
+      )
+      .subscribe(console.log);
+
     this.modalService.dismissAll();
   }
 
-  addNewCategory(){
-    let contenido={
+  addNewCategory() {
+    let contenido = {
       formCategoryName: this.addNewCategoryName,
       formCategoryDescription: this.addNewCategoryDescription,
       formImageInput: null,
       currentAdmin: 1,
     };
 
-    this.httpClient.post(`${this.backendHost}/categorias/guardar`, contenido).subscribe( console.log );
+    this.httpClient
+      .post(`${this.backendHost}/categorias/guardar`, contenido)
+      .subscribe(console.log);
 
     this.modalService.dismissAll();
   }
 
-  ignoreReport(){
-    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe( console.log );
+  ignoreReport() {
+    this.httpClient
+      .delete(
+        `${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`
+      )
+      .subscribe(console.log);
 
     this.modalService.dismissAll();
   }
 
-  putUserDown(idDenunciado: number){
-    this.httpClient.delete(`${this.backendHost}/denuncias/darBajaUsuario/${idDenunciado}`).subscribe( console.log );
-    
-    this.httpClient.delete(`${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`).subscribe( console.log );
-    
+  putUserDown(idDenunciado: number) {
+    this.httpClient
+      .delete(`${this.backendHost}/denuncias/darBajaUsuario/${idDenunciado}`)
+      .subscribe(console.log);
+
+    this.httpClient
+      .delete(
+        `${this.backendHost}/denuncias/borrarDenuncia/${this.idReportSelected}`
+      )
+      .subscribe(console.log);
+
     this.modalService.dismissAll();
+  }
+
+  view: [number, number] = [700, 400];
+
+  // options
+  gradient: boolean = true;
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };
+
+  single = [
+    {
+      name: 'Germany',
+      value: 7940000,
+    },
+    {
+      name: 'USA',
+      value: 5000000,
+    },
+    {
+      name: 'France',
+      value: 7200000,
+    },
+    {
+      name: 'UK',
+      value: 6200000,
+    },
+  ];
+
+  onSelect(data: any): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data: any): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data: any): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }
