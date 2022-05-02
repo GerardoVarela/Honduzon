@@ -216,15 +216,16 @@ export class NavbarComponent implements OnInit {
   upload(content: any, idCurrentUser: number){
 
     let productInfo = {
-      formProdName: this.formProdName,
-      formDescripcion: this.formDescripcion,
-      formQuantityProd: this.formQuantityProd,
+      formProdName: this.formProdName?.value,
+      formDescripcion: this.formDescripcion?.value,
+      formQuantityProd: this.formQuantityProd?.value,
       formQuantitySold: 0,
-      formPrice: this.formPrice,
+      formPrice: this.formPrice?.value,
       userID: idCurrentUser,
-      categoryID: this.categoryID,
-      formImage: this.formImage,
+      categoryID: this.categoryID?.value,
+      formImage: this.formImage?.value,
     }
+    console.log(productInfo)
     this.httpClient.post(`${this.backendHost}/productos/guardarproducto`, productInfo).subscribe( console.log );
     this.modalService.dismissAll();
     

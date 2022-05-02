@@ -35,6 +35,7 @@ router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
 
 
 router.post('/guardarproducto',(req,res)=>{
+    console.log(req.body)
     var producto = {... req.body}
     productoModel.insertProducto(producto).then(resultado=>{
         res.status(201).send({
