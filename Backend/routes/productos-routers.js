@@ -20,7 +20,11 @@ var numeroTotalProdUsusario = 0
 
 router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
     productoModel.getProductoPorId(req.params.idProducto).then((resultado)=>{
-        var productoPorId = {...resultado[0]}
+        if(resultado.length == 0){
+            res.send();
+            return;
+        }else{
+            var productoPorId = {...resultado[0]}
         console.log(resultado[0])
         productoModel.getCantTotalProdUsuario(resultado[0].ID_USUARIO).then(resultado=>{
             numeroTotalProdUsusario = resultado[0].CantTot;
@@ -28,6 +32,9 @@ router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
             res.send(productoPorId);
             return;
         })
+        }
+
+        
         
         
     });
