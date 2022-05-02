@@ -16,7 +16,7 @@ const keys = require ('./config/keys.config');
 const denuncias = require('./routes/denuncias.router');
 const listaDeseos = require('./routes/listaDeseos.router');
 const chatRouter =require('./routes/chat-router');
-const metricas = require('./routes/metricas.router');
+const metricas = require('./routes/metric.router');
 //const scheduler = require('./jobs/jobscheduler.jobs').startSchedulingFunction();
 
 

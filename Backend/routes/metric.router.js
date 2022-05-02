@@ -36,4 +36,6 @@ router.get('/usuariosMejorValorados',(req,res, next)=>{
 }
 );
 
-module .exports = router;
+module .exports ={
+    router: router
+}
