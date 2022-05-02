@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
   uploadForm = new FormGroup({
     formProdName: new FormControl('', Validators.required),
     formPrice: new FormControl(1, [Validators.required, Validators.max(500000), Validators.min(1)]),
-    categoryID: new FormControl(null, Validators.required),
+    categoryID: new FormControl('', Validators.required),
     formImage: new FormControl('', Validators.required),
     formDescripcion: new FormControl('', Validators.required),
     formQuantityProd: new FormControl(1, [Validators.required, Validators.max(120), Validators.min(1)]),
@@ -109,8 +109,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  open(content: any, eraseMod?: boolean){
-    this.clearInputs();
+  open(content: any, eraseMod?: boolean, terms?:boolean){
+    if(!terms){
+      this.clearInputs();
+    }
     if(eraseMod){
       this.modalService.dismissAll();
     }

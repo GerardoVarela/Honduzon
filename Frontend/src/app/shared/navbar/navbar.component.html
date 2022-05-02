@@ -489,14 +489,14 @@
           He leído y acepto los
           <a
             role="button"
-            (click)="open(contentTermsConds)"
+            (click)="open(contentTermsConds, undefined, true)"
             style="color: #00bce4"
             >Términos</a
           >
           y
           <a
             role="button"
-            (click)="open(contentTermsConds)"
+            (click)="open(contentTermsConds, undefined, true)"
             style="color: #00bce4"
             >Condiciones</a
           >
@@ -841,7 +841,7 @@
               >Selecciona una categoría</label
             >
             <select id="inputState" formControlName="categoryID" class="form-select">
-              <option value="" selected>Categorías</option>
+              <option value="" disabled>Categorías</option>
               <option *ngFor="let cat of categorias" value="{{cat.ID_CATEGORIA}}">{{cat.NOMBRE_CATEGORIA}}</option>
             </select>
             <div

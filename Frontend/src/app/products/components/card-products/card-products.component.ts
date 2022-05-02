@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +10,10 @@ export class CardProductsComponent implements OnInit {
 
   @Input() item!:any;
 
+  private backendHost: string = 'http://localhost:8888';
   public selectedHeart: boolean = false;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +21,8 @@ export class CardProductsComponent implements OnInit {
   wishList(idProduct: number){
     console.log(idProduct);
     this.selectedHeart = !this.selectedHeart;
+
+    // /updateEstadoListaDeseo
   }
 
 }

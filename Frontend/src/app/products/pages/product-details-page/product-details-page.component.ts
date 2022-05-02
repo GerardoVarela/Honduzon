@@ -7,6 +7,7 @@ import { switchMap, take, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../../services/socket.service';
 import { ProductDetail } from '../../interfaces/product-detail.interface';
+import { ResponseLoggedUser } from '../../interfaces/logged-user.interface';
 
 interface Valoracion{
   VALORACION_USUARIO: number
@@ -71,14 +72,11 @@ export class ProductDetailsPageComponent implements OnInit {
   }
 
   async getLoggedUser(){
-    let resp = this.httpClient.get(`${this.backendHost}/login/getloggeduser`,{
+    let resp = this.httpClient.get<ResponseLoggedUser>(`${this.backendHost}/login/getloggeduser`,{
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
-    }).pipe(take(1));
-
-    this.loggedUser = await lastValueFrom(resp);
-    console.log('aqui')
+    }).subscribe( res => this.loggedUser = res.loggedUser);
     console.log(this.loggedUser)
   }
 
