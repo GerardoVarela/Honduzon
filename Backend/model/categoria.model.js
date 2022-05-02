@@ -100,7 +100,7 @@ async function suscripcionCategoria(detalleSuscripcion){
         let suscripcionCategoria = await pool.request()
         .input('idUsuario', mssql.Int, detalleSuscripcion.ID_CurrentUser)
         .input('idCat', mssql.Int, detalleSuscripcion.ID_Categoria)
-        .query('INSERT INTO USUARIOSxCATEGORIAS VALUES (@idUsuario,@idCat)');
+        .query('INSERT INTO USUARIOSxCATEGORIAS (ID_USUARIO, ID_CATEGORIA) VALUES (@idUsuario,@idCat)');
         return suscripcionCategoria.recordset;
     }catch (error) {
         return error;

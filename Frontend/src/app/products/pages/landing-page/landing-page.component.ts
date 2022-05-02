@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseLoggedUser } from '../../interfaces/logged-user.interface';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class LandingPageComponent implements OnInit {
 
   token: string = '';
+  loggedUserInfo: ResponseLoggedUser | undefined;
 
   constructor() { }
 
@@ -15,6 +17,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   receiveToken(token: string){
-    this.token= token;
+    this.token = token;
+  }
+
+  receiveLoggedEmitter(loggedUserInfo: ResponseLoggedUser | undefined){
+    this.loggedUserInfo = loggedUserInfo;
   }
 }

@@ -1,6 +1,6 @@
-<app-navbar (newToken)="receiveToken($event)"></app-navbar>
+<app-navbar (newToken)="receiveToken($event)" (loggedUserEmitter)="receiveLoggedEmitter($event)"></app-navbar>
 
-<app-carrusel [token]="token"></app-carrusel>
+<app-carrusel [token]="token" [loggedUserInfo]="loggedUserInfo"></app-carrusel>
 
 <!-- <app-card-sales-person></app-card-sales-person> -->
 

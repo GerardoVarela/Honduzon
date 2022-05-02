@@ -4,10 +4,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SharedService } from '../services/shared.service';
 import { CookieService } from 'ngx-cookie-service';
-import { take } from 'rxjs/operators';
-import { lastValueFrom } from 'rxjs';
+
+import { SharedService } from '../services/shared.service';
+import { ResponseLoggedUser } from 'src/app/products/interfaces/logged-user.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -18,9 +18,11 @@ export class NavbarComponent implements OnInit {
 
   @Output() searchValue = new EventEmitter<string>();
   @Output() newToken = new EventEmitter<string>();
+  @Output() loggedUserEmitter = new EventEmitter<ResponseLoggedUser | undefined>();
 
   public productos: any = [];
   public deptos: any = [];
+  public categorias: any = [];
   public preguntas:any  = {};
   public loggedAdmin: boolean = false;
   public hayError!: boolean;
@@ -71,7 +73,7 @@ export class NavbarComponent implements OnInit {
   uploadForm = new FormGroup({
     formProdName: new FormControl('', Validators.required),
     formPrice: new FormControl(1, [Validators.required, Validators.max(500000), Validators.min(1)]),
-    categoryID: new FormControl(1, Validators.required),
+    categoryID: new FormControl(null, Validators.required),
     formImage: new FormControl('', Validators.required),
     formDescripcion: new FormControl('', Validators.required),
     formQuantityProd: new FormControl(1, [Validators.required, Validators.max(120), Validators.min(1)]),
@@ -95,11 +97,15 @@ export class NavbarComponent implements OnInit {
     this.httpClient.get(`${this.backendHost}/ciudades/`).subscribe(res=>{
       this.ciudades = res;
     });
+    this.httpClient.get(`${this.backendHost}/categorias/`).subscribe(res=>{
+      this.categorias = res;
+    });
     
     if(this.cookieService.get('ACCESS_TOKEN')){
       this.getLoggedUser();
     }else{
       this.newToken.emit('nada');
+      this.loggedUserEmitter.emit(undefined);
     }
   }
 
@@ -139,6 +145,7 @@ export class NavbarComponent implements OnInit {
         this.loggedUser = undefined;
       }else{
         this.newToken.emit('nada');
+        this.loggedUserEmitter.emit(undefined);
       }
     });
 
@@ -170,22 +177,27 @@ export class NavbarComponent implements OnInit {
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
-    }).subscribe( res => this.loggedUserAdmin = res );
+    }).subscribe( res => {
+      this.loggedUserAdmin = res;
+      console.log(this.loggedUserAdmin);
+    });
 
-    // this.loggedUserAdmin = await lastValueFrom(respAdmin);
-    // console.log(this.loggedUserAdmin);
     this.router.navigate(['/home/admin']);
   }
 
   async getLoggedUser(){
-    let resp = this.httpClient.get(`${this.backendHost}/login/getloggeduser`,{
+    let resp = this.httpClient.get<ResponseLoggedUser>(`${this.backendHost}/login/getloggeduser`,{
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
-    }).pipe(take(1));
+    }).subscribe( res => {
+      this.loggedUser = res['loggedUser'];
+      this.newToken.emit(this.cookieService.get('ACCESS_TOKEN'));
+      this.loggedUserEmitter.emit(res);
+      console.log(res);
+    });
 
-    this.loggedUser = await lastValueFrom(resp);
-    this.newToken.emit(this.cookieService.get('ACCESS_TOKEN'));
+    // this.loggedUser = await lastValueFrom(resp);
   }
 
   logout(content: any):void{

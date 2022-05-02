@@ -34,14 +34,14 @@
               </div>
               <div class="col">
                 <button id="btn-sub" 
-                        class="btn btn-primary btn-cards" 
+                        class="btn btn-primary btn-cards"
                         [ngClass]="{
-                          'btn-sub-selected': selectedSub === true
+                          'btn-sub-selected': selectedSub === true && token !== 'nada'
                         }"
                         [disabled]="token === 'nada'"
                         (click)="subscribe()"
                         type="button">
-                  {{ selectedSub ? 'Suscrito' : 'Suscribirme' }}
+                  {{ (selectedSub && token !== 'nada') ? 'Suscrito' : 'Suscribirme' }}
                 </button>
               </div>
             </div>

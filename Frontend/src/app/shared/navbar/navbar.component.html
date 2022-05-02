@@ -783,7 +783,7 @@
         <div class="row" style="padding-bottom: 15px">
           <div class="col">
             <label for="inputCity" class="form-label"
-            >Establece un precio</label
+            >Establece un precio (Lps.)</label
           >
             <input
               type="number"
@@ -841,9 +841,8 @@
               >Selecciona una categoría</label
             >
             <select id="inputState" formControlName="categoryID" class="form-select">
-              <option selected>Deportes</option>
-              <option value="1">Muebles</option>
-              <option value="2">Tecnologia</option>
+              <option value="" selected>Categorías</option>
+              <option *ngFor="let cat of categorias" value="{{cat.ID_CATEGORIA}}">{{cat.NOMBRE_CATEGORIA}}</option>
             </select>
             <div
               *ngIf="categoryID!.invalid && (categoryID!.dirty || formDept!.touched)"

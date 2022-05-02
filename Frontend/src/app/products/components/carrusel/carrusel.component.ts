@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ResponseLoggedUser } from '../../interfaces/logged-user.interface';
 
 @Component({
   selector: 'app-carrusel',
@@ -9,6 +10,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class CarruselComponent implements OnInit, OnChanges {
   
   @Input() token: string = '';
+  @Input() loggedUserInfo: ResponseLoggedUser | undefined;
+
+  newLoggedInfo: ResponseLoggedUser | undefined;
   newToken: string = '';
 
   imgs: number[] = [1, 2, 3, 4, 5, 6];
@@ -19,6 +23,7 @@ export class CarruselComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.newToken = this.token;
+    this.newLoggedInfo = this.loggedUserInfo
   }
 
   customOptions: OwlOptions = {
