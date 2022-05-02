@@ -146,23 +146,22 @@
                       </div>
                       <div class="col">
                         <div class="vstack" style="height: 100%;">
-                          <a href="#" style="margin: 9px 0;">
-                            <button class="btn btn-primary border-button" type="button" style="background-color: #2E72B1;border-color: #2E72B1">
-                              Comprar ahora
-                            </button>
-                          </a>
-                          <a href="#" style="margin: 9px 0;">
+                          <!-- <a href="#" style="margin: 9px 0;">
                             <button class="btn btn-primary border-button" type="button" style="background-color: #00BCE4;border-color: #00BCE4;">
                               Agregar al carrito
                             </button>
-                          </a>
-                          <a href="#" style="margin: 9px 0;">
-                            <button class="btn btn-primary border-button" type="button" style="background-color: white;border-color: #00BCE4;color: #00BCE4;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                              </svg>&nbsp;Agregar a favoritos<br>
-                            </button>
-                          </a>
+                          </a> -->
+                          <button class="btn btn-primary border-button" 
+                                  [ngClass]="{
+                                    'wish-blue': selectedHeart === false,
+                                    'wish-tomato': selectedHeart === true
+                                  }"
+                                  type="button" 
+                                  (click)="wishList()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                              <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>&nbsp;{{ (selectedHeart && loggedUser !== undefined) ? 'Agregado a Favoritos' : 'Agregar a Favoritos' }}<br>
+                          </button>
                           <div>
                             <div style="text-align: center; padding: -20px">    
                               <ngb-rating class="s-color" [(rate)]="currentRate" (rateChange)="rated(productDetail.ID_USUARIO, loggedUser.idUsuario)"></ngb-rating>

@@ -25,13 +25,13 @@ router.get('/obtenerdetalleproducto/:idProducto',(req,res)=>{
             return;
         }else{
             var productoPorId = {...resultado[0]}
-        console.log(resultado[0])
-        productoModel.getCantTotalProdUsuario(resultado[0].ID_USUARIO).then(resultado=>{
-            numeroTotalProdUsusario = resultado[0].CantTot;
-            productoPorId['CantidadProdTotal'] = numeroTotalProdUsusario;
-            res.send(productoPorId);
-            return;
-        })
+            console.log(resultado[0])
+            productoModel.getCantTotalProdUsuario(resultado[0].ID_USUARIO).then(resultado=>{
+                numeroTotalProdUsusario = resultado[0].CantTot;
+                productoPorId['CantidadProdTotal'] = numeroTotalProdUsusario;
+                res.send(productoPorId);
+                return;
+            })
         }
 
         

@@ -117,3 +117,15 @@ img {
 .p-alf {
   font-size: 26px;
 }
+
+.wish-blue{
+  background-color: white;
+  border-color: #00BCE4;
+  color: #00BCE4;
+}
+
+.wish-tomato{
+  background-color: white;
+  border-color: tomato;
+  color: tomato;
+}

@@ -4,6 +4,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 
+interface chartResponseInfo{
+  ID_CATEGORIA: number;
+  NOMBRE_CATEGORIA: string;
+  categoriaSuscrita: number;
+}
+
 @Component({
   selector: 'app-admin-module-page',
   templateUrl: './admin-module-page.component.html',
@@ -22,9 +28,35 @@ export class AdminModulePageComponent implements OnInit {
   public newCategoryName: string = '';
   public newCategoryDescription: string = '';
 
+  
+  view: [number, number] = [700, 400];
+
+  // options
+  gradient: boolean = true;
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+
+  colorScheme = {
+    domain: ['#143F6B', '#F55353', '#FEB139', '#F6F54D'],
+  };
+
+  single: object[] = [];
+
   constructor(private modalService: NgbModal, private httpClient: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.httpClient.get<chartResponseInfo[]>(`${this.backendHost}/metricas/categoriasMasSuscritas`).subscribe(res=>{
+      console.log(res);
+      res.forEach(element => {
+        let json = {
+          name: element.NOMBRE_CATEGORIA,
+          value: element.categoriaSuscrita,
+        };
+        this.single.push(json);
+      });
+    })
+  }
 
   openLG(
     content: any,
@@ -137,36 +169,6 @@ export class AdminModulePageComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  view: [number, number] = [700, 400];
-
-  // options
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
-  };
-
-  single = [
-    {
-      name: 'Germany',
-      value: 7940000,
-    },
-    {
-      name: 'USA',
-      value: 5000000,
-    },
-    {
-      name: 'France',
-      value: 7200000,
-    },
-    {
-      name: 'UK',
-      value: 6200000,
-    },
-  ];
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));

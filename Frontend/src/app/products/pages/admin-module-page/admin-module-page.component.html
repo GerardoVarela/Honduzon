@@ -794,11 +794,12 @@
                 margin-left: 15px;
                 color: black;
               "
-              >Categorias y sus datos</strong
+              >Cantidad de Suscripciones por Categoría</strong
             >
             <ngx-charts-advanced-pie-chart
               [view]="view"
               [results]="single"
+              scheme="flame"
               [gradient]="gradient"
               (select)="onSelect($event)"
               (activate)="onActivate($event)"

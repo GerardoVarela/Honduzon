@@ -508,8 +508,9 @@ ALTER TABLE PRODUCTOS ADD DescripcionEstado varchar(50)
 
 select Productos.nombre_Producto from LISTA_DESEOS join Productos on LISTA_DESEOS.ID_PRODUCTO=productos.ID_PRODUCTO where id_usuario=
 
-UPDATE Productos SET FECHA =GETDATE() WHERE ID_PRODUCTO=2
-UPDATE Productos SET Estado=0,descripcionEstado='fecha vencida'  WHERE DATEDIFF (DAY, FECHA , GETDATE() )=60
+UPDATE Productos SET FECHA =GETDATE()
+UPDATE Productos SET FECHA = '2022-04-20' WHERE ID_PRODUCTO = 1
+UPDATE Productos SET Estado=0,descripcionEstado='fecha vencida'  WHERE DATEDIFF (DAY, FECHA , GETDATE() )= 1 OR DATEDIFF (DAY, FECHA , GETDATE() ) > 1
 
 select * from Productos where estado=0 and DescripcionEstado='fecha vencida'
 update Productos set estado=1,DescripcionEstado='disponible',fecha=getdate() where id_Producto=2

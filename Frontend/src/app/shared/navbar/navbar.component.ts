@@ -8,6 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { SharedService } from '../services/shared.service';
 import { ResponseLoggedUser } from 'src/app/products/interfaces/logged-user.interface';
+import { ListaDeseosUsuario } from 'src/app/products/interfaces/wish-list.interface';
+
 
 @Component({
   selector: 'app-navbar',
@@ -23,6 +25,7 @@ export class NavbarComponent implements OnInit {
   public productos: any = [];
   public deptos: any = [];
   public categorias: any = [];
+  public wishListArray: any = [];
   public preguntas:any  = {};
   public loggedAdmin: boolean = false;
   public hayError!: boolean;
@@ -109,7 +112,17 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  open(content: any, eraseMod?: boolean, terms?:boolean){
+  open(content: any, eraseMod?: boolean, terms?:boolean, wish?: boolean){
+
+    if(wish){
+
+      this.httpClient.get<ListaDeseosUsuario>(`${this.backendHost}/wishlist/getListaDeseoUsuario/${this.loggedUser.idUsuario}`).subscribe( res=>{
+        console.log(this.loggedUser.idUsuario);
+        this.wishListArray = res.resultado;
+        console.log(this.wishListArray);
+      } );
+    }
+
     if(!terms){
       this.clearInputs();
     }
@@ -188,7 +201,7 @@ export class NavbarComponent implements OnInit {
   }
 
   async getLoggedUser(){
-    let resp = this.httpClient.get<ResponseLoggedUser>(`${this.backendHost}/login/getloggeduser`,{
+    this.httpClient.get<ResponseLoggedUser>(`${this.backendHost}/login/getloggeduser`,{
       headers:new HttpHeaders({
         authorization: 'Bearer '+ this.cookieService.get('ACCESS_TOKEN') || ''
       })
@@ -225,7 +238,7 @@ export class NavbarComponent implements OnInit {
       categoryID: this.categoryID?.value,
       formImage: this.formImage?.value,
     }
-    console.log(productInfo)
+    
     this.httpClient.post(`${this.backendHost}/productos/guardarproducto`, productInfo).subscribe( console.log );
     this.modalService.dismissAll();
     

@@ -142,26 +142,15 @@
             </li>
             <li class="nav-item" style="padding-top: 8px">
               <!-- <a routerLink="/chat"> -->
-              <a role="button" (click)="open(contentWishList)">
+              <a role="button" (click)="open(contentWishList, undefined, undefined, true)">
                 <i id="iconBookmark" class="fas fa-bookmark"></i>
               </a>
             </li>
           </ng-container>
           <ng-template #adminGotLogged>
             <li class="nav-item">
-              <i
-                class="far fa-user-circle"
-                style="
-                  color: #00bce4;
-                  margin-left: 5px;
-                  margin-right: 5px;
-                  font-size: 40px;
-                "
-              ></i>
-            </li>
-            <li class="nav-item">
-              <!-- <i class="far fa-user-circle" style="color: #00BCE4; margin-left: 5px; margin-right: 5px; font-size: 40px"></i> -->
-              <img src="../../../assets/profile-pics/admin.jpg" 
+              <img *ngIf="loggedUserAdmin !== undefined && loggedUser === undefined"
+                    src="../../../assets/profile-pics/admin.jpg" 
                     alt="admin_img"
                     style="border-radius: 30px; width: 40px; height: 45px; margin-right: 5px"/>
             </li>
@@ -235,7 +224,7 @@
       >
         Iniciar Sesión
       </button>
-      <div *ngIf="hayError" class="alert alert-danger">
+      <div *ngIf="hayError === true" class="alert alert-danger">
         Correo o contraseña incorrecta.
       </div>
     </form>
@@ -675,7 +664,7 @@
     </div>
 
     <div class="row" style="text-align: left; margin-left: 50px">
-      <li>Probando</li>
+      <li *ngFor="let wish of wishListArray">{{wish.NOMBRE_PRODUCTO}}</li>
     </div>
   </div>
 </ng-template>
