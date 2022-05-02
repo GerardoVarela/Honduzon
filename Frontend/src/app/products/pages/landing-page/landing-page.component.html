@@ -1,4 +1,9 @@
-<app-navbar (newToken)="receiveToken($event)" (loggedUserEmitter)="receiveLoggedEmitter($event)"></app-navbar>
+<app-navbar
+  (newToken)="receiveToken($event)"
+  (loggedUserEmitter)="receiveLoggedEmitter($event)"
+></app-navbar>
+
+<app-admin-module-page></app-admin-module-page>
 
 <app-carrusel [token]="token" [loggedUserInfo]="loggedUserInfo"></app-carrusel>
 
