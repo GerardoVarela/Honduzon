@@ -16,7 +16,7 @@ const keys = require ('./config/keys.config');
 const denuncias = require('./routes/denuncias.router');
 const listaDeseos = require('./routes/listaDeseos.router');
 const chatRouter =require('./routes/chat-router');
-
+const metricas = require('./routes/metricas.router');
 //const scheduler = require('./jobs/jobscheduler.jobs').startSchedulingFunction();
 
 
@@ -53,6 +53,8 @@ app.use('/administrador',admin.router);
 app.use('/valoraciones',valoraciones.router);
 app.use('/denuncias',denuncias.router);
 app.use('/wishlist',listaDeseos.router);
+app.use('/metricas',metricas.router);
+
 puerto = 8888;
 // app.set('templates', path.join(__dirname,'recuperacion-constraseña'));
 app.get('/',(req,res)=>{

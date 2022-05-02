@@ -35,3 +35,5 @@ router.get('/usuariosMejorValorados',(req,res, next)=>{
     });
 }
 );
+
+module .exports = router;
