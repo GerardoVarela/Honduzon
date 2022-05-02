@@ -5,18 +5,18 @@ async function categoriasMasSuscritas(){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let categoriasMasSuscritas = await pool.request()
-        .query("select top 5 count (categoria.ID_CATEGORIA),categoria.ID_CATEGORIA,categoria.NOMBRE_CATEGORIA from UsuariosxCategorias join categoria on USUARIOSxCATEGORIAS.ID_CATEGORIA=categoria.ID_CATEGORIA group by categoria.ID_CATEGORIA,categoria.nombre_categoria order by categoriaSuscrita desc     ");
-        return categorias.recordset;
+        .query("select top 5 count (categoria.ID_CATEGORIA) as categoriaSuscrita,categoria.ID_CATEGORIA,categoria.NOMBRE_CATEGORIA from UsuariosxCategorias join categoria on USUARIOSxCATEGORIAS.ID_CATEGORIA=categoria.ID_CATEGORIA group by categoria.ID_CATEGORIA,categoria.nombre_categoria order by categoriaSuscrita desc     ");
+        return categoriasMasSuscritas.recordset;
     } catch (error) {
         return error;
     }
 }
 
-async function cateogriasConMasProductos(){
+async function categoriasConMasProductos(){
     try {
         var pool = await mssql.connect(bdConfig.config);
         let cateogriasConMasProductos = await pool.request()
-        .query("select top 5 count (productos.ID_PRODUCTO),categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria order by cantidadSuscritos desc       ");
+        .query("select top 5 count (productos.ID_PRODUCTO) as cantidadProductos,categoria.NOMBRE_CATEGORIA from productos join categoria on productos.id_categoria=Categoria.id_categoria group by categoria.id_categoria,categoria.nombre_categoria order by cantidadProductos desc       ");
         return cateogriasConMasProductos.recordset;
     } catch (error) {
         return error;
@@ -38,6 +38,6 @@ async function usuariosMejorValorados(){
 
 module.exports = {
     categoriasMasSuscritas,
-    cateogriasConMasProductos,
+    categoriasConMasProductos,
     usuariosMejorValorados
 }
