@@ -14,11 +14,11 @@
 ####  Front-end:
 *  Gerardo Varela (Scrum Master)
 *  Darwin Rodas
-*  Alfonso Sevilla 
  #### Back-end:
 *  Ariel Amador
 *  Jorge Varela
-
+#### Nothing:
+* Alfonso Sevilla
 ## Tecnologías
 ***
 * [Angular](https://angular.io/) : Versión 13.2.2
